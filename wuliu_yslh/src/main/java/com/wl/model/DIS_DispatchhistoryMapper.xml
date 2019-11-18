@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.DIS_DispatchhistoryMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.DIS_Dispatchhistory">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="DISPATCHSEQUENCE" jdbcType="DECIMAL" property="dispatchsequence" />
+    <result column="TRANSFERREDUNIT" jdbcType="DECIMAL" property="transferredunit" />
+    <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+    <result column="OPERATIONUNITID" jdbcType="DECIMAL" property="operationunitid" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="REASON" jdbcType="VARCHAR" property="reason" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, DISPATCHSEQUENCE, TRANSFERREDUNIT, OPERATORID, OPERATIONUNITID, OPERATIONTIME, 
+    REMARK, STATUS, REASON
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.DIS_DISPATCHHISTORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.DIS_DISPATCHHISTORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.DIS_Dispatchhistory">
+    insert into BOS.DIS_DISPATCHHISTORY (ID, DISPATCHSEQUENCE, TRANSFERREDUNIT, 
+      OPERATORID, OPERATIONUNITID, OPERATIONTIME, 
+      REMARK, STATUS, REASON
+      )
+    values (#{id,jdbcType=DECIMAL}, #{dispatchsequence,jdbcType=DECIMAL}, #{transferredunit,jdbcType=DECIMAL}, 
+      #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL}, #{operationtime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{reason,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.DIS_Dispatchhistory">
+    insert into BOS.DIS_DISPATCHHISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="dispatchsequence != null">
+        DISPATCHSEQUENCE,
+      </if>
+      <if test="transferredunit != null">
+        TRANSFERREDUNIT,
+      </if>
+      <if test="operatorid != null">
+        OPERATORID,
+      </if>
+      <if test="operationunitid != null">
+        OPERATIONUNITID,
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="reason != null">
+        REASON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="dispatchsequence != null">
+        #{dispatchsequence,jdbcType=DECIMAL},
+      </if>
+      <if test="transferredunit != null">
+        #{transferredunit,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorid != null">
+        #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationunitid != null">
+        #{operationunitid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationtime != null">
+        #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.DIS_Dispatchhistory">
+    update BOS.DIS_DISPATCHHISTORY
+    <set>
+      <if test="dispatchsequence != null">
+        DISPATCHSEQUENCE = #{dispatchsequence,jdbcType=DECIMAL},
+      </if>
+      <if test="transferredunit != null">
+        TRANSFERREDUNIT = #{transferredunit,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorid != null">
+        OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationunitid != null">
+        OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="reason != null">
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.DIS_Dispatchhistory">
+    update BOS.DIS_DISPATCHHISTORY
+    set DISPATCHSEQUENCE = #{dispatchsequence,jdbcType=DECIMAL},
+      TRANSFERREDUNIT = #{transferredunit,jdbcType=DECIMAL},
+      OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
+      OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      REASON = #{reason,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

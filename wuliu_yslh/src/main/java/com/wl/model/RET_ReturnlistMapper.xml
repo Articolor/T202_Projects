@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.RET_ReturnlistMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.RET_Returnlist">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="APPLICATIONNO" jdbcType="VARCHAR" property="applicationno" />
+    <result column="WORKSHEETNO" jdbcType="VARCHAR" property="worksheetno" />
+    <result column="RETURNTYPE" jdbcType="DECIMAL" property="returntype" />
+    <result column="APREMARK" jdbcType="VARCHAR" property="apremark" />
+    <result column="APLOSS" jdbcType="DECIMAL" property="aploss" />
+    <result column="ENTRYTIME" jdbcType="TIMESTAMP" property="entrytime" />
+    <result column="RECEIVEGUNIT" jdbcType="DECIMAL" property="receivegunit" />
+    <result column="INVALIDATESIGN" jdbcType="DECIMAL" property="invalidatesign" />
+    <result column="RETURNUNIT" jdbcType="DECIMAL" property="returnunit" />
+    <result column="RECORDINGTIME" jdbcType="TIMESTAMP" property="recordingtime" />
+    <result column="ENTRYUNIT" jdbcType="DECIMAL" property="entryunit" />
+    <result column="PERSONNAME" jdbcType="VARCHAR" property="personname" />
+    <result column="CONFIRMATIONTIME" jdbcType="TIMESTAMP" property="confirmationtime" />
+    <result column="CONFIRMATIONUNIT" jdbcType="DECIMAL" property="confirmationunit" />
+    <result column="CONFIRMATIONPERSONNAME" jdbcType="VARCHAR" property="confirmationpersonname" />
+    <result column="TREATMENTSTATE" jdbcType="DECIMAL" property="treatmentstate" />
+    <result column="APRETURNSTATUS" jdbcType="DECIMAL" property="apreturnstatus" />
+    <result column="IDENTIFICATIONSIGN" jdbcType="DECIMAL" property="identificationsign" />
+    <result column="HANDLINGOPINIONS" jdbcType="VARCHAR" property="handlingopinions" />
+    <result column="DENIALTYPE" jdbcType="VARCHAR" property="denialtype" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, APPLICATIONNO, WORKSHEETNO, RETURNTYPE, APREMARK, APLOSS, ENTRYTIME, RECEIVEGUNIT, 
+    INVALIDATESIGN, RETURNUNIT, RECORDINGTIME, ENTRYUNIT, PERSONNAME, CONFIRMATIONTIME, 
+    CONFIRMATIONUNIT, CONFIRMATIONPERSONNAME, TREATMENTSTATE, APRETURNSTATUS, IDENTIFICATIONSIGN, 
+    HANDLINGOPINIONS, DENIALTYPE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.RET_RETURNLIST
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.RET_RETURNLIST
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.RET_Returnlist">
+    insert into BOS.RET_RETURNLIST (ID, APPLICATIONNO, WORKSHEETNO, 
+      RETURNTYPE, APREMARK, APLOSS, 
+      ENTRYTIME, RECEIVEGUNIT, INVALIDATESIGN, 
+      RETURNUNIT, RECORDINGTIME, ENTRYUNIT, 
+      PERSONNAME, CONFIRMATIONTIME, CONFIRMATIONUNIT, 
+      CONFIRMATIONPERSONNAME, TREATMENTSTATE, 
+      APRETURNSTATUS, IDENTIFICATIONSIGN, HANDLINGOPINIONS, 
+      DENIALTYPE)
+    values (#{id,jdbcType=DECIMAL}, #{applicationno,jdbcType=VARCHAR}, #{worksheetno,jdbcType=VARCHAR}, 
+      #{returntype,jdbcType=DECIMAL}, #{apremark,jdbcType=VARCHAR}, #{aploss,jdbcType=DECIMAL}, 
+      #{entrytime,jdbcType=TIMESTAMP}, #{receivegunit,jdbcType=DECIMAL}, #{invalidatesign,jdbcType=DECIMAL}, 
+      #{returnunit,jdbcType=DECIMAL}, #{recordingtime,jdbcType=TIMESTAMP}, #{entryunit,jdbcType=DECIMAL}, 
+      #{personname,jdbcType=VARCHAR}, #{confirmationtime,jdbcType=TIMESTAMP}, #{confirmationunit,jdbcType=DECIMAL}, 
+      #{confirmationpersonname,jdbcType=VARCHAR}, #{treatmentstate,jdbcType=DECIMAL}, 
+      #{apreturnstatus,jdbcType=DECIMAL}, #{identificationsign,jdbcType=DECIMAL}, #{handlingopinions,jdbcType=VARCHAR}, 
+      #{denialtype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.RET_Returnlist">
+    insert into BOS.RET_RETURNLIST
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="applicationno != null">
+        APPLICATIONNO,
+      </if>
+      <if test="worksheetno != null">
+        WORKSHEETNO,
+      </if>
+      <if test="returntype != null">
+        RETURNTYPE,
+      </if>
+      <if test="apremark != null">
+        APREMARK,
+      </if>
+      <if test="aploss != null">
+        APLOSS,
+      </if>
+      <if test="entrytime != null">
+        ENTRYTIME,
+      </if>
+      <if test="receivegunit != null">
+        RECEIVEGUNIT,
+      </if>
+      <if test="invalidatesign != null">
+        INVALIDATESIGN,
+      </if>
+      <if test="returnunit != null">
+        RETURNUNIT,
+      </if>
+      <if test="recordingtime != null">
+        RECORDINGTIME,
+      </if>
+      <if test="entryunit != null">
+        ENTRYUNIT,
+      </if>
+      <if test="personname != null">
+        PERSONNAME,
+      </if>
+      <if test="confirmationtime != null">
+        CONFIRMATIONTIME,
+      </if>
+      <if test="confirmationunit != null">
+        CONFIRMATIONUNIT,
+      </if>
+      <if test="confirmationpersonname != null">
+        CONFIRMATIONPERSONNAME,
+      </if>
+      <if test="treatmentstate != null">
+        TREATMENTSTATE,
+      </if>
+      <if test="apreturnstatus != null">
+        APRETURNSTATUS,
+      </if>
+      <if test="identificationsign != null">
+        IDENTIFICATIONSIGN,
+      </if>
+      <if test="handlingopinions != null">
+        HANDLINGOPINIONS,
+      </if>
+      <if test="denialtype != null">
+        DENIALTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="applicationno != null">
+        #{applicationno,jdbcType=VARCHAR},
+      </if>
+      <if test="worksheetno != null">
+        #{worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="returntype != null">
+        #{returntype,jdbcType=DECIMAL},
+      </if>
+      <if test="apremark != null">
+        #{apremark,jdbcType=VARCHAR},
+      </if>
+      <if test="aploss != null">
+        #{aploss,jdbcType=DECIMAL},
+      </if>
+      <if test="entrytime != null">
+        #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivegunit != null">
+        #{receivegunit,jdbcType=DECIMAL},
+      </if>
+      <if test="invalidatesign != null">
+        #{invalidatesign,jdbcType=DECIMAL},
+      </if>
+      <if test="returnunit != null">
+        #{returnunit,jdbcType=DECIMAL},
+      </if>
+      <if test="recordingtime != null">
+        #{recordingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entryunit != null">
+        #{entryunit,jdbcType=DECIMAL},
+      </if>
+      <if test="personname != null">
+        #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmationtime != null">
+        #{confirmationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmationunit != null">
+        #{confirmationunit,jdbcType=DECIMAL},
+      </if>
+      <if test="confirmationpersonname != null">
+        #{confirmationpersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentstate != null">
+        #{treatmentstate,jdbcType=DECIMAL},
+      </if>
+      <if test="apreturnstatus != null">
+        #{apreturnstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="identificationsign != null">
+        #{identificationsign,jdbcType=DECIMAL},
+      </if>
+      <if test="handlingopinions != null">
+        #{handlingopinions,jdbcType=VARCHAR},
+      </if>
+      <if test="denialtype != null">
+        #{denialtype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.RET_Returnlist">
+    update BOS.RET_RETURNLIST
+    <set>
+      <if test="applicationno != null">
+        APPLICATIONNO = #{applicationno,jdbcType=VARCHAR},
+      </if>
+      <if test="worksheetno != null">
+        WORKSHEETNO = #{worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="returntype != null">
+        RETURNTYPE = #{returntype,jdbcType=DECIMAL},
+      </if>
+      <if test="apremark != null">
+        APREMARK = #{apremark,jdbcType=VARCHAR},
+      </if>
+      <if test="aploss != null">
+        APLOSS = #{aploss,jdbcType=DECIMAL},
+      </if>
+      <if test="entrytime != null">
+        ENTRYTIME = #{entrytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivegunit != null">
+        RECEIVEGUNIT = #{receivegunit,jdbcType=DECIMAL},
+      </if>
+      <if test="invalidatesign != null">
+        INVALIDATESIGN = #{invalidatesign,jdbcType=DECIMAL},
+      </if>
+      <if test="returnunit != null">
+        RETURNUNIT = #{returnunit,jdbcType=DECIMAL},
+      </if>
+      <if test="recordingtime != null">
+        RECORDINGTIME = #{recordingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entryunit != null">
+        ENTRYUNIT = #{entryunit,jdbcType=DECIMAL},
+      </if>
+      <if test="personname != null">
+        PERSONNAME = #{personname,jdbcType=VARCHAR},
+      </if>
+      <if test="confirmationtime != null">
+        CONFIRMATIONTIME = #{confirmationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmationunit != null">
+        CONFIRMATIONUNIT = #{confirmationunit,jdbcType=DECIMAL},
+      </if>
+      <if test="confirmationpersonname != null">
+        CONFIRMATIONPERSONNAME = #{confirmationpersonname,jdbcType=VARCHAR},
+      </if>
+      <if test="treatmentstate != null">
+        TREATMENTSTATE = #{treatmentstate,jdbcType=DECIMAL},
+      </if>
+      <if test="apreturnstatus != null">
+        APRETURNSTATUS = #{apreturnstatus,jdbcType=DECIMAL},
+      </if>
+      <if test="identificationsign != null">
+        IDENTIFICATIONSIGN = #{identificationsign,jdbcType=DECIMAL},
+      </if>
+      <if test="handlingopinions != null">
+        HANDLINGOPINIONS = #{handlingopinions,jdbcType=VARCHAR},
+      </if>
+      <if test="denialtype != null">
+        DENIALTYPE = #{denialtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.RET_Returnlist">
+    update BOS.RET_RETURNLIST
+    set APPLICATIONNO = #{applicationno,jdbcType=VARCHAR},
+      WORKSHEETNO = #{worksheetno,jdbcType=VARCHAR},
+      RETURNTYPE = #{returntype,jdbcType=DECIMAL},
+      APREMARK = #{apremark,jdbcType=VARCHAR},
+      APLOSS = #{aploss,jdbcType=DECIMAL},
+      ENTRYTIME = #{entrytime,jdbcType=TIMESTAMP},
+      RECEIVEGUNIT = #{receivegunit,jdbcType=DECIMAL},
+      INVALIDATESIGN = #{invalidatesign,jdbcType=DECIMAL},
+      RETURNUNIT = #{returnunit,jdbcType=DECIMAL},
+      RECORDINGTIME = #{recordingtime,jdbcType=TIMESTAMP},
+      ENTRYUNIT = #{entryunit,jdbcType=DECIMAL},
+      PERSONNAME = #{personname,jdbcType=VARCHAR},
+      CONFIRMATIONTIME = #{confirmationtime,jdbcType=TIMESTAMP},
+      CONFIRMATIONUNIT = #{confirmationunit,jdbcType=DECIMAL},
+      CONFIRMATIONPERSONNAME = #{confirmationpersonname,jdbcType=VARCHAR},
+      TREATMENTSTATE = #{treatmentstate,jdbcType=DECIMAL},
+      APRETURNSTATUS = #{apreturnstatus,jdbcType=DECIMAL},
+      IDENTIFICATIONSIGN = #{identificationsign,jdbcType=DECIMAL},
+      HANDLINGOPINIONS = #{handlingopinions,jdbcType=VARCHAR},
+      DENIALTYPE = #{denialtype,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

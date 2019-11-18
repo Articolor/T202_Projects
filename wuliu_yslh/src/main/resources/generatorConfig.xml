@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="testTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/test"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>-->
+
+         <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+            connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:ORCL"
+            userId="bos"
+            password="abc123">
+        </jdbcConnection>
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和
+            NUMERIC 类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.wl.model"
+                            targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="com.wl.model"
+                         targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.wl.mapper"
+                             targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+
+        <!-- 指定数据库表 1
+        <table tableName="SY_UNITS" schema="bos" domainObjectName="SY_Units" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash;2&ndash;&gt;
+        <table tableName="SY_ROLESMENUS" schema="bos" domainObjectName="SY_Rolesmenus" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 3&ndash;&gt;
+        <table tableName="SY_ROLE" schema="bos" domainObjectName="SY_Role" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 4&ndash;&gt;
+        <table tableName="SY_MENUS" schema="bos" domainObjectName="SY_Menus" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 5&ndash;&gt;
+        <table tableName="SY_EMP" schema="bos" domainObjectName="SY_Emp" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 6&ndash;&gt;
+        <table tableName="SOR_STORAGEDETAILS" schema="bos" domainObjectName="SOR_Storagedetails" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 7&ndash;&gt;
+        <table tableName="SOR_Storage" schema="bos" domainObjectName="SOR_Storage" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 8&ndash;&gt;
+        <table tableName="SOR_Packagedetails" schema="bos" domainObjectName="SOR_Packagedetails" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 9&ndash;&gt;
+        <table tableName="SOR_Package" schema="bos" domainObjectName="SOR_Package" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 10&ndash;&gt;
+        <table tableName="SOR_Outbounddetails" schema="bos" domainObjectName="SOR_Outbounddetails" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 11&ndash;&gt;
+        <table tableName="SOR_Outbound" schema="bos" domainObjectName="SOR_Outbound" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 12&ndash;&gt;
+        <table tableName="SOR_Checkbounddetails" schema="bos" domainObjectName="SOR_Checkbounddetails" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 13&ndash;&gt;
+        <table tableName="SOR_Checkbound" schema="bos" domainObjectName="SOR_Checkbound" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 14&ndash;&gt;
+        <table tableName="SOR_Abnormal" schema="bos" domainObjectName="SOR_Abnormal" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 15&ndash;&gt;
+        <table tableName="RET_Returnlist" schema="bos" domainObjectName="RET_Returnlist" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 16&ndash;&gt;
+        <table tableName="PAC_Stockitem" schema="bos" domainObjectName="PAC_Stockitem" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 17&ndash;&gt;
+        <table tableName="PAC_Stock" schema="bos" domainObjectName="PAC_Stock" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 18&ndash;&gt;
+        <table tableName="PAC_Packaging" schema="bos" domainObjectName="PAC_Packaging" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 19&ndash;&gt;
+        <table tableName="LOG_Track" schema="bos" domainObjectName="LOG_Track" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 20&ndash;&gt;
+        <table tableName="LOG_Logisticstransfer" schema="bos" domainObjectName="LOG_Logisticstransfer" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 21&ndash;&gt;
+        <table tableName="LOG_Logisticsdetails" schema="bos" domainObjectName="LOG_Logisticsdetails" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 22&ndash;&gt;
+        <table tableName="LOG_Logistics" schema="bos" domainObjectName="LOG_Logistics" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 23&ndash;&gt;
+        <table tableName="IAE_Timeinput" schema="bos" domainObjectName="IAE_Timeinput" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 24&ndash;&gt;
+        <table tableName="IAE_Lineresource" schema="bos" domainObjectName="IAE_Lineresource" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 25&ndash;&gt;
+        <table tableName="IAE_Extract" schema="bos" domainObjectName="IAE_Extract" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 26&ndash;&gt;
+        <table tableName="IAE_Departure" schema="bos" domainObjectName="IAE_Departure" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 27&ndash;&gt;
+        <table tableName="IAE_Arrival" schema="bos" domainObjectName="IAE_Arrival" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 28&ndash;&gt;
+        <table tableName="DIS_Workordersign" schema="bos" domainObjectName="DIS_Workordersign" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 29&ndash;&gt;
+        <table tableName="DIS_Propagandatask" schema="bos" domainObjectName="DIS_Propagandatask" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 30&ndash;&gt;
+        <table tableName="DIS_Dispatchhistory" schema="bos" domainObjectName="DIS_Dispatchhistory" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 31&ndash;&gt;
+        <table tableName="BIGLOG_Logisticscontroltable" schema="bos" domainObjectName="BIGLOG_Logisticscontroltable" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 32&ndash;&gt;
+        <table tableName="BAS_Zoneinfo" schema="bos" domainObjectName="BAS_Zoneinfo" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 33&ndash;&gt;
+        <table tableName="BAS_Zonecustominfo" schema="bos" domainObjectName="BAS_Zonecustominfo" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 34&ndash;&gt;
+        <table tableName="BAS_Substitute" schema="bos" domainObjectName="BAS_Substitute" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 35&ndash;&gt;
+        <table tableName="BAS_Standartime" schema="bos" domainObjectName="BAS_Standartime" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 36&ndash;&gt;
+        <table tableName="BAS_Shuttlebus" schema="bos" domainObjectName="BAS_Shuttlebus" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 37&ndash;&gt;
+        <table tableName="BAS_Partition" schema="bos" domainObjectName="BAS_Partition" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 38&ndash;&gt;
+        <table tableName="BAS_Deliverystandard" schema="bos" domainObjectName="BAS_Deliverystandard" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 39&ndash;&gt;
+        <table tableName="BAS_Basicarchivesentry" schema="bos" domainObjectName="BAS_Basicarchivesentry" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 40&ndash;&gt;
+        <table tableName="BAS_Basicarchives" schema="bos" domainObjectName="BAS_Basicarchives" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 41&ndash;&gt;
+        <table tableName="BAS_Associatemember" schema="bos" domainObjectName="BAS_Associatemember" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 42&ndash;&gt;
+        <table tableName="BAS_Associatedaddress" schema="bos" domainObjectName="BAS_Associatedaddress" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 43&ndash;&gt;
+        <table tableName="BAS_Area" schema="bos" domainObjectName="BAS_Area" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 44&ndash;&gt;
+        <table tableName="ACC_Worksheet" schema="bos" domainObjectName="ACC_Worksheet" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 45&ndash;&gt;
+        <table tableName="ACC_Workorder" schema="bos" domainObjectName="ACC_Workorder" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>
+        &lt;!&ndash; 指定数据库表 46&ndash;&gt;
+        <table tableName="ACC_Businessadmissibility" schema="bos" domainObjectName="ACC_Businessadmissibility" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+        </table>-->
+
+        <!-- 有些表的字段需要指定java类型
+         <table schema="" tableName="">
+            <columnOverride column="" javaType="" />
+        </table> -->
+    </context>
+</generatorConfiguration>

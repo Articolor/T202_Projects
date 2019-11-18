@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.IAE_ExtractMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.IAE_Extract">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="VEHICLEINT" jdbcType="VARCHAR" property="vehicleint" />
+    <result column="TRANSPORTWAY" jdbcType="VARCHAR" property="transportway" />
+    <result column="WAYBILLID" jdbcType="VARCHAR" property="waybillid" />
+    <result column="ESTIMATEDATE" jdbcType="TIMESTAMP" property="estimatedate" />
+    <result column="CARGON" jdbcType="DECIMAL" property="cargon" />
+    <result column="IMPORTANTHINTS" jdbcType="VARCHAR" property="importanthints" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, VEHICLEINT, TRANSPORTWAY, WAYBILLID, ESTIMATEDATE, CARGON, IMPORTANTHINTS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.IAE_EXTRACT
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BOS.IAE_EXTRACT
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.IAE_Extract">
+    insert into BOS.IAE_EXTRACT (ID, VEHICLEINT, TRANSPORTWAY, 
+      WAYBILLID, ESTIMATEDATE, CARGON, 
+      IMPORTANTHINTS)
+    values (#{id,jdbcType=VARCHAR}, #{vehicleint,jdbcType=VARCHAR}, #{transportway,jdbcType=VARCHAR}, 
+      #{waybillid,jdbcType=VARCHAR}, #{estimatedate,jdbcType=TIMESTAMP}, #{cargon,jdbcType=DECIMAL}, 
+      #{importanthints,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.IAE_Extract">
+    insert into BOS.IAE_EXTRACT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="vehicleint != null">
+        VEHICLEINT,
+      </if>
+      <if test="transportway != null">
+        TRANSPORTWAY,
+      </if>
+      <if test="waybillid != null">
+        WAYBILLID,
+      </if>
+      <if test="estimatedate != null">
+        ESTIMATEDATE,
+      </if>
+      <if test="cargon != null">
+        CARGON,
+      </if>
+      <if test="importanthints != null">
+        IMPORTANTHINTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleint != null">
+        #{vehicleint,jdbcType=VARCHAR},
+      </if>
+      <if test="transportway != null">
+        #{transportway,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillid != null">
+        #{waybillid,jdbcType=VARCHAR},
+      </if>
+      <if test="estimatedate != null">
+        #{estimatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cargon != null">
+        #{cargon,jdbcType=DECIMAL},
+      </if>
+      <if test="importanthints != null">
+        #{importanthints,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.IAE_Extract">
+    update BOS.IAE_EXTRACT
+    <set>
+      <if test="vehicleint != null">
+        VEHICLEINT = #{vehicleint,jdbcType=VARCHAR},
+      </if>
+      <if test="transportway != null">
+        TRANSPORTWAY = #{transportway,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillid != null">
+        WAYBILLID = #{waybillid,jdbcType=VARCHAR},
+      </if>
+      <if test="estimatedate != null">
+        ESTIMATEDATE = #{estimatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cargon != null">
+        CARGON = #{cargon,jdbcType=DECIMAL},
+      </if>
+      <if test="importanthints != null">
+        IMPORTANTHINTS = #{importanthints,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.IAE_Extract">
+    update BOS.IAE_EXTRACT
+    set VEHICLEINT = #{vehicleint,jdbcType=VARCHAR},
+      TRANSPORTWAY = #{transportway,jdbcType=VARCHAR},
+      WAYBILLID = #{waybillid,jdbcType=VARCHAR},
+      ESTIMATEDATE = #{estimatedate,jdbcType=TIMESTAMP},
+      CARGON = #{cargon,jdbcType=DECIMAL},
+      IMPORTANTHINTS = #{importanthints,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

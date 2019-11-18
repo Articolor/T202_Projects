@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_StandartimeMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Standartime">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="TIMENAME" jdbcType="VARCHAR" property="timename" />
+    <result column="SUBORDINATEUNIT" jdbcType="DECIMAL" property="subordinateunit" />
+    <result column="WORKINGTIME" jdbcType="TIMESTAMP" property="workingtime" />
+    <result column="CLOSINGTIME" jdbcType="TIMESTAMP" property="closingtime" />
+    <result column="SATURDAYWORKINGTIME" jdbcType="TIMESTAMP" property="saturdayworkingtime" />
+    <result column="SATURDAYCLOSINGTIME" jdbcType="TIMESTAMP" property="saturdayclosingtime" />
+    <result column="SUNDAYWORKINGTIME" jdbcType="TIMESTAMP" property="sundayworkingtime" />
+    <result column="SUNDAYCLOSINGTIME" jdbcType="TIMESTAMP" property="sundayclosingtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, TIMENAME, SUBORDINATEUNIT, WORKINGTIME, CLOSINGTIME, SATURDAYWORKINGTIME, SATURDAYCLOSINGTIME, 
+    SUNDAYWORKINGTIME, SUNDAYCLOSINGTIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BAS_STANDARTIME
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BAS_STANDARTIME
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BAS_Standartime">
+    insert into BOS.BAS_STANDARTIME (ID, TIMENAME, SUBORDINATEUNIT, 
+      WORKINGTIME, CLOSINGTIME, SATURDAYWORKINGTIME, 
+      SATURDAYCLOSINGTIME, SUNDAYWORKINGTIME, 
+      SUNDAYCLOSINGTIME)
+    values (#{id,jdbcType=DECIMAL}, #{timename,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=DECIMAL}, 
+      #{workingtime,jdbcType=TIMESTAMP}, #{closingtime,jdbcType=TIMESTAMP}, #{saturdayworkingtime,jdbcType=TIMESTAMP}, 
+      #{saturdayclosingtime,jdbcType=TIMESTAMP}, #{sundayworkingtime,jdbcType=TIMESTAMP}, 
+      #{sundayclosingtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Standartime">
+    insert into BOS.BAS_STANDARTIME
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="timename != null">
+        TIMENAME,
+      </if>
+      <if test="subordinateunit != null">
+        SUBORDINATEUNIT,
+      </if>
+      <if test="workingtime != null">
+        WORKINGTIME,
+      </if>
+      <if test="closingtime != null">
+        CLOSINGTIME,
+      </if>
+      <if test="saturdayworkingtime != null">
+        SATURDAYWORKINGTIME,
+      </if>
+      <if test="saturdayclosingtime != null">
+        SATURDAYCLOSINGTIME,
+      </if>
+      <if test="sundayworkingtime != null">
+        SUNDAYWORKINGTIME,
+      </if>
+      <if test="sundayclosingtime != null">
+        SUNDAYCLOSINGTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="timename != null">
+        #{timename,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateunit != null">
+        #{subordinateunit,jdbcType=DECIMAL},
+      </if>
+      <if test="workingtime != null">
+        #{workingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closingtime != null">
+        #{closingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saturdayworkingtime != null">
+        #{saturdayworkingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saturdayclosingtime != null">
+        #{saturdayclosingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sundayworkingtime != null">
+        #{sundayworkingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sundayclosingtime != null">
+        #{sundayclosingtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Standartime">
+    update BOS.BAS_STANDARTIME
+    <set>
+      <if test="timename != null">
+        TIMENAME = #{timename,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateunit != null">
+        SUBORDINATEUNIT = #{subordinateunit,jdbcType=DECIMAL},
+      </if>
+      <if test="workingtime != null">
+        WORKINGTIME = #{workingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closingtime != null">
+        CLOSINGTIME = #{closingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saturdayworkingtime != null">
+        SATURDAYWORKINGTIME = #{saturdayworkingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saturdayclosingtime != null">
+        SATURDAYCLOSINGTIME = #{saturdayclosingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sundayworkingtime != null">
+        SUNDAYWORKINGTIME = #{sundayworkingtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sundayclosingtime != null">
+        SUNDAYCLOSINGTIME = #{sundayclosingtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BAS_Standartime">
+    update BOS.BAS_STANDARTIME
+    set TIMENAME = #{timename,jdbcType=VARCHAR},
+      SUBORDINATEUNIT = #{subordinateunit,jdbcType=DECIMAL},
+      WORKINGTIME = #{workingtime,jdbcType=TIMESTAMP},
+      CLOSINGTIME = #{closingtime,jdbcType=TIMESTAMP},
+      SATURDAYWORKINGTIME = #{saturdayworkingtime,jdbcType=TIMESTAMP},
+      SATURDAYCLOSINGTIME = #{saturdayclosingtime,jdbcType=TIMESTAMP},
+      SUNDAYWORKINGTIME = #{sundayworkingtime,jdbcType=TIMESTAMP},
+      SUNDAYCLOSINGTIME = #{sundayclosingtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.LOG_LogisticsMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.LOG_Logistics">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="LOGISTICSINT" jdbcType="VARCHAR" property="logisticsint" />
+    <result column="LINENAME" jdbcType="VARCHAR" property="linename" />
+    <result column="STARTCOMPANY" jdbcType="VARCHAR" property="startcompany" />
+    <result column="GENERATEPERSON" jdbcType="VARCHAR" property="generateperson" />
+    <result column="CARINT" jdbcType="VARCHAR" property="carint" />
+    <result column="DRIVER" jdbcType="VARCHAR" property="driver" />
+    <result column="DRIVERPHONE" jdbcType="VARCHAR" property="driverphone" />
+    <result column="CARTYPE" jdbcType="VARCHAR" property="cartype" />
+    <result column="LOGISTICSSTATE" jdbcType="VARCHAR" property="logisticsstate" />
+    <result column="ISCANCEL" jdbcType="DECIMAL" property="iscancel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, LOGISTICSINT, LINENAME, STARTCOMPANY, GENERATEPERSON, CARINT, DRIVER, DRIVERPHONE, 
+    CARTYPE, LOGISTICSSTATE, ISCANCEL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.LOG_LOGISTICS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.LOG_LOGISTICS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.LOG_Logistics">
+    insert into BOS.LOG_LOGISTICS (ID, LOGISTICSINT, LINENAME, 
+      STARTCOMPANY, GENERATEPERSON, CARINT, 
+      DRIVER, DRIVERPHONE, CARTYPE, 
+      LOGISTICSSTATE, ISCANCEL)
+    values (#{id,jdbcType=DECIMAL}, #{logisticsint,jdbcType=VARCHAR}, #{linename,jdbcType=VARCHAR}, 
+      #{startcompany,jdbcType=VARCHAR}, #{generateperson,jdbcType=VARCHAR}, #{carint,jdbcType=VARCHAR}, 
+      #{driver,jdbcType=VARCHAR}, #{driverphone,jdbcType=VARCHAR}, #{cartype,jdbcType=VARCHAR}, 
+      #{logisticsstate,jdbcType=VARCHAR}, #{iscancel,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.LOG_Logistics">
+    insert into BOS.LOG_LOGISTICS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="logisticsint != null">
+        LOGISTICSINT,
+      </if>
+      <if test="linename != null">
+        LINENAME,
+      </if>
+      <if test="startcompany != null">
+        STARTCOMPANY,
+      </if>
+      <if test="generateperson != null">
+        GENERATEPERSON,
+      </if>
+      <if test="carint != null">
+        CARINT,
+      </if>
+      <if test="driver != null">
+        DRIVER,
+      </if>
+      <if test="driverphone != null">
+        DRIVERPHONE,
+      </if>
+      <if test="cartype != null">
+        CARTYPE,
+      </if>
+      <if test="logisticsstate != null">
+        LOGISTICSSTATE,
+      </if>
+      <if test="iscancel != null">
+        ISCANCEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="logisticsint != null">
+        #{logisticsint,jdbcType=VARCHAR},
+      </if>
+      <if test="linename != null">
+        #{linename,jdbcType=VARCHAR},
+      </if>
+      <if test="startcompany != null">
+        #{startcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="generateperson != null">
+        #{generateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="carint != null">
+        #{carint,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="driverphone != null">
+        #{driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cartype != null">
+        #{cartype,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsstate != null">
+        #{logisticsstate,jdbcType=VARCHAR},
+      </if>
+      <if test="iscancel != null">
+        #{iscancel,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.LOG_Logistics">
+    update BOS.LOG_LOGISTICS
+    <set>
+      <if test="logisticsint != null">
+        LOGISTICSINT = #{logisticsint,jdbcType=VARCHAR},
+      </if>
+      <if test="linename != null">
+        LINENAME = #{linename,jdbcType=VARCHAR},
+      </if>
+      <if test="startcompany != null">
+        STARTCOMPANY = #{startcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="generateperson != null">
+        GENERATEPERSON = #{generateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="carint != null">
+        CARINT = #{carint,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        DRIVER = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="driverphone != null">
+        DRIVERPHONE = #{driverphone,jdbcType=VARCHAR},
+      </if>
+      <if test="cartype != null">
+        CARTYPE = #{cartype,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsstate != null">
+        LOGISTICSSTATE = #{logisticsstate,jdbcType=VARCHAR},
+      </if>
+      <if test="iscancel != null">
+        ISCANCEL = #{iscancel,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.LOG_Logistics">
+    update BOS.LOG_LOGISTICS
+    set LOGISTICSINT = #{logisticsint,jdbcType=VARCHAR},
+      LINENAME = #{linename,jdbcType=VARCHAR},
+      STARTCOMPANY = #{startcompany,jdbcType=VARCHAR},
+      GENERATEPERSON = #{generateperson,jdbcType=VARCHAR},
+      CARINT = #{carint,jdbcType=VARCHAR},
+      DRIVER = #{driver,jdbcType=VARCHAR},
+      DRIVERPHONE = #{driverphone,jdbcType=VARCHAR},
+      CARTYPE = #{cartype,jdbcType=VARCHAR},
+      LOGISTICSSTATE = #{logisticsstate,jdbcType=VARCHAR},
+      ISCANCEL = #{iscancel,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.SOR_StorageMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.SOR_Storage">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ACCEPTDATE" jdbcType="TIMESTAMP" property="acceptdate" />
+    <result column="ACCEPTPERSON" jdbcType="DECIMAL" property="acceptperson" />
+    <result column="ACCEPTCOMPANY" jdbcType="VARCHAR" property="acceptcompany" />
+    <result column="DELIVERYPERSON" jdbcType="DECIMAL" property="deliveryperson" />
+    <result column="DELIVERYCOMPANY" jdbcType="VARCHAR" property="deliverycompany" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ACCEPTDATE, ACCEPTPERSON, ACCEPTCOMPANY, DELIVERYPERSON, DELIVERYCOMPANY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.SOR_STORAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.SOR_STORAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.SOR_Storage">
+    insert into BOS.SOR_STORAGE (ID, ACCEPTDATE, ACCEPTPERSON, 
+      ACCEPTCOMPANY, DELIVERYPERSON, DELIVERYCOMPANY
+      )
+    values (#{id,jdbcType=DECIMAL}, #{acceptdate,jdbcType=TIMESTAMP}, #{acceptperson,jdbcType=DECIMAL}, 
+      #{acceptcompany,jdbcType=VARCHAR}, #{deliveryperson,jdbcType=DECIMAL}, #{deliverycompany,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.SOR_Storage">
+    insert into BOS.SOR_STORAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="acceptdate != null">
+        ACCEPTDATE,
+      </if>
+      <if test="acceptperson != null">
+        ACCEPTPERSON,
+      </if>
+      <if test="acceptcompany != null">
+        ACCEPTCOMPANY,
+      </if>
+      <if test="deliveryperson != null">
+        DELIVERYPERSON,
+      </if>
+      <if test="deliverycompany != null">
+        DELIVERYCOMPANY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="acceptdate != null">
+        #{acceptdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptperson != null">
+        #{acceptperson,jdbcType=DECIMAL},
+      </if>
+      <if test="acceptcompany != null">
+        #{acceptcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryperson != null">
+        #{deliveryperson,jdbcType=DECIMAL},
+      </if>
+      <if test="deliverycompany != null">
+        #{deliverycompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.SOR_Storage">
+    update BOS.SOR_STORAGE
+    <set>
+      <if test="acceptdate != null">
+        ACCEPTDATE = #{acceptdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptperson != null">
+        ACCEPTPERSON = #{acceptperson,jdbcType=DECIMAL},
+      </if>
+      <if test="acceptcompany != null">
+        ACCEPTCOMPANY = #{acceptcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryperson != null">
+        DELIVERYPERSON = #{deliveryperson,jdbcType=DECIMAL},
+      </if>
+      <if test="deliverycompany != null">
+        DELIVERYCOMPANY = #{deliverycompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.SOR_Storage">
+    update BOS.SOR_STORAGE
+    set ACCEPTDATE = #{acceptdate,jdbcType=TIMESTAMP},
+      ACCEPTPERSON = #{acceptperson,jdbcType=DECIMAL},
+      ACCEPTCOMPANY = #{acceptcompany,jdbcType=VARCHAR},
+      DELIVERYPERSON = #{deliveryperson,jdbcType=DECIMAL},
+      DELIVERYCOMPANY = #{deliverycompany,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

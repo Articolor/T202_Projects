@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_ZonecustominfoMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Zonecustominfo">
+    <id column="CUSTOMCODE" jdbcType="DECIMAL" property="customcode" />
+    <result column="CUSTOMNAME" jdbcType="VARCHAR" property="customname" />
+    <result column="MOBILENO" jdbcType="DECIMAL" property="mobileno" />
+    <result column="CITYNAME" jdbcType="VARCHAR" property="cityname" />
+    <result column="CSTOMADDRESS" jdbcType="VARCHAR" property="cstomaddress" />
+    <result column="ZONEINFOID" jdbcType="DECIMAL" property="zoneinfoid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CUSTOMCODE, CUSTOMNAME, MOBILENO, CITYNAME, CSTOMADDRESS, ZONEINFOID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BAS_ZONECUSTOMINFO
+    where CUSTOMCODE = #{customcode,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BAS_ZONECUSTOMINFO
+    where CUSTOMCODE = #{customcode,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BAS_Zonecustominfo">
+    insert into BOS.BAS_ZONECUSTOMINFO (CUSTOMCODE, CUSTOMNAME, MOBILENO, 
+      CITYNAME, CSTOMADDRESS, ZONEINFOID
+      )
+    values (#{customcode,jdbcType=DECIMAL}, #{customname,jdbcType=VARCHAR}, #{mobileno,jdbcType=DECIMAL}, 
+      #{cityname,jdbcType=VARCHAR}, #{cstomaddress,jdbcType=VARCHAR}, #{zoneinfoid,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Zonecustominfo">
+    insert into BOS.BAS_ZONECUSTOMINFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="customcode != null">
+        CUSTOMCODE,
+      </if>
+      <if test="customname != null">
+        CUSTOMNAME,
+      </if>
+      <if test="mobileno != null">
+        MOBILENO,
+      </if>
+      <if test="cityname != null">
+        CITYNAME,
+      </if>
+      <if test="cstomaddress != null">
+        CSTOMADDRESS,
+      </if>
+      <if test="zoneinfoid != null">
+        ZONEINFOID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="customcode != null">
+        #{customcode,jdbcType=DECIMAL},
+      </if>
+      <if test="customname != null">
+        #{customname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null">
+        #{mobileno,jdbcType=DECIMAL},
+      </if>
+      <if test="cityname != null">
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="cstomaddress != null">
+        #{cstomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneinfoid != null">
+        #{zoneinfoid,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Zonecustominfo">
+    update BOS.BAS_ZONECUSTOMINFO
+    <set>
+      <if test="customname != null">
+        CUSTOMNAME = #{customname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null">
+        MOBILENO = #{mobileno,jdbcType=DECIMAL},
+      </if>
+      <if test="cityname != null">
+        CITYNAME = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="cstomaddress != null">
+        CSTOMADDRESS = #{cstomaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zoneinfoid != null">
+        ZONEINFOID = #{zoneinfoid,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where CUSTOMCODE = #{customcode,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BAS_Zonecustominfo">
+    update BOS.BAS_ZONECUSTOMINFO
+    set CUSTOMNAME = #{customname,jdbcType=VARCHAR},
+      MOBILENO = #{mobileno,jdbcType=DECIMAL},
+      CITYNAME = #{cityname,jdbcType=VARCHAR},
+      CSTOMADDRESS = #{cstomaddress,jdbcType=VARCHAR},
+      ZONEINFOID = #{zoneinfoid,jdbcType=DECIMAL}
+    where CUSTOMCODE = #{customcode,jdbcType=DECIMAL}
+  </update>
+</mapper>

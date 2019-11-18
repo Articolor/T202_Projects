@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_SubstituteMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Substitute">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="EMPNO" jdbcType="VARCHAR" property="empno" />
+    <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    <result column="MOBILENO" jdbcType="DECIMAL" property="mobileno" />
+    <result column="TYPE" jdbcType="DECIMAL" property="type" />
+    <result column="PDA" jdbcType="DECIMAL" property="pda" />
+    <result column="STANDARDKG" jdbcType="DECIMAL" property="standardkg" />
+    <result column="STANDARDLENGTH" jdbcType="DECIMAL" property="standardlength" />
+    <result column="MODELS" jdbcType="VARCHAR" property="models" />
+    <result column="PLATEINT" jdbcType="VARCHAR" property="plateint" />
+    <result column="INVALIDATEMARK" jdbcType="DECIMAL" property="invalidatemark" />
+    <result column="SUBORDINATEUNIT" jdbcType="DECIMAL" property="subordinateunit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, EMPNO, EMPNAME, MOBILENO, TYPE, PDA, STANDARDKG, STANDARDLENGTH, MODELS, PLATEINT, 
+    INVALIDATEMARK, SUBORDINATEUNIT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BAS_SUBSTITUTE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BAS_SUBSTITUTE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BAS_Substitute">
+    insert into BOS.BAS_SUBSTITUTE (ID, EMPNO, EMPNAME, 
+      MOBILENO, TYPE, PDA, 
+      STANDARDKG, STANDARDLENGTH, MODELS, 
+      PLATEINT, INVALIDATEMARK, SUBORDINATEUNIT
+      )
+    values (#{id,jdbcType=DECIMAL}, #{empno,jdbcType=VARCHAR}, #{empname,jdbcType=VARCHAR}, 
+      #{mobileno,jdbcType=DECIMAL}, #{type,jdbcType=DECIMAL}, #{pda,jdbcType=DECIMAL}, 
+      #{standardkg,jdbcType=DECIMAL}, #{standardlength,jdbcType=DECIMAL}, #{models,jdbcType=VARCHAR}, 
+      #{plateint,jdbcType=VARCHAR}, #{invalidatemark,jdbcType=DECIMAL}, #{subordinateunit,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Substitute">
+    insert into BOS.BAS_SUBSTITUTE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="empno != null">
+        EMPNO,
+      </if>
+      <if test="empname != null">
+        EMPNAME,
+      </if>
+      <if test="mobileno != null">
+        MOBILENO,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="pda != null">
+        PDA,
+      </if>
+      <if test="standardkg != null">
+        STANDARDKG,
+      </if>
+      <if test="standardlength != null">
+        STANDARDLENGTH,
+      </if>
+      <if test="models != null">
+        MODELS,
+      </if>
+      <if test="plateint != null">
+        PLATEINT,
+      </if>
+      <if test="invalidatemark != null">
+        INVALIDATEMARK,
+      </if>
+      <if test="subordinateunit != null">
+        SUBORDINATEUNIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="empno != null">
+        #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="empname != null">
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null">
+        #{mobileno,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="pda != null">
+        #{pda,jdbcType=DECIMAL},
+      </if>
+      <if test="standardkg != null">
+        #{standardkg,jdbcType=DECIMAL},
+      </if>
+      <if test="standardlength != null">
+        #{standardlength,jdbcType=DECIMAL},
+      </if>
+      <if test="models != null">
+        #{models,jdbcType=VARCHAR},
+      </if>
+      <if test="plateint != null">
+        #{plateint,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidatemark != null">
+        #{invalidatemark,jdbcType=DECIMAL},
+      </if>
+      <if test="subordinateunit != null">
+        #{subordinateunit,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Substitute">
+    update BOS.BAS_SUBSTITUTE
+    <set>
+      <if test="empno != null">
+        EMPNO = #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="empname != null">
+        EMPNAME = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null">
+        MOBILENO = #{mobileno,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="pda != null">
+        PDA = #{pda,jdbcType=DECIMAL},
+      </if>
+      <if test="standardkg != null">
+        STANDARDKG = #{standardkg,jdbcType=DECIMAL},
+      </if>
+      <if test="standardlength != null">
+        STANDARDLENGTH = #{standardlength,jdbcType=DECIMAL},
+      </if>
+      <if test="models != null">
+        MODELS = #{models,jdbcType=VARCHAR},
+      </if>
+      <if test="plateint != null">
+        PLATEINT = #{plateint,jdbcType=VARCHAR},
+      </if>
+      <if test="invalidatemark != null">
+        INVALIDATEMARK = #{invalidatemark,jdbcType=DECIMAL},
+      </if>
+      <if test="subordinateunit != null">
+        SUBORDINATEUNIT = #{subordinateunit,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BAS_Substitute">
+    update BOS.BAS_SUBSTITUTE
+    set EMPNO = #{empno,jdbcType=VARCHAR},
+      EMPNAME = #{empname,jdbcType=VARCHAR},
+      MOBILENO = #{mobileno,jdbcType=DECIMAL},
+      TYPE = #{type,jdbcType=DECIMAL},
+      PDA = #{pda,jdbcType=DECIMAL},
+      STANDARDKG = #{standardkg,jdbcType=DECIMAL},
+      STANDARDLENGTH = #{standardlength,jdbcType=DECIMAL},
+      MODELS = #{models,jdbcType=VARCHAR},
+      PLATEINT = #{plateint,jdbcType=VARCHAR},
+      INVALIDATEMARK = #{invalidatemark,jdbcType=DECIMAL},
+      SUBORDINATEUNIT = #{subordinateunit,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

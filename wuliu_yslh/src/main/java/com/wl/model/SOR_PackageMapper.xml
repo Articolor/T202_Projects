@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.SOR_PackageMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.SOR_Package">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PACKAGEPERSON" jdbcType="DECIMAL" property="packageperson" />
+    <result column="SEALINT" jdbcType="VARCHAR" property="sealint" />
+    <result column="DESTINATION" jdbcType="VARCHAR" property="destination" />
+    <result column="RECKONDES" jdbcType="VARCHAR" property="reckondes" />
+    <result column="TIMELIMIT" jdbcType="TIMESTAMP" property="timelimit" />
+    <result column="TICKETSUM" jdbcType="DECIMAL" property="ticketsum" />
+    <result column="CARGOSUM" jdbcType="DECIMAL" property="cargosum" />
+    <result column="WEIGHTSUM" jdbcType="DECIMAL" property="weightsum" />
+    <result column="VOLUMESUM" jdbcType="DECIMAL" property="volumesum" />
+    <result column="STATE" jdbcType="DECIMAL" property="state" />
+    <result column="ASK" jdbcType="DECIMAL" property="ask" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PACKAGEPERSON, SEALINT, DESTINATION, RECKONDES, TIMELIMIT, TICKETSUM, CARGOSUM, 
+    WEIGHTSUM, VOLUMESUM, STATE, ASK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.SOR_PACKAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.SOR_PACKAGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.SOR_Package">
+    insert into BOS.SOR_PACKAGE (ID, PACKAGEPERSON, SEALINT, 
+      DESTINATION, RECKONDES, TIMELIMIT, 
+      TICKETSUM, CARGOSUM, WEIGHTSUM, 
+      VOLUMESUM, STATE, ASK
+      )
+    values (#{id,jdbcType=DECIMAL}, #{packageperson,jdbcType=DECIMAL}, #{sealint,jdbcType=VARCHAR}, 
+      #{destination,jdbcType=VARCHAR}, #{reckondes,jdbcType=VARCHAR}, #{timelimit,jdbcType=TIMESTAMP}, 
+      #{ticketsum,jdbcType=DECIMAL}, #{cargosum,jdbcType=DECIMAL}, #{weightsum,jdbcType=DECIMAL}, 
+      #{volumesum,jdbcType=DECIMAL}, #{state,jdbcType=DECIMAL}, #{ask,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.SOR_Package">
+    insert into BOS.SOR_PACKAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="packageperson != null">
+        PACKAGEPERSON,
+      </if>
+      <if test="sealint != null">
+        SEALINT,
+      </if>
+      <if test="destination != null">
+        DESTINATION,
+      </if>
+      <if test="reckondes != null">
+        RECKONDES,
+      </if>
+      <if test="timelimit != null">
+        TIMELIMIT,
+      </if>
+      <if test="ticketsum != null">
+        TICKETSUM,
+      </if>
+      <if test="cargosum != null">
+        CARGOSUM,
+      </if>
+      <if test="weightsum != null">
+        WEIGHTSUM,
+      </if>
+      <if test="volumesum != null">
+        VOLUMESUM,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="ask != null">
+        ASK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="packageperson != null">
+        #{packageperson,jdbcType=DECIMAL},
+      </if>
+      <if test="sealint != null">
+        #{sealint,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="reckondes != null">
+        #{reckondes,jdbcType=VARCHAR},
+      </if>
+      <if test="timelimit != null">
+        #{timelimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticketsum != null">
+        #{ticketsum,jdbcType=DECIMAL},
+      </if>
+      <if test="cargosum != null">
+        #{cargosum,jdbcType=DECIMAL},
+      </if>
+      <if test="weightsum != null">
+        #{weightsum,jdbcType=DECIMAL},
+      </if>
+      <if test="volumesum != null">
+        #{volumesum,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="ask != null">
+        #{ask,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.SOR_Package">
+    update BOS.SOR_PACKAGE
+    <set>
+      <if test="packageperson != null">
+        PACKAGEPERSON = #{packageperson,jdbcType=DECIMAL},
+      </if>
+      <if test="sealint != null">
+        SEALINT = #{sealint,jdbcType=VARCHAR},
+      </if>
+      <if test="destination != null">
+        DESTINATION = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="reckondes != null">
+        RECKONDES = #{reckondes,jdbcType=VARCHAR},
+      </if>
+      <if test="timelimit != null">
+        TIMELIMIT = #{timelimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticketsum != null">
+        TICKETSUM = #{ticketsum,jdbcType=DECIMAL},
+      </if>
+      <if test="cargosum != null">
+        CARGOSUM = #{cargosum,jdbcType=DECIMAL},
+      </if>
+      <if test="weightsum != null">
+        WEIGHTSUM = #{weightsum,jdbcType=DECIMAL},
+      </if>
+      <if test="volumesum != null">
+        VOLUMESUM = #{volumesum,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=DECIMAL},
+      </if>
+      <if test="ask != null">
+        ASK = #{ask,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.SOR_Package">
+    update BOS.SOR_PACKAGE
+    set PACKAGEPERSON = #{packageperson,jdbcType=DECIMAL},
+      SEALINT = #{sealint,jdbcType=VARCHAR},
+      DESTINATION = #{destination,jdbcType=VARCHAR},
+      RECKONDES = #{reckondes,jdbcType=VARCHAR},
+      TIMELIMIT = #{timelimit,jdbcType=TIMESTAMP},
+      TICKETSUM = #{ticketsum,jdbcType=DECIMAL},
+      CARGOSUM = #{cargosum,jdbcType=DECIMAL},
+      WEIGHTSUM = #{weightsum,jdbcType=DECIMAL},
+      VOLUMESUM = #{volumesum,jdbcType=DECIMAL},
+      STATE = #{state,jdbcType=DECIMAL},
+      ASK = #{ask,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

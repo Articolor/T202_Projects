@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_ShuttlebusMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Shuttlebus">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="LINETYPE" jdbcType="DECIMAL" property="linetype" />
+    <result column="LINEID" jdbcType="DECIMAL" property="lineid" />
+    <result column="LICENSEPLATEINT" jdbcType="VARCHAR" property="licenseplateint" />
+    <result column="CARRIER" jdbcType="VARCHAR" property="carrier" />
+    <result column="MODELS" jdbcType="VARCHAR" property="models" />
+    <result column="DRIVER" jdbcType="VARCHAR" property="driver" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="TON" jdbcType="DECIMAL" property="ton" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+    <result column="OPERATIONUNITID" jdbcType="DECIMAL" property="operationunitid" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, LINETYPE, LINEID, LICENSEPLATEINT, CARRIER, MODELS, DRIVER, TELEPHONE, TON, REMARKS, 
+    OPERATORID, OPERATIONUNITID, OPERATIONTIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BAS_SHUTTLEBUS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BAS_SHUTTLEBUS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BAS_Shuttlebus">
+    insert into BOS.BAS_SHUTTLEBUS (ID, LINETYPE, LINEID, 
+      LICENSEPLATEINT, CARRIER, MODELS, 
+      DRIVER, TELEPHONE, TON, 
+      REMARKS, OPERATORID, OPERATIONUNITID, 
+      OPERATIONTIME)
+    values (#{id,jdbcType=DECIMAL}, #{linetype,jdbcType=DECIMAL}, #{lineid,jdbcType=DECIMAL}, 
+      #{licenseplateint,jdbcType=VARCHAR}, #{carrier,jdbcType=VARCHAR}, #{models,jdbcType=VARCHAR}, 
+      #{driver,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{ton,jdbcType=DECIMAL}, 
+      #{remarks,jdbcType=VARCHAR}, #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL}, 
+      #{operationtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Shuttlebus">
+    insert into BOS.BAS_SHUTTLEBUS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="linetype != null">
+        LINETYPE,
+      </if>
+      <if test="lineid != null">
+        LINEID,
+      </if>
+      <if test="licenseplateint != null">
+        LICENSEPLATEINT,
+      </if>
+      <if test="carrier != null">
+        CARRIER,
+      </if>
+      <if test="models != null">
+        MODELS,
+      </if>
+      <if test="driver != null">
+        DRIVER,
+      </if>
+      <if test="telephone != null">
+        TELEPHONE,
+      </if>
+      <if test="ton != null">
+        TON,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="operatorid != null">
+        OPERATORID,
+      </if>
+      <if test="operationunitid != null">
+        OPERATIONUNITID,
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="linetype != null">
+        #{linetype,jdbcType=DECIMAL},
+      </if>
+      <if test="lineid != null">
+        #{lineid,jdbcType=DECIMAL},
+      </if>
+      <if test="licenseplateint != null">
+        #{licenseplateint,jdbcType=VARCHAR},
+      </if>
+      <if test="carrier != null">
+        #{carrier,jdbcType=VARCHAR},
+      </if>
+      <if test="models != null">
+        #{models,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="ton != null">
+        #{ton,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorid != null">
+        #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationunitid != null">
+        #{operationunitid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationtime != null">
+        #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Shuttlebus">
+    update BOS.BAS_SHUTTLEBUS
+    <set>
+      <if test="linetype != null">
+        LINETYPE = #{linetype,jdbcType=DECIMAL},
+      </if>
+      <if test="lineid != null">
+        LINEID = #{lineid,jdbcType=DECIMAL},
+      </if>
+      <if test="licenseplateint != null">
+        LICENSEPLATEINT = #{licenseplateint,jdbcType=VARCHAR},
+      </if>
+      <if test="carrier != null">
+        CARRIER = #{carrier,jdbcType=VARCHAR},
+      </if>
+      <if test="models != null">
+        MODELS = #{models,jdbcType=VARCHAR},
+      </if>
+      <if test="driver != null">
+        DRIVER = #{driver,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="ton != null">
+        TON = #{ton,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorid != null">
+        OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationunitid != null">
+        OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BAS_Shuttlebus">
+    update BOS.BAS_SHUTTLEBUS
+    set LINETYPE = #{linetype,jdbcType=DECIMAL},
+      LINEID = #{lineid,jdbcType=DECIMAL},
+      LICENSEPLATEINT = #{licenseplateint,jdbcType=VARCHAR},
+      CARRIER = #{carrier,jdbcType=VARCHAR},
+      MODELS = #{models,jdbcType=VARCHAR},
+      DRIVER = #{driver,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      TON = #{ton,jdbcType=DECIMAL},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
+      OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

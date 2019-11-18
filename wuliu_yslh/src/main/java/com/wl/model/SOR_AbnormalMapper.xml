@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.SOR_AbnormalMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.SOR_Abnormal">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="LAUNCHDATE" jdbcType="TIMESTAMP" property="launchdate" />
+    <result column="LAUNCHPERSON" jdbcType="VARCHAR" property="launchperson" />
+    <result column="LAUNCHCOMPANY" jdbcType="VARCHAR" property="launchcompany" />
+    <result column="ABNORMALTYPE" jdbcType="DECIMAL" property="abnormaltype" />
+    <result column="TRANSFERINT" jdbcType="VARCHAR" property="transferint" />
+    <result column="CARGOINT" jdbcType="VARCHAR" property="cargoint" />
+    <result column="PACKAGEINT" jdbcType="VARCHAR" property="packageint" />
+    <result column="HEDGEABNINT" jdbcType="DECIMAL" property="hedgeabnint" />
+    <result column="ABOSTATE" jdbcType="DECIMAL" property="abostate" />
+    <result column="HANDLEDATE" jdbcType="TIMESTAMP" property="handledate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, LAUNCHDATE, LAUNCHPERSON, LAUNCHCOMPANY, ABNORMALTYPE, TRANSFERINT, CARGOINT, 
+    PACKAGEINT, HEDGEABNINT, ABOSTATE, HANDLEDATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.SOR_ABNORMAL
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.SOR_ABNORMAL
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.SOR_Abnormal">
+    insert into BOS.SOR_ABNORMAL (ID, LAUNCHDATE, LAUNCHPERSON, 
+      LAUNCHCOMPANY, ABNORMALTYPE, TRANSFERINT, 
+      CARGOINT, PACKAGEINT, HEDGEABNINT, 
+      ABOSTATE, HANDLEDATE)
+    values (#{id,jdbcType=DECIMAL}, #{launchdate,jdbcType=TIMESTAMP}, #{launchperson,jdbcType=VARCHAR}, 
+      #{launchcompany,jdbcType=VARCHAR}, #{abnormaltype,jdbcType=DECIMAL}, #{transferint,jdbcType=VARCHAR}, 
+      #{cargoint,jdbcType=VARCHAR}, #{packageint,jdbcType=VARCHAR}, #{hedgeabnint,jdbcType=DECIMAL}, 
+      #{abostate,jdbcType=DECIMAL}, #{handledate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.SOR_Abnormal">
+    insert into BOS.SOR_ABNORMAL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="launchdate != null">
+        LAUNCHDATE,
+      </if>
+      <if test="launchperson != null">
+        LAUNCHPERSON,
+      </if>
+      <if test="launchcompany != null">
+        LAUNCHCOMPANY,
+      </if>
+      <if test="abnormaltype != null">
+        ABNORMALTYPE,
+      </if>
+      <if test="transferint != null">
+        TRANSFERINT,
+      </if>
+      <if test="cargoint != null">
+        CARGOINT,
+      </if>
+      <if test="packageint != null">
+        PACKAGEINT,
+      </if>
+      <if test="hedgeabnint != null">
+        HEDGEABNINT,
+      </if>
+      <if test="abostate != null">
+        ABOSTATE,
+      </if>
+      <if test="handledate != null">
+        HANDLEDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="launchdate != null">
+        #{launchdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="launchperson != null">
+        #{launchperson,jdbcType=VARCHAR},
+      </if>
+      <if test="launchcompany != null">
+        #{launchcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormaltype != null">
+        #{abnormaltype,jdbcType=DECIMAL},
+      </if>
+      <if test="transferint != null">
+        #{transferint,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoint != null">
+        #{cargoint,jdbcType=VARCHAR},
+      </if>
+      <if test="packageint != null">
+        #{packageint,jdbcType=VARCHAR},
+      </if>
+      <if test="hedgeabnint != null">
+        #{hedgeabnint,jdbcType=DECIMAL},
+      </if>
+      <if test="abostate != null">
+        #{abostate,jdbcType=DECIMAL},
+      </if>
+      <if test="handledate != null">
+        #{handledate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.SOR_Abnormal">
+    update BOS.SOR_ABNORMAL
+    <set>
+      <if test="launchdate != null">
+        LAUNCHDATE = #{launchdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="launchperson != null">
+        LAUNCHPERSON = #{launchperson,jdbcType=VARCHAR},
+      </if>
+      <if test="launchcompany != null">
+        LAUNCHCOMPANY = #{launchcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormaltype != null">
+        ABNORMALTYPE = #{abnormaltype,jdbcType=DECIMAL},
+      </if>
+      <if test="transferint != null">
+        TRANSFERINT = #{transferint,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoint != null">
+        CARGOINT = #{cargoint,jdbcType=VARCHAR},
+      </if>
+      <if test="packageint != null">
+        PACKAGEINT = #{packageint,jdbcType=VARCHAR},
+      </if>
+      <if test="hedgeabnint != null">
+        HEDGEABNINT = #{hedgeabnint,jdbcType=DECIMAL},
+      </if>
+      <if test="abostate != null">
+        ABOSTATE = #{abostate,jdbcType=DECIMAL},
+      </if>
+      <if test="handledate != null">
+        HANDLEDATE = #{handledate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.SOR_Abnormal">
+    update BOS.SOR_ABNORMAL
+    set LAUNCHDATE = #{launchdate,jdbcType=TIMESTAMP},
+      LAUNCHPERSON = #{launchperson,jdbcType=VARCHAR},
+      LAUNCHCOMPANY = #{launchcompany,jdbcType=VARCHAR},
+      ABNORMALTYPE = #{abnormaltype,jdbcType=DECIMAL},
+      TRANSFERINT = #{transferint,jdbcType=VARCHAR},
+      CARGOINT = #{cargoint,jdbcType=VARCHAR},
+      PACKAGEINT = #{packageint,jdbcType=VARCHAR},
+      HEDGEABNINT = #{hedgeabnint,jdbcType=DECIMAL},
+      ABOSTATE = #{abostate,jdbcType=DECIMAL},
+      HANDLEDATE = #{handledate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

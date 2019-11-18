@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.PAC_StockitemMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.PAC_Stockitem">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="WAREHOUSENO" jdbcType="VARCHAR" property="warehouseno" />
+    <result column="GOODSCODE" jdbcType="VARCHAR" property="goodscode" />
+    <result column="GOODSNAME" jdbcType="VARCHAR" property="goodsname" />
+    <result column="STORAGENUM" jdbcType="DECIMAL" property="storagenum" />
+    <result column="ACTUALNUM" jdbcType="DECIMAL" property="actualnum" />
+    <result column="PLANNEDPRICE" jdbcType="DECIMAL" property="plannedprice" />
+    <result column="SPECIFICATIONS" jdbcType="VARCHAR" property="specifications" />
+    <result column="TYPE" jdbcType="DECIMAL" property="type" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, WAREHOUSENO, GOODSCODE, GOODSNAME, STORAGENUM, ACTUALNUM, PLANNEDPRICE, SPECIFICATIONS, 
+    TYPE, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.PAC_STOCKITEM
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.PAC_STOCKITEM
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.PAC_Stockitem">
+    insert into BOS.PAC_STOCKITEM (ID, WAREHOUSENO, GOODSCODE, 
+      GOODSNAME, STORAGENUM, ACTUALNUM, 
+      PLANNEDPRICE, SPECIFICATIONS, TYPE, 
+      STATUS)
+    values (#{id,jdbcType=DECIMAL}, #{warehouseno,jdbcType=VARCHAR}, #{goodscode,jdbcType=VARCHAR}, 
+      #{goodsname,jdbcType=VARCHAR}, #{storagenum,jdbcType=DECIMAL}, #{actualnum,jdbcType=DECIMAL}, 
+      #{plannedprice,jdbcType=DECIMAL}, #{specifications,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
+      #{status,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.PAC_Stockitem">
+    insert into BOS.PAC_STOCKITEM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="warehouseno != null">
+        WAREHOUSENO,
+      </if>
+      <if test="goodscode != null">
+        GOODSCODE,
+      </if>
+      <if test="goodsname != null">
+        GOODSNAME,
+      </if>
+      <if test="storagenum != null">
+        STORAGENUM,
+      </if>
+      <if test="actualnum != null">
+        ACTUALNUM,
+      </if>
+      <if test="plannedprice != null">
+        PLANNEDPRICE,
+      </if>
+      <if test="specifications != null">
+        SPECIFICATIONS,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseno != null">
+        #{warehouseno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscode != null">
+        #{goodscode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="storagenum != null">
+        #{storagenum,jdbcType=DECIMAL},
+      </if>
+      <if test="actualnum != null">
+        #{actualnum,jdbcType=DECIMAL},
+      </if>
+      <if test="plannedprice != null">
+        #{plannedprice,jdbcType=DECIMAL},
+      </if>
+      <if test="specifications != null">
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.PAC_Stockitem">
+    update BOS.PAC_STOCKITEM
+    <set>
+      <if test="warehouseno != null">
+        WAREHOUSENO = #{warehouseno,jdbcType=VARCHAR},
+      </if>
+      <if test="goodscode != null">
+        GOODSCODE = #{goodscode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsname != null">
+        GOODSNAME = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="storagenum != null">
+        STORAGENUM = #{storagenum,jdbcType=DECIMAL},
+      </if>
+      <if test="actualnum != null">
+        ACTUALNUM = #{actualnum,jdbcType=DECIMAL},
+      </if>
+      <if test="plannedprice != null">
+        PLANNEDPRICE = #{plannedprice,jdbcType=DECIMAL},
+      </if>
+      <if test="specifications != null">
+        SPECIFICATIONS = #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.PAC_Stockitem">
+    update BOS.PAC_STOCKITEM
+    set WAREHOUSENO = #{warehouseno,jdbcType=VARCHAR},
+      GOODSCODE = #{goodscode,jdbcType=VARCHAR},
+      GOODSNAME = #{goodsname,jdbcType=VARCHAR},
+      STORAGENUM = #{storagenum,jdbcType=DECIMAL},
+      ACTUALNUM = #{actualnum,jdbcType=DECIMAL},
+      PLANNEDPRICE = #{plannedprice,jdbcType=DECIMAL},
+      SPECIFICATIONS = #{specifications,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

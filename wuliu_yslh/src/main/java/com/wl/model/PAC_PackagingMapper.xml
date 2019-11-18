@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.PAC_PackagingMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.PAC_Packaging">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ITEMCODE" jdbcType="VARCHAR" property="itemcode" />
+    <result column="ITEMNAME" jdbcType="VARCHAR" property="itemname" />
+    <result column="PLANNEDPRICE" jdbcType="DECIMAL" property="plannedprice" />
+    <result column="SPECIFICATIONS" jdbcType="VARCHAR" property="specifications" />
+    <result column="TYPE" jdbcType="DECIMAL" property="type" />
+    <result column="MEASUREMENTUNIT" jdbcType="VARCHAR" property="measurementunit" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    <result column="INVALIDATEJOBINT" jdbcType="TIMESTAMP" property="invalidatejobint" />
+    <result column="INVALIDATENAME" jdbcType="DECIMAL" property="invalidatename" />
+    <result column="INVALIDATETIME" jdbcType="TIMESTAMP" property="invalidatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ITEMCODE, ITEMNAME, PLANNEDPRICE, SPECIFICATIONS, TYPE, MEASUREMENTUNIT, STATUS, 
+    OPERATORID, OPERATIONTIME, INVALIDATEJOBINT, INVALIDATENAME, INVALIDATETIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.PAC_PACKAGING
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.PAC_PACKAGING
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.PAC_Packaging">
+    insert into BOS.PAC_PACKAGING (ID, ITEMCODE, ITEMNAME, 
+      PLANNEDPRICE, SPECIFICATIONS, TYPE, 
+      MEASUREMENTUNIT, STATUS, OPERATORID, 
+      OPERATIONTIME, INVALIDATEJOBINT, INVALIDATENAME, 
+      INVALIDATETIME)
+    values (#{id,jdbcType=DECIMAL}, #{itemcode,jdbcType=VARCHAR}, #{itemname,jdbcType=VARCHAR}, 
+      #{plannedprice,jdbcType=DECIMAL}, #{specifications,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
+      #{measurementunit,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{operatorid,jdbcType=DECIMAL}, 
+      #{operationtime,jdbcType=TIMESTAMP}, #{invalidatejobint,jdbcType=TIMESTAMP}, #{invalidatename,jdbcType=DECIMAL}, 
+      #{invalidatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.PAC_Packaging">
+    insert into BOS.PAC_PACKAGING
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="itemcode != null">
+        ITEMCODE,
+      </if>
+      <if test="itemname != null">
+        ITEMNAME,
+      </if>
+      <if test="plannedprice != null">
+        PLANNEDPRICE,
+      </if>
+      <if test="specifications != null">
+        SPECIFICATIONS,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="measurementunit != null">
+        MEASUREMENTUNIT,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="operatorid != null">
+        OPERATORID,
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME,
+      </if>
+      <if test="invalidatejobint != null">
+        INVALIDATEJOBINT,
+      </if>
+      <if test="invalidatename != null">
+        INVALIDATENAME,
+      </if>
+      <if test="invalidatetime != null">
+        INVALIDATETIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null">
+        #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="plannedprice != null">
+        #{plannedprice,jdbcType=DECIMAL},
+      </if>
+      <if test="specifications != null">
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="measurementunit != null">
+        #{measurementunit,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorid != null">
+        #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationtime != null">
+        #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidatejobint != null">
+        #{invalidatejobint,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidatename != null">
+        #{invalidatename,jdbcType=DECIMAL},
+      </if>
+      <if test="invalidatetime != null">
+        #{invalidatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.PAC_Packaging">
+    update BOS.PAC_PACKAGING
+    <set>
+      <if test="itemcode != null">
+        ITEMCODE = #{itemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="itemname != null">
+        ITEMNAME = #{itemname,jdbcType=VARCHAR},
+      </if>
+      <if test="plannedprice != null">
+        PLANNEDPRICE = #{plannedprice,jdbcType=DECIMAL},
+      </if>
+      <if test="specifications != null">
+        SPECIFICATIONS = #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=DECIMAL},
+      </if>
+      <if test="measurementunit != null">
+        MEASUREMENTUNIT = #{measurementunit,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorid != null">
+        OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidatejobint != null">
+        INVALIDATEJOBINT = #{invalidatejobint,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invalidatename != null">
+        INVALIDATENAME = #{invalidatename,jdbcType=DECIMAL},
+      </if>
+      <if test="invalidatetime != null">
+        INVALIDATETIME = #{invalidatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.PAC_Packaging">
+    update BOS.PAC_PACKAGING
+    set ITEMCODE = #{itemcode,jdbcType=VARCHAR},
+      ITEMNAME = #{itemname,jdbcType=VARCHAR},
+      PLANNEDPRICE = #{plannedprice,jdbcType=DECIMAL},
+      SPECIFICATIONS = #{specifications,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=DECIMAL},
+      MEASUREMENTUNIT = #{measurementunit,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=DECIMAL},
+      OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP},
+      INVALIDATEJOBINT = #{invalidatejobint,jdbcType=TIMESTAMP},
+      INVALIDATENAME = #{invalidatename,jdbcType=DECIMAL},
+      INVALIDATETIME = #{invalidatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

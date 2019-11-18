@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.SOR_CheckbounddetailsMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.SOR_Checkbounddetails">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PACKAGEID" jdbcType="VARCHAR" property="packageid" />
+    <result column="CARGOCOUNT" jdbcType="DECIMAL" property="cargocount" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="VOLUME" jdbcType="DECIMAL" property="volume" />
+    <result column="CARGOTYPE" jdbcType="DECIMAL" property="cargotype" />
+    <result column="DIRECTION" jdbcType="VARCHAR" property="direction" />
+    <result column="STORAGEPERSON" jdbcType="DECIMAL" property="storageperson" />
+    <result column="STORAGEDATE" jdbcType="TIMESTAMP" property="storagedate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PACKAGEID, CARGOCOUNT, WEIGHT, VOLUME, CARGOTYPE, DIRECTION, STORAGEPERSON, STORAGEDATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.SOR_CHECKBOUNDDETAILS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.SOR_CHECKBOUNDDETAILS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.SOR_Checkbounddetails">
+    insert into BOS.SOR_CHECKBOUNDDETAILS (ID, PACKAGEID, CARGOCOUNT, 
+      WEIGHT, VOLUME, CARGOTYPE, 
+      DIRECTION, STORAGEPERSON, STORAGEDATE
+      )
+    values (#{id,jdbcType=DECIMAL}, #{packageid,jdbcType=VARCHAR}, #{cargocount,jdbcType=DECIMAL}, 
+      #{weight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, #{cargotype,jdbcType=DECIMAL}, 
+      #{direction,jdbcType=VARCHAR}, #{storageperson,jdbcType=DECIMAL}, #{storagedate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.SOR_Checkbounddetails">
+    insert into BOS.SOR_CHECKBOUNDDETAILS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="packageid != null">
+        PACKAGEID,
+      </if>
+      <if test="cargocount != null">
+        CARGOCOUNT,
+      </if>
+      <if test="weight != null">
+        WEIGHT,
+      </if>
+      <if test="volume != null">
+        VOLUME,
+      </if>
+      <if test="cargotype != null">
+        CARGOTYPE,
+      </if>
+      <if test="direction != null">
+        DIRECTION,
+      </if>
+      <if test="storageperson != null">
+        STORAGEPERSON,
+      </if>
+      <if test="storagedate != null">
+        STORAGEDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="packageid != null">
+        #{packageid,jdbcType=VARCHAR},
+      </if>
+      <if test="cargocount != null">
+        #{cargocount,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="cargotype != null">
+        #{cargotype,jdbcType=DECIMAL},
+      </if>
+      <if test="direction != null">
+        #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="storageperson != null">
+        #{storageperson,jdbcType=DECIMAL},
+      </if>
+      <if test="storagedate != null">
+        #{storagedate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.SOR_Checkbounddetails">
+    update BOS.SOR_CHECKBOUNDDETAILS
+    <set>
+      <if test="packageid != null">
+        PACKAGEID = #{packageid,jdbcType=VARCHAR},
+      </if>
+      <if test="cargocount != null">
+        CARGOCOUNT = #{cargocount,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        WEIGHT = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        VOLUME = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="cargotype != null">
+        CARGOTYPE = #{cargotype,jdbcType=DECIMAL},
+      </if>
+      <if test="direction != null">
+        DIRECTION = #{direction,jdbcType=VARCHAR},
+      </if>
+      <if test="storageperson != null">
+        STORAGEPERSON = #{storageperson,jdbcType=DECIMAL},
+      </if>
+      <if test="storagedate != null">
+        STORAGEDATE = #{storagedate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.SOR_Checkbounddetails">
+    update BOS.SOR_CHECKBOUNDDETAILS
+    set PACKAGEID = #{packageid,jdbcType=VARCHAR},
+      CARGOCOUNT = #{cargocount,jdbcType=DECIMAL},
+      WEIGHT = #{weight,jdbcType=DECIMAL},
+      VOLUME = #{volume,jdbcType=DECIMAL},
+      CARGOTYPE = #{cargotype,jdbcType=DECIMAL},
+      DIRECTION = #{direction,jdbcType=VARCHAR},
+      STORAGEPERSON = #{storageperson,jdbcType=DECIMAL},
+      STORAGEDATE = #{storagedate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

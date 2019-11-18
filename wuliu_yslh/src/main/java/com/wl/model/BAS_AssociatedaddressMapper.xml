@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_AssociatedaddressMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Associatedaddress">
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ZONECODE" jdbcType="VARCHAR" property="zonecode" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="CUSTOMADDRESS" jdbcType="VARCHAR" property="customaddress" />
+    <result column="ASSOCIATEDPARTITIONS" jdbcType="DECIMAL" property="associatedpartitions" />
+  </resultMap>
+  <insert id="insert" parameterType="com.wl.model.BAS_Associatedaddress">
+    insert into BOS.BAS_ASSOCIATEDADDRESS (ID, ZONECODE, CITY, 
+      CUSTOMADDRESS, ASSOCIATEDPARTITIONS)
+    values (#{id,jdbcType=DECIMAL}, #{zonecode,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{customaddress,jdbcType=VARCHAR}, #{associatedpartitions,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Associatedaddress">
+    insert into BOS.BAS_ASSOCIATEDADDRESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="zonecode != null">
+        ZONECODE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="customaddress != null">
+        CUSTOMADDRESS,
+      </if>
+      <if test="associatedpartitions != null">
+        ASSOCIATEDPARTITIONS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="zonecode != null">
+        #{zonecode,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="customaddress != null">
+        #{customaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="associatedpartitions != null">
+        #{associatedpartitions,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

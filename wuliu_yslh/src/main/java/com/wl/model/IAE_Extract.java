@@ -1,0 +1,76 @@
+package com.wl.model;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class IAE_Extract {
+    private String id;
+
+    private String vehicleint;
+
+    private String transportway;
+
+    private String waybillid;
+
+    private Date estimatedate;
+
+    private BigDecimal cargon;
+
+    private String importanthints;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
+    }
+
+    public String getVehicleint() {
+        return vehicleint;
+    }
+
+    public void setVehicleint(String vehicleint) {
+        this.vehicleint = vehicleint == null ? null : vehicleint.trim();
+    }
+
+    public String getTransportway() {
+        return transportway;
+    }
+
+    public void setTransportway(String transportway) {
+        this.transportway = transportway == null ? null : transportway.trim();
+    }
+
+    public String getWaybillid() {
+        return waybillid;
+    }
+
+    public void setWaybillid(String waybillid) {
+        this.waybillid = waybillid == null ? null : waybillid.trim();
+    }
+
+    public Date getEstimatedate() {
+        return estimatedate;
+    }
+
+    public void setEstimatedate(Date estimatedate) {
+        this.estimatedate = estimatedate;
+    }
+
+    public BigDecimal getCargon() {
+        return cargon;
+    }
+
+    public void setCargon(BigDecimal cargon) {
+        this.cargon = cargon;
+    }
+
+    public String getImportanthints() {
+        return importanthints;
+    }
+
+    public void setImportanthints(String importanthints) {
+        this.importanthints = importanthints == null ? null : importanthints.trim();
+    }
+}

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_PartitionMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Partition">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="COUNTY" jdbcType="VARCHAR" property="county" />
+    <result column="ZONECODE" jdbcType="VARCHAR" property="zonecode" />
+    <result column="KEYWORD" jdbcType="VARCHAR" property="keyword" />
+    <result column="STARTINT" jdbcType="DECIMAL" property="startint" />
+    <result column="TERMINATEINT" jdbcType="DECIMAL" property="terminateint" />
+    <result column="SDINT" jdbcType="DECIMAL" property="sdint" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PROVINCE, CITY, COUNTY, ZONECODE, KEYWORD, STARTINT, TERMINATEINT, SDINT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BAS_PARTITION
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BAS_PARTITION
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BAS_Partition">
+    insert into BOS.BAS_PARTITION (ID, PROVINCE, CITY, 
+      COUNTY, ZONECODE, KEYWORD, 
+      STARTINT, TERMINATEINT, SDINT
+      )
+    values (#{id,jdbcType=DECIMAL}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{county,jdbcType=VARCHAR}, #{zonecode,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
+      #{startint,jdbcType=DECIMAL}, #{terminateint,jdbcType=DECIMAL}, #{sdint,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Partition">
+    insert into BOS.BAS_PARTITION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="county != null">
+        COUNTY,
+      </if>
+      <if test="zonecode != null">
+        ZONECODE,
+      </if>
+      <if test="keyword != null">
+        KEYWORD,
+      </if>
+      <if test="startint != null">
+        STARTINT,
+      </if>
+      <if test="terminateint != null">
+        TERMINATEINT,
+      </if>
+      <if test="sdint != null">
+        SDINT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="zonecode != null">
+        #{zonecode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="startint != null">
+        #{startint,jdbcType=DECIMAL},
+      </if>
+      <if test="terminateint != null">
+        #{terminateint,jdbcType=DECIMAL},
+      </if>
+      <if test="sdint != null">
+        #{sdint,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Partition">
+    update BOS.BAS_PARTITION
+    <set>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        COUNTY = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="zonecode != null">
+        ZONECODE = #{zonecode,jdbcType=VARCHAR},
+      </if>
+      <if test="keyword != null">
+        KEYWORD = #{keyword,jdbcType=VARCHAR},
+      </if>
+      <if test="startint != null">
+        STARTINT = #{startint,jdbcType=DECIMAL},
+      </if>
+      <if test="terminateint != null">
+        TERMINATEINT = #{terminateint,jdbcType=DECIMAL},
+      </if>
+      <if test="sdint != null">
+        SDINT = #{sdint,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BAS_Partition">
+    update BOS.BAS_PARTITION
+    set PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      COUNTY = #{county,jdbcType=VARCHAR},
+      ZONECODE = #{zonecode,jdbcType=VARCHAR},
+      KEYWORD = #{keyword,jdbcType=VARCHAR},
+      STARTINT = #{startint,jdbcType=DECIMAL},
+      TERMINATEINT = #{terminateint,jdbcType=DECIMAL},
+      SDINT = #{sdint,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

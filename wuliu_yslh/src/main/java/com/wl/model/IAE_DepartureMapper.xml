@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.IAE_DepartureMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.IAE_Departure">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PACKINGID" jdbcType="VARCHAR" property="packingid" />
+    <result column="TRANSFER" jdbcType="DECIMAL" property="transfer" />
+    <result column="ACTUALCOUNT" jdbcType="DECIMAL" property="actualcount" />
+    <result column="DESTINATION" jdbcType="VARCHAR" property="destination" />
+    <result column="WARENAME" jdbcType="DECIMAL" property="warename" />
+    <result column="CARGOCOUNT" jdbcType="DECIMAL" property="cargocount" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="VOLUME" jdbcType="DECIMAL" property="volume" />
+    <result column="ACTUALVOLUME" jdbcType="DECIMAL" property="actualvolume" />
+    <result column="TIMELIMIT" jdbcType="TIMESTAMP" property="timelimit" />
+    <result column="ASK" jdbcType="VARCHAR" property="ask" />
+    <result column="TAKECARGOPERSON" jdbcType="VARCHAR" property="takecargoperson" />
+    <result column="TACKCARGOADDRESS" jdbcType="VARCHAR" property="tackcargoaddress" />
+    <result column="PAYMENT" jdbcType="DECIMAL" property="payment" />
+    <result column="IMPORTANTHINTS" jdbcType="VARCHAR" property="importanthints" />
+    <result column="SURPLUSTIME" jdbcType="TIMESTAMP" property="surplustime" />
+    <result column="ENTRUSTCOMPANY" jdbcType="VARCHAR" property="entrustcompany" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PACKINGID, TRANSFER, ACTUALCOUNT, DESTINATION, WARENAME, CARGOCOUNT, WEIGHT, 
+    VOLUME, ACTUALVOLUME, TIMELIMIT, ASK, TAKECARGOPERSON, TACKCARGOADDRESS, PAYMENT, 
+    IMPORTANTHINTS, SURPLUSTIME, ENTRUSTCOMPANY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.IAE_DEPARTURE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BOS.IAE_DEPARTURE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.IAE_Departure">
+    insert into BOS.IAE_DEPARTURE (ID, PACKINGID, TRANSFER, 
+      ACTUALCOUNT, DESTINATION, WARENAME, 
+      CARGOCOUNT, WEIGHT, VOLUME, 
+      ACTUALVOLUME, TIMELIMIT, ASK, 
+      TAKECARGOPERSON, TACKCARGOADDRESS, PAYMENT, 
+      IMPORTANTHINTS, SURPLUSTIME, ENTRUSTCOMPANY
+      )
+    values (#{id,jdbcType=VARCHAR}, #{packingid,jdbcType=VARCHAR}, #{transfer,jdbcType=DECIMAL}, 
+      #{actualcount,jdbcType=DECIMAL}, #{destination,jdbcType=VARCHAR}, #{warename,jdbcType=DECIMAL}, 
+      #{cargocount,jdbcType=DECIMAL}, #{weight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, 
+      #{actualvolume,jdbcType=DECIMAL}, #{timelimit,jdbcType=TIMESTAMP}, #{ask,jdbcType=VARCHAR}, 
+      #{takecargoperson,jdbcType=VARCHAR}, #{tackcargoaddress,jdbcType=VARCHAR}, #{payment,jdbcType=DECIMAL}, 
+      #{importanthints,jdbcType=VARCHAR}, #{surplustime,jdbcType=TIMESTAMP}, #{entrustcompany,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.IAE_Departure">
+    insert into BOS.IAE_DEPARTURE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="packingid != null">
+        PACKINGID,
+      </if>
+      <if test="transfer != null">
+        TRANSFER,
+      </if>
+      <if test="actualcount != null">
+        ACTUALCOUNT,
+      </if>
+      <if test="destination != null">
+        DESTINATION,
+      </if>
+      <if test="warename != null">
+        WARENAME,
+      </if>
+      <if test="cargocount != null">
+        CARGOCOUNT,
+      </if>
+      <if test="weight != null">
+        WEIGHT,
+      </if>
+      <if test="volume != null">
+        VOLUME,
+      </if>
+      <if test="actualvolume != null">
+        ACTUALVOLUME,
+      </if>
+      <if test="timelimit != null">
+        TIMELIMIT,
+      </if>
+      <if test="ask != null">
+        ASK,
+      </if>
+      <if test="takecargoperson != null">
+        TAKECARGOPERSON,
+      </if>
+      <if test="tackcargoaddress != null">
+        TACKCARGOADDRESS,
+      </if>
+      <if test="payment != null">
+        PAYMENT,
+      </if>
+      <if test="importanthints != null">
+        IMPORTANTHINTS,
+      </if>
+      <if test="surplustime != null">
+        SURPLUSTIME,
+      </if>
+      <if test="entrustcompany != null">
+        ENTRUSTCOMPANY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="packingid != null">
+        #{packingid,jdbcType=VARCHAR},
+      </if>
+      <if test="transfer != null">
+        #{transfer,jdbcType=DECIMAL},
+      </if>
+      <if test="actualcount != null">
+        #{actualcount,jdbcType=DECIMAL},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="warename != null">
+        #{warename,jdbcType=DECIMAL},
+      </if>
+      <if test="cargocount != null">
+        #{cargocount,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="actualvolume != null">
+        #{actualvolume,jdbcType=DECIMAL},
+      </if>
+      <if test="timelimit != null">
+        #{timelimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ask != null">
+        #{ask,jdbcType=VARCHAR},
+      </if>
+      <if test="takecargoperson != null">
+        #{takecargoperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tackcargoaddress != null">
+        #{tackcargoaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=DECIMAL},
+      </if>
+      <if test="importanthints != null">
+        #{importanthints,jdbcType=VARCHAR},
+      </if>
+      <if test="surplustime != null">
+        #{surplustime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entrustcompany != null">
+        #{entrustcompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.IAE_Departure">
+    update BOS.IAE_DEPARTURE
+    <set>
+      <if test="packingid != null">
+        PACKINGID = #{packingid,jdbcType=VARCHAR},
+      </if>
+      <if test="transfer != null">
+        TRANSFER = #{transfer,jdbcType=DECIMAL},
+      </if>
+      <if test="actualcount != null">
+        ACTUALCOUNT = #{actualcount,jdbcType=DECIMAL},
+      </if>
+      <if test="destination != null">
+        DESTINATION = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="warename != null">
+        WARENAME = #{warename,jdbcType=DECIMAL},
+      </if>
+      <if test="cargocount != null">
+        CARGOCOUNT = #{cargocount,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        WEIGHT = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        VOLUME = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="actualvolume != null">
+        ACTUALVOLUME = #{actualvolume,jdbcType=DECIMAL},
+      </if>
+      <if test="timelimit != null">
+        TIMELIMIT = #{timelimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ask != null">
+        ASK = #{ask,jdbcType=VARCHAR},
+      </if>
+      <if test="takecargoperson != null">
+        TAKECARGOPERSON = #{takecargoperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tackcargoaddress != null">
+        TACKCARGOADDRESS = #{tackcargoaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        PAYMENT = #{payment,jdbcType=DECIMAL},
+      </if>
+      <if test="importanthints != null">
+        IMPORTANTHINTS = #{importanthints,jdbcType=VARCHAR},
+      </if>
+      <if test="surplustime != null">
+        SURPLUSTIME = #{surplustime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entrustcompany != null">
+        ENTRUSTCOMPANY = #{entrustcompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.IAE_Departure">
+    update BOS.IAE_DEPARTURE
+    set PACKINGID = #{packingid,jdbcType=VARCHAR},
+      TRANSFER = #{transfer,jdbcType=DECIMAL},
+      ACTUALCOUNT = #{actualcount,jdbcType=DECIMAL},
+      DESTINATION = #{destination,jdbcType=VARCHAR},
+      WARENAME = #{warename,jdbcType=DECIMAL},
+      CARGOCOUNT = #{cargocount,jdbcType=DECIMAL},
+      WEIGHT = #{weight,jdbcType=DECIMAL},
+      VOLUME = #{volume,jdbcType=DECIMAL},
+      ACTUALVOLUME = #{actualvolume,jdbcType=DECIMAL},
+      TIMELIMIT = #{timelimit,jdbcType=TIMESTAMP},
+      ASK = #{ask,jdbcType=VARCHAR},
+      TAKECARGOPERSON = #{takecargoperson,jdbcType=VARCHAR},
+      TACKCARGOADDRESS = #{tackcargoaddress,jdbcType=VARCHAR},
+      PAYMENT = #{payment,jdbcType=DECIMAL},
+      IMPORTANTHINTS = #{importanthints,jdbcType=VARCHAR},
+      SURPLUSTIME = #{surplustime,jdbcType=TIMESTAMP},
+      ENTRUSTCOMPANY = #{entrustcompany,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

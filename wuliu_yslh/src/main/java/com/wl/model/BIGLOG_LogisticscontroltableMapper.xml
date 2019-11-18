@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BIGLOG_LogisticscontroltableMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BIGLOG_Logisticscontroltable">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="WORKSHEETNO" jdbcType="VARCHAR" property="worksheetno" />
+    <result column="CTYPE" jdbcType="DECIMAL" property="ctype" />
+    <result column="CORPORATION" jdbcType="VARCHAR" property="corporation" />
+    <result column="WAYBILLID" jdbcType="VARCHAR" property="waybillid" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="INPUTPERSON" jdbcType="DECIMAL" property="inputperson" />
+    <result column="INPUTDATE" jdbcType="TIMESTAMP" property="inputdate" />
+    <result column="INPUTCOMPANY" jdbcType="DECIMAL" property="inputcompany" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, WORKSHEETNO, CTYPE, CORPORATION, WAYBILLID, REMARKS, INPUTPERSON, INPUTDATE, 
+    INPUTCOMPANY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BIGLOG_LOGISTICSCONTROLTABLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BIGLOG_LOGISTICSCONTROLTABLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BIGLOG_Logisticscontroltable">
+    insert into BOS.BIGLOG_LOGISTICSCONTROLTABLE (ID, WORKSHEETNO, CTYPE, 
+      CORPORATION, WAYBILLID, REMARKS, 
+      INPUTPERSON, INPUTDATE, INPUTCOMPANY
+      )
+    values (#{id,jdbcType=DECIMAL}, #{worksheetno,jdbcType=VARCHAR}, #{ctype,jdbcType=DECIMAL}, 
+      #{corporation,jdbcType=VARCHAR}, #{waybillid,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{inputperson,jdbcType=DECIMAL}, #{inputdate,jdbcType=TIMESTAMP}, #{inputcompany,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BIGLOG_Logisticscontroltable">
+    insert into BOS.BIGLOG_LOGISTICSCONTROLTABLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="worksheetno != null">
+        WORKSHEETNO,
+      </if>
+      <if test="ctype != null">
+        CTYPE,
+      </if>
+      <if test="corporation != null">
+        CORPORATION,
+      </if>
+      <if test="waybillid != null">
+        WAYBILLID,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="inputperson != null">
+        INPUTPERSON,
+      </if>
+      <if test="inputdate != null">
+        INPUTDATE,
+      </if>
+      <if test="inputcompany != null">
+        INPUTCOMPANY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="worksheetno != null">
+        #{worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null">
+        #{ctype,jdbcType=DECIMAL},
+      </if>
+      <if test="corporation != null">
+        #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillid != null">
+        #{waybillid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="inputperson != null">
+        #{inputperson,jdbcType=DECIMAL},
+      </if>
+      <if test="inputdate != null">
+        #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputcompany != null">
+        #{inputcompany,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BIGLOG_Logisticscontroltable">
+    update BOS.BIGLOG_LOGISTICSCONTROLTABLE
+    <set>
+      <if test="worksheetno != null">
+        WORKSHEETNO = #{worksheetno,jdbcType=VARCHAR},
+      </if>
+      <if test="ctype != null">
+        CTYPE = #{ctype,jdbcType=DECIMAL},
+      </if>
+      <if test="corporation != null">
+        CORPORATION = #{corporation,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillid != null">
+        WAYBILLID = #{waybillid,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="inputperson != null">
+        INPUTPERSON = #{inputperson,jdbcType=DECIMAL},
+      </if>
+      <if test="inputdate != null">
+        INPUTDATE = #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inputcompany != null">
+        INPUTCOMPANY = #{inputcompany,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BIGLOG_Logisticscontroltable">
+    update BOS.BIGLOG_LOGISTICSCONTROLTABLE
+    set WORKSHEETNO = #{worksheetno,jdbcType=VARCHAR},
+      CTYPE = #{ctype,jdbcType=DECIMAL},
+      CORPORATION = #{corporation,jdbcType=VARCHAR},
+      WAYBILLID = #{waybillid,jdbcType=VARCHAR},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      INPUTPERSON = #{inputperson,jdbcType=DECIMAL},
+      INPUTDATE = #{inputdate,jdbcType=TIMESTAMP},
+      INPUTCOMPANY = #{inputcompany,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

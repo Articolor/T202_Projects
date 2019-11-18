@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.LOG_TrackMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.LOG_Track">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="LINETYPE" jdbcType="VARCHAR" property="linetype" />
+    <result column="LINENAME" jdbcType="VARCHAR" property="linename" />
+    <result column="LOGISTICSCAR" jdbcType="VARCHAR" property="logisticscar" />
+    <result column="LINESTATE" jdbcType="DECIMAL" property="linestate" />
+    <result column="NODENAME" jdbcType="VARCHAR" property="nodename" />
+    <result column="STARTTIME" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="ARRIVALTIME" jdbcType="TIMESTAMP" property="arrivaltime" />
+    <result column="CARINT" jdbcType="VARCHAR" property="carint" />
+    <result column="NEXTNODELOAD" jdbcType="VARCHAR" property="nextnodeload" />
+    <result column="DESCRIBE" jdbcType="VARCHAR" property="describe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, LINETYPE, LINENAME, LOGISTICSCAR, LINESTATE, NODENAME, STARTTIME, ARRIVALTIME, 
+    CARINT, NEXTNODELOAD, DESCRIBE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.LOG_TRACK
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.LOG_TRACK
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.LOG_Track">
+    insert into BOS.LOG_TRACK (ID, LINETYPE, LINENAME, 
+      LOGISTICSCAR, LINESTATE, NODENAME, 
+      STARTTIME, ARRIVALTIME, CARINT, 
+      NEXTNODELOAD, DESCRIBE)
+    values (#{id,jdbcType=DECIMAL}, #{linetype,jdbcType=VARCHAR}, #{linename,jdbcType=VARCHAR}, 
+      #{logisticscar,jdbcType=VARCHAR}, #{linestate,jdbcType=DECIMAL}, #{nodename,jdbcType=VARCHAR}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{arrivaltime,jdbcType=TIMESTAMP}, #{carint,jdbcType=VARCHAR}, 
+      #{nextnodeload,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.LOG_Track">
+    insert into BOS.LOG_TRACK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="linetype != null">
+        LINETYPE,
+      </if>
+      <if test="linename != null">
+        LINENAME,
+      </if>
+      <if test="logisticscar != null">
+        LOGISTICSCAR,
+      </if>
+      <if test="linestate != null">
+        LINESTATE,
+      </if>
+      <if test="nodename != null">
+        NODENAME,
+      </if>
+      <if test="starttime != null">
+        STARTTIME,
+      </if>
+      <if test="arrivaltime != null">
+        ARRIVALTIME,
+      </if>
+      <if test="carint != null">
+        CARINT,
+      </if>
+      <if test="nextnodeload != null">
+        NEXTNODELOAD,
+      </if>
+      <if test="describe != null">
+        DESCRIBE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="linetype != null">
+        #{linetype,jdbcType=VARCHAR},
+      </if>
+      <if test="linename != null">
+        #{linename,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticscar != null">
+        #{logisticscar,jdbcType=VARCHAR},
+      </if>
+      <if test="linestate != null">
+        #{linestate,jdbcType=DECIMAL},
+      </if>
+      <if test="nodename != null">
+        #{nodename,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivaltime != null">
+        #{arrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carint != null">
+        #{carint,jdbcType=VARCHAR},
+      </if>
+      <if test="nextnodeload != null">
+        #{nextnodeload,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.LOG_Track">
+    update BOS.LOG_TRACK
+    <set>
+      <if test="linetype != null">
+        LINETYPE = #{linetype,jdbcType=VARCHAR},
+      </if>
+      <if test="linename != null">
+        LINENAME = #{linename,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticscar != null">
+        LOGISTICSCAR = #{logisticscar,jdbcType=VARCHAR},
+      </if>
+      <if test="linestate != null">
+        LINESTATE = #{linestate,jdbcType=DECIMAL},
+      </if>
+      <if test="nodename != null">
+        NODENAME = #{nodename,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null">
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="arrivaltime != null">
+        ARRIVALTIME = #{arrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carint != null">
+        CARINT = #{carint,jdbcType=VARCHAR},
+      </if>
+      <if test="nextnodeload != null">
+        NEXTNODELOAD = #{nextnodeload,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        DESCRIBE = #{describe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.LOG_Track">
+    update BOS.LOG_TRACK
+    set LINETYPE = #{linetype,jdbcType=VARCHAR},
+      LINENAME = #{linename,jdbcType=VARCHAR},
+      LOGISTICSCAR = #{logisticscar,jdbcType=VARCHAR},
+      LINESTATE = #{linestate,jdbcType=DECIMAL},
+      NODENAME = #{nodename,jdbcType=VARCHAR},
+      STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      ARRIVALTIME = #{arrivaltime,jdbcType=TIMESTAMP},
+      CARINT = #{carint,jdbcType=VARCHAR},
+      NEXTNODELOAD = #{nextnodeload,jdbcType=VARCHAR},
+      DESCRIBE = #{describe,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

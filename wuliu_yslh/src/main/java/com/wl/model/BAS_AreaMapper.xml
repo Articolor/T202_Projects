@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_AreaMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Area">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="COUNTY" jdbcType="VARCHAR" property="county" />
+    <result column="POSTALCODE" jdbcType="DECIMAL" property="postalcode" />
+    <result column="SIMPLECODE" jdbcType="VARCHAR" property="simplecode" />
+    <result column="CITYCODE" jdbcType="DECIMAL" property="citycode" />
+    <result column="ENTRYUNITID" jdbcType="VARCHAR" property="entryunitid" />
+    <result column="COMPLEMENTUNITID" jdbcType="VARCHAR" property="complementunitid" />
+    <result column="NATURE" jdbcType="DECIMAL" property="nature" />
+    <result column="THEAREA" jdbcType="DECIMAL" property="thearea" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PROVINCE, CITY, COUNTY, POSTALCODE, SIMPLECODE, CITYCODE, ENTRYUNITID, COMPLEMENTUNITID, 
+    NATURE, THEAREA
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BAS_AREA
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BAS_AREA
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BAS_Area">
+    insert into BOS.BAS_AREA (ID, PROVINCE, CITY, 
+      COUNTY, POSTALCODE, SIMPLECODE, 
+      CITYCODE, ENTRYUNITID, COMPLEMENTUNITID, 
+      NATURE, THEAREA)
+    values (#{id,jdbcType=DECIMAL}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{county,jdbcType=VARCHAR}, #{postalcode,jdbcType=DECIMAL}, #{simplecode,jdbcType=VARCHAR}, 
+      #{citycode,jdbcType=DECIMAL}, #{entryunitid,jdbcType=VARCHAR}, #{complementunitid,jdbcType=VARCHAR}, 
+      #{nature,jdbcType=DECIMAL}, #{thearea,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Area">
+    insert into BOS.BAS_AREA
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="county != null">
+        COUNTY,
+      </if>
+      <if test="postalcode != null">
+        POSTALCODE,
+      </if>
+      <if test="simplecode != null">
+        SIMPLECODE,
+      </if>
+      <if test="citycode != null">
+        CITYCODE,
+      </if>
+      <if test="entryunitid != null">
+        ENTRYUNITID,
+      </if>
+      <if test="complementunitid != null">
+        COMPLEMENTUNITID,
+      </if>
+      <if test="nature != null">
+        NATURE,
+      </if>
+      <if test="thearea != null">
+        THEAREA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null">
+        #{postalcode,jdbcType=DECIMAL},
+      </if>
+      <if test="simplecode != null">
+        #{simplecode,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null">
+        #{citycode,jdbcType=DECIMAL},
+      </if>
+      <if test="entryunitid != null">
+        #{entryunitid,jdbcType=VARCHAR},
+      </if>
+      <if test="complementunitid != null">
+        #{complementunitid,jdbcType=VARCHAR},
+      </if>
+      <if test="nature != null">
+        #{nature,jdbcType=DECIMAL},
+      </if>
+      <if test="thearea != null">
+        #{thearea,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Area">
+    update BOS.BAS_AREA
+    <set>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        COUNTY = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="postalcode != null">
+        POSTALCODE = #{postalcode,jdbcType=DECIMAL},
+      </if>
+      <if test="simplecode != null">
+        SIMPLECODE = #{simplecode,jdbcType=VARCHAR},
+      </if>
+      <if test="citycode != null">
+        CITYCODE = #{citycode,jdbcType=DECIMAL},
+      </if>
+      <if test="entryunitid != null">
+        ENTRYUNITID = #{entryunitid,jdbcType=VARCHAR},
+      </if>
+      <if test="complementunitid != null">
+        COMPLEMENTUNITID = #{complementunitid,jdbcType=VARCHAR},
+      </if>
+      <if test="nature != null">
+        NATURE = #{nature,jdbcType=DECIMAL},
+      </if>
+      <if test="thearea != null">
+        THEAREA = #{thearea,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BAS_Area">
+    update BOS.BAS_AREA
+    set PROVINCE = #{province,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      COUNTY = #{county,jdbcType=VARCHAR},
+      POSTALCODE = #{postalcode,jdbcType=DECIMAL},
+      SIMPLECODE = #{simplecode,jdbcType=VARCHAR},
+      CITYCODE = #{citycode,jdbcType=DECIMAL},
+      ENTRYUNITID = #{entryunitid,jdbcType=VARCHAR},
+      COMPLEMENTUNITID = #{complementunitid,jdbcType=VARCHAR},
+      NATURE = #{nature,jdbcType=DECIMAL},
+      THEAREA = #{thearea,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

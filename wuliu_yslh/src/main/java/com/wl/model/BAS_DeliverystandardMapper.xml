@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_DeliverystandardMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Deliverystandard">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="MINWEIGHT" jdbcType="DECIMAL" property="minweight" />
+    <result column="MAXWEIGHT" jdbcType="DECIMAL" property="maxweight" />
+    <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+    <result column="OPERATIONUNITID" jdbcType="DECIMAL" property="operationunitid" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, NAME, MINWEIGHT, MAXWEIGHT, OPERATORID, OPERATIONUNITID, OPERATIONTIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BAS_DELIVERYSTANDARD
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BAS_DELIVERYSTANDARD
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BAS_Deliverystandard">
+    insert into BOS.BAS_DELIVERYSTANDARD (ID, NAME, MINWEIGHT, 
+      MAXWEIGHT, OPERATORID, OPERATIONUNITID, 
+      OPERATIONTIME)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{minweight,jdbcType=DECIMAL}, 
+      #{maxweight,jdbcType=DECIMAL}, #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL}, 
+      #{operationtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Deliverystandard">
+    insert into BOS.BAS_DELIVERYSTANDARD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="minweight != null">
+        MINWEIGHT,
+      </if>
+      <if test="maxweight != null">
+        MAXWEIGHT,
+      </if>
+      <if test="operatorid != null">
+        OPERATORID,
+      </if>
+      <if test="operationunitid != null">
+        OPERATIONUNITID,
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="minweight != null">
+        #{minweight,jdbcType=DECIMAL},
+      </if>
+      <if test="maxweight != null">
+        #{maxweight,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorid != null">
+        #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationunitid != null">
+        #{operationunitid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationtime != null">
+        #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Deliverystandard">
+    update BOS.BAS_DELIVERYSTANDARD
+    <set>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="minweight != null">
+        MINWEIGHT = #{minweight,jdbcType=DECIMAL},
+      </if>
+      <if test="maxweight != null">
+        MAXWEIGHT = #{maxweight,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorid != null">
+        OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationunitid != null">
+        OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
+      </if>
+      <if test="operationtime != null">
+        OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BAS_Deliverystandard">
+    update BOS.BAS_DELIVERYSTANDARD
+    set NAME = #{name,jdbcType=VARCHAR},
+      MINWEIGHT = #{minweight,jdbcType=DECIMAL},
+      MAXWEIGHT = #{maxweight,jdbcType=DECIMAL},
+      OPERATORID = #{operatorid,jdbcType=DECIMAL},
+      OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
+      OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

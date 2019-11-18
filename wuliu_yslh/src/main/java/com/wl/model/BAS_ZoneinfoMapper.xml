@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.BAS_ZoneinfoMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.BAS_Zoneinfo">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ZONECODE" jdbcType="VARCHAR" property="zonecode" />
+    <result column="ZONENAME" jdbcType="VARCHAR" property="zonename" />
+    <result column="ZONEPEOPLE" jdbcType="DECIMAL" property="zonepeople" />
+    <result column="TELPHONE" jdbcType="VARCHAR" property="telphone" />
+    <result column="SUBORDINATEUNIT" jdbcType="DECIMAL" property="subordinateunit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ZONECODE, ZONENAME, ZONEPEOPLE, TELPHONE, SUBORDINATEUNIT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.BAS_ZONEINFO
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.BAS_ZONEINFO
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.BAS_Zoneinfo">
+    insert into BOS.BAS_ZONEINFO (ID, ZONECODE, ZONENAME, 
+      ZONEPEOPLE, TELPHONE, SUBORDINATEUNIT
+      )
+    values (#{id,jdbcType=DECIMAL}, #{zonecode,jdbcType=VARCHAR}, #{zonename,jdbcType=VARCHAR}, 
+      #{zonepeople,jdbcType=DECIMAL}, #{telphone,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.BAS_Zoneinfo">
+    insert into BOS.BAS_ZONEINFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="zonecode != null">
+        ZONECODE,
+      </if>
+      <if test="zonename != null">
+        ZONENAME,
+      </if>
+      <if test="zonepeople != null">
+        ZONEPEOPLE,
+      </if>
+      <if test="telphone != null">
+        TELPHONE,
+      </if>
+      <if test="subordinateunit != null">
+        SUBORDINATEUNIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="zonecode != null">
+        #{zonecode,jdbcType=VARCHAR},
+      </if>
+      <if test="zonename != null">
+        #{zonename,jdbcType=VARCHAR},
+      </if>
+      <if test="zonepeople != null">
+        #{zonepeople,jdbcType=DECIMAL},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateunit != null">
+        #{subordinateunit,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Zoneinfo">
+    update BOS.BAS_ZONEINFO
+    <set>
+      <if test="zonecode != null">
+        ZONECODE = #{zonecode,jdbcType=VARCHAR},
+      </if>
+      <if test="zonename != null">
+        ZONENAME = #{zonename,jdbcType=VARCHAR},
+      </if>
+      <if test="zonepeople != null">
+        ZONEPEOPLE = #{zonepeople,jdbcType=DECIMAL},
+      </if>
+      <if test="telphone != null">
+        TELPHONE = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="subordinateunit != null">
+        SUBORDINATEUNIT = #{subordinateunit,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.BAS_Zoneinfo">
+    update BOS.BAS_ZONEINFO
+    set ZONECODE = #{zonecode,jdbcType=VARCHAR},
+      ZONENAME = #{zonename,jdbcType=VARCHAR},
+      ZONEPEOPLE = #{zonepeople,jdbcType=DECIMAL},
+      TELPHONE = #{telphone,jdbcType=VARCHAR},
+      SUBORDINATEUNIT = #{subordinateunit,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

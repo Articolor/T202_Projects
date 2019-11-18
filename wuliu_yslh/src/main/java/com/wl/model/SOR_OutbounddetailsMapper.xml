@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.SOR_OutbounddetailsMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.SOR_Outbounddetails">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PACKAGEID" jdbcType="VARCHAR" property="packageid" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="VOLUME" jdbcType="DECIMAL" property="volume" />
+    <result column="SCANDATE" jdbcType="TIMESTAMP" property="scandate" />
+    <result column="ISSCAN" jdbcType="DECIMAL" property="isscan" />
+    <result column="ISNEXTSTORAGE" jdbcType="DECIMAL" property="isnextstorage" />
+    <result column="ISDOUBLESTORAGE" jdbcType="DECIMAL" property="isdoublestorage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, PACKAGEID, WEIGHT, VOLUME, SCANDATE, ISSCAN, ISNEXTSTORAGE, ISDOUBLESTORAGE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.SOR_OUTBOUNDDETAILS
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.SOR_OUTBOUNDDETAILS
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.SOR_Outbounddetails">
+    insert into BOS.SOR_OUTBOUNDDETAILS (ID, PACKAGEID, WEIGHT, 
+      VOLUME, SCANDATE, ISSCAN, 
+      ISNEXTSTORAGE, ISDOUBLESTORAGE)
+    values (#{id,jdbcType=DECIMAL}, #{packageid,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, 
+      #{volume,jdbcType=DECIMAL}, #{scandate,jdbcType=TIMESTAMP}, #{isscan,jdbcType=DECIMAL}, 
+      #{isnextstorage,jdbcType=DECIMAL}, #{isdoublestorage,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.SOR_Outbounddetails">
+    insert into BOS.SOR_OUTBOUNDDETAILS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="packageid != null">
+        PACKAGEID,
+      </if>
+      <if test="weight != null">
+        WEIGHT,
+      </if>
+      <if test="volume != null">
+        VOLUME,
+      </if>
+      <if test="scandate != null">
+        SCANDATE,
+      </if>
+      <if test="isscan != null">
+        ISSCAN,
+      </if>
+      <if test="isnextstorage != null">
+        ISNEXTSTORAGE,
+      </if>
+      <if test="isdoublestorage != null">
+        ISDOUBLESTORAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="packageid != null">
+        #{packageid,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="scandate != null">
+        #{scandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isscan != null">
+        #{isscan,jdbcType=DECIMAL},
+      </if>
+      <if test="isnextstorage != null">
+        #{isnextstorage,jdbcType=DECIMAL},
+      </if>
+      <if test="isdoublestorage != null">
+        #{isdoublestorage,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.SOR_Outbounddetails">
+    update BOS.SOR_OUTBOUNDDETAILS
+    <set>
+      <if test="packageid != null">
+        PACKAGEID = #{packageid,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        WEIGHT = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        VOLUME = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="scandate != null">
+        SCANDATE = #{scandate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isscan != null">
+        ISSCAN = #{isscan,jdbcType=DECIMAL},
+      </if>
+      <if test="isnextstorage != null">
+        ISNEXTSTORAGE = #{isnextstorage,jdbcType=DECIMAL},
+      </if>
+      <if test="isdoublestorage != null">
+        ISDOUBLESTORAGE = #{isdoublestorage,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.SOR_Outbounddetails">
+    update BOS.SOR_OUTBOUNDDETAILS
+    set PACKAGEID = #{packageid,jdbcType=VARCHAR},
+      WEIGHT = #{weight,jdbcType=DECIMAL},
+      VOLUME = #{volume,jdbcType=DECIMAL},
+      SCANDATE = #{scandate,jdbcType=TIMESTAMP},
+      ISSCAN = #{isscan,jdbcType=DECIMAL},
+      ISNEXTSTORAGE = #{isnextstorage,jdbcType=DECIMAL},
+      ISDOUBLESTORAGE = #{isdoublestorage,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

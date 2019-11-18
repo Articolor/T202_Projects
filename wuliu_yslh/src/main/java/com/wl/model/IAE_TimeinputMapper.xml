@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.IAE_TimeinputMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.IAE_Timeinput">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="INPUTTYPE" jdbcType="VARCHAR" property="inputtype" />
+    <result column="PORT" jdbcType="VARCHAR" property="port" />
+    <result column="DEMAND" jdbcType="DECIMAL" property="demand" />
+    <result column="VEHICLEINT" jdbcType="VARCHAR" property="vehicleint" />
+    <result column="WAYBILLID" jdbcType="VARCHAR" property="waybillid" />
+    <result column="EXPECTARRIVALDATE" jdbcType="TIMESTAMP" property="expectarrivaldate" />
+    <result column="EXPECTDEPARTUREDATE" jdbcType="TIMESTAMP" property="expectdeparturedate" />
+    <result column="ACTUALARRIVALDATE" jdbcType="TIMESTAMP" property="actualarrivaldate" />
+    <result column="ACTUALDEPARTUREDATE" jdbcType="TIMESTAMP" property="actualdeparturedate" />
+    <result column="START" jdbcType="VARCHAR" property="start" />
+    <result column="CARRIERS" jdbcType="DECIMAL" property="carriers" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="INPUTPERSON" jdbcType="DECIMAL" property="inputperson" />
+    <result column="INPUTDATE" jdbcType="TIMESTAMP" property="inputdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, INPUTTYPE, PORT, DEMAND, VEHICLEINT, WAYBILLID, EXPECTARRIVALDATE, EXPECTDEPARTUREDATE, 
+    ACTUALARRIVALDATE, ACTUALDEPARTUREDATE, START, CARRIERS, REMARKS, INPUTPERSON, INPUTDATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.IAE_TIMEINPUT
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.IAE_TIMEINPUT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.IAE_Timeinput">
+    insert into BOS.IAE_TIMEINPUT (ID, INPUTTYPE, PORT, 
+      DEMAND, VEHICLEINT, WAYBILLID, 
+      EXPECTARRIVALDATE, EXPECTDEPARTUREDATE, 
+      ACTUALARRIVALDATE, ACTUALDEPARTUREDATE, 
+      START, CARRIERS, REMARKS, 
+      INPUTPERSON, INPUTDATE)
+    values (#{id,jdbcType=DECIMAL}, #{inputtype,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{demand,jdbcType=DECIMAL}, #{vehicleint,jdbcType=VARCHAR}, #{waybillid,jdbcType=VARCHAR}, 
+      #{expectarrivaldate,jdbcType=TIMESTAMP}, #{expectdeparturedate,jdbcType=TIMESTAMP}, 
+      #{actualarrivaldate,jdbcType=TIMESTAMP}, #{actualdeparturedate,jdbcType=TIMESTAMP}, 
+      #{start,jdbcType=VARCHAR}, #{carriers,jdbcType=DECIMAL}, #{remarks,jdbcType=VARCHAR}, 
+      #{inputperson,jdbcType=DECIMAL}, #{inputdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.IAE_Timeinput">
+    insert into BOS.IAE_TIMEINPUT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="inputtype != null">
+        INPUTTYPE,
+      </if>
+      <if test="port != null">
+        PORT,
+      </if>
+      <if test="demand != null">
+        DEMAND,
+      </if>
+      <if test="vehicleint != null">
+        VEHICLEINT,
+      </if>
+      <if test="waybillid != null">
+        WAYBILLID,
+      </if>
+      <if test="expectarrivaldate != null">
+        EXPECTARRIVALDATE,
+      </if>
+      <if test="expectdeparturedate != null">
+        EXPECTDEPARTUREDATE,
+      </if>
+      <if test="actualarrivaldate != null">
+        ACTUALARRIVALDATE,
+      </if>
+      <if test="actualdeparturedate != null">
+        ACTUALDEPARTUREDATE,
+      </if>
+      <if test="start != null">
+        START,
+      </if>
+      <if test="carriers != null">
+        CARRIERS,
+      </if>
+      <if test="remarks != null">
+        REMARKS,
+      </if>
+      <if test="inputperson != null">
+        INPUTPERSON,
+      </if>
+      <if test="inputdate != null">
+        INPUTDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="inputtype != null">
+        #{inputtype,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="demand != null">
+        #{demand,jdbcType=DECIMAL},
+      </if>
+      <if test="vehicleint != null">
+        #{vehicleint,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillid != null">
+        #{waybillid,jdbcType=VARCHAR},
+      </if>
+      <if test="expectarrivaldate != null">
+        #{expectarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectdeparturedate != null">
+        #{expectdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualarrivaldate != null">
+        #{actualarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualdeparturedate != null">
+        #{actualdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="start != null">
+        #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="carriers != null">
+        #{carriers,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="inputperson != null">
+        #{inputperson,jdbcType=DECIMAL},
+      </if>
+      <if test="inputdate != null">
+        #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.IAE_Timeinput">
+    update BOS.IAE_TIMEINPUT
+    <set>
+      <if test="inputtype != null">
+        INPUTTYPE = #{inputtype,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        PORT = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="demand != null">
+        DEMAND = #{demand,jdbcType=DECIMAL},
+      </if>
+      <if test="vehicleint != null">
+        VEHICLEINT = #{vehicleint,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillid != null">
+        WAYBILLID = #{waybillid,jdbcType=VARCHAR},
+      </if>
+      <if test="expectarrivaldate != null">
+        EXPECTARRIVALDATE = #{expectarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectdeparturedate != null">
+        EXPECTDEPARTUREDATE = #{expectdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualarrivaldate != null">
+        ACTUALARRIVALDATE = #{actualarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="actualdeparturedate != null">
+        ACTUALDEPARTUREDATE = #{actualdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="start != null">
+        START = #{start,jdbcType=VARCHAR},
+      </if>
+      <if test="carriers != null">
+        CARRIERS = #{carriers,jdbcType=DECIMAL},
+      </if>
+      <if test="remarks != null">
+        REMARKS = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="inputperson != null">
+        INPUTPERSON = #{inputperson,jdbcType=DECIMAL},
+      </if>
+      <if test="inputdate != null">
+        INPUTDATE = #{inputdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.IAE_Timeinput">
+    update BOS.IAE_TIMEINPUT
+    set INPUTTYPE = #{inputtype,jdbcType=VARCHAR},
+      PORT = #{port,jdbcType=VARCHAR},
+      DEMAND = #{demand,jdbcType=DECIMAL},
+      VEHICLEINT = #{vehicleint,jdbcType=VARCHAR},
+      WAYBILLID = #{waybillid,jdbcType=VARCHAR},
+      EXPECTARRIVALDATE = #{expectarrivaldate,jdbcType=TIMESTAMP},
+      EXPECTDEPARTUREDATE = #{expectdeparturedate,jdbcType=TIMESTAMP},
+      ACTUALARRIVALDATE = #{actualarrivaldate,jdbcType=TIMESTAMP},
+      ACTUALDEPARTUREDATE = #{actualdeparturedate,jdbcType=TIMESTAMP},
+      START = #{start,jdbcType=VARCHAR},
+      CARRIERS = #{carriers,jdbcType=DECIMAL},
+      REMARKS = #{remarks,jdbcType=VARCHAR},
+      INPUTPERSON = #{inputperson,jdbcType=DECIMAL},
+      INPUTDATE = #{inputdate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.IAE_LineresourceMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.IAE_Lineresource">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="RESOURCETYPE" jdbcType="VARCHAR" property="resourcetype" />
+    <result column="PORT" jdbcType="VARCHAR" property="port" />
+    <result column="DEMAND" jdbcType="DECIMAL" property="demand" />
+    <result column="VEHICLEINT" jdbcType="VARCHAR" property="vehicleint" />
+    <result column="CAPACITY" jdbcType="VARCHAR" property="capacity" />
+    <result column="WAYBILLID" jdbcType="DECIMAL" property="waybillid" />
+    <result column="CARRIER" jdbcType="VARCHAR" property="carrier" />
+    <result column="EXPECTARRIVALDATE" jdbcType="TIMESTAMP" property="expectarrivaldate" />
+    <result column="EXPECTDEPARTUREDATE" jdbcType="TIMESTAMP" property="expectdeparturedate" />
+    <result column="TICKET" jdbcType="DECIMAL" property="ticket" />
+    <result column="CARGO" jdbcType="DECIMAL" property="cargo" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="VOLUME" jdbcType="DECIMAL" property="volume" />
+    <result column="HANDLEPERSON" jdbcType="VARCHAR" property="handleperson" />
+    <result column="HANDLEDATE" jdbcType="TIMESTAMP" property="handledate" />
+    <result column="ENTERPERSON" jdbcType="DECIMAL" property="enterperson" />
+    <result column="ENTERDATE" jdbcType="TIMESTAMP" property="enterdate" />
+    <result column="ENTERCOMPANY" jdbcType="VARCHAR" property="entercompany" />
+    <result column="ACCEPTPERSON" jdbcType="DECIMAL" property="acceptperson" />
+    <result column="ACCEPTDATE" jdbcType="TIMESTAMP" property="acceptdate" />
+    <result column="ACCEPTCOMPANY" jdbcType="VARCHAR" property="acceptcompany" />
+    <result column="ABNORMALREMARKS" jdbcType="VARCHAR" property="abnormalremarks" />
+    <result column="WORKINT" jdbcType="VARCHAR" property="workint" />
+    <result column="ACTUALCOUNT" jdbcType="DECIMAL" property="actualcount" />
+    <result column="DESTINATION" jdbcType="VARCHAR" property="destination" />
+    <result column="WARENAME" jdbcType="VARCHAR" property="warename" />
+    <result column="ACTUALVOLUME" jdbcType="DECIMAL" property="actualvolume" />
+    <result column="TIMELIMIT" jdbcType="TIMESTAMP" property="timelimit" />
+    <result column="ASK" jdbcType="VARCHAR" property="ask" />
+    <result column="TAKECARGOPERSON" jdbcType="VARCHAR" property="takecargoperson" />
+    <result column="TACKCARGOADDRESS" jdbcType="VARCHAR" property="tackcargoaddress" />
+    <result column="PAYMENT" jdbcType="DECIMAL" property="payment" />
+    <result column="SPECIALENSURE" jdbcType="VARCHAR" property="specialensure" />
+    <result column="DELIVERYTYPE" jdbcType="DECIMAL" property="deliverytype" />
+    <result column="IMPORTANTHINTS" jdbcType="VARCHAR" property="importanthints" />
+    <result column="SURPLUSTIME" jdbcType="TIMESTAMP" property="surplustime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, RESOURCETYPE, PORT, DEMAND, VEHICLEINT, CAPACITY, WAYBILLID, CARRIER, EXPECTARRIVALDATE, 
+    EXPECTDEPARTUREDATE, TICKET, CARGO, WEIGHT, VOLUME, HANDLEPERSON, HANDLEDATE, ENTERPERSON, 
+    ENTERDATE, ENTERCOMPANY, ACCEPTPERSON, ACCEPTDATE, ACCEPTCOMPANY, ABNORMALREMARKS, 
+    WORKINT, ACTUALCOUNT, DESTINATION, WARENAME, ACTUALVOLUME, TIMELIMIT, ASK, TAKECARGOPERSON, 
+    TACKCARGOADDRESS, PAYMENT, SPECIALENSURE, DELIVERYTYPE, IMPORTANTHINTS, SURPLUSTIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.IAE_LINERESOURCE
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BOS.IAE_LINERESOURCE
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.IAE_Lineresource">
+    insert into BOS.IAE_LINERESOURCE (ID, RESOURCETYPE, PORT, 
+      DEMAND, VEHICLEINT, CAPACITY, 
+      WAYBILLID, CARRIER, EXPECTARRIVALDATE, 
+      EXPECTDEPARTUREDATE, TICKET, CARGO, 
+      WEIGHT, VOLUME, HANDLEPERSON, 
+      HANDLEDATE, ENTERPERSON, ENTERDATE, 
+      ENTERCOMPANY, ACCEPTPERSON, ACCEPTDATE, 
+      ACCEPTCOMPANY, ABNORMALREMARKS, WORKINT, 
+      ACTUALCOUNT, DESTINATION, WARENAME, 
+      ACTUALVOLUME, TIMELIMIT, ASK, 
+      TAKECARGOPERSON, TACKCARGOADDRESS, PAYMENT, 
+      SPECIALENSURE, DELIVERYTYPE, IMPORTANTHINTS, 
+      SURPLUSTIME)
+    values (#{id,jdbcType=VARCHAR}, #{resourcetype,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, 
+      #{demand,jdbcType=DECIMAL}, #{vehicleint,jdbcType=VARCHAR}, #{capacity,jdbcType=VARCHAR}, 
+      #{waybillid,jdbcType=DECIMAL}, #{carrier,jdbcType=VARCHAR}, #{expectarrivaldate,jdbcType=TIMESTAMP}, 
+      #{expectdeparturedate,jdbcType=TIMESTAMP}, #{ticket,jdbcType=DECIMAL}, #{cargo,jdbcType=DECIMAL}, 
+      #{weight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, #{handleperson,jdbcType=VARCHAR}, 
+      #{handledate,jdbcType=TIMESTAMP}, #{enterperson,jdbcType=DECIMAL}, #{enterdate,jdbcType=TIMESTAMP}, 
+      #{entercompany,jdbcType=VARCHAR}, #{acceptperson,jdbcType=DECIMAL}, #{acceptdate,jdbcType=TIMESTAMP}, 
+      #{acceptcompany,jdbcType=VARCHAR}, #{abnormalremarks,jdbcType=VARCHAR}, #{workint,jdbcType=VARCHAR}, 
+      #{actualcount,jdbcType=DECIMAL}, #{destination,jdbcType=VARCHAR}, #{warename,jdbcType=VARCHAR}, 
+      #{actualvolume,jdbcType=DECIMAL}, #{timelimit,jdbcType=TIMESTAMP}, #{ask,jdbcType=VARCHAR}, 
+      #{takecargoperson,jdbcType=VARCHAR}, #{tackcargoaddress,jdbcType=VARCHAR}, #{payment,jdbcType=DECIMAL}, 
+      #{specialensure,jdbcType=VARCHAR}, #{deliverytype,jdbcType=DECIMAL}, #{importanthints,jdbcType=VARCHAR}, 
+      #{surplustime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.IAE_Lineresource">
+    insert into BOS.IAE_LINERESOURCE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="resourcetype != null">
+        RESOURCETYPE,
+      </if>
+      <if test="port != null">
+        PORT,
+      </if>
+      <if test="demand != null">
+        DEMAND,
+      </if>
+      <if test="vehicleint != null">
+        VEHICLEINT,
+      </if>
+      <if test="capacity != null">
+        CAPACITY,
+      </if>
+      <if test="waybillid != null">
+        WAYBILLID,
+      </if>
+      <if test="carrier != null">
+        CARRIER,
+      </if>
+      <if test="expectarrivaldate != null">
+        EXPECTARRIVALDATE,
+      </if>
+      <if test="expectdeparturedate != null">
+        EXPECTDEPARTUREDATE,
+      </if>
+      <if test="ticket != null">
+        TICKET,
+      </if>
+      <if test="cargo != null">
+        CARGO,
+      </if>
+      <if test="weight != null">
+        WEIGHT,
+      </if>
+      <if test="volume != null">
+        VOLUME,
+      </if>
+      <if test="handleperson != null">
+        HANDLEPERSON,
+      </if>
+      <if test="handledate != null">
+        HANDLEDATE,
+      </if>
+      <if test="enterperson != null">
+        ENTERPERSON,
+      </if>
+      <if test="enterdate != null">
+        ENTERDATE,
+      </if>
+      <if test="entercompany != null">
+        ENTERCOMPANY,
+      </if>
+      <if test="acceptperson != null">
+        ACCEPTPERSON,
+      </if>
+      <if test="acceptdate != null">
+        ACCEPTDATE,
+      </if>
+      <if test="acceptcompany != null">
+        ACCEPTCOMPANY,
+      </if>
+      <if test="abnormalremarks != null">
+        ABNORMALREMARKS,
+      </if>
+      <if test="workint != null">
+        WORKINT,
+      </if>
+      <if test="actualcount != null">
+        ACTUALCOUNT,
+      </if>
+      <if test="destination != null">
+        DESTINATION,
+      </if>
+      <if test="warename != null">
+        WARENAME,
+      </if>
+      <if test="actualvolume != null">
+        ACTUALVOLUME,
+      </if>
+      <if test="timelimit != null">
+        TIMELIMIT,
+      </if>
+      <if test="ask != null">
+        ASK,
+      </if>
+      <if test="takecargoperson != null">
+        TAKECARGOPERSON,
+      </if>
+      <if test="tackcargoaddress != null">
+        TACKCARGOADDRESS,
+      </if>
+      <if test="payment != null">
+        PAYMENT,
+      </if>
+      <if test="specialensure != null">
+        SPECIALENSURE,
+      </if>
+      <if test="deliverytype != null">
+        DELIVERYTYPE,
+      </if>
+      <if test="importanthints != null">
+        IMPORTANTHINTS,
+      </if>
+      <if test="surplustime != null">
+        SURPLUSTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcetype != null">
+        #{resourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="demand != null">
+        #{demand,jdbcType=DECIMAL},
+      </if>
+      <if test="vehicleint != null">
+        #{vehicleint,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null">
+        #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillid != null">
+        #{waybillid,jdbcType=DECIMAL},
+      </if>
+      <if test="carrier != null">
+        #{carrier,jdbcType=VARCHAR},
+      </if>
+      <if test="expectarrivaldate != null">
+        #{expectarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectdeparturedate != null">
+        #{expectdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticket != null">
+        #{ticket,jdbcType=DECIMAL},
+      </if>
+      <if test="cargo != null">
+        #{cargo,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="handleperson != null">
+        #{handleperson,jdbcType=VARCHAR},
+      </if>
+      <if test="handledate != null">
+        #{handledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterperson != null">
+        #{enterperson,jdbcType=DECIMAL},
+      </if>
+      <if test="enterdate != null">
+        #{enterdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entercompany != null">
+        #{entercompany,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptperson != null">
+        #{acceptperson,jdbcType=DECIMAL},
+      </if>
+      <if test="acceptdate != null">
+        #{acceptdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptcompany != null">
+        #{acceptcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalremarks != null">
+        #{abnormalremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="workint != null">
+        #{workint,jdbcType=VARCHAR},
+      </if>
+      <if test="actualcount != null">
+        #{actualcount,jdbcType=DECIMAL},
+      </if>
+      <if test="destination != null">
+        #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="warename != null">
+        #{warename,jdbcType=VARCHAR},
+      </if>
+      <if test="actualvolume != null">
+        #{actualvolume,jdbcType=DECIMAL},
+      </if>
+      <if test="timelimit != null">
+        #{timelimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ask != null">
+        #{ask,jdbcType=VARCHAR},
+      </if>
+      <if test="takecargoperson != null">
+        #{takecargoperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tackcargoaddress != null">
+        #{tackcargoaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        #{payment,jdbcType=DECIMAL},
+      </if>
+      <if test="specialensure != null">
+        #{specialensure,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverytype != null">
+        #{deliverytype,jdbcType=DECIMAL},
+      </if>
+      <if test="importanthints != null">
+        #{importanthints,jdbcType=VARCHAR},
+      </if>
+      <if test="surplustime != null">
+        #{surplustime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.IAE_Lineresource">
+    update BOS.IAE_LINERESOURCE
+    <set>
+      <if test="resourcetype != null">
+        RESOURCETYPE = #{resourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        PORT = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="demand != null">
+        DEMAND = #{demand,jdbcType=DECIMAL},
+      </if>
+      <if test="vehicleint != null">
+        VEHICLEINT = #{vehicleint,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null">
+        CAPACITY = #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="waybillid != null">
+        WAYBILLID = #{waybillid,jdbcType=DECIMAL},
+      </if>
+      <if test="carrier != null">
+        CARRIER = #{carrier,jdbcType=VARCHAR},
+      </if>
+      <if test="expectarrivaldate != null">
+        EXPECTARRIVALDATE = #{expectarrivaldate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expectdeparturedate != null">
+        EXPECTDEPARTUREDATE = #{expectdeparturedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ticket != null">
+        TICKET = #{ticket,jdbcType=DECIMAL},
+      </if>
+      <if test="cargo != null">
+        CARGO = #{cargo,jdbcType=DECIMAL},
+      </if>
+      <if test="weight != null">
+        WEIGHT = #{weight,jdbcType=DECIMAL},
+      </if>
+      <if test="volume != null">
+        VOLUME = #{volume,jdbcType=DECIMAL},
+      </if>
+      <if test="handleperson != null">
+        HANDLEPERSON = #{handleperson,jdbcType=VARCHAR},
+      </if>
+      <if test="handledate != null">
+        HANDLEDATE = #{handledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterperson != null">
+        ENTERPERSON = #{enterperson,jdbcType=DECIMAL},
+      </if>
+      <if test="enterdate != null">
+        ENTERDATE = #{enterdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entercompany != null">
+        ENTERCOMPANY = #{entercompany,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptperson != null">
+        ACCEPTPERSON = #{acceptperson,jdbcType=DECIMAL},
+      </if>
+      <if test="acceptdate != null">
+        ACCEPTDATE = #{acceptdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acceptcompany != null">
+        ACCEPTCOMPANY = #{acceptcompany,jdbcType=VARCHAR},
+      </if>
+      <if test="abnormalremarks != null">
+        ABNORMALREMARKS = #{abnormalremarks,jdbcType=VARCHAR},
+      </if>
+      <if test="workint != null">
+        WORKINT = #{workint,jdbcType=VARCHAR},
+      </if>
+      <if test="actualcount != null">
+        ACTUALCOUNT = #{actualcount,jdbcType=DECIMAL},
+      </if>
+      <if test="destination != null">
+        DESTINATION = #{destination,jdbcType=VARCHAR},
+      </if>
+      <if test="warename != null">
+        WARENAME = #{warename,jdbcType=VARCHAR},
+      </if>
+      <if test="actualvolume != null">
+        ACTUALVOLUME = #{actualvolume,jdbcType=DECIMAL},
+      </if>
+      <if test="timelimit != null">
+        TIMELIMIT = #{timelimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ask != null">
+        ASK = #{ask,jdbcType=VARCHAR},
+      </if>
+      <if test="takecargoperson != null">
+        TAKECARGOPERSON = #{takecargoperson,jdbcType=VARCHAR},
+      </if>
+      <if test="tackcargoaddress != null">
+        TACKCARGOADDRESS = #{tackcargoaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="payment != null">
+        PAYMENT = #{payment,jdbcType=DECIMAL},
+      </if>
+      <if test="specialensure != null">
+        SPECIALENSURE = #{specialensure,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverytype != null">
+        DELIVERYTYPE = #{deliverytype,jdbcType=DECIMAL},
+      </if>
+      <if test="importanthints != null">
+        IMPORTANTHINTS = #{importanthints,jdbcType=VARCHAR},
+      </if>
+      <if test="surplustime != null">
+        SURPLUSTIME = #{surplustime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.IAE_Lineresource">
+    update BOS.IAE_LINERESOURCE
+    set RESOURCETYPE = #{resourcetype,jdbcType=VARCHAR},
+      PORT = #{port,jdbcType=VARCHAR},
+      DEMAND = #{demand,jdbcType=DECIMAL},
+      VEHICLEINT = #{vehicleint,jdbcType=VARCHAR},
+      CAPACITY = #{capacity,jdbcType=VARCHAR},
+      WAYBILLID = #{waybillid,jdbcType=DECIMAL},
+      CARRIER = #{carrier,jdbcType=VARCHAR},
+      EXPECTARRIVALDATE = #{expectarrivaldate,jdbcType=TIMESTAMP},
+      EXPECTDEPARTUREDATE = #{expectdeparturedate,jdbcType=TIMESTAMP},
+      TICKET = #{ticket,jdbcType=DECIMAL},
+      CARGO = #{cargo,jdbcType=DECIMAL},
+      WEIGHT = #{weight,jdbcType=DECIMAL},
+      VOLUME = #{volume,jdbcType=DECIMAL},
+      HANDLEPERSON = #{handleperson,jdbcType=VARCHAR},
+      HANDLEDATE = #{handledate,jdbcType=TIMESTAMP},
+      ENTERPERSON = #{enterperson,jdbcType=DECIMAL},
+      ENTERDATE = #{enterdate,jdbcType=TIMESTAMP},
+      ENTERCOMPANY = #{entercompany,jdbcType=VARCHAR},
+      ACCEPTPERSON = #{acceptperson,jdbcType=DECIMAL},
+      ACCEPTDATE = #{acceptdate,jdbcType=TIMESTAMP},
+      ACCEPTCOMPANY = #{acceptcompany,jdbcType=VARCHAR},
+      ABNORMALREMARKS = #{abnormalremarks,jdbcType=VARCHAR},
+      WORKINT = #{workint,jdbcType=VARCHAR},
+      ACTUALCOUNT = #{actualcount,jdbcType=DECIMAL},
+      DESTINATION = #{destination,jdbcType=VARCHAR},
+      WARENAME = #{warename,jdbcType=VARCHAR},
+      ACTUALVOLUME = #{actualvolume,jdbcType=DECIMAL},
+      TIMELIMIT = #{timelimit,jdbcType=TIMESTAMP},
+      ASK = #{ask,jdbcType=VARCHAR},
+      TAKECARGOPERSON = #{takecargoperson,jdbcType=VARCHAR},
+      TACKCARGOADDRESS = #{tackcargoaddress,jdbcType=VARCHAR},
+      PAYMENT = #{payment,jdbcType=DECIMAL},
+      SPECIALENSURE = #{specialensure,jdbcType=VARCHAR},
+      DELIVERYTYPE = #{deliverytype,jdbcType=DECIMAL},
+      IMPORTANTHINTS = #{importanthints,jdbcType=VARCHAR},
+      SURPLUSTIME = #{surplustime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.SOR_CheckboundMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.SOR_Checkbound">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="SCANID" jdbcType="DECIMAL" property="scanid" />
+    <result column="CARGOSUM" jdbcType="DECIMAL" property="cargosum" />
+    <result column="CHECKPERSON" jdbcType="DECIMAL" property="checkperson" />
+    <result column="CHECKDATE" jdbcType="TIMESTAMP" property="checkdate" />
+    <result column="CHECKCOMPANY" jdbcType="VARCHAR" property="checkcompany" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, SCANID, CARGOSUM, CHECKPERSON, CHECKDATE, CHECKCOMPANY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.SOR_CHECKBOUND
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.SOR_CHECKBOUND
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.SOR_Checkbound">
+    insert into BOS.SOR_CHECKBOUND (ID, SCANID, CARGOSUM, 
+      CHECKPERSON, CHECKDATE, CHECKCOMPANY
+      )
+    values (#{id,jdbcType=DECIMAL}, #{scanid,jdbcType=DECIMAL}, #{cargosum,jdbcType=DECIMAL}, 
+      #{checkperson,jdbcType=DECIMAL}, #{checkdate,jdbcType=TIMESTAMP}, #{checkcompany,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.SOR_Checkbound">
+    insert into BOS.SOR_CHECKBOUND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="scanid != null">
+        SCANID,
+      </if>
+      <if test="cargosum != null">
+        CARGOSUM,
+      </if>
+      <if test="checkperson != null">
+        CHECKPERSON,
+      </if>
+      <if test="checkdate != null">
+        CHECKDATE,
+      </if>
+      <if test="checkcompany != null">
+        CHECKCOMPANY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="scanid != null">
+        #{scanid,jdbcType=DECIMAL},
+      </if>
+      <if test="cargosum != null">
+        #{cargosum,jdbcType=DECIMAL},
+      </if>
+      <if test="checkperson != null">
+        #{checkperson,jdbcType=DECIMAL},
+      </if>
+      <if test="checkdate != null">
+        #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkcompany != null">
+        #{checkcompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.SOR_Checkbound">
+    update BOS.SOR_CHECKBOUND
+    <set>
+      <if test="scanid != null">
+        SCANID = #{scanid,jdbcType=DECIMAL},
+      </if>
+      <if test="cargosum != null">
+        CARGOSUM = #{cargosum,jdbcType=DECIMAL},
+      </if>
+      <if test="checkperson != null">
+        CHECKPERSON = #{checkperson,jdbcType=DECIMAL},
+      </if>
+      <if test="checkdate != null">
+        CHECKDATE = #{checkdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkcompany != null">
+        CHECKCOMPANY = #{checkcompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.SOR_Checkbound">
+    update BOS.SOR_CHECKBOUND
+    set SCANID = #{scanid,jdbcType=DECIMAL},
+      CARGOSUM = #{cargosum,jdbcType=DECIMAL},
+      CHECKPERSON = #{checkperson,jdbcType=DECIMAL},
+      CHECKDATE = #{checkdate,jdbcType=TIMESTAMP},
+      CHECKCOMPANY = #{checkcompany,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

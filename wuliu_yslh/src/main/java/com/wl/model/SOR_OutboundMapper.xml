@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.mapper.SOR_OutboundMapper">
+  <resultMap id="BaseResultMap" type="com.wl.model.SOR_Outbound">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="HANDOVERTYPE" jdbcType="DECIMAL" property="handovertype" />
+    <result column="LINE" jdbcType="VARCHAR" property="line" />
+    <result column="DIRECTION" jdbcType="DECIMAL" property="direction" />
+    <result column="ACCEPTPERSON" jdbcType="DECIMAL" property="acceptperson" />
+    <result column="CARRIERS" jdbcType="DECIMAL" property="carriers" />
+    <result column="DELIVERYPERSON" jdbcType="DECIMAL" property="deliveryperson" />
+    <result column="DELIVERYDATE" jdbcType="TIMESTAMP" property="deliverydate" />
+    <result column="DELIVERYCOMPANY" jdbcType="VARCHAR" property="deliverycompany" />
+    <result column="ENTERPERSON" jdbcType="DECIMAL" property="enterperson" />
+    <result column="ENTERDATE" jdbcType="TIMESTAMP" property="enterdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, HANDOVERTYPE, LINE, DIRECTION, ACCEPTPERSON, CARRIERS, DELIVERYPERSON, DELIVERYDATE, 
+    DELIVERYCOMPANY, ENTERPERSON, ENTERDATE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BOS.SOR_OUTBOUND
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from BOS.SOR_OUTBOUND
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.wl.model.SOR_Outbound">
+    insert into BOS.SOR_OUTBOUND (ID, HANDOVERTYPE, LINE, 
+      DIRECTION, ACCEPTPERSON, CARRIERS, 
+      DELIVERYPERSON, DELIVERYDATE, DELIVERYCOMPANY, 
+      ENTERPERSON, ENTERDATE)
+    values (#{id,jdbcType=DECIMAL}, #{handovertype,jdbcType=DECIMAL}, #{line,jdbcType=VARCHAR}, 
+      #{direction,jdbcType=DECIMAL}, #{acceptperson,jdbcType=DECIMAL}, #{carriers,jdbcType=DECIMAL}, 
+      #{deliveryperson,jdbcType=DECIMAL}, #{deliverydate,jdbcType=TIMESTAMP}, #{deliverycompany,jdbcType=VARCHAR}, 
+      #{enterperson,jdbcType=DECIMAL}, #{enterdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wl.model.SOR_Outbound">
+    insert into BOS.SOR_OUTBOUND
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="handovertype != null">
+        HANDOVERTYPE,
+      </if>
+      <if test="line != null">
+        LINE,
+      </if>
+      <if test="direction != null">
+        DIRECTION,
+      </if>
+      <if test="acceptperson != null">
+        ACCEPTPERSON,
+      </if>
+      <if test="carriers != null">
+        CARRIERS,
+      </if>
+      <if test="deliveryperson != null">
+        DELIVERYPERSON,
+      </if>
+      <if test="deliverydate != null">
+        DELIVERYDATE,
+      </if>
+      <if test="deliverycompany != null">
+        DELIVERYCOMPANY,
+      </if>
+      <if test="enterperson != null">
+        ENTERPERSON,
+      </if>
+      <if test="enterdate != null">
+        ENTERDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="handovertype != null">
+        #{handovertype,jdbcType=DECIMAL},
+      </if>
+      <if test="line != null">
+        #{line,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null">
+        #{direction,jdbcType=DECIMAL},
+      </if>
+      <if test="acceptperson != null">
+        #{acceptperson,jdbcType=DECIMAL},
+      </if>
+      <if test="carriers != null">
+        #{carriers,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryperson != null">
+        #{deliveryperson,jdbcType=DECIMAL},
+      </if>
+      <if test="deliverydate != null">
+        #{deliverydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverycompany != null">
+        #{deliverycompany,jdbcType=VARCHAR},
+      </if>
+      <if test="enterperson != null">
+        #{enterperson,jdbcType=DECIMAL},
+      </if>
+      <if test="enterdate != null">
+        #{enterdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.SOR_Outbound">
+    update BOS.SOR_OUTBOUND
+    <set>
+      <if test="handovertype != null">
+        HANDOVERTYPE = #{handovertype,jdbcType=DECIMAL},
+      </if>
+      <if test="line != null">
+        LINE = #{line,jdbcType=VARCHAR},
+      </if>
+      <if test="direction != null">
+        DIRECTION = #{direction,jdbcType=DECIMAL},
+      </if>
+      <if test="acceptperson != null">
+        ACCEPTPERSON = #{acceptperson,jdbcType=DECIMAL},
+      </if>
+      <if test="carriers != null">
+        CARRIERS = #{carriers,jdbcType=DECIMAL},
+      </if>
+      <if test="deliveryperson != null">
+        DELIVERYPERSON = #{deliveryperson,jdbcType=DECIMAL},
+      </if>
+      <if test="deliverydate != null">
+        DELIVERYDATE = #{deliverydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliverycompany != null">
+        DELIVERYCOMPANY = #{deliverycompany,jdbcType=VARCHAR},
+      </if>
+      <if test="enterperson != null">
+        ENTERPERSON = #{enterperson,jdbcType=DECIMAL},
+      </if>
+      <if test="enterdate != null">
+        ENTERDATE = #{enterdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.SOR_Outbound">
+    update BOS.SOR_OUTBOUND
+    set HANDOVERTYPE = #{handovertype,jdbcType=DECIMAL},
+      LINE = #{line,jdbcType=VARCHAR},
+      DIRECTION = #{direction,jdbcType=DECIMAL},
+      ACCEPTPERSON = #{acceptperson,jdbcType=DECIMAL},
+      CARRIERS = #{carriers,jdbcType=DECIMAL},
+      DELIVERYPERSON = #{deliveryperson,jdbcType=DECIMAL},
+      DELIVERYDATE = #{deliverydate,jdbcType=TIMESTAMP},
+      DELIVERYCOMPANY = #{deliverycompany,jdbcType=VARCHAR},
+      ENTERPERSON = #{enterperson,jdbcType=DECIMAL},
+      ENTERDATE = #{enterdate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>
