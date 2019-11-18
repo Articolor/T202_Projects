@@ -25,7 +25,7 @@ public class My_EmpController {
     public String insertemp(){
         Integer i;
         i = my_empService.insertemp(new My_Emp("嘻嘻","scott",123,null,123.0,20,"男"));
-        System.out.println(i+"+++++++++++++++++++");
+        System.out.println(i+"+++++++-嘻嘻嘻嘻嘻++++++++++++");
         return null;
     }
 
