@@ -1,12 +1,20 @@
 package com.wl.mapper;
 
 import com.wl.model.SY_Emp;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+@Service
 public interface SY_EmpMapper {
+
+    //查询全部的方法有用户和角色和单位
+    List<SY_Emp> findAllEmpAndRole(SY_Emp sy_emp);
+
     int deleteByPrimaryKey(BigDecimal id);
 
-    int insert(SY_Emp record);
+    void insertEMP(SY_Emp emp);
 
     int insertSelective(SY_Emp record);
 
