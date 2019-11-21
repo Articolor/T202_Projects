@@ -31,7 +31,7 @@
       MNEMONICCODE, AVAILABLE, REMARKS, 
       OPERATORID, OPERATIONUNITID, OPERATIONTIME
       )
-    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{parentid,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{parentid,jdbcType=DECIMAL},
       #{mnemoniccode,jdbcType=VARCHAR}, #{available,jdbcType=DECIMAL}, #{remarks,jdbcType=VARCHAR}, 
       #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL}, #{operationtime,jdbcType=TIMESTAMP}
       )

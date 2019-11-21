@@ -18,6 +18,44 @@ public class BAS_Basicarchives {
 
     private Date operationtime;
 
+    private SY_Units sy_units;
+
+    private SY_Emp sy_emp;
+
+    private BAS_Basicarchivesentry bas_basicarchivesentry;
+
+    public BAS_Basicarchives() {
+    }
+
+    public BAS_Basicarchives(BigDecimal id, String name, BigDecimal grade, String remarks, BigDecimal operatorid, BigDecimal operationunitid, Date operationtime, SY_Units sy_units, SY_Emp sy_emp, BAS_Basicarchivesentry bas_basicarchivesentry) {
+        this.id = id;
+        this.name = name;
+        this.grade = grade;
+        this.remarks = remarks;
+        this.operatorid = operatorid;
+        this.operationunitid = operationunitid;
+        this.operationtime = operationtime;
+        this.sy_units = sy_units;
+        this.sy_emp = sy_emp;
+        this.bas_basicarchivesentry = bas_basicarchivesentry;
+    }
+
+    @Override
+    public String toString() {
+        return "BAS_Basicarchives{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", grade=" + grade +
+                ", remarks='" + remarks + '\'' +
+                ", operatorid=" + operatorid +
+                ", operationunitid=" + operationunitid +
+                ", operationtime=" + operationtime +
+                ", sy_units=" + sy_units +
+                ", sy_emp=" + sy_emp +
+                ", bas_basicarchivesentry=" + bas_basicarchivesentry +
+                '}';
+    }
+
     public BigDecimal getId() {
         return id;
     }
@@ -31,7 +69,7 @@ public class BAS_Basicarchives {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public BigDecimal getGrade() {
@@ -47,7 +85,7 @@ public class BAS_Basicarchives {
     }
 
     public void setRemarks(String remarks) {
-        this.remarks = remarks == null ? null : remarks.trim();
+        this.remarks = remarks;
     }
 
     public BigDecimal getOperatorid() {
@@ -72,5 +110,29 @@ public class BAS_Basicarchives {
 
     public void setOperationtime(Date operationtime) {
         this.operationtime = operationtime;
+    }
+
+    public SY_Units getSy_units() {
+        return sy_units;
+    }
+
+    public void setSy_units(SY_Units sy_units) {
+        this.sy_units = sy_units;
+    }
+
+    public SY_Emp getSy_emp() {
+        return sy_emp;
+    }
+
+    public void setSy_emp(SY_Emp sy_emp) {
+        this.sy_emp = sy_emp;
+    }
+
+    public BAS_Basicarchivesentry getBas_basicarchivesentry() {
+        return bas_basicarchivesentry;
+    }
+
+    public void setBas_basicarchivesentry(BAS_Basicarchivesentry bas_basicarchivesentry) {
+        this.bas_basicarchivesentry = bas_basicarchivesentry;
     }
 }

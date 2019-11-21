@@ -1,7 +1,5 @@
 package com.wl.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -14,39 +12,7 @@ public class SY_Units {
 
     private BigDecimal operatorid;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date operationtime;
-
-    //一个单位对应一个员工
-    private SY_Emp sy_emp;
-
-    private Integer page=1;
-
-    private Integer rows=5;
-
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getRows() {
-        return rows;
-    }
-
-    public void setRows(Integer rows) {
-        this.rows = rows;
-    }
-
-    public SY_Emp getSy_emp() {
-        return sy_emp;
-    }
-
-    public void setSy_emp(SY_Emp sy_emp) {
-        this.sy_emp = sy_emp;
-    }
 
     public BigDecimal getId() {
         return id;
@@ -84,20 +50,7 @@ public class SY_Units {
         return operationtime;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setOperationtime(Date operationtime) {
         this.operationtime = operationtime;
-    }
-
-    @Override
-    public String toString() {
-        return "SY_Units{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", remarks='" + remarks + '\'' +
-                ", operatorid=" + operatorid +
-                ", operationtime=" + operationtime +
-                ", sy_emp=" + sy_emp +
-                '}';
     }
 }

@@ -6,18 +6,25 @@
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="MINWEIGHT" jdbcType="DECIMAL" property="minweight" />
     <result column="MAXWEIGHT" jdbcType="DECIMAL" property="maxweight" />
+    <result column="INVALIDATEMARK" jdbcType="DECIMAL" property="invalidatemark" />
     <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
     <result column="OPERATIONUNITID" jdbcType="DECIMAL" property="operationunitid" />
     <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, NAME, MINWEIGHT, MAXWEIGHT, OPERATORID, OPERATIONUNITID, OPERATIONTIME
+    ID, NAME, MINWEIGHT, MAXWEIGHT, InvalidateMark,OPERATORID, OPERATIONUNITID, OPERATIONTIME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from BOS.BAS_DELIVERYSTANDARD
     where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="findAllBASDELIVERYSTANDARD"  resultType="java.lang.Integer">
+    select
+    count(*)
+    from BOS.BAS_DELIVERYSTANDARD
+
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.BAS_DELIVERYSTANDARD
@@ -46,6 +53,9 @@
       <if test="maxweight != null">
         MAXWEIGHT,
       </if>
+      <if test="invalidatemark !=null" >
+      invalidatemark
+      </if>
       <if test="operatorid != null">
         OPERATORID,
       </if>
@@ -69,6 +79,10 @@
       <if test="maxweight != null">
         #{maxweight,jdbcType=DECIMAL},
       </if>
+      <if test="invalidatemark != null">
+        #{invalidatemark,jdbcType=DECIMAL},
+      </if>
+
       <if test="operatorid != null">
         #{operatorid,jdbcType=DECIMAL},
       </if>
@@ -81,13 +95,16 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BAS_Deliverystandard">
-    update BOS.BAS_DELIVERYSTANDARD
+    update BAS_DELIVERYSTANDARD
     <set>
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
       <if test="minweight != null">
         MINWEIGHT = #{minweight,jdbcType=DECIMAL},
+      </if>
+      <if test="invalidatemark != null">
+        INVALIDATEMARK = #{invalidatemark,jdbcType=DECIMAL},
       </if>
       <if test="maxweight != null">
         MAXWEIGHT = #{maxweight,jdbcType=DECIMAL},
@@ -114,4 +131,91 @@
       OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+
+
+  <!--自定义返回类型-->
+  <resultMap id="BAS_DeliverystandardAndSY_EMP" type="BAS_Deliverystandard">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="MINWEIGHT" jdbcType="DECIMAL" property="minweight" />
+    <result column="MAXWEIGHT" jdbcType="DECIMAL" property="maxweight" />
+    <result column="InvalidateMark" jdbcType="DECIMAL" property="invalidatemark" />
+    <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+    <result column="OPERATIONUNITID" jdbcType="DECIMAL" property="operationunitid" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    <association property="sy_emp" javaType="SY_Emp">
+      <id column="EID" jdbcType="DECIMAL" property="id" />
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </association>
+
+    <association property="sy_units" javaType="SY_UNITS">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="WLNAME" jdbcType="VARCHAR" property="name" />
+    </association>
+  </resultMap>
+
+  <!--查询收派标准-->
+  <select id="findAllBASDeliverystandardAndSY_EMP" resultMap="BAS_DeliverystandardAndSY_EMP">
+   select * from (select rownum rn, b.*,s.id as eid,s.empname as empname,u.id as aid,u.name as wlname from BAS_Deliverystandard b
+    inner join SY_EMP s on b.operatorid=s.id
+    inner join SY_UNITS u on b.operationunitid=u.id) where rn between #{page} and #{rows}
+  </select>
+
+  <!--自定义返回类型-->
+  <resultMap id="BAS_DeliverystandardAndSY_EMPKEY" type="BAS_Deliverystandard">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="MINWEIGHT" jdbcType="DECIMAL" property="minweight" />
+    <result column="MAXWEIGHT" jdbcType="DECIMAL" property="maxweight" />
+    <result column="InvalidateMark" jdbcType="DECIMAL" property="invalidatemark" />
+    <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+    <result column="OPERATIONUNITID" jdbcType="DECIMAL" property="operationunitid" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    <association property="sy_emp" javaType="SY_Emp">
+      <id column="EID" jdbcType="DECIMAL" property="id" />
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </association>
+
+    <association property="sy_units" javaType="SY_UNITS">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="WLNAME" jdbcType="VARCHAR" property="name" />
+    </association>
+  </resultMap>
+
+
+  <select id="findAllBASDeliverystandardAndSY_EMPKEY" parameterType="Object" resultMap="BAS_DeliverystandardAndSY_EMPKEY">
+   select * from (select rownum rn, b.*,s.id as eid,s.empname as empname,u.id as aid,u.name as wlname from BAS_Deliverystandard b
+    inner join SY_EMP s on b.operatorid=s.id
+    inner join SY_UNITS u on b.operationunitid=u.id
+    <where>
+      <if test="name != null">
+        and b.NAME = #{Name,jdbcType=VARCHAR}
+      </if>
+      <if test="invalidatemark!=null">
+        and InvalidateMark=#{InvalidateMark,jdbcType=DECIMAL}
+      </if>
+      <if test="minweight != null">
+        and MINWEIGHT = #{minweight,jdbcType=DECIMAL}
+      </if>
+      <if test="maxweight != null">
+        and  MAXWEIGHT = #{maxweight,jdbcType=DECIMAL}
+      </if>
+
+      <if test="maxweight != null">
+        and  MAXWEIGHT = #{maxweight,jdbcType=DECIMAL}
+      </if>
+
+      <if test="empname !=null">
+        and   EMPNAME=#{empname,jdbcType=VARCHAR}
+      </if>
+
+      <if test="operationtime != null">
+        and  OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+    ) where rn between #{page} and #{rows}
+  </select>
+
+
 </mapper>
