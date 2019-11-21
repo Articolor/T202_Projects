@@ -39,6 +39,7 @@ public class SY_EmpYController {
     @RequestMapping("testallE")
     public List<SY_Role> testallrole (SY_Role r){
         List<SY_Role> list = sy_roleService.findAllRoleAndMenu(r);
+        System.out.println("xxx");
         return list;
     }
 
