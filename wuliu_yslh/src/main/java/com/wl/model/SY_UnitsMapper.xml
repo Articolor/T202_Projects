@@ -17,6 +17,42 @@
     from BOS.SY_UNITS
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <select id="findAllUnitsAndEmp" resultMap="UnitsAndEmp">
+    select * from
+     (select rownum rn,u.*,e.id as eid,e.empname as empname
+     from sy_units u
+     inner join sy_emp e on u.id=e.empunit
+     <where>
+       <if test="name != null">
+         and u.name like concat(concat('%',#{name}),'%')
+       </if>
+     </where>
+     )
+     where rn between #{page} and #{rows}
+  </select>
+
+  <!--自定义的返回类型用户和单位-->
+  <resultMap id="UnitsAndEmp" type="SY_Units">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+      <association property="sy_emp" javaType="SY_Emp">
+        <id column="EID" jdbcType="DECIMAL" property="id" />
+        <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+      </association>
+  </resultMap>
+
+  <!--查询所有的单位-->
+  <select id="findAllUnits" resultType="SY_Units">
+    select * from sy_units
+  </select>
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SY_UNITS
     where ID = #{id,jdbcType=DECIMAL}

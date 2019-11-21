@@ -16,6 +16,72 @@
     from BOS.SY_ROLE
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+
+  <!--查询出所有的角色和用户-->
+  <select id="findAllRoleAndEmp" resultMap="RoleAndEmp">
+    select r.*,e.ID as eid,e.empname as empname from sy_role r
+    inner join sy_emp e on r.id=e.roleid
+  </select>
+
+  <!--自定义的返回类型用户和角色-->
+  <resultMap id="RoleAndEmp" type="SY_Role">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+    <result column="ROLEDESC" jdbcType="VARCHAR" property="roledesc" />
+    <result column="DISABLED" jdbcType="DECIMAL" property="disabled" />
+    <collection property="sy_emps"  ofType="SY_Emp" column="roleid">
+      <id column="EID" jdbcType="DECIMAL" property="id" />
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </collection>
+  </resultMap>
+
+
+  <!--查询所有的角色-->
+  <select id="findAllRole" resultType="SY_Role">
+    select * from sy_role
+  </select>
+
+
+  <!--查询出所有的角色和菜单-->
+  <select id="findAllRoleAndMenu" resultMap="RoleAndMenu" parameterType="SY_Role">
+    select * from
+    (select rownum rn,r.* from sy_role r
+    <where>
+      <if test="rolename != null">
+        and rolename like concat(concat('%',#{rolename}),'%')
+      </if>
+      <if test="disabled != null">
+        and disabled=#{disabled,jdbcType=DECIMAL}
+      </if>
+    </where>
+
+    )
+     where rn between #{page} and #{rows}
+  </select>
+
+  <!--自定义的返回类型  角色和菜单-->
+  <resultMap id="RoleAndMenu" type="SY_Role">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+    <result column="ROLEDESC" jdbcType="VARCHAR" property="roledesc" />
+    <result column="DISABLED" jdbcType="DECIMAL" property="disabled" />
+    <collection property="menus" ofType="SY_Menus" select="findRoleOrMenuById" column="id">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="PARENTID" jdbcType="VARCHAR" property="parentid" />
+      <result column="TYPE" jdbcType="VARCHAR" property="type" />
+      <result column="TEXT" jdbcType="VARCHAR" property="text" />
+    </collection>
+  </resultMap>
+
+  <!--查询角色的菜单-->
+  <select id="findRoleOrMenuById" resultType="SY_Menus" parameterType="int">
+        select * from sy_menus m inner join sy_rolesmenus rm on m.id=rm.menuid  where roleid=#{id}
+  </select>
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SY_ROLE
     where ID = #{id,jdbcType=DECIMAL}

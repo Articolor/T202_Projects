@@ -21,16 +21,65 @@
     from BOS.SY_EMP
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <!--用户和角色一对一的关系-->
+  <select id="findAllEmpAndRole" resultMap="EmpAndRole" parameterType="Object">
+     select * from
+     (select rownum rn,e.*,r.id as rid,r.roleName as rolename,
+     u.id as idu,u.name as nameu
+     from sy_emp e inner join sy_role r on e.roleid=r.id
+     inner join sy_units u on e.empunit=u.id
+     <where>
+       <if test="empname != null">
+         and EMPNAME like  concat(concat('%',#{empname}),'%')
+       </if>
+       <if test="disabled != null">
+         and e.DISABLED = #{disabled,jdbcType=DECIMAL}
+       </if>
+     </where>
+     )
+   where rn between #{page} and #{rows}
+  </select>
+
+  <!--用户和角色的自定义返回类型-->
+  <resultMap id="EmpAndRole" type="SY_Emp">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    <result column="EMPNO" jdbcType="VARCHAR" property="empno" />
+    <result column="PWD" jdbcType="VARCHAR" property="pwd" />
+    <result column="QUERYPWD" jdbcType="VARCHAR" property="querypwd" />
+    <result column="ROLEID" jdbcType="DECIMAL" property="roleid" />
+    <result column="EMPUNIT" jdbcType="DECIMAL" property="empunit" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DISABLED" jdbcType="DECIMAL" property="disabled" />
+    <!--用户里面对应的角色-->
+    <association property="sy_role" javaType="SY_Role">
+      <id column="RID" jdbcType="DECIMAL" property="id" />
+      <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+      <result column="ROLEDESC" jdbcType="VARCHAR" property="roledesc" />
+      <result column="DISABLED" jdbcType="DECIMAL" property="disabled" />
+    </association>
+    <!--用户里面的单位-->
+    <association property="sy_units" javaType="SY_Units">
+      <id column="IDU" jdbcType="DECIMAL" property="id" />
+      <result column="NAMEU" jdbcType="VARCHAR" property="name" />
+    </association>
+  </resultMap>
+
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SY_EMP
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.wl.model.SY_Emp">
+  <insert id="insertEMP" parameterType="com.wl.model.SY_Emp">
     insert into BOS.SY_EMP (ID, EMPNAME, EMPNO, 
       PWD, QUERYPWD, ROLEID, 
       EMPUNIT, REMARK, DISABLED
       )
-    values (#{id,jdbcType=DECIMAL}, #{empname,jdbcType=VARCHAR}, #{empno,jdbcType=VARCHAR}, 
+    values (emp_id.nextval, #{empname,jdbcType=VARCHAR}, emp_no.nextval,
       #{pwd,jdbcType=VARCHAR}, #{querypwd,jdbcType=VARCHAR}, #{roleid,jdbcType=DECIMAL}, 
       #{empunit,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{disabled,jdbcType=DECIMAL}
       )

@@ -1,6 +1,7 @@
 package com.wl.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class SY_Menus {
     private BigDecimal id;
@@ -14,6 +15,46 @@ public class SY_Menus {
     private String url;
 
     private String tip;
+
+    private List<SY_Role> roles;
+
+    private Integer page=1;
+
+    private Integer rows=5;
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public List<SY_Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SY_Role> roles) {
+        this.roles = roles;
+    }
+
+    public SY_Menus(String parentid, String text, Integer page, Integer rows) {
+        this.parentid = parentid;
+        this.text = text;
+        this.page = page;
+        this.rows = rows;
+    }
+
+    public SY_Menus() {
+    }
 
     public BigDecimal getId() {
         return id;
