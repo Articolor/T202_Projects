@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface SY_EmpMapper {
 
-    //查询全部的方法有用户和角色和单位
+    //查询全部的方   法有用户和角色和单位
     List<SY_Emp> findAllEmpAndRole(SY_Emp sy_emp);
 
     int deleteByPrimaryKey(BigDecimal id);

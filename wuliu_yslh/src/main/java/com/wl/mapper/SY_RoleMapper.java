@@ -15,7 +15,7 @@ public interface SY_RoleMapper {
     //查询所有的角色
     List<SY_Role> findAllRole();
 
-    //查询出所有的角色和菜单分页加模糊查询
+     //查询出所 有的角色和菜单分页加模糊查询
     List<SY_Role> findAllRoleAndMenu(SY_Role role);
 
     void deleteByPrimaryKey(BigDecimal id);

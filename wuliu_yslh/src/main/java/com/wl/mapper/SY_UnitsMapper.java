@@ -12,7 +12,7 @@ public interface SY_UnitsMapper {
     //查询单位和员工
     List<SY_Units> findAllUnitsAndEmp(SY_Units units);
 
-    //查询所有的单位
+    //查询所 有的单位
     List<SY_Units> findAllUnits();
 
 

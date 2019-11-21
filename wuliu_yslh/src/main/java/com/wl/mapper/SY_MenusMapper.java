@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface SY_MenusMapper {
 
-    //查询出所有的菜单和角色
+    //查询出所有 的菜单和角色
     List<SY_Menus> findAllMenuAndRole(SY_Menus menus);
 
     int deleteByPrimaryKey(BigDecimal id);
