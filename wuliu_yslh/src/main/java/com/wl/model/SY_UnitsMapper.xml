@@ -45,7 +45,7 @@
       </association>
   </resultMap>
 
-  <!--查询所有的单位-->
+  <!--查询所有的 单位-->
   <select id="findAllUnits" resultType="SY_Units">
     select * from sy_units
   </select>
