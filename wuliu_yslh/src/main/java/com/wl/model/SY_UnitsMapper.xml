@@ -18,7 +18,7 @@
     where ID = #{id,jdbcType=DECIMAL}
   </select>
 
-  <select id="findAllUnitsAndEmp" resultMap="UnitsAndEmp">
+  <select id="findAllUnitsAndEmp" resultMap="UnitsAndEmp" parameterType="SY_Units">
     select * from
      (select rownum rn,u.*,e.id as eid,e.empname as empname
      from sy_units u
@@ -50,7 +50,24 @@
     select * from sy_units
   </select>
 
+  <!--查询总行数-->
+  <select id="findCount" resultType="Integer">
+    select count(*) from sy_units
+  </select>
 
+  <!--查询模糊查询的总行数-->
+  <select id="findMhCount" resultType="Integer" parameterType="SY_Units">
+    select count(*) from
+    (select rownum rn,u.*,e.id as eid,e.empname as empname
+    from sy_units u
+    inner join sy_emp e on u.id=e.empunit
+    <where>
+      <if test="name != null">
+        and u.name like concat(concat('%',#{name}),'%')
+      </if>
+    </where>
+    )
+  </select>
 
 
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
