@@ -11,6 +11,7 @@ import java.util.List;
 public class SY_MenusServiceimpl implements SY_MenusService {
     @Autowired
     private SY_MenusMapper menusMapper;
+    //查询全部的菜单和角色
     @Override
     public List<SY_Menus> findAllMenuAndRole(SY_Menus menus) {
         return menusMapper.findAllMenuAndRole(menus);
