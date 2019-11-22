@@ -18,7 +18,8 @@ public class SY_Units {
     private Date operationtime=new Date();
 
 
-
+    private BAS_Deliverystandard bas_deliverystandard;
+    private BAS_Basicarchives bas_basicArchives;
 
 
     //一个单位对应一个员工
@@ -90,5 +91,21 @@ public class SY_Units {
 
     public void setOperationtime(Date operationtime) {
         this.operationtime = operationtime;
+    }
+
+    public BAS_Deliverystandard getBas_deliverystandard() {
+        return bas_deliverystandard;
+    }
+
+    public void setBas_deliverystandard(BAS_Deliverystandard bas_deliverystandard) {
+        this.bas_deliverystandard = bas_deliverystandard;
+    }
+
+    public BAS_Basicarchives getBas_basicArchives() {
+        return bas_basicArchives;
+    }
+
+    public void setBas_basicArchives(BAS_Basicarchives bas_basicArchives) {
+        this.bas_basicArchives = bas_basicArchives;
     }
 }
