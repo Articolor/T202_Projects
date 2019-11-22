@@ -22,7 +22,9 @@ public class SY_Emp {
     private BigDecimal disabled;
 
 
+    private BAS_Deliverystandard bas_deliverystandard;
 
+    private BAS_Basicarchives bas_basicArchives;
 
     private Integer page=1;//起始页数
 
@@ -136,5 +138,21 @@ public class SY_Emp {
 
     public void setDisabled(BigDecimal disabled) {
         this.disabled = disabled;
+    }
+
+    public BAS_Deliverystandard getBas_deliverystandard() {
+        return bas_deliverystandard;
+    }
+
+    public void setBas_deliverystandard(BAS_Deliverystandard bas_deliverystandard) {
+        this.bas_deliverystandard = bas_deliverystandard;
+    }
+
+    public BAS_Basicarchives getBas_basicArchives() {
+        return bas_basicArchives;
+    }
+
+    public void setBas_basicArchives(BAS_Basicarchives bas_basicArchives) {
+        this.bas_basicArchives = bas_basicArchives;
     }
 }
