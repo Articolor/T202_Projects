@@ -16,7 +16,7 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
 
 
 
-    //查询全部的方法有用  户和角色
+    //查询全部的方法有用户和角色
     @Override
     public List<SY_Emp> findAllEmpAndRole(SY_Emp sy_emp) {
         return sy_empMapper.findAllEmpAndRole(sy_emp);
@@ -31,5 +31,15 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
     @Override
     public void deleteByPrimaryKey(BigDecimal id) {
         sy_empMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Integer findsumCount(SY_Emp e) {
+        return sy_empMapper.findsumCount(e);
+    }
+
+    @Override
+    public void updateByPrimaryKeySelective(SY_Emp record) {
+        sy_empMapper.updateByPrimaryKeySelective(record);
     }
 }

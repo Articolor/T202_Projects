@@ -14,4 +14,12 @@ public interface SY_EmpService {
 
     //删除用户
     void deleteByPrimaryKey(BigDecimal id);
+
+    //查询总行数
+    Integer findsumCount(SY_Emp e);
+
+    //修改员工
+    void updateByPrimaryKeySelective(SY_Emp record);
+
+
 }
