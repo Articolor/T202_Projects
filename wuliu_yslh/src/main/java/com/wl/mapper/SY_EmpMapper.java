@@ -12,6 +12,10 @@ public interface SY_EmpMapper {
     //查询全部的方   法有用户和角色和单位
     List<SY_Emp> findAllEmpAndRole(SY_Emp sy_emp);
 
+    //查询总行数
+    Integer findsumCount(SY_Emp e);
+
+
     int deleteByPrimaryKey(BigDecimal id);
 
     void insertEMP(SY_Emp emp);
@@ -20,7 +24,8 @@ public interface SY_EmpMapper {
 
     SY_Emp selectByPrimaryKey(BigDecimal id);
 
-    int updateByPrimaryKeySelective(SY_Emp record);
+    //修改员工
+    void updateByPrimaryKeySelective(SY_Emp record);
 
     int updateByPrimaryKey(SY_Emp record);
 }
