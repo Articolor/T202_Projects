@@ -18,6 +18,9 @@ public class SY_Menus {
 
     private List<SY_Role> roles;
 
+    //一级菜单的所有子菜单
+    private List<SY_Menus> children;
+
     private Integer page=1;
 
     private Integer rows=5;
@@ -102,5 +105,28 @@ public class SY_Menus {
 
     public void setTip(String tip) {
         this.tip = tip == null ? null : tip.trim();
+    }
+
+    public List<SY_Menus> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<SY_Menus> children) {
+        this.children = children;
+    }
+
+    @Override
+    public String toString() {
+        return "SY_Menus{" +
+                "id=" + id +
+                ", parentid='" + parentid + '\'' +
+                ", type='" + type + '\'' +
+                ", text='" + text + '\'' +
+                ", url='" + url + '\'' +
+                ", tip='" + tip + '\'' +
+                ", roles=" + roles +
+                ", page=" + page +
+                ", rows=" + rows +
+                '}';
     }
 }
