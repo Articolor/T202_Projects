@@ -6,13 +6,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface SY_MenusService {
-    //查询出所 有的菜单和角色
+    //查询出所 有的菜单和角色xx
     List<SY_Menus> findAllMenuAndRole(SY_Menus menus);
 
-    //删除的方法
+    //删除的方法xx
     void deleteByPrimaryKey(BigDecimal id);
 
-    //新增
+    //新增xx
     void insert(SY_Menus record);
     //查询总行数
     Integer sumCount(SY_Menus menus);

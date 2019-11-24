@@ -22,7 +22,7 @@ public interface SY_UnitsService {
     //修改单位
     void updateByPrimaryKeySelective(SY_Units record);
 
-    //删除单位
+    //删除单位x
     void deleteByPrimaryKey(BigDecimal id);
 
     //新增单位

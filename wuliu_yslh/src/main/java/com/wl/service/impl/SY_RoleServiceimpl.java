@@ -25,7 +25,7 @@ public class SY_RoleServiceimpl implements SY_RoleService {
         return sy_roleMapper.findAllRole();
     }
 
-    //查询全部的角色和菜单
+    //查询全部的角色和菜单xx
     @Override
     public List<SY_Role> findAllRoleAndMenu(SY_Role role) {
         return sy_roleMapper.findAllRoleAndMenu(role);

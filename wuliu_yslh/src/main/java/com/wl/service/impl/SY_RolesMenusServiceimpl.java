@@ -14,6 +14,7 @@ public class SY_RolesMenusServiceimpl implements SY_RolesMenusService {
     private SY_RolesmenusMapper rolesmenusMapper;
 
 
+    //删除角色对应的菜单
     @Override
     public void deleteByPrimaryKey(BigDecimal id) {
         rolesmenusMapper.deleteByPrimaryKey(id);

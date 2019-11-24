@@ -27,9 +27,9 @@ public interface SY_RoleService {
     //查询总行数
     Integer sumCount(SY_Role role);
 
-    //查询单个角色和对应的权限
+    //查询单个角色和对应的权限x
     SY_Role selectByPrimaryKey(BigDecimal id);
 
-    //查询角色所对应的一级菜单
+    //查询角色所对应的一级菜单x
     SY_Role findRoleOrMenuByIdParents(SY_Role role);
 }

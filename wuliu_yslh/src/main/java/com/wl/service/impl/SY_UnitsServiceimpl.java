@@ -15,7 +15,7 @@ public class SY_UnitsServiceimpl implements SY_UnitsService {
     @Autowired
     private SY_UnitsMapper unitsMapper;
 
-    //查询全部的部门
+    //查询全部的部门xx
     @Override
     public List<SY_Units> findAllUnitsAndEmp(SY_Units units) {
         return unitsMapper.findAllUnitsAndEmp(units);
