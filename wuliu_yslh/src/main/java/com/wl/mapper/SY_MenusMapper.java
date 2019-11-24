@@ -11,15 +11,28 @@ public interface SY_MenusMapper {
     //查询出所有 的菜单和角色
     List<SY_Menus> findAllMenuAndRole(SY_Menus menus);
 
-    int deleteByPrimaryKey(BigDecimal id);
+    //删除的方法
+    void deleteByPrimaryKey(BigDecimal id);
 
-    int insert(SY_Menus record);
+    //新增
+    void insert(SY_Menus record);
+    //查询总行数
+    Integer sumCount(SY_Menus menus);
+
+    //修改
+    void updateByPrimaryKeySelective(SY_Menus record);
+
+    //查询出所有一级菜单   parentid==-1
+    List<SY_Menus> findMenuParent();
+
+    //查询出一级菜单下对应的二级菜单
+    List<SY_Menus> findMenuChild(BigDecimal parentid);
 
     int insertSelective(SY_Menus record);
 
     SY_Menus selectByPrimaryKey(BigDecimal id);
 
-    int updateByPrimaryKeySelective(SY_Menus record);
+
 
     int updateByPrimaryKey(SY_Menus record);
 }
