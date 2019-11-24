@@ -24,7 +24,7 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
 
     @Override
     public void insertEMP(SY_Emp emp) {
-        //新增  用户
+        //新增用户
         sy_empMapper.insertEMP(emp);
     }
 
