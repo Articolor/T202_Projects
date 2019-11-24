@@ -32,4 +32,12 @@ public class SY_Rolesmenus {
     public void setMenuid(BigDecimal menuid) {
         this.menuid = menuid;
     }
+
+    public SY_Rolesmenus() {
+    }
+
+    public SY_Rolesmenus(BigDecimal roleid, BigDecimal menuid) {
+        this.roleid = roleid;
+        this.menuid = menuid;
+    }
 }

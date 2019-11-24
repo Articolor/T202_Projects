@@ -17,12 +17,12 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SY_ROLESMENUS
-    where ID = #{id,jdbcType=DECIMAL}
+    where ROLEID = #{id,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.wl.model.SY_Rolesmenus">
     insert into BOS.SY_ROLESMENUS (ID, ROLEID, MENUID
       )
-    values (#{id,jdbcType=DECIMAL}, #{roleid,jdbcType=DECIMAL}, #{menuid,jdbcType=DECIMAL}
+    values (rome_id.nextval, #{roleid,jdbcType=DECIMAL}, #{menuid,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SY_Rolesmenus">
