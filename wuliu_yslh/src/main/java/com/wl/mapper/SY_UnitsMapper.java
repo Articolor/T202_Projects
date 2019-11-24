@@ -21,15 +21,18 @@ public interface SY_UnitsMapper {
     //模糊查询后的总行数
     public Integer findMhCount(SY_Units units);
 
-    int deleteByPrimaryKey(BigDecimal id);
+    //删除单位
+    void deleteByPrimaryKey(BigDecimal id);
 
-    int insert(SY_Units record);
+    //新增单位
+    void insertUnits(SY_Units record);
 
     int insertSelective(SY_Units record);
 
     SY_Units selectByPrimaryKey(BigDecimal id);
 
-    int updateByPrimaryKeySelective(SY_Units record);
+    //修改单位
+    void updateByPrimaryKeySelective(SY_Units record);
 
     int updateByPrimaryKey(SY_Units record);
 }
