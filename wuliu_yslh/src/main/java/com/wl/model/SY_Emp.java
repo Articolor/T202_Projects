@@ -36,6 +36,8 @@ public class SY_Emp {
     //一个用户对应一个单位
     private SY_Units sy_units;
 
+    private BAS_Shuttlebus bas_shuttlebus;
+
     public Integer getPage() {
         return page;
     }
@@ -156,6 +158,13 @@ public class SY_Emp {
         this.bas_basicArchives = bas_basicArchives;
     }
 
+    public BAS_Shuttlebus getBas_shuttlebus() {
+        return bas_shuttlebus;
+    }
+
+    public void setBas_shuttlebus(BAS_Shuttlebus bas_shuttlebus) {
+        this.bas_shuttlebus = bas_shuttlebus;
+    }
 
     @Override
     public String toString() {
