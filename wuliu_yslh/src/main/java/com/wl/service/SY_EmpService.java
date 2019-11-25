@@ -22,4 +22,6 @@ public interface SY_EmpService {
     void updateByPrimaryKeySelective(SY_Emp record);
 
 
+    //根据姓名和密码登录
+    SY_Emp findEmpByLogin(SY_Emp emp);
 }
