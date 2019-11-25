@@ -155,4 +155,26 @@ public class SY_Emp {
     public void setBas_basicArchives(BAS_Basicarchives bas_basicArchives) {
         this.bas_basicArchives = bas_basicArchives;
     }
+
+
+    @Override
+    public String toString() {
+        return "SY_Emp{" +
+                "id=" + id +
+                ", empname='" + empname + '\'' +
+                ", empno='" + empno + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", querypwd='" + querypwd + '\'' +
+                ", roleid=" + roleid +
+                ", empunit=" + empunit +
+                ", remark='" + remark + '\'' +
+                ", disabled=" + disabled +
+                ", bas_deliverystandard=" + bas_deliverystandard +
+                ", bas_basicArchives=" + bas_basicArchives +
+                ", page=" + page +
+                ", rows=" + rows +
+                ", sy_role=" + sy_role +
+                ", sy_units=" + sy_units +
+                '}';
+    }
 }
