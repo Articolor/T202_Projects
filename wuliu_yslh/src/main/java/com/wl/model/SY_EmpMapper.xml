@@ -84,6 +84,13 @@
     )
   </select>
 
+  <!--登录的方法-->
+  <select id="findEmpByLogin" resultMap="EmpAndRole" parameterType="SY_Emp">
+    select rownum rn,e.*,r.id as rid,r.roleName as rolename,
+    u.id as idu,u.name as nameu
+    from sy_emp e inner join sy_role r on e.roleid=r.id
+    inner join sy_units u on e.empunit=u.id where e.empname=#{empname} and e.pwd=#{pwd}
+  </select>
 
 
 
