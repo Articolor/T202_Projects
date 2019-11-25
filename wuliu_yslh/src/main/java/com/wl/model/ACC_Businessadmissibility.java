@@ -50,6 +50,18 @@ public class ACC_Businessadmissibility {
 
     private BigDecimal actualpacking;
 
+    //起始页数
+    private Integer page=1;
+
+    //到第几页
+    private Integer rows=5;
+
+    //一个员工对象
+    private SY_Units units;
+
+    //一个单位对象
+    private SY_Emp emp;
+
     public BigDecimal getId() {
         return id;
     }
@@ -232,5 +244,37 @@ public class ACC_Businessadmissibility {
 
     public void setActualpacking(BigDecimal actualpacking) {
         this.actualpacking = actualpacking;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public SY_Units getUnits() {
+        return units;
+    }
+
+    public void setUnits(SY_Units units) {
+        this.units = units;
+    }
+
+    public SY_Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(SY_Emp emp) {
+        this.emp = emp;
     }
 }

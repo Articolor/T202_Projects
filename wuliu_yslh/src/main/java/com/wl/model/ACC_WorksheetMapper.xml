@@ -23,11 +23,13 @@
     delete from BOS.ACC_WORKSHEET
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.wl.model.ACC_Worksheet">
+
+  <!--工作单快速入录-->
+  <insert id="insertWSheet" parameterType="com.wl.model.ACC_Worksheet">
     insert into BOS.ACC_WORKSHEET (ID, WORKSHEETNO, DESTINATION, 
       PRODUCTTIME, TOTAL, WEIGHT, 
       STOWAGEREQUIREMENTS)
-    values (#{id,jdbcType=DECIMAL}, #{worksheetno,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR}, 
+    values (acc_wsheet_id.nextval, CONCAT('GZ',acc_wsheet_no.nextval), #{destination,jdbcType=VARCHAR},
       #{producttime,jdbcType=VARCHAR}, #{total,jdbcType=DECIMAL}, #{weight,jdbcType=DECIMAL}, 
       #{stowagerequirements,jdbcType=VARCHAR})
   </insert>

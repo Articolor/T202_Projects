@@ -38,11 +38,92 @@
     from BOS.ACC_BUSINESSADMISSIBILITY
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+  
+  <!--查询全部的信息————无关系-->
+  <select id="findAllBusinessM" resultMap="BaseResultMap" parameterType="ACC_Businessadmissibility">
+    select * from
+    (select rownum rn,bb.* from acc_businessadmissibility bb
+    <where>
+      <if test="businessnoticeno != null">
+        and BUSINESSNOTICENO like concat(concat('%',#{businessnoticeno}),'%')
+      </if>
+      <if test="customcode != null">
+        and CUSTOMCODE like concat(concat('%',#{customcode}),'%')
+      </if>
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询总行数的方法-->
+  <select id="sumCount" resultType="Integer" parameterType="ACC_Businessadmissibility">
+    select count(*) from
+    (select rownum rn,bb.* from acc_businessadmissibility bb
+    <where>
+      <if test="businessnoticeno != null">
+        and BUSINESSNOTICENO like concat(concat('%',#{businessnoticeno}),'%')
+      </if>
+      <if test="customcode != null">
+        and CUSTOMCODE like concat(concat('%',#{customcode}),'%')
+      </if>
+    </where>
+    )
+  </select>
+
+
+  <!--根据工单表的业务通知单号查询出对应的受理数据和员工，单位-->
+  <!--ACC_Businessadmissibility findBilityAndUnityAndEmp(String businessnoticeno);-->
+  <select id="findBilityAndUnityAndEmp" resultMap="BBilityAndUnityAndEmp" parameterType="String">
+    select bb.*,e.empname as empname,un.name as name from acc_businessadmissibility bb inner join sy_units un
+    on bb.ProcessingUnit=un.id
+    inner join sy_emp e
+    on bb.PickerInfo=e.id where bb.BusinessNoticeNo=#{businessnoticeno}
+  </select>
+
+  <!--自定义返回类型   受理对象  员工对象    单位对象-->
+  <resultMap id="BBilityAndUnityAndEmp" type="ACC_Businessadmissibility">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="BUSINESSNOTICENO" jdbcType="VARCHAR" property="businessnoticeno" />
+    <result column="RESERVATIONTIME" jdbcType="TIMESTAMP" property="reservationtime" />
+    <result column="CUSTOMNAME" jdbcType="VARCHAR" property="customname" />
+    <result column="PICKUPADDRESS" jdbcType="VARCHAR" property="pickupaddress" />
+    <result column="CUSTOMCODE" jdbcType="VARCHAR" property="customcode" />
+    <result column="LINKMAN" jdbcType="VARCHAR" property="linkman" />
+    <result column="TELPHONE" jdbcType="VARCHAR" property="telphone" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="VOLUME" jdbcType="DECIMAL" property="volume" />
+    <result column="IMPORTANTHINTS" jdbcType="VARCHAR" property="importanthints" />
+    <result column="ARRIVECITY" jdbcType="VARCHAR" property="arrivecity" />
+    <result column="PICKERINFO" jdbcType="DECIMAL" property="pickerinfo" />
+    <result column="SENDADDRESS" jdbcType="VARCHAR" property="sendaddress" />
+    <result column="PROCESSINGUNIT" jdbcType="DECIMAL" property="processingunit" />
+    <result column="NOTIFICATIONSOURCE" jdbcType="DECIMAL" property="notificationsource" />
+    <result column="CUSTOMNOMODIFYFLAG" jdbcType="DECIMAL" property="customnomodifyflag" />
+    <result column="SINGLETYPE" jdbcType="VARCHAR" property="singletype" />
+    <result column="PACKAGESNUM" jdbcType="DECIMAL" property="packagesnum" />
+    <result column="ACTUALWEIGHT" jdbcType="DECIMAL" property="actualweight" />
+    <result column="BILLINGWEIGHT" jdbcType="DECIMAL" property="billingweight" />
+    <result column="PACKINGFEE" jdbcType="DECIMAL" property="packingfee" />
+    <result column="ACTUALPACKING" jdbcType="DECIMAL" property="actualpacking" />
+    <!--受理对象对应的员工信息-->
+    <association property="units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+    </association>
+    <!--受理对象对应的单位信息-->
+    <association property="emp" javaType="SY_Emp">
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </association>
+  </resultMap>
+
+
+
+  
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.ACC_BUSINESSADMISSIBILITY
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.wl.model.ACC_Businessadmissibility">
+  <!--新增-->
+  <insert id="insertBusin" parameterType="com.wl.model.ACC_Businessadmissibility">
     insert into BOS.ACC_BUSINESSADMISSIBILITY (ID, BUSINESSNOTICENO, RESERVATIONTIME, 
       CUSTOMNAME, PICKUPADDRESS, CUSTOMCODE, 
       LINKMAN, TELPHONE, WEIGHT, 
@@ -52,7 +133,7 @@
       SINGLETYPE, PACKAGESNUM, ACTUALWEIGHT, 
       BILLINGWEIGHT, PACKINGFEE, ACTUALPACKING
       )
-    values (#{id,jdbcType=DECIMAL}, #{businessnoticeno,jdbcType=VARCHAR}, #{reservationtime,jdbcType=TIMESTAMP}, 
+    values (bility_id.nextval, CONCAT('YWH',bility_no.nextval), sysdate,
       #{customname,jdbcType=VARCHAR}, #{pickupaddress,jdbcType=VARCHAR}, #{customcode,jdbcType=VARCHAR}, 
       #{linkman,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, 
       #{volume,jdbcType=DECIMAL}, #{importanthints,jdbcType=VARCHAR}, #{arrivecity,jdbcType=VARCHAR}, 

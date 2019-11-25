@@ -28,6 +28,17 @@ public class ACC_Workorder {
 
     private String sortingcode;
 
+    //起始页数
+    private Integer page=1;
+    //到哪一行结束
+    private Integer rows=5;
+
+    //一个工作单号对应一个公司
+    private SY_Units units;
+
+    //一个受理对象
+    private ACC_Businessadmissibility businessadmissibility;
+
     public BigDecimal getId() {
         return id;
     }
@@ -122,5 +133,64 @@ public class ACC_Workorder {
 
     public void setSortingcode(String sortingcode) {
         this.sortingcode = sortingcode == null ? null : sortingcode.trim();
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public SY_Units getUnits() {
+        return units;
+    }
+
+    public void setUnits(SY_Units units) {
+        this.units = units;
+    }
+
+    public ACC_Businessadmissibility getBusinessadmissibility() {
+        return businessadmissibility;
+    }
+
+    public void setBusinessadmissibility(ACC_Businessadmissibility businessadmissibility) {
+        this.businessadmissibility = businessadmissibility;
+    }
+
+    public ACC_Workorder() {
+    }
+
+    public ACC_Workorder(String businessnoticeno, String jobno, BigDecimal jobtype, BigDecimal pickupstatus, BigDecimal shortmessageint, Date workgenerationtime, BigDecimal aftersinglenum, BigDecimal smallmembernum, BigDecimal pickupunit, Date pickuptime, String sortingcode) {
+        this.businessnoticeno = businessnoticeno;
+        this.jobno = jobno;
+        this.jobtype = jobtype;
+        this.pickupstatus = pickupstatus;
+        this.shortmessageint = shortmessageint;
+        this.workgenerationtime = workgenerationtime;
+        this.aftersinglenum = aftersinglenum;
+        this.smallmembernum = smallmembernum;
+        this.pickupunit = pickupunit;
+        this.pickuptime = pickuptime;
+        this.sortingcode = sortingcode;
+    }
+
+    public ACC_Workorder(String businessnoticeno, BigDecimal jobtype, BigDecimal pickupstatus, BigDecimal aftersinglenum, BigDecimal smallmembernum, BigDecimal pickupunit, Date pickuptime) {
+        this.businessnoticeno = businessnoticeno;
+        this.jobtype = jobtype;
+        this.pickupstatus = pickupstatus;
+        this.aftersinglenum = aftersinglenum;
+        this.smallmembernum = smallmembernum;
+        this.pickupunit = pickupunit;
+        this.pickuptime = pickuptime;
     }
 }

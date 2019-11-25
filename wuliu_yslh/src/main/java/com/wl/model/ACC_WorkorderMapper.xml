@@ -25,20 +25,63 @@
     from BOS.ACC_WORKORDER
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <!--查询全部的工单信息和对应的单位units-->
+  <select id="findAllWorderAndBility" resultMap="WOrderAndUnitys" parameterType="ACC_Workorder">
+    select * from
+      (select rownum rn,wo.*,un.name as name from acc_workorder wo inner join sy_units un
+      on wo.PickupUnit=un.id
+      )
+      where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询总行数-->
+  <select id="sumCount" resultType="Integer" parameterType="ACC_Workorder">
+    select count(*) from
+      (select rownum rn,wo.*,un.name as name from acc_workorder wo inner join sy_units un
+      on wo.PickupUnit=un.id
+      )
+  </select>
+
+  <!--自定义返回类型-->
+  <resultMap id="WOrderAndUnitys" type="ACC_Workorder">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="BUSINESSNOTICENO" jdbcType="VARCHAR" property="businessnoticeno" />
+    <result column="JOBNO" jdbcType="VARCHAR" property="jobno" />
+    <result column="JOBTYPE" jdbcType="DECIMAL" property="jobtype" />
+    <result column="PICKUPSTATUS" jdbcType="DECIMAL" property="pickupstatus" />
+    <result column="SHORTMESSAGEINT" jdbcType="DECIMAL" property="shortmessageint" />
+    <result column="WORKGENERATIONTIME" jdbcType="TIMESTAMP" property="workgenerationtime" />
+    <result column="AFTERSINGLENUM" jdbcType="DECIMAL" property="aftersinglenum" />
+    <result column="SMALLMEMBERNUM" jdbcType="DECIMAL" property="smallmembernum" />
+    <result column="PICKUPUNIT" jdbcType="DECIMAL" property="pickupunit" />
+    <result column="PICKUPTIME" jdbcType="TIMESTAMP" property="pickuptime" />
+    <result column="SORTINGCODE" jdbcType="VARCHAR" property="sortingcode" />
+    <!--用户里面对应的卡-->
+    <association property="units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+    </association>
+  </resultMap>
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.ACC_WORKORDER
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.wl.model.ACC_Workorder">
+
+  <!--新增受理对应的工单表-->
+  <insert id="insertOrder" parameterType="com.wl.model.ACC_Workorder">
     insert into BOS.ACC_WORKORDER (ID, BUSINESSNOTICENO, JOBNO, 
       JOBTYPE, PICKUPSTATUS, SHORTMESSAGEINT, 
       WORKGENERATIONTIME, AFTERSINGLENUM, SMALLMEMBERNUM, 
       PICKUPUNIT, PICKUPTIME, SORTINGCODE
       )
-    values (#{id,jdbcType=DECIMAL}, #{businessnoticeno,jdbcType=VARCHAR}, #{jobno,jdbcType=VARCHAR}, 
+    values (worder_id.nextval, #{businessnoticeno,jdbcType=VARCHAR},CONCAT('GDH',worder_jobno.nextval),
       #{jobtype,jdbcType=DECIMAL}, #{pickupstatus,jdbcType=DECIMAL}, #{shortmessageint,jdbcType=DECIMAL}, 
-      #{workgenerationtime,jdbcType=TIMESTAMP}, #{aftersinglenum,jdbcType=DECIMAL}, #{smallmembernum,jdbcType=DECIMAL}, 
-      #{pickupunit,jdbcType=DECIMAL}, #{pickuptime,jdbcType=TIMESTAMP}, #{sortingcode,jdbcType=VARCHAR}
+      sysdate, #{aftersinglenum,jdbcType=DECIMAL}, #{smallmembernum,jdbcType=DECIMAL},
+      #{pickupunit,jdbcType=DECIMAL}, sysdate, #{sortingcode,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.ACC_Workorder">
@@ -157,6 +200,13 @@
         SORTINGCODE = #{sortingcode,jdbcType=VARCHAR},
       </if>
     </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  
+  <!--修改工单状态-->
+  <update id="updateJobTypeById" parameterType="ACC_Workorder">
+    update BOS.ACC_WORKORDER
+    set JOBTYPE = #{jobtype,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wl.model.ACC_Workorder">
