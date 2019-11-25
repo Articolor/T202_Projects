@@ -26,6 +26,16 @@ public class SY_EmpYController {
     @Autowired
     private SY_RolesMenusService syRolesMenusService;
 
+    //登录的方法
+    @RequestMapping("findEmpByLogin")
+    public Map<String,Object> findEmpByLogin(SY_Emp emp){
+        Map<String,Object> map=new HashMap<>();
+        SY_Emp emp1 = sy_empService.findEmpByLogin(emp);
+        map.put("emp",emp);
+        return map;
+    }
+
+
 
     //查询所有单位---单位管理
     @RequestMapping("findAllUnits")
@@ -207,8 +217,8 @@ public class SY_EmpYController {
         //查询全部的角色
         Integer rowss=sy_role.getRows();
         Integer pages=sy_role.getPage();
-        sy_role.setPage((pages-1)*rowss+1);
         sy_role.setRows(pages*rowss);
+        sy_role.setPage((pages-1)*rowss+1);
         List<SY_Role> list = sy_roleService.findAllRoleAndMenu(sy_role);
         Integer sum = sy_roleService.sumCount(sy_role);//总行数
         map.put("roles",list);
