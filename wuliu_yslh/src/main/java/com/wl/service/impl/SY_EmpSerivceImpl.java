@@ -42,4 +42,9 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
     public void updateByPrimaryKeySelective(SY_Emp record) {
         sy_empMapper.updateByPrimaryKeySelective(record);
     }
+
+    @Override
+    public SY_Emp findEmpByLogin(SY_Emp emp) {
+        return sy_empMapper.findEmpByLogin(emp);
+    }
 }
