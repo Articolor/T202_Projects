@@ -15,6 +15,8 @@ public interface SY_EmpMapper {
     //查询总行数
     Integer findsumCount(SY_Emp e);
 
+    //根据姓名和密码登录
+    SY_Emp findEmpByLogin(SY_Emp emp);
 
     int deleteByPrimaryKey(BigDecimal id);
 
