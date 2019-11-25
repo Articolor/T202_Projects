@@ -27,6 +27,47 @@ public class BAS_Substitute {
 
     private BigDecimal subordinateunit;
 
+    private SY_Units sy_units;
+
+    public BAS_Substitute() {
+    }
+
+    public BAS_Substitute(BigDecimal id, String empno, String empname, BigDecimal mobileno, BigDecimal type, BigDecimal pda, BigDecimal standardkg, BigDecimal standardlength, String models, String plateint, BigDecimal invalidatemark, BigDecimal subordinateunit, SY_Units sy_units) {
+        this.id = id;
+        this.empno = empno;
+        this.empname = empname;
+        this.mobileno = mobileno;
+        this.type = type;
+        this.pda = pda;
+        this.standardkg = standardkg;
+        this.standardlength = standardlength;
+        this.models = models;
+        this.plateint = plateint;
+        this.invalidatemark = invalidatemark;
+        this.subordinateunit = subordinateunit;
+        this.sy_units = sy_units;
+    }
+
+
+    @Override
+    public String toString() {
+        return "BAS_Substitute{" +
+                "id=" + id +
+                ", empno='" + empno + '\'' +
+                ", empname='" + empname + '\'' +
+                ", mobileno=" + mobileno +
+                ", type=" + type +
+                ", pda=" + pda +
+                ", standardkg=" + standardkg +
+                ", standardlength=" + standardlength +
+                ", models='" + models + '\'' +
+                ", plateint='" + plateint + '\'' +
+                ", invalidatemark=" + invalidatemark +
+                ", subordinateunit=" + subordinateunit +
+                ", sy_units=" + sy_units +
+                '}';
+    }
+
     public BigDecimal getId() {
         return id;
     }
@@ -40,7 +81,7 @@ public class BAS_Substitute {
     }
 
     public void setEmpno(String empno) {
-        this.empno = empno == null ? null : empno.trim();
+        this.empno = empno;
     }
 
     public String getEmpname() {
@@ -48,7 +89,7 @@ public class BAS_Substitute {
     }
 
     public void setEmpname(String empname) {
-        this.empname = empname == null ? null : empname.trim();
+        this.empname = empname;
     }
 
     public BigDecimal getMobileno() {
@@ -96,7 +137,7 @@ public class BAS_Substitute {
     }
 
     public void setModels(String models) {
-        this.models = models == null ? null : models.trim();
+        this.models = models;
     }
 
     public String getPlateint() {
@@ -104,7 +145,7 @@ public class BAS_Substitute {
     }
 
     public void setPlateint(String plateint) {
-        this.plateint = plateint == null ? null : plateint.trim();
+        this.plateint = plateint;
     }
 
     public BigDecimal getInvalidatemark() {
@@ -121,5 +162,13 @@ public class BAS_Substitute {
 
     public void setSubordinateunit(BigDecimal subordinateunit) {
         this.subordinateunit = subordinateunit;
+    }
+
+    public SY_Units getSy_units() {
+        return sy_units;
+    }
+
+    public void setSy_units(SY_Units sy_units) {
+        this.sy_units = sy_units;
     }
 }
