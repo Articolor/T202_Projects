@@ -47,4 +47,14 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
     public SY_Emp findEmpByLogin(SY_Emp emp) {
         return sy_empMapper.findEmpByLogin(emp);
     }
+
+    @Override
+    public List<SY_Emp> findXJY() {
+        return sy_empMapper.findXJY();
+    }
+
+    @Override
+    public SY_Emp findByQueryPwd(String querypwd) {
+        return sy_empMapper.findByQueryPwd(querypwd);
+    }
 }
