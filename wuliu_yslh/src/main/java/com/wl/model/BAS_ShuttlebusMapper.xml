@@ -251,12 +251,7 @@ inner join LOG_Logistics l on b.lineid=l.id) where rn between #{page} and #{rows
     inner join LOG_Logistics l on b.lineid=l.id
 
     <where >
-      <if test="lineid != null">
-        LINEID = #{lineid,jdbcType=DECIMAL}
-      </if>
-      <if test="linetype != null">
-        b.linetype = #{lineType,jdbcType=DECIMAL}
-      </if>
+
       <if test="licenseplateint != null">
         LICENSEPLATEINT = #{licenseplateint,jdbcType=VARCHAR}
       </if>
@@ -272,10 +267,10 @@ inner join LOG_Logistics l on b.lineid=l.id) where rn between #{page} and #{rows
   </select>
 
   <select id="GetBUSCOUNT"  resultType="java.lang.Integer">
-    select
-    count(*)
-    from BOS.BAS_SHUTTLEBUS
-
+   select COUNT(*) from(select rownum rn, b.*,e.empname,u.name,l.linename from BAS_SHUTTLEBUS  b
+inner join SY_EMP  e on b.operatorid=e.id
+inner join SY_UNITS u on b.operationunitid=u.id
+inner join LOG_Logistics l on b.lineid=l.id)
   </select>
 
 </mapper>

@@ -22,6 +22,8 @@ public class BAS_Standartime {
 
     private Date sundayclosingtime;
 
+    private SY_Units sy_units;
+
     public BigDecimal getId() {
         return id;
     }
@@ -92,5 +94,13 @@ public class BAS_Standartime {
 
     public void setSundayclosingtime(Date sundayclosingtime) {
         this.sundayclosingtime = sundayclosingtime;
+    }
+
+    public SY_Units getSy_units() {
+        return sy_units;
+    }
+
+    public void setSy_units(SY_Units sy_units) {
+        this.sy_units = sy_units;
     }
 }
