@@ -25,8 +25,8 @@ public class BAS_DeliverystandardServiseImpl implements BAS_DeliverystandardServ
     }
 
     @Override
-    public List<BAS_Deliverystandard> findAllBASDeliverystandardAndSY_EMPKEY(String name, BigDecimal invalidatemark, BigDecimal maxweight, BigDecimal minweight, String empname, Date operationtime,int page,int rows) {
-        List<BAS_Deliverystandard> list1 = bas_deliverystandardMapper.findAllBASDeliverystandardAndSY_EMPKEY( name,  invalidatemark,  maxweight,  minweight,  empname,  operationtime, page, rows);
+    public List<BAS_Deliverystandard> findAllBASDeliverystandardAndSY_EMPKEY(BAS_Deliverystandard d) {
+        List<BAS_Deliverystandard> list1 = bas_deliverystandardMapper.findAllBASDeliverystandardAndSY_EMPKEY(d);
         return list1;
     }
 
@@ -39,6 +39,16 @@ public class BAS_DeliverystandardServiseImpl implements BAS_DeliverystandardServ
     public int findAllBASDELIVERYSTANDARD() {
         int i = bas_deliverystandardMapper.findAllBASDELIVERYSTANDARD();
         return i;
+    }
+
+    @Override
+    public int insert(BAS_Deliverystandard record) {
+        return bas_deliverystandardMapper.insert(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(BAS_Deliverystandard record) {
+        return bas_deliverystandardMapper.updateByPrimaryKey(record);
     }
 
 

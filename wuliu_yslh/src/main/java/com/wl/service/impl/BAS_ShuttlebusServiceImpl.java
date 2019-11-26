@@ -19,8 +19,8 @@ public class BAS_ShuttlebusServiceImpl implements BAS_ShuttlebusService {
     }
 
     @Override
-    public List<BAS_Shuttlebus> findBUSANDEMPANDUNITSfenye(Integer lineid, Integer linetype, String licenseplateint, String driver, String carrier, Integer page, int rows) {
-        return bas_shuttlebusMapper.findBUSANDEMPANDUNITSfenye( lineid,  linetype,  licenseplateint,  driver,  carrier,  page,  rows);
+    public List<BAS_Shuttlebus> findBUSANDEMPANDUNITSfenye(String licenseplateint,String driver,String carrier, Integer page,Integer rows) {
+        return bas_shuttlebusMapper.findBUSANDEMPANDUNITSfenye(   licenseplateint,  driver,  carrier , page,  rows);
     }
 
     @Override
