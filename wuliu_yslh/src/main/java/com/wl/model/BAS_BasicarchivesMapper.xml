@@ -182,18 +182,11 @@ where rn between #{page} and #{rows}
     inner join sy_units u on b.operationunitid=u.id
     inner join bas_basicarchivesentry y on b.id=y.parentid
     <where>
-      <if test="parentid != null">
-       AND  PARENTID = #{parentid,jdbcType=VARCHAR}
-      </if>
+
       <if test="ename != null">
-        AND  E.NAME = #{ename,jdbcType=DECIMAL}
+        AND  b.NAME = #{ename,jdbcType=DECIMAL}
       </if>
-      <if test="empname != null">
-        AND  EMPNAME = #{empname,jdbcType=VARCHAR}
-      </if>
-      <if test="boperationtime != null">
-        AND  B.OPERATIONTIME  = #{boperationtime,jdbcType=DECIMAL}
-      </if>
+
     </where>
     )
     where rn between #{page} and #{rows}
