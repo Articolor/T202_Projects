@@ -115,8 +115,10 @@
     </association>
   </resultMap>
 
-
-
+  <!--查询出最新新增的数据-->
+  <select id="findByNewDate" resultType="ACC_Businessadmissibility" >
+    select * from acc_businessadmissibility order by reservationtime desc
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.ACC_BUSINESSADMISSIBILITY
@@ -134,7 +136,7 @@
       BILLINGWEIGHT, PACKINGFEE, ACTUALPACKING
       )
     values (bility_id.nextval, CONCAT('YWH',bility_no.nextval), sysdate,
-      #{customname,jdbcType=VARCHAR}, #{pickupaddress,jdbcType=VARCHAR}, #{customcode,jdbcType=VARCHAR}, 
+      #{customname,jdbcType=VARCHAR}, #{pickupaddress,jdbcType=VARCHAR}, CONCAT('KH',bility_code.nextval),
       #{linkman,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, 
       #{volume,jdbcType=DECIMAL}, #{importanthints,jdbcType=VARCHAR}, #{arrivecity,jdbcType=VARCHAR}, 
       #{pickerinfo,jdbcType=DECIMAL}, #{sendaddress,jdbcType=VARCHAR}, #{processingunit,jdbcType=DECIMAL}, 

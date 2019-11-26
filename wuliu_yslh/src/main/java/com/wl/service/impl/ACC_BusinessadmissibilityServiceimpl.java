@@ -32,4 +32,14 @@ public class ACC_BusinessadmissibilityServiceimpl implements ACC_Businessadmissi
     public ACC_Businessadmissibility findBilityAndUnityAndEmp(String businessnoticeno) {
         return businessadmissibilityMapper.findBilityAndUnityAndEmp(businessnoticeno);
     }
+
+    @Override
+    public List<ACC_Businessadmissibility> findByNewDate() {
+        return businessadmissibilityMapper.findByNewDate();
+    }
+
+    @Override
+    public void updateByPrimaryKeySelective(ACC_Businessadmissibility record) {
+        businessadmissibilityMapper.updateByPrimaryKeySelective(record);
+    }
 }

@@ -16,4 +16,10 @@ public interface ACC_BusinessadmissibilityService {
 
     //根据工单表的业务通知单号查询出对应的受理数据和员工，单位
     ACC_Businessadmissibility findBilityAndUnityAndEmp(String businessnoticeno);
+
+    //根据时间查询出最新新增的数据
+    List<ACC_Businessadmissibility> findByNewDate();
+
+    //修改
+    void updateByPrimaryKeySelective(ACC_Businessadmissibility record);
 }

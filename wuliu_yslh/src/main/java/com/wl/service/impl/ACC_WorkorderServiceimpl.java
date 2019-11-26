@@ -6,6 +6,7 @@ import com.wl.service.ACC_WorkorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -32,5 +33,25 @@ public class ACC_WorkorderServiceimpl implements ACC_WorkorderService {
     @Override
     public Integer sumCount(ACC_Workorder o) {
         return workorderMapper.sumCount(o);
+    }
+
+    @Override
+    public ACC_Workorder selectByPrimaryKey(BigDecimal id) {
+        return workorderMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public ACC_Workorder selecByBusineNo(String businessnoticeno) {
+        return workorderMapper.selecByBusineNo(businessnoticeno);
+    }
+
+    @Override
+    public List<ACC_Workorder> findAllWorAndUnitAndBli(ACC_Workorder w) {
+        return workorderMapper.findAllWorAndUnitAndBli(w);
+    }
+
+    @Override
+    public Integer findsumcountUB(ACC_Workorder w) {
+        return workorderMapper.findsumcountUB(w);
     }
 }

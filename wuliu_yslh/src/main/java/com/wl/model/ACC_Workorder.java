@@ -1,5 +1,8 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -16,6 +19,8 @@ public class ACC_Workorder {
 
     private BigDecimal shortmessageint;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date workgenerationtime;
 
     private BigDecimal aftersinglenum;
@@ -24,6 +29,8 @@ public class ACC_Workorder {
 
     private BigDecimal pickupunit;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date pickuptime;
 
     private String sortingcode;
@@ -192,5 +199,27 @@ public class ACC_Workorder {
         this.smallmembernum = smallmembernum;
         this.pickupunit = pickupunit;
         this.pickuptime = pickuptime;
+    }
+
+    @Override
+    public String toString() {
+        return "ACC_Workorder{" +
+                "id=" + id +
+                ", businessnoticeno='" + businessnoticeno + '\'' +
+                ", jobno='" + jobno + '\'' +
+                ", jobtype=" + jobtype +
+                ", pickupstatus=" + pickupstatus +
+                ", shortmessageint=" + shortmessageint +
+                ", workgenerationtime=" + workgenerationtime +
+                ", aftersinglenum=" + aftersinglenum +
+                ", smallmembernum=" + smallmembernum +
+                ", pickupunit=" + pickupunit +
+                ", pickuptime=" + pickuptime +
+                ", sortingcode='" + sortingcode + '\'' +
+                ", page=" + page +
+                ", rows=" + rows +
+                ", units=" + units +
+                ", businessadmissibility=" + businessadmissibility +
+                '}';
     }
 }

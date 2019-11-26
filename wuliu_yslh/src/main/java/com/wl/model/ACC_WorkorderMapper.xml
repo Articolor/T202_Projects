@@ -31,6 +31,14 @@
     select * from
       (select rownum rn,wo.*,un.name as name from acc_workorder wo inner join sy_units un
       on wo.PickupUnit=un.id
+      <where>
+        <if test="jobno != null">
+          JOBNO like concat(concat('%',#{jobno}),'%')
+        </if>
+        <if test="workgenerationtime != null">
+          WORKGENERATIONTIME = #{workgenerationtime,jdbcType=TIMESTAMP}
+        </if>
+      </where>
       )
       where rn between #{page} and #{rows}
   </select>
@@ -43,6 +51,66 @@
       )
   </select>
 
+  <!--根据工单表和单位表和受理表连接    分页和高级查询-->
+  <select id="findAllWorAndUnitAndBli" resultMap="WorderAndUnitsAndBus" parameterType="ACC_Workorder">
+    select * from (
+       select rownum rn,wo.*,
+       bb.customname customname,bb.reservationtime reservationtime,
+       bb.pickupaddress pickupaddress,bb.customcode customcode,bb.linkman linkman,
+       bb.telphone telphone,bb.weight weight,bb.volume volume,bb.importanthints importanthints,
+       bb.arrivecity arrivecity,bb.pickerinfo pickerinfo,bb.sendaddress sendaddress,bb.processingunit processingunit,
+       bb.notificationsource notificationsource,bb.customnomodifyflag customnomodifyflag,bb.singletype singletype,
+       bb.packagesnum packagesnum,
+       u.name as name
+       from Acc_Workorder wo
+      inner join Acc_Businessadmissibility bb
+      on wo.businessnoticeno=bb.businessnoticeno
+      inner join sy_units u
+      on wo.pickupunit=u.id
+     <where>
+        <if test="businessnoticeno!=null and businessnoticeno!=''">
+          and wo.businessnoticeno like concat(concat('%',#{businessnoticeno}),'%')
+        </if>
+        <if test="jobno!=null and jobno!=''">
+          and bb.telphone like concat(concat('%',#{jobno}),'%')
+        </if>
+        <if test="shortmessageint!=null and shortmessageint!=''">
+          and wo.shortmessageint like concat(concat('%',#{shortmessageint}),'%')
+        </if>
+     </where>
+      )
+      where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询总行数-->
+  <select id="findsumcountUB" resultType="Integer" parameterType="ACC_Workorder">
+    select count(*) from (
+    select rownum rn,wo.*,
+    bb.customname customname,bb.reservationtime reservationtime,
+    bb.pickupaddress pickupaddress,bb.customcode customcode,bb.linkman linkman,
+    bb.telphone telphone,bb.weight weight,bb.volume volume,bb.importanthints importanthints,
+    bb.arrivecity arrivecity,bb.pickerinfo pickerinfo,bb.sendaddress sendaddress,bb.processingunit processingunit,
+    bb.notificationsource notificationsource,bb.customnomodifyflag customnomodifyflag,bb.singletype singletype,
+    bb.packagesnum packagesnum,
+    u.name as name
+    from Acc_Workorder wo
+    inner join Acc_Businessadmissibility bb
+    on wo.businessnoticeno=bb.businessnoticeno
+    inner join sy_units u
+    on wo.pickupunit=u.id
+    <where>
+      <if test="businessnoticeno!=null and businessnoticeno!=''">
+        and wo.businessnoticeno like concat(concat('%',#{businessnoticeno}),'%')
+      </if>
+      <if test="jobno!=null and jobno!=''">
+        and bb.telphone like concat(concat('%',#{jobno}),'%')
+      </if>
+      <if test="shortmessageint!=null and shortmessageint!=''">
+        and wo.shortmessageint like concat(concat('%',#{shortmessageint}),'%')
+      </if>
+    </where>
+    )
+  </select>
   <!--自定义返回类型-->
   <resultMap id="WOrderAndUnitys" type="ACC_Workorder">
     <id column="ID" jdbcType="DECIMAL" property="id" />
@@ -63,7 +131,56 @@
     </association>
   </resultMap>
 
+  <!--自定义返回类型   有卡和受理对象-->
+  <resultMap id="WorderAndUnitsAndBus" type="ACC_Workorder">
+    <!--工单对象-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="BUSINESSNOTICENO" jdbcType="VARCHAR" property="businessnoticeno" />
+    <result column="JOBNO" jdbcType="VARCHAR" property="jobno" />
+    <result column="JOBTYPE" jdbcType="DECIMAL" property="jobtype" />
+    <result column="PICKUPSTATUS" jdbcType="DECIMAL" property="pickupstatus" />
+    <result column="SHORTMESSAGEINT" jdbcType="DECIMAL" property="shortmessageint" />
+    <result column="WORKGENERATIONTIME" jdbcType="TIMESTAMP" property="workgenerationtime" />
+    <result column="AFTERSINGLENUM" jdbcType="DECIMAL" property="aftersinglenum" />
+    <result column="SMALLMEMBERNUM" jdbcType="DECIMAL" property="smallmembernum" />
+    <result column="PICKUPUNIT" jdbcType="DECIMAL" property="pickupunit" />
+    <result column="PICKUPTIME" jdbcType="TIMESTAMP" property="pickuptime" />
+    <result column="SORTINGCODE" jdbcType="VARCHAR" property="sortingcode" />
+    <!--单位对象-->
+    <association property="units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+    </association>
 
+    <!--受理对象-->
+    <association property="businessadmissibility" javaType="ACC_Businessadmissibility">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="BUSINESSNOTICENO" jdbcType="VARCHAR" property="businessnoticeno" />
+      <result column="RESERVATIONTIME" jdbcType="TIMESTAMP" property="reservationtime" />
+      <result column="CUSTOMNAME" jdbcType="VARCHAR" property="customname" />
+      <result column="PICKUPADDRESS" jdbcType="VARCHAR" property="pickupaddress" />
+      <result column="CUSTOMCODE" jdbcType="VARCHAR" property="customcode" />
+      <result column="LINKMAN" jdbcType="VARCHAR" property="linkman" />
+      <result column="TELPHONE" jdbcType="VARCHAR" property="telphone" />
+      <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+      <result column="VOLUME" jdbcType="DECIMAL" property="volume" />
+      <result column="IMPORTANTHINTS" jdbcType="VARCHAR" property="importanthints" />
+      <result column="ARRIVECITY" jdbcType="VARCHAR" property="arrivecity" />
+      <result column="PICKERINFO" jdbcType="DECIMAL" property="pickerinfo" />
+      <result column="SENDADDRESS" jdbcType="VARCHAR" property="sendaddress" />
+      <result column="PROCESSINGUNIT" jdbcType="DECIMAL" property="processingunit" />
+      <result column="NOTIFICATIONSOURCE" jdbcType="DECIMAL" property="notificationsource" />
+      <result column="CUSTOMNOMODIFYFLAG" jdbcType="DECIMAL" property="customnomodifyflag" />
+      <result column="SINGLETYPE" jdbcType="VARCHAR" property="singletype" />
+      <result column="PACKAGESNUM" jdbcType="DECIMAL" property="packagesnum" />
+    </association>
+  </resultMap>
+
+
+
+  <!--根据业务单号查询出单个对象-->
+  <select id="selecByBusineNo" resultType="ACC_Workorder" parameterType="String">
+    select * from acc_workorder where businessnoticeno =#{businessnoticeno}
+  </select>
 
 
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
@@ -79,7 +196,7 @@
       PICKUPUNIT, PICKUPTIME, SORTINGCODE
       )
     values (worder_id.nextval, #{businessnoticeno,jdbcType=VARCHAR},CONCAT('GDH',worder_jobno.nextval),
-      #{jobtype,jdbcType=DECIMAL}, #{pickupstatus,jdbcType=DECIMAL}, #{shortmessageint,jdbcType=DECIMAL}, 
+      #{jobtype,jdbcType=DECIMAL}, #{pickupstatus,jdbcType=DECIMAL},worder_dx.nextval,
       sysdate, #{aftersinglenum,jdbcType=DECIMAL}, #{smallmembernum,jdbcType=DECIMAL},
       #{pickupunit,jdbcType=DECIMAL}, sysdate, #{sortingcode,jdbcType=VARCHAR}
       )
@@ -206,8 +323,23 @@
   <!--修改工单状态-->
   <update id="updateJobTypeById" parameterType="ACC_Workorder">
     update BOS.ACC_WORKORDER
-    set JOBTYPE = #{jobtype,jdbcType=DECIMAL}
-    where ID = #{id,jdbcType=DECIMAL}
+    <set>
+      <if test="jobtype != null">
+        JOBTYPE = #{jobtype,jdbcType=DECIMAL},
+      </if>
+      <if test="aftersinglenum != null">
+        AFTERSINGLENUM = #{aftersinglenum,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <where>
+      <if test="businessnoticeno != null">
+        BUSINESSNOTICENO = #{businessnoticeno,jdbcType=VARCHAR}
+      </if>
+      <if test="id!=null">
+        ID = #{id,jdbcType=DECIMAL}
+      </if>
+    </where>
+
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wl.model.ACC_Workorder">
     update BOS.ACC_WORKORDER

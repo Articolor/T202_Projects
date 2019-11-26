@@ -24,4 +24,10 @@ public interface SY_EmpService {
 
     //根据姓名和密码登录
     SY_Emp findEmpByLogin(SY_Emp emp);
+
+    //查询出所有的小件员
+    List<SY_Emp> findXJY();
+
+    //根据员工工号查询出查台密码-
+    SY_Emp findByQueryPwd(String querypwd);
 }
