@@ -31,7 +31,12 @@ public class SY_EmpYController {
     public Map<String,Object> findEmpByLogin(SY_Emp emp){
         Map<String,Object> map=new HashMap<>();
         SY_Emp emp1 = sy_empService.findEmpByLogin(emp);
+        System.out.println(emp1);
+        //根据指定用户查询的角色查询出菜单
+        SY_Role role = sy_roleService.selectByPrimaryKey(emp1.getRoleid());
+        List<SY_Menus> menus = role.getMenus();
         map.put("emp",emp);
+        map.put("menus",menus);
         return map;
     }
 
