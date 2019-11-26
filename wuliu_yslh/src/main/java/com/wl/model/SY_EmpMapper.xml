@@ -41,6 +41,17 @@
    where rn between #{page} and #{rows}
   </select>
 
+  <!--查询出所有的小件员-->
+  <select id="findXJY" resultMap="EmpAndRole">
+    select rownum rn,e.*,r.id as rid,r.roleName as rolename,
+     u.id as idu,u.name as nameu
+     from sy_emp e inner join sy_role r on e.roleid=r.id
+     inner join sy_units u on e.empunit=u.id where roleid=1004
+  </select>
+  <!--根据员工工号查询出查台密码-->
+  <select id="findByQueryPwd" resultType="SY_Emp" parameterType="String">
+    select * from SY_Emp where empno=#{querypwd}
+  </select>
   <!--用户和角色的自定义返回类型-->
   <resultMap id="EmpAndRole" type="SY_Emp">
     <id column="ID" jdbcType="DECIMAL" property="id" />
