@@ -24,7 +24,17 @@ public interface ACC_WorkorderMapper {
 
     int insertSelective(ACC_Workorder record);
 
+    //查询单个工单数据
     ACC_Workorder selectByPrimaryKey(BigDecimal id);
+
+    //根据业务通知单号查询单个对象
+    ACC_Workorder selecByBusineNo(String businessnoticeno);
+
+    //根据工单表和单位表和受理表连接---分页和高级查询
+    List<ACC_Workorder> findAllWorAndUnitAndBli(ACC_Workorder w);
+
+    //查询总行数  根据工单表和单位表和受理表连接---分页和高级查询
+    Integer findsumcountUB(ACC_Workorder w);
 
     int updateByPrimaryKeySelective(ACC_Workorder record);
 
