@@ -19,8 +19,8 @@ public class BAS_AreaServiceImpl implements BAS_AreaService {
     }
 
     @Override
-    public List<BAS_Area> findBASAreaAndsy_unitsFenye(String province, String city, String county, String simplecode, Integer citycode, Integer page, Integer rows) {
-        return bas_areaMapper.findBASAreaAndsy_unitsFenye( province,  city,  county,  simplecode,  citycode,  page,  rows);
+    public List<BAS_Area> findBASAreaAndsy_unitsFenye(String province,String city,String county,Integer page, Integer rows) {
+        return bas_areaMapper.findBASAreaAndsy_unitsFenye( province,  city,  county,  page,  rows);
     }
 
     @Override

@@ -20,8 +20,8 @@ public class BAS_SubstituteServicesImpl implements BAS_SubstituteServices {
     }
 
     @Override
-    public List<BAS_Substitute> findBAS_SubstituteAndSY_Unitsfenye(String empno, String empname, Integer mobileno, Integer type, BigDecimal pda,Integer page,Integer rows) {
-        List<BAS_Substitute> list = bas_substituteMapper.findBAS_SubstituteAndSY_Unitsfenye(empno, empname, mobileno, type, pda, page, rows);
+    public List<BAS_Substitute> findBAS_SubstituteAndSY_Unitsfenye(String empno, String empname, Integer mobileno, Integer page,Integer rows) {
+        List<BAS_Substitute> list = bas_substituteMapper.findBAS_SubstituteAndSY_Unitsfenye(empno, empname, mobileno,  page, rows);
         return list;
     }
 

@@ -31,7 +31,7 @@ public class BAS_Deliverystandard {
 
     private Integer page=1;
 
-    private Integer rows=5;
+    private Integer rows=10;
 
     private String baempname;
 

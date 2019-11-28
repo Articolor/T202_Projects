@@ -181,6 +181,7 @@ select rownum rn, b.*,s.name from BAS_StandarTime b inner join SY_UNITS s on b.s
   <select id="findBAS_StandartimeAndSy_unitsfenye" parameterType="Object" resultMap="BAS_StandartimeAndSy_units1">
     select * from (
     select rownum rn, b.id,
+    b.timename,
     WorkingTime,
     ClosingTime,
     SaturdayWorkingTime,
@@ -189,11 +190,11 @@ select rownum rn, b.*,s.name from BAS_StandarTime b inner join SY_UNITS s on b.s
     SundayClosingTime,
     s.name from BAS_StandarTime b inner join SY_UNITS s on b.subordinateunit=s.id
     <where >
-      <if test="timename != null">
+      <if test="timename != null and timename != ''">
         TIMENAME = #{timename,jdbcType=VARCHAR}
       </if>
-      <if test="name!= null">
-        S.NAME = #{name,jdbcType=DECIMAL}
+      <if test="name!= null and name != ''">
+        s.NAME = #{name,jdbcType=DECIMAL}
       </if>
     </where>
     )where rn between #{page} and #{rows}

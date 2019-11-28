@@ -1,5 +1,8 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,17 +12,23 @@ public class BAS_Standartime {
     private String timename;
 
     private BigDecimal subordinateunit;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date workingtime;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date closingtime;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date saturdayworkingtime;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date saturdayclosingtime;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date sundayworkingtime;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date sundayclosingtime;
 
     private SY_Units sy_units;

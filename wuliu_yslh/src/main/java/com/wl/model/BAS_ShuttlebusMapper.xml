@@ -253,13 +253,13 @@ inner join LOG_Logistics l on b.lineid=l.id) where rn between #{page} and #{rows
     <where >
 
       <if test="licenseplateint != null">
-        LICENSEPLATEINT = #{licenseplateint,jdbcType=VARCHAR}
+        and LICENSEPLATEINT like concat(concat('%',#{licenseplateint,jdbcType=VARCHAR}),'%')
       </if>
       <if test="driver != null">
-        b.DRIVER = #{driver,jdbcType=VARCHAR}
+        and b.DRIVER like concat(concat('%',#{driver,jdbcType=VARCHAR}),'%')
       </if>
       <if test="carrier != null">
-        CARRIER = #{carrier,jdbcType=VARCHAR}
+        and CARRIER like concat(concat('%',#{carrier,jdbcType=VARCHAR}),'%')
       </if>
     </where>
 

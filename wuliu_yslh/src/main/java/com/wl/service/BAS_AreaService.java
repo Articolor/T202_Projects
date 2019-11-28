@@ -9,7 +9,7 @@ public interface BAS_AreaService {
     List<BAS_Area> findBASAreaAndsy_units(Integer page, Integer rows);
 
     //高级区派
-    List<BAS_Area> findBASAreaAndsy_unitsFenye(String province, String city, String county, String simplecode, Integer citycode, Integer page, Integer rows);
+    List<BAS_Area> findBASAreaAndsy_unitsFenye(String province,String city,String county,Integer page, Integer rows);
 
     //总和
     int getcount();

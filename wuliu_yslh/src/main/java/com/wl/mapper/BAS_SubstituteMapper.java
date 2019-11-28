@@ -12,7 +12,7 @@ public interface BAS_SubstituteMapper {
     List<BAS_Substitute> findBAS_SubstituteAndSY_Units(Integer page,Integer rows);
 
     //取派员查询
-    List<BAS_Substitute> findBAS_SubstituteAndSY_Unitsfenye(String empno,String empname,Integer mobileno,Integer type,BigDecimal pda,Integer page,Integer rows);
+    List<BAS_Substitute> findBAS_SubstituteAndSY_Unitsfenye(String empno,String empname,Integer mobileno,Integer page,Integer rows);
 
     int deleteByPrimaryKey(BigDecimal id);
 

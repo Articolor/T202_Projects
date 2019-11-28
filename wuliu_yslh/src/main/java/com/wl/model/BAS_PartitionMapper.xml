@@ -141,26 +141,22 @@
 
   <select id="findBAS_Partition" resultType="BAS_Partition">
     select * from (select b.*, rownum rn from BAS_Partition b) where rn between #{page} and #{rows}
+
   </select>
 
   <select id="findBAS_PartitionGAOJI" resultType="BAS_Partition">
     select * from (select b.*, rownum rn from BAS_Partition b
     <where>
-      <if test="province != null">
-        PROVINCE = #{province,jdbcType=VARCHAR}
+      <if test="province != null and province !=''">
+       PROVINCE = #{province,jdbcType=VARCHAR}
       </if>
-      <if test="city != null">
-        CITY = #{city,jdbcType=VARCHAR}
+      <if test="city != null and city !=''">
+       AND CITY = #{city,jdbcType=VARCHAR}
       </if>
-      <if test="county != null">
-        COUNTY = #{county,jdbcType=VARCHAR}
+      <if test="county != null and county !=''">
+       AND COUNTY = #{county,jdbcType=VARCHAR}
       </if>
-      <if test="zonecode != null">
-        ZONECODE = #{zonecode,jdbcType=VARCHAR}
-      </if>
-      <if test="keyword != null">
-        KEYWORD = #{keyword,jdbcType=VARCHAR}
-      </if>
+
 
     </where >
     ) where rn between #{page} and #{rows}

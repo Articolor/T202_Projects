@@ -15,6 +15,16 @@ public class BAS_Zonecustominfo {
 
     private BigDecimal zoneinfoid;
 
+    private BAS_Zoneinfo bas_zoneinfo;
+
+    public BAS_Zoneinfo getBas_zoneinfo() {
+        return bas_zoneinfo;
+    }
+
+    public void setBas_zoneinfo(BAS_Zoneinfo bas_zoneinfo) {
+        this.bas_zoneinfo = bas_zoneinfo;
+    }
+
     public BigDecimal getCustomcode() {
         return customcode;
     }
