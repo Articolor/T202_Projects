@@ -16,4 +16,9 @@ public class BAS_ZoneinfoServiceImpl implements BAS_ZoneinfoService{
     public List<BAS_Zoneinfo> findBAS_ZoneinfoAndSY_EmpAndSY_Units(Integer page, Integer rows) {
         return bas_zoneinfoMapper.findBAS_ZoneinfoAndSY_EmpAndSY_Units(page, rows);
     }
+
+    @Override
+    public List<BAS_Zoneinfo> findBAS_ZoneinfoAndSY_EmpAndSY_Unitsfenye(String name, String zonecode,Integer page,Integer rows) {
+        return bas_zoneinfoMapper.findBAS_ZoneinfoAndSY_EmpAndSY_Unitsfenye(name, zonecode,page,rows);
+    }
 }
