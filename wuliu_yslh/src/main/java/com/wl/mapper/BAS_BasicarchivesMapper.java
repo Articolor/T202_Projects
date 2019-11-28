@@ -15,7 +15,7 @@ public interface BAS_BasicarchivesMapper {
     List<BAS_Basicarchives> findfindBASBasicarchivesAndSYEmpAndSYUnitsKey(String ename,  int page, int rows);
 
     int deleteByPrimaryKey(BigDecimal id);
-
+    //新增数据
     int insert(BAS_Basicarchives record);
 
     int insertSelective(BAS_Basicarchives record);
@@ -23,6 +23,6 @@ public interface BAS_BasicarchivesMapper {
     BAS_Basicarchives selectByPrimaryKey(BigDecimal id);
 
     int updateByPrimaryKeySelective(BAS_Basicarchives record);
-
+    //修改基础数据
     int updateByPrimaryKey(BAS_Basicarchives record);
 }
