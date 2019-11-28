@@ -54,4 +54,9 @@ public class ACC_WorkorderServiceimpl implements ACC_WorkorderService {
     public Integer findsumcountUB(ACC_Workorder w) {
         return workorderMapper.findsumcountUB(w);
     }
+
+    @Override
+    public void updateByOrderAndUnits(ACC_Workorder o) {
+        workorderMapper.updateByOrderAndUnits(o);
+    }
 }

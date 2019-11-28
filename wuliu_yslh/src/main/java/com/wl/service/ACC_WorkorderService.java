@@ -30,4 +30,7 @@ public interface ACC_WorkorderService {
 
     //查询总行数  根据工单表和单位表和受理表连接---分页和高级查询
     Integer findsumcountUB(ACC_Workorder w);
+
+    //根据工单表的业务通知单号修改分拣编码和所有单位（取件单位）
+    void updateByOrderAndUnits(ACC_Workorder o);
 }
