@@ -17,8 +17,8 @@ public class BAS_PartitionServiceImpl implements  BAS_PartitionService {
     }
 
     @Override
-    public List<BAS_Partition> findBAS_PartitionGAOJI(String province, String city, String county, String zonecode, String keyword, Integer page, Integer rows) {
-        List<BAS_Partition> gaoji = bas_partitionMapper.findBAS_PartitionGAOJI(province, city, county, zonecode, keyword, page, rows);
+    public List<BAS_Partition> findBAS_PartitionGAOJI(String province,String city,String county,Integer page, Integer rows) {
+        List<BAS_Partition> gaoji = bas_partitionMapper.findBAS_PartitionGAOJI(province, city, county,  page, rows);
         return gaoji;
     }
 }
