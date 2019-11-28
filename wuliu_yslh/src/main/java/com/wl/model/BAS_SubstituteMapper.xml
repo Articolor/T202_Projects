@@ -192,12 +192,18 @@
       <result column="NAME" jdbcType="VARCHAR" property="name" />
       <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
     </association>
+
+    <association property="sy_emp" javaType="SY_Emp">
+      <id column="EID" jdbcType="DECIMAL" property="id" />
+      <result column="EMP" jdbcType="VARCHAR" property="empname" />
+    </association>
   </resultMap>
 
   <select id="findBAS_SubstituteAndSY_Units" resultMap="BAS_SubstituteAndSY_Units" parameterType="Object">
-   select * from(select rownum rn, b.*,u.operationtime,u.name
+    select * from(select rownum rn, b.*,e.id as eid,u.operationtime,u.name,e.empname as emp
    from Bas_Substitute b
-   inner join SY_UNITS u on b.subordinateunit=u.id)
+   inner join SY_UNITS u on b.subordinateunit=u.id
+   inner join SY_EMP e on b.empno=e.id)
     where rn between #{page} and #{rows}
   </select>
 
@@ -218,29 +224,28 @@
       <result column="NAME" jdbcType="VARCHAR" property="name" />
       <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
     </association>
+
+    <association property="sy_emp" javaType="SY_Emp">
+      <id column="EID" jdbcType="DECIMAL" property="id" />
+      <result column="EMP" jdbcType="VARCHAR" property="empname" />
+    </association>
   </resultMap>
 
-  <select id="findBAS_SubstituteAndSY_Unitsfenye" parameterType="Object" resultMap="BAS_SubstituteAndSY_Unitsfenye">
-    select * from(select rownum rn, b.*,u.operationtime,u.name
+  <select id="findBAS_SubstituteAndSY_Unitsfenye"  resultMap="BAS_SubstituteAndSY_Units">
+    select * from(select rownum rn, b.*,e.id as eid,u.operationtime,u.name,e.empname as emp
     from Bas_Substitute b
     inner join SY_UNITS u on b.subordinateunit=u.id
+    inner join SY_EMP e on b.empno=e.id
     <where>
-      <if test="empno != null">
-        EMPNO = #{empno,jdbcType=VARCHAR}
+      <if test="empno != null and empno!=''">
+        b.EMPNO = #{empno,jdbcType=VARCHAR}
       </if>
-      <if test="empname != null">
-        EMPNAME = #{empname,jdbcType=VARCHAR}
+      <if test="empname != null and empname!=''">
+     AND   e.EMPNAME = #{empname,jdbcType=VARCHAR}
       </if>
-      <if test="mobileno != null">
-        MOBILENO = #{mobileno,jdbcType=DECIMAL}
+      <if test="mobileno != null and mobileno!=''">
+     AND  MOBILENO = #{mobileno,jdbcType=DECIMAL}
       </if>
-      <if test="type != null">
-        TYPE = #{type,jdbcType=DECIMAL}
-      </if>
-      <if test="pda != null">
-        PDA = #{pda,jdbcType=DECIMAL}
-      </if>
-
     </where>
 
     )
