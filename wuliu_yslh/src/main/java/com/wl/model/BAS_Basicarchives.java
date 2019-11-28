@@ -1,5 +1,8 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -15,7 +18,8 @@ public class BAS_Basicarchives {
     private BigDecimal operatorid;
 
     private BigDecimal operationunitid;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date operationtime;
 
     private SY_Units sy_units;
@@ -27,8 +31,16 @@ public class BAS_Basicarchives {
     public BAS_Basicarchives() {
     }
 
-    public BAS_Basicarchives(BigDecimal id, String name, BigDecimal grade, String remarks, BigDecimal operatorid, BigDecimal operationunitid, Date operationtime, SY_Units sy_units, SY_Emp sy_emp, BAS_Basicarchivesentry bas_basicarchivesentry) {
-        this.id = id;
+    public BAS_Basicarchives(String name, BigDecimal grade, String remarks, BigDecimal operatorid, BigDecimal operationunitid, Date operationtime) {
+        this.name = name;
+        this.grade = grade;
+        this.remarks = remarks;
+        this.operatorid = operatorid;
+        this.operationunitid = operationunitid;
+        this.operationtime = operationtime;
+    }
+
+    public BAS_Basicarchives(String name, BigDecimal grade, String remarks, BigDecimal operatorid, BigDecimal operationunitid, Date operationtime, SY_Units sy_units, SY_Emp sy_emp, BAS_Basicarchivesentry bas_basicarchivesentry) {
         this.name = name;
         this.grade = grade;
         this.remarks = remarks;

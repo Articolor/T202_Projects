@@ -24,12 +24,12 @@
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.wl.model.BAS_Basicarchives">
-    insert into BOS.BAS_BASICARCHIVES (ID, NAME, GRADE, 
+    insert into BOS.BAS_BASICARCHIVES (id, NAME, GRADE,
       REMARKS, OPERATORID, OPERATIONUNITID, 
       OPERATIONTIME)
-    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{grade,jdbcType=DECIMAL}, 
+    values (asicarchives_id.nextval, #{name,jdbcType=VARCHAR}, #{grade,jdbcType=DECIMAL},
       #{remarks,jdbcType=VARCHAR}, #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL}, 
-      #{operationtime,jdbcType=TIMESTAMP})
+     sysdate)
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.BAS_Basicarchives">
     insert into BOS.BAS_BASICARCHIVES
@@ -111,7 +111,7 @@
       REMARKS = #{remarks,jdbcType=VARCHAR},
       OPERATORID = #{operatorid,jdbcType=DECIMAL},
       OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
-      OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP}
+      OPERATIONTIME = sysdate
     where ID = #{id,jdbcType=DECIMAL}
   </update>
   
@@ -146,7 +146,20 @@
 inner join sy_emp e on b.operatorid=e.id
 inner join sy_units u on b.operationunitid=u.id
 inner join bas_basicarchivesentry y on b.id=y.parentid)
-where rn between #{page} and #{rows}
+<where>
+  rn between
+  <if test="page !=null and page!=''" >
+
+   #{page}
+  </if>
+
+  <if test="rows !=null and rows!=''">
+    AND  #{rows}
+  </if>
+</where>
+
+
+
 
   </select>
 

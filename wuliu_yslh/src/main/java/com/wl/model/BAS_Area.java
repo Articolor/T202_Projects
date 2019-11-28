@@ -27,6 +27,16 @@ public class BAS_Area {
 
     private SY_Units sy_units;
 
+    private  SY_Emp sy_emp;
+
+    public SY_Emp getSy_emp() {
+        return sy_emp;
+    }
+
+    public void setSy_emp(SY_Emp sy_emp) {
+        this.sy_emp = sy_emp;
+    }
+
     public SY_Units getSy_units() {
         return sy_units;
     }

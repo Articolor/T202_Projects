@@ -178,52 +178,33 @@
       <result column="NAME" jdbcType="VARCHAR" property="name" />
       <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
     </association>
+
+    <association property="sy_emp" javaType="SY_Emp">
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" /> </association>
   </resultMap>
 
   <select id="findBASAreaAndsy_units" resultMap="BASAreaAndsy_units">
-   select * from ( select rownum rn,bs.*,s.name,s.operationtime from BAS_Area bs inner join sy_units s on s.id=bs.entryunitid) where rn between #{page} and #{rows}
-
+    select * from ( select rownum rn,bs.*,s.name,s.operationtime,e.empname from BAS_Area bs inner join sy_units s on s.id=bs.entryunitid
+     inner join sy_emp e on e.id=bs.complementunitid
+     )
+      where rn between #{page} and #{rows}
   </select>
 
-  <resultMap id="BASAreaAndsy_units1" type="BAS_Area">
-    <id column="ID" jdbcType="DECIMAL" property="id" />
-    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
-    <result column="CITY" jdbcType="VARCHAR" property="city" />
-    <result column="COUNTY" jdbcType="VARCHAR" property="county" />
-    <result column="POSTALCODE" jdbcType="DECIMAL" property="postalcode" />
-    <result column="SIMPLECODE" jdbcType="VARCHAR" property="simplecode" />
-    <result column="CITYCODE" jdbcType="DECIMAL" property="citycode" />
-    <result column="NATURE" jdbcType="DECIMAL" property="nature" />
-    <result column="THEAREA" jdbcType="DECIMAL" property="thearea" />
 
-    <association property="sy_units" javaType="SY_Units">
 
-      <result column="NAME" jdbcType="VARCHAR" property="name" />
-      <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
-    </association>
-  </resultMap>
-
-  <select id="findBASAreaAndsy_unitsFenye" resultMap="BASAreaAndsy_units1" >
-    select * from ( select rownum rn,bs.*,s.name,s.operationtime from BAS_Area bs inner join sy_units s on s.id=bs.entryunitid
+  <select id="findBASAreaAndsy_unitsFenye" resultMap="BASAreaAndsy_units" >
+    select * from ( select rownum rn,bs.*,s.name,s.operationtime,e.empname from BAS_Area bs inner join sy_units s on s.id=bs.entryunitid
+    inner join sy_emp e on e.id=bs.complementunitid
     <where >
-      <if test="province != null">
-        PROVINCE = #{province,jdbcType=VARCHAR}
+      <if test="province != null and province!=''">
+     AND   PROVINCE = #{province,jdbcType=VARCHAR}
       </if>
-      <if test="city != null">
-        CITY = #{city,jdbcType=VARCHAR}
+      <if test="city != null and city!=''">
+      AND  CITY = #{city,jdbcType=VARCHAR}
       </if>
-      <if test="county != null">
-        COUNTY = #{county,jdbcType=VARCHAR}
+      <if test="county != null and county!=''">
+      AND  COUNTY = #{county,jdbcType=VARCHAR}
       </if>
-
-      <if test="simplecode != null">
-        SIMPLECODE = #{simplecode,jdbcType=VARCHAR}
-      </if>
-      <if test="citycode != null">
-        CITYCODE = #{citycode,jdbcType=DECIMAL}
-      </if>
-
-
     </where>
     ) where rn between #{page} and #{rows}
 
