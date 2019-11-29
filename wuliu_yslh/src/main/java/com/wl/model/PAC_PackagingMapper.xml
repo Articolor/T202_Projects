@@ -12,7 +12,7 @@
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
     <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
     <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
-    <result column="INVALIDATEJOBINT" jdbcType="TIMESTAMP" property="invalidatejobint" />
+    <result column="INVALIDATEJOBINT" jdbcType="DECIMAL" property="invalidatejobint" />
     <result column="INVALIDATENAME" jdbcType="DECIMAL" property="invalidatename" />
     <result column="INVALIDATETIME" jdbcType="TIMESTAMP" property="invalidatetime" />
   </resultMap>

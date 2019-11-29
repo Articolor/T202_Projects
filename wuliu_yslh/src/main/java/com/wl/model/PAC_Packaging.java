@@ -24,7 +24,7 @@ public class PAC_Packaging {
 
     private Date operationtime;
 
-    private Date invalidatejobint;
+    private BigDecimal invalidatejobint;
 
     private BigDecimal invalidatename;
 
@@ -110,11 +110,11 @@ public class PAC_Packaging {
         this.operationtime = operationtime;
     }
 
-    public Date getInvalidatejobint() {
+    public BigDecimal getInvalidatejobint() {
         return invalidatejobint;
     }
 
-    public void setInvalidatejobint(Date invalidatejobint) {
+    public void setInvalidatejobint(BigDecimal invalidatejobint) {
         this.invalidatejobint = invalidatejobint;
     }
 
