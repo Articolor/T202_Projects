@@ -1,9 +1,16 @@
 package com.wl.mapper;
 
 import com.wl.model.BAS_Standartime;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+@Service
 public interface BAS_StandartimeMapper {
+    //收派时间管理
+    List<BAS_Standartime> findBAS_StandartimeAndSy_units(Integer page, Integer rows);
+    //分页收派时间管理
+    List<BAS_Standartime> findBAS_StandartimeAndSy_unitsfenye(String timename,String name,Integer page,Integer rows);
     int deleteByPrimaryKey(BigDecimal id);
 
     int insert(BAS_Standartime record);

@@ -2,6 +2,7 @@ package com.wl.service;
 
 import com.wl.model.SY_Units;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface SY_UnitsService {
@@ -17,4 +18,13 @@ public interface SY_UnitsService {
 
     //模糊查询后的总行数
     public Integer findMhCount(SY_Units units);
+
+    //修改单位
+    void updateByPrimaryKeySelective(SY_Units record);
+
+    //删除单位x
+    void deleteByPrimaryKey(BigDecimal id);
+
+    //新增单位
+    void insertUnits(SY_Units record);
 }

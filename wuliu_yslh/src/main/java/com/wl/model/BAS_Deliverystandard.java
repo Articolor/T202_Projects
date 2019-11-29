@@ -1,6 +1,5 @@
 package com.wl.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,12 +21,54 @@ public class BAS_Deliverystandard {
 
     private BigDecimal operationunitid;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date operationtime=new Date();
 
     private SY_Units sy_units;
 
     private SY_Emp sy_emp;
+
+    private Integer page=1;
+
+    private Integer rows=10;
+
+    private String baempname;
+
+
+    public String getBaempname() {
+        return baempname;
+    }
+
+    public void setBaempname(String baempname) {
+        this.baempname = baempname;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public BAS_Deliverystandard(String name, BigDecimal minweight, BigDecimal maxweight, BigDecimal invalidatemark, BigDecimal operatorid, BigDecimal operationunitid, Date operationtime) {
+        this.name = name;
+        this.minweight = minweight;
+        this.maxweight = maxweight;
+        this.invalidatemark = invalidatemark;
+        this.operatorid = operatorid;
+        this.operationunitid = operationunitid;
+        this.operationtime = operationtime;
+    }
 
     public BAS_Deliverystandard(BigDecimal id, String name, BigDecimal minweight, BigDecimal maxweight, BigDecimal invalidatemark, BigDecimal operatorid, BigDecimal operationunitid, Date operationtime, SY_Units sy_units, SY_Emp sy_emp) {
         this.id = id;

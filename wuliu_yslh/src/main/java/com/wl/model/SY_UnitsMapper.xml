@@ -24,7 +24,7 @@
      from sy_units u
      inner join sy_emp e on u.id=e.empunit
      <where>
-       <if test="name != null">
+       <if test="name != null  and name!=''">
          and u.name like concat(concat('%',#{name}),'%')
        </if>
      </where>
@@ -51,9 +51,9 @@
   </select>
 
   <!--查询总行数-->
-  <select id="findCount" resultType="Integer">
+ <!-- <select id="findCount" resultType="Integer">
     select count(*) from sy_units
-  </select>
+  </select>-->
 
   <!--查询模糊查询的总行数-->
   <select id="findMhCount" resultType="Integer" parameterType="SY_Units">
@@ -74,11 +74,11 @@
     delete from BOS.SY_UNITS
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.wl.model.SY_Units">
+  <insert id="insertUnits" parameterType="com.wl.model.SY_Units">
     insert into BOS.SY_UNITS (ID, NAME, REMARKS, 
       OPERATORID, OPERATIONTIME)
-    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
-      #{operatorid,jdbcType=DECIMAL}, #{operationtime,jdbcType=TIMESTAMP})
+    values (sy_units_id.nextval, #{name,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
+      #{operatorid,jdbcType=DECIMAL}, sysdate)
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SY_Units">
     insert into BOS.SY_UNITS

@@ -12,6 +12,69 @@
   <sql id="Base_Column_List">
     ID, ZONECODE, ZONENAME, ZONEPEOPLE, TELPHONE, SUBORDINATEUNIT
   </sql>
+
+  <resultMap id="BAS_ZoneinfoAndSY_EmpAndSY_Units" type="BAS_Zoneinfo">
+    <id column="ID" jdbcType="DECIMAL" property="id"/>
+    <result column="ZONECODE" jdbcType="VARCHAR" property="zonecode"/>
+    <result column="ZONENAME" jdbcType="VARCHAR" property="zonename"/>
+    <result column="ZONEPEOPLE" jdbcType="DECIMAL" property="zonepeople"/>
+    <result column="TELPHONE" jdbcType="VARCHAR" property="telphone"/>
+    <result column="SUBORDINATEUNIT" jdbcType="DECIMAL" property="subordinateunit"/>
+
+    <association property="sy_units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name"/>
+    </association>
+
+    <association property="emp" javaType="SY_Emp">
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname"/>
+    </association>
+
+
+
+  </resultMap>
+
+  <!--查询全部的方法-->
+  <select id="findBAS_ZoneinfoAndSY_EmpAndSY_Units" resultMap="BAS_ZoneinfoAndSY_EmpAndSY_Units">
+    select * from (
+  select rownum rn,bz.*,e.empname,un.name from bas_zoneinfo bz
+  inner join sy_emp e
+  on bz.zonepeople=e.id
+  inner join sy_units un
+  on bz.subordinateunit=un.id)
+    <where>
+      <if test="page !=0" >
+        rn between
+        #{page}
+      </if>
+
+      <if test="rows!=0">
+        AND  #{rows}
+      </if>
+    </where>
+  </select>
+
+  <select id="findBAS_ZoneinfoAndSY_EmpAndSY_Unitsfenye" resultMap="BAS_ZoneinfoAndSY_EmpAndSY_Units">
+    select * from (
+  select rownum rn,bz.*,e.empname,un.name from bas_zoneinfo bz
+  inner join sy_emp e
+  on bz.zonepeople=e.id
+  inner join sy_units un
+  on bz.subordinateunit=un.id
+    <where>
+      <if test="name != null and name !=''">
+        un.NAME= #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="zonecode != null and zonecode !=''">
+      AND  ZONECODE = #{zonecode,jdbcType=VARCHAR}
+      </if>
+
+    </where>
+  )
+  where rn between #{page} and #{rows}
+  </select>
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

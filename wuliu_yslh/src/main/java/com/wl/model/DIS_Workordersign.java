@@ -1,5 +1,8 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -16,12 +19,14 @@ public class DIS_Workordersign {
 
     private BigDecimal courierint;
 
-    private String couriername;
+    private String couriername;//暂时接受录入人姓名
 
-    private String recipient;
+    private String recipient;//暂时接受单位
 
     private BigDecimal signunit;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date signtime;
 
     private BigDecimal invalidatemark;
@@ -34,7 +39,59 @@ public class DIS_Workordersign {
 
     private BigDecimal inputid;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date inputtime;
+
+    private Integer page=1;//起始页数
+
+    private Integer rows=5;//到哪一页结束
+
+    private SY_Emp emp;//一个员工对象
+
+    private SY_Units units;//一个单位对象
+
+    private String singunitname;//签收单位
+
+    public String getSingunitname() {
+        return singunitname;
+    }
+
+    public void setSingunitname(String singunitname) {
+        this.singunitname = singunitname;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public SY_Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(SY_Emp emp) {
+        this.emp = emp;
+    }
+
+    public SY_Units getUnits() {
+        return units;
+    }
+
+    public void setUnits(SY_Units units) {
+        this.units = units;
+    }
 
     public BigDecimal getId() {
         return id;
@@ -162,5 +219,31 @@ public class DIS_Workordersign {
 
     public void setInputtime(Date inputtime) {
         this.inputtime = inputtime;
+    }
+
+    @Override
+    public String toString() {
+        return "DIS_Workordersign{" +
+                "id=" + id +
+                ", workorderid=" + workorderid +
+                ", worksheetno='" + worksheetno + '\'' +
+                ", workordertype=" + workordertype +
+                ", signtype=" + signtype +
+                ", courierint=" + courierint +
+                ", couriername='" + couriername + '\'' +
+                ", recipient='" + recipient + '\'' +
+                ", signunit=" + signunit +
+                ", signtime=" + signtime +
+                ", invalidatemark=" + invalidatemark +
+                ", abnormalmark='" + abnormalmark + '\'' +
+                ", inputpersoncode=" + inputpersoncode +
+                ", inputpersonid=" + inputpersonid +
+                ", inputid=" + inputid +
+                ", inputtime=" + inputtime +
+                ", page=" + page +
+                ", rows=" + rows +
+                ", emp=" + emp +
+                ", units=" + units +
+                '}';
     }
 }

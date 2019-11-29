@@ -10,12 +10,7 @@
   <sql id="Base_Column_List">
     ID, ROLENAME, ROLEDESC, DISABLED
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from BOS.SY_ROLE
-    where ID = #{id,jdbcType=DECIMAL}
-  </select>
+
 
 
   <!--查询出所有的角色和用户-->
@@ -48,16 +43,32 @@
     select * from
     (select rownum rn,r.* from sy_role r
     <where>
-      <if test="rolename != null">
+      <if test="rolename != null and rolename!=''">
         and rolename like concat(concat('%',#{rolename}),'%')
       </if>
-      <if test="disabled != null">
+      <if test="disabled != null and disabled!=''">
         and disabled=#{disabled,jdbcType=DECIMAL}
       </if>
     </where>
 
     )
      where rn between #{page} and #{rows}
+  </select>
+
+  <!--根据id查询出角色和对应的权限-->
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="RoleAndMenu">
+    select
+    <include refid="Base_Column_List" />
+    from BOS.SY_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+
+  <!--根据id查询出角色和对应的权限2-->
+  <select id="findRoleOrMenuByIdParents" parameterType="java.math.BigDecimal" resultMap="RoleAndMenuP">
+    select
+    <include refid="Base_Column_List" />
+    from BOS.SY_ROLE
+    where ID = #{id,jdbcType=DECIMAL}
   </select>
 
   <!--自定义的返回类型  角色和菜单-->
@@ -73,12 +84,43 @@
       <result column="TEXT" jdbcType="VARCHAR" property="text" />
     </collection>
   </resultMap>
+  <!--自定义的返回类型  角色和一级菜单-->
+  <resultMap id="RoleAndMenuP" type="SY_Role">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+    <result column="ROLEDESC" jdbcType="VARCHAR" property="roledesc" />
+    <result column="DISABLED" jdbcType="DECIMAL" property="disabled" />
+    <collection property="menus" ofType="SY_Menus" select="findRoleOrMenuByIdParent" column="id">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="PARENTID" jdbcType="VARCHAR" property="parentid" />
+      <result column="TYPE" jdbcType="VARCHAR" property="type" />
+      <result column="TEXT" jdbcType="VARCHAR" property="text" />
+    </collection>
+  </resultMap>
 
   <!--查询角色的菜单-->
   <select id="findRoleOrMenuById" resultType="SY_Menus" parameterType="int">
         select * from sy_menus m inner join sy_rolesmenus rm on m.id=rm.menuid  where roleid=#{id}
   </select>
+  <!--查询角色的菜单———————一级菜单—-->
+  <select id="findRoleOrMenuByIdParent" resultType="SY_Menus" parameterType="int">
+        select * from sy_menus m inner join sy_rolesmenus rm on m.id=rm.menuid  where roleid=#{id} and parentid!=-1
+  </select>
+  <!--查询总行数-->
+  <select id="sumCount" parameterType="SY_Role" resultType="Integer">
+    select count(*) from
+    (select rownum rn,r.* from sy_role r
+    <where>
+      <if test="rolename != null and rolename!=''">
+        and rolename like concat(concat('%',#{rolename}),'%')
+      </if>
+      <if test="disabled != null and disabled!=''">
+        and disabled=#{disabled,jdbcType=DECIMAL}
+      </if>
+    </where>
 
+    )
+  </select>
 
 
 
@@ -89,7 +131,7 @@
   <insert id="insert" parameterType="com.wl.model.SY_Role">
     insert into BOS.SY_ROLE (ID, ROLENAME, ROLEDESC, 
       DISABLED)
-    values (#{id,jdbcType=DECIMAL}, #{rolename,jdbcType=VARCHAR}, #{roledesc,jdbcType=VARCHAR}, 
+    values (role_id.nextval, #{rolename,jdbcType=VARCHAR}, #{roledesc,jdbcType=VARCHAR},
       #{disabled,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SY_Role">

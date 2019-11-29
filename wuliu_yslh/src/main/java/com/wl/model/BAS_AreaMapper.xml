@@ -19,7 +19,7 @@
     NATURE, THEAREA
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from BOS.BAS_AREA
     where ID = #{id,jdbcType=DECIMAL}
@@ -161,4 +161,59 @@
       THEAREA = #{thearea,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+  <resultMap id="BASAreaAndsy_units" type="BAS_Area">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PROVINCE" jdbcType="VARCHAR" property="province" />
+    <result column="CITY" jdbcType="VARCHAR" property="city" />
+    <result column="COUNTY" jdbcType="VARCHAR" property="county" />
+    <result column="POSTALCODE" jdbcType="DECIMAL" property="postalcode" />
+    <result column="SIMPLECODE" jdbcType="VARCHAR" property="simplecode" />
+    <result column="CITYCODE" jdbcType="DECIMAL" property="citycode" />
+    <result column="NATURE" jdbcType="DECIMAL" property="nature" />
+    <result column="THEAREA" jdbcType="DECIMAL" property="thearea" />
+
+    <association property="sy_units" javaType="SY_Units">
+
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+      <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    </association>
+
+    <association property="sy_emp" javaType="SY_Emp">
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" /> </association>
+  </resultMap>
+
+  <select id="findBASAreaAndsy_units" resultMap="BASAreaAndsy_units">
+    select * from ( select rownum rn,bs.*,s.name,s.operationtime,e.empname from BAS_Area bs inner join sy_units s on s.id=bs.entryunitid
+     inner join sy_emp e on e.id=bs.complementunitid
+     )
+      where rn between #{page} and #{rows}
+  </select>
+
+
+
+  <select id="findBASAreaAndsy_unitsFenye" resultMap="BASAreaAndsy_units" >
+    select * from ( select rownum rn,bs.*,s.name,s.operationtime,e.empname from BAS_Area bs inner join sy_units s on s.id=bs.entryunitid
+    inner join sy_emp e on e.id=bs.complementunitid
+    <where >
+      <if test="province != null and province!=''">
+     AND   PROVINCE = #{province,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null and city!=''">
+      AND  CITY = #{city,jdbcType=VARCHAR}
+      </if>
+      <if test="county != null and county!=''">
+      AND  COUNTY = #{county,jdbcType=VARCHAR}
+      </if>
+    </where>
+    ) where rn between #{page} and #{rows}
+
+  </select>
+
+  <select id="getcount"  resultType="java.lang.Integer">
+    select
+    count(*)
+    from BOS.BAS_Area
+
+  </select>
 </mapper>

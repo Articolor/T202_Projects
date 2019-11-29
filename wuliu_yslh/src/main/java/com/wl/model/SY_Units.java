@@ -108,4 +108,20 @@ public class SY_Units {
     public void setBas_basicArchives(BAS_Basicarchives bas_basicArchives) {
         this.bas_basicArchives = bas_basicArchives;
     }
+
+    @Override
+    public String toString() {
+        return "SY_Units{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", remarks='" + remarks + '\'' +
+                ", operatorid=" + operatorid +
+                ", operationtime=" + operationtime +
+                ", bas_deliverystandard=" + bas_deliverystandard +
+                ", bas_basicArchives=" + bas_basicArchives +
+                ", sy_emp=" + sy_emp +
+                ", page=" + page +
+                ", rows=" + rows +
+                '}';
+    }
 }

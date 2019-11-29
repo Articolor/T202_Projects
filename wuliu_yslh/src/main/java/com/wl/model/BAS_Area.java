@@ -25,6 +25,26 @@ public class BAS_Area {
 
     private BigDecimal thearea;
 
+    private SY_Units sy_units;
+
+    private  SY_Emp sy_emp;
+
+    public SY_Emp getSy_emp() {
+        return sy_emp;
+    }
+
+    public void setSy_emp(SY_Emp sy_emp) {
+        this.sy_emp = sy_emp;
+    }
+
+    public SY_Units getSy_units() {
+        return sy_units;
+    }
+
+    public void setSy_units(SY_Units sy_units) {
+        this.sy_units = sy_units;
+    }
+
     public BigDecimal getId() {
         return id;
     }
@@ -111,5 +131,40 @@ public class BAS_Area {
 
     public void setThearea(BigDecimal thearea) {
         this.thearea = thearea;
+    }
+    public BAS_Area() {
+    }
+
+    public BAS_Area(BigDecimal id, String province, String city, String county, BigDecimal postalcode, String simplecode, BigDecimal citycode, String entryunitid, String complementunitid, BigDecimal nature, BigDecimal thearea, SY_Units sy_units) {
+        this.id = id;
+        this.province = province;
+        this.city = city;
+        this.county = county;
+        this.postalcode = postalcode;
+        this.simplecode = simplecode;
+        this.citycode = citycode;
+        this.entryunitid = entryunitid;
+        this.complementunitid = complementunitid;
+        this.nature = nature;
+        this.thearea = thearea;
+        this.sy_units = sy_units;
+    }
+
+    @Override
+    public String toString() {
+        return "BAS_Area{" +
+                "id=" + id +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", county='" + county + '\'' +
+                ", postalcode=" + postalcode +
+                ", simplecode='" + simplecode + '\'' +
+                ", citycode=" + citycode +
+                ", entryunitid='" + entryunitid + '\'' +
+                ", complementunitid='" + complementunitid + '\'' +
+                ", nature=" + nature +
+                ", thearea=" + thearea +
+                ", sy_units=" + sy_units +
+                '}';
     }
 }

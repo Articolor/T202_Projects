@@ -13,11 +13,11 @@
     <result column="SUNDAYCLOSINGTIME" jdbcType="TIMESTAMP" property="sundayclosingtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, TIMENAME, SUBORDINATEUNIT, WORKINGTIME, CLOSINGTIME, SATURDAYWORKINGTIME, SATURDAYCLOSINGTIME, 
+    ID, TIMENAME, SUBORDINATEUNIT, WORKINGTIME, CLOSINGTIME, SATURDAYWORKINGTIME, SATURDAYCLOSINGTIME,
     SUNDAYWORKINGTIME, SUNDAYCLOSINGTIME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from BOS.BAS_STANDARTIME
     where ID = #{id,jdbcType=DECIMAL}
@@ -27,13 +27,13 @@
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.wl.model.BAS_Standartime">
-    insert into BOS.BAS_STANDARTIME (ID, TIMENAME, SUBORDINATEUNIT, 
-      WORKINGTIME, CLOSINGTIME, SATURDAYWORKINGTIME, 
-      SATURDAYCLOSINGTIME, SUNDAYWORKINGTIME, 
+    insert into BOS.BAS_STANDARTIME (ID, TIMENAME, SUBORDINATEUNIT,
+      WORKINGTIME, CLOSINGTIME, SATURDAYWORKINGTIME,
+      SATURDAYCLOSINGTIME, SUNDAYWORKINGTIME,
       SUNDAYCLOSINGTIME)
-    values (#{id,jdbcType=DECIMAL}, #{timename,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=DECIMAL}, 
-      #{workingtime,jdbcType=TIMESTAMP}, #{closingtime,jdbcType=TIMESTAMP}, #{saturdayworkingtime,jdbcType=TIMESTAMP}, 
-      #{saturdayclosingtime,jdbcType=TIMESTAMP}, #{sundayworkingtime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=DECIMAL}, #{timename,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=DECIMAL},
+      #{workingtime,jdbcType=TIMESTAMP}, #{closingtime,jdbcType=TIMESTAMP}, #{saturdayworkingtime,jdbcType=TIMESTAMP},
+      #{saturdayclosingtime,jdbcType=TIMESTAMP}, #{sundayworkingtime,jdbcType=TIMESTAMP},
       #{sundayclosingtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.BAS_Standartime">
@@ -139,4 +139,64 @@
       SUNDAYCLOSINGTIME = #{sundayclosingtime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+  <resultMap id="BAS_StandartimeAndSy_units" type="BAS_Standartime">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="TIMENAME" jdbcType="VARCHAR" property="timename" />
+    <result column="SUBORDINATEUNIT" jdbcType="DECIMAL" property="subordinateunit" />
+    <result column="WORKINGTIME" jdbcType="TIMESTAMP" property="workingtime" />
+    <result column="CLOSINGTIME" jdbcType="TIMESTAMP" property="closingtime" />
+    <result column="SATURDAYWORKINGTIME" jdbcType="TIMESTAMP" property="saturdayworkingtime" />
+    <result column="SATURDAYCLOSINGTIME" jdbcType="TIMESTAMP" property="saturdayclosingtime" />
+    <result column="SUNDAYWORKINGTIME" jdbcType="TIMESTAMP" property="sundayworkingtime" />
+    <result column="SUNDAYCLOSINGTIME" jdbcType="TIMESTAMP" property="sundayclosingtime" />
+
+    <association property="sy_units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+    </association>
+  </resultMap>
+
+  <select id="findBAS_StandartimeAndSy_units" resultMap="BAS_StandartimeAndSy_units">
+    select * from (
+select rownum rn, b.*,s.name from BAS_StandarTime b inner join SY_UNITS s on b.subordinateunit=s.id
+)where rn between #{page} and #{rows}
+  </select>
+
+  <resultMap id="BAS_StandartimeAndSy_units1" type="BAS_Standartime">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="TIMENAME" jdbcType="VARCHAR" property="timename" />
+    <result column="SUBORDINATEUNIT" jdbcType="DECIMAL" property="subordinateunit" />
+    <result column="WORKINGTIME" jdbcType="TIMESTAMP" property="workingtime" />
+    <result column="CLOSINGTIME" jdbcType="TIMESTAMP" property="closingtime" />
+    <result column="SATURDAYWORKINGTIME" jdbcType="TIMESTAMP" property="saturdayworkingtime" />
+    <result column="SATURDAYCLOSINGTIME" jdbcType="TIMESTAMP" property="saturdayclosingtime" />
+    <result column="SUNDAYWORKINGTIME" jdbcType="TIMESTAMP" property="sundayworkingtime" />
+    <result column="SUNDAYCLOSINGTIME" jdbcType="TIMESTAMP" property="sundayclosingtime" />
+
+    <association property="sy_units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+    </association>
+  </resultMap>
+
+  <select id="findBAS_StandartimeAndSy_unitsfenye" parameterType="Object" resultMap="BAS_StandartimeAndSy_units1">
+    select * from (
+    select rownum rn, b.id,
+    b.timename,
+    WorkingTime,
+    ClosingTime,
+    SaturdayWorkingTime,
+    SaturdayClosingTime,
+    SundayWorkingTime,
+    SundayClosingTime,
+    s.name from BAS_StandarTime b inner join SY_UNITS s on b.subordinateunit=s.id
+    <where >
+      <if test="timename != null and timename != ''">
+        TIMENAME = #{timename,jdbcType=VARCHAR}
+      </if>
+      <if test="name!= null and name != ''">
+        s.NAME = #{name,jdbcType=DECIMAL}
+      </if>
+    </where>
+    )where rn between #{page} and #{rows}
+  </select>
 </mapper>
