@@ -11,6 +11,11 @@ public interface ACC_BusinessadmissibilityMapper {
     //查询全部的业务受理加分页高级查询-----无关系
     List<ACC_Businessadmissibility> findAllBusinessM(ACC_Businessadmissibility b);
 
+    //人工调度的查询全部的受理信息和工单表
+    List<ACC_Businessadmissibility> findAllBusinessR(ACC_Businessadmissibility b);
+
+    //查询总行数---人工调度
+    Integer sumCountR(ACC_Businessadmissibility b);
     //查询总行数
     Integer sumCount(ACC_Businessadmissibility b);
 
