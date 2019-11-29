@@ -21,7 +21,7 @@
     OPERATORID, OPERATIONTIME, INVALIDATEJOBINT, INVALIDATENAME, INVALIDATETIME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from BOS.PAC_PACKAGING
     where ID = #{id,jdbcType=DECIMAL}
