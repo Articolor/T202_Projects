@@ -37,7 +37,7 @@ public class SY_EmpYController {
         }
         SY_Role role = sy_roleService.selectByPrimaryKey(emp1.getRoleid());
         List<SY_Menus> menus = role.getMenus();
-        map.put("emp",emp);
+        map.put("emp",emp1);
         map.put("menus",menus);
         return map;
     }
