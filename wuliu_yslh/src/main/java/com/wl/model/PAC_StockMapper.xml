@@ -12,6 +12,98 @@
     <result column="DRAWERTIME" jdbcType="TIMESTAMP" property="drawertime" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
   </resultMap>
+  <resultMap id="result" type="com.wl.model.PAC_Stock">
+    <id property="id" column="ID"></id>
+    <result property="warehouseno" column="WarehouseNo"></result>
+    <result property="reservoirtype" column="ReservoirType"></result>
+    <result property="transport" column="Transport"></result>
+    <result property="subordinateunit" column="SubordinateUnit"></result>
+    <result property="drawerno" column="DrawerNo"></result>
+    <result property="drawername" column="DrawerName"></result>
+    <result property="drawertime" column="DrawerTime"></result>
+    <result property="remark" column="Remark"></result>
+
+    <association property="pac_stockitem" javaType="PAC_StockItem">
+      <result property="warehouseno" column="WarehouseNo"></result>
+      <result property="status" column="Status"></result>
+    </association>
+  </resultMap>
+  <select id="selectAll" resultMap="result" parameterType="PAC_Stock">
+    select * from (
+select rownum rn,sk.*,sm.Status as status from PAC_StockItem sm,PAC_Stock sk
+<where>
+    and sm.WarehouseNo=sk.warehouseno
+    <if test="warehouseno != null and warehouseno!=''">
+      and
+      sk.warehouseno like concat(concat('%',#{warehouseno}),'%')
+    </if>
+    <if test="reservoirtype != null and reservoirtype!=''">
+      and sk.reservoirtype=#{reservoirtype}
+    </if>
+    <if test="transport != null and transport!=''">
+      and sk.transport like concat(concat('%',#{transport}),'%')
+    </if>
+    <if test="subordinateunit != null and subordinateunit!=''">
+      and
+      sk.subordinateunit like concat(concat('%',#{subordinateunit}),'%')
+    </if>
+  </where>
+)
+where rn between #{page} and #{rows}
+
+
+  </select>
+  <select id="selectbyid" resultMap="result" parameterType="Object">
+    select sk.*,sm.Status as status from PAC_StockItem sm,PAC_Stock sk where sm.WarehouseNo=sk.warehouseno
+    and sk.id=#{id}
+
+  </select>
+  <select id="mhselect" resultMap="result" parameterType="PAC_Stock">
+    select * from (
+    select rownum rn,sk.*,sm.Status as status from PAC_StockItem sm,PAC_Stock sk
+        <where>
+          and sm.WarehouseNo=sk.warehouseno
+          <if test="warehouseno != null">
+            and
+            sk.warehouseno like concat(concat('%',#{warehouseno}),'%')
+          </if>
+          <if test="reservoirtype != null">
+            and sk.reservoirtype=#{reservoirtype}
+          </if>
+          <if test="transport != null">
+            and sk.transport like concat(concat('%',#{transport}),'%')
+          </if>
+          <if test="subordinateunit != null">
+            and
+            sk.subordinateunit like concat(concat('%',#{subordinateunit}),'%')
+          </if>
+        </where>
+    )
+    where rn between #{page} and #{rows}
+
+  </select>
+  <select id="querycount" parameterType="Object" resultType="int">
+    select count(*) from (
+    select rownum rn,sk.*,sm.Status as status from PAC_StockItem sm,PAC_Stock sk
+    <where>
+      and sm.WarehouseNo=sk.warehouseno
+      <if test="warehouseno != null">
+        and
+        sk.warehouseno like concat(concat('%',#{warehouseno}),'%')
+      </if>
+      <if test="reservoirtype != null">
+        and sk.reservoirtype=#{reservoirtype}
+      </if>
+      <if test="transport != null">
+        and sk.transport like concat(concat('%',#{transport}),'%')
+      </if>
+      <if test="subordinateunit != null">
+        and
+        sk.subordinateunit like concat(concat('%',#{subordinateunit}),'%')
+      </if>
+    </where>
+    )
+  </select>
   <sql id="Base_Column_List">
     ID, WAREHOUSENO, RESERVOIRTYPE, TRANSPORT, SUBORDINATEUNIT, DRAWERNO, DRAWERNAME, 
     DRAWERTIME, REMARK
@@ -31,9 +123,9 @@
       TRANSPORT, SUBORDINATEUNIT, DRAWERNO, 
       DRAWERNAME, DRAWERTIME, REMARK
       )
-    values (#{id,jdbcType=DECIMAL}, #{warehouseno,jdbcType=VARCHAR}, #{reservoirtype,jdbcType=DECIMAL}, 
+    values (pac_sk_seq.nextval, #{warehouseno,jdbcType=VARCHAR}, #{reservoirtype,jdbcType=DECIMAL},
       #{transport,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=VARCHAR}, #{drawerno,jdbcType=DECIMAL}, 
-      #{drawername,jdbcType=VARCHAR}, #{drawertime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      #{drawername,jdbcType=VARCHAR}, sysdate, #{remark,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.PAC_Stock">
@@ -97,7 +189,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.PAC_Stock">
+  <update id="updatepacsk" parameterType="com.wl.model.PAC_Stock">
     update BOS.PAC_STOCK
     <set>
       <if test="warehouseno != null">

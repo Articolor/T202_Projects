@@ -1,9 +1,13 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class PAC_Stock {
+
     private BigDecimal id;
 
     private String warehouseno;
@@ -17,10 +21,38 @@ public class PAC_Stock {
     private BigDecimal drawerno;
 
     private String drawername;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date drawertime;
 
     private String remark;
+    private PAC_Stockitem pac_stockitem;
+    private Integer page=1;
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    } private Integer rows=5;
+
+
+
+    public PAC_Stockitem getPac_stockitem() {
+        return pac_stockitem;
+    }
+
+    public void setPac_stockitem(PAC_Stockitem pac_stockitem) {
+        this.pac_stockitem = pac_stockitem;
+    }
 
     public BigDecimal getId() {
         return id;
@@ -92,5 +124,21 @@ public class PAC_Stock {
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "PAC_Stock{" +
+                "id=" + id +
+                ", warehouseno='" + warehouseno + '\'' +
+                ", reservoirtype=" + reservoirtype +
+                ", transport='" + transport + '\'' +
+                ", subordinateunit='" + subordinateunit + '\'' +
+                ", drawerno=" + drawerno +
+                ", drawername='" + drawername + '\'' +
+                ", drawertime=" + drawertime +
+                ", remark='" + remark + '\'' +
+                ", pac_stockitem=" + pac_stockitem +
+                '}';
     }
 }
