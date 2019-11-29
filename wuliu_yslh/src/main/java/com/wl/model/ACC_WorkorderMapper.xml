@@ -280,6 +280,13 @@
       </if>
     </trim>
   </insert>
+  <!--//根据工单表的业务通知单号修改分拣编码和所有单位（取件单位）-->
+  <update id="updateByOrderAndUnits" parameterType="ACC_Workorder" >
+    update acc_workorder  set SortingCode=#{sortingcode},PickupUnit=#{pickupunit}
+    where BusinessNoticeNo=#{businessnoticeno}
+  </update>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.ACC_Workorder">
     update BOS.ACC_WORKORDER
     <set>

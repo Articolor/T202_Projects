@@ -22,6 +22,15 @@
     from BOS.DIS_DISPATCHHISTORY
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <!--根据调度序号查询-->
+  <select id="findByDisp" resultType="DIS_Dispatchhistory" parameterType="java.math.BigDecimal">
+    select * from DIS_DispatchHistory where
+    DispatchSequence=#{no}
+  </select>
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.DIS_DISPATCHHISTORY
     where ID = #{id,jdbcType=DECIMAL}
@@ -31,8 +40,8 @@
       OPERATORID, OPERATIONUNITID, OPERATIONTIME, 
       REMARK, STATUS, REASON
       )
-    values (#{id,jdbcType=DECIMAL}, #{dispatchsequence,jdbcType=DECIMAL}, #{transferredunit,jdbcType=DECIMAL}, 
-      #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL}, #{operationtime,jdbcType=TIMESTAMP}, 
+    values (dis_history_id.nextval, #{dispatchsequence,jdbcType=DECIMAL}, #{transferredunit,jdbcType=DECIMAL},
+      #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL},sysdate,
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{reason,jdbcType=VARCHAR}
       )
   </insert>
