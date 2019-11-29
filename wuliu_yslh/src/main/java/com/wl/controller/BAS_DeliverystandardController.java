@@ -102,7 +102,11 @@ public class BAS_DeliverystandardController {
         return i;
     }
     //修改基础数据
-
+    @RequestMapping("updateByPrimaryKey1")
+    public int updateByPrimaryKey1(BAS_Basicarchives basicrchives){
+        int i = basicarchivesService.updateByPrimaryKey(basicrchives);
+        return i;
+    }
 
     //查询班车
     @RequestMapping("findBUSANDEMPANDUNITS")
