@@ -1,9 +1,17 @@
 package com.wl.mapper;
 
 import com.wl.model.BAS_Zoneinfo;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+@Service
 public interface BAS_ZoneinfoMapper {
+    //管理定区
+    List<BAS_Zoneinfo> findBAS_ZoneinfoAndSY_EmpAndSY_Units(Integer page,Integer rows);
+    //管理定区查询
+    List<BAS_Zoneinfo> findBAS_ZoneinfoAndSY_EmpAndSY_Unitsfenye(String name,String zonecode,Integer page,Integer rows);
+
     int deleteByPrimaryKey(BigDecimal id);
 
     int insert(BAS_Zoneinfo record);

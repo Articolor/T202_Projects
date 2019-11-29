@@ -103,4 +103,10 @@
       ZONEINFOID = #{zoneinfoid,jdbcType=DECIMAL}
     where CUSTOMCODE = #{customcode,jdbcType=DECIMAL}
   </update>
+  
+
+
+  <select id="findBAS_ZonecustominfoANDBAS_ZONEINFO" resultType="BAS_Zonecustominfo">
+     select * from BAS_ZoneCustomInfo where zoneinfoid=#{id}
+  </select>
 </mapper>

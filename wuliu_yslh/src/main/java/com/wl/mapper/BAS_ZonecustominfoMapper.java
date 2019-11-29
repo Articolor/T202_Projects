@@ -1,9 +1,17 @@
 package com.wl.mapper;
 
 import com.wl.model.BAS_Zonecustominfo;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+@Service
 public interface BAS_ZonecustominfoMapper {
+    //查询单个客户信息
+   List<BAS_Zonecustominfo> findBAS_ZonecustominfoANDBAS_ZONEINFO(Integer id);
+
+
     int deleteByPrimaryKey(BigDecimal customcode);
 
     int insert(BAS_Zonecustominfo record);

@@ -19,6 +19,162 @@
     <result column="INPUTID" jdbcType="DECIMAL" property="inputid" />
     <result column="INPUTTIME" jdbcType="TIMESTAMP" property="inputtime" />
   </resultMap>
+
+  <!--//查询全部的签收信息有员工和单位-->
+  <select id="findAllByUnitsAndEmp" resultMap="SignAndUnitsAndEmp" parameterType="DIS_Workordersign">
+    select * from
+    (
+     select rownum rn,wr.*,un.name name,emp.empname empname from dis_workordersign wr
+    inner join sy_units un
+    on wr.inputid=un.id
+    inner join sy_emp emp
+    on wr.inputpersonid=emp.id
+    <where>
+      <if test="worksheetno!=null and worksheetno!=''">
+        and wr.worksheetno like concat(concat('%',#{worksheetno}),'%')
+      </if>
+      <if test="couriername!=null and couriername!=''">
+        and empname like concat(concat('%',#{couriername}),'%')
+      </if>
+      <if test="recipient!=null and recipient !=''">
+        and name like concat(concat('%',#{recipient}),'%')
+      </if>
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询出单个签收单信息-->
+  <select id="findByIdUnitsAndEmp" resultMap="SignAndUnitsAndEmp" parameterType="DIS_Workordersign">
+      select * from
+    (
+     select rownum rn,wr.*,un.name name,emp.empname empname from dis_workordersign wr
+    inner join sy_units un
+    on wr.inputid=un.id
+    inner join sy_emp emp
+    on wr.inputpersonid=emp.id
+    where wr.id=#{id}
+    )
+
+  </select>
+
+  <!--//签收录入中的查询-查询出全部的签收信息和量个单位和一个员工-->
+  <select id="findAllByUnits2AndEmp" resultMap="SignAndUnitsAndEmp" parameterType="DIS_Workordersign">
+    select * from
+    (
+    select rownum rn,wr.*,un.name name,un2.name as uname,emp.empname empname from dis_workordersign wr
+    inner join sy_units un
+    on wr.inputid=un.id
+    inner join sy_emp emp
+    on wr.inputpersonid=emp.id
+    inner join sy_units un2
+    on wr.signunit=un2.id
+    <where>
+      <if test="id!=null and id!=''">
+        and wr.id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="worksheetno!=null and worksheetno!=''" >
+        and wr.worksheetno like concat(concat('%',#{worksheetno}),'%')
+      </if>
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询总行数2-->
+  <select id="findSumCount2" resultType="Integer" parameterType="DIS_Workordersign">
+    select count(*) from
+    (
+    select rownum rn,wr.*,un.name name,un2.name as uname,emp.empname empname from dis_workordersign wr
+    inner join sy_units un
+    on wr.inputid=un.id
+    inner join sy_emp emp
+    on wr.inputpersonid=emp.id
+    inner join sy_units un2
+    on wr.signunit=un2.id
+    <where>
+      <if test="id!=null and id!=''">
+        and wr.id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="worksheetno!=null and worksheetno!=''" >
+        and wr.worksheetno like concat(concat('%',#{worksheetno}),'%')
+      </if>
+    </where>
+    )
+  </select>
+
+  <!--根据编号查询出单个对象2-->
+  <select id="findByID2UnitsAndEmp" resultMap="SignAndUnitsAndEmp" parameterType="DIS_Workordersign">
+    select * from
+    (
+    select rownum rn,wr.*,un.name name,un2.name as uname,emp.empname empname from dis_workordersign wr
+    inner join sy_units un
+    on wr.inputid=un.id
+    inner join sy_emp emp
+    on wr.inputpersonid=emp.id
+    inner join sy_units un2
+    on wr.signunit=un2.id
+      where  wr.id=#{id}
+    )
+  </select>
+  <!--自定义返回类型  签收表和员工和单位-->
+  <resultMap id="SignAndUnitsAndEmp" type="DIS_Workordersign">
+    <result column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="WORKORDERID" jdbcType="DECIMAL" property="workorderid" />
+    <result column="WORKSHEETNO" jdbcType="VARCHAR" property="worksheetno" />
+    <result column="WORKORDERTYPE" jdbcType="DECIMAL" property="workordertype" />
+    <result column="SIGNTYPE" jdbcType="DECIMAL" property="signtype" />
+    <result column="COURIERINT" jdbcType="DECIMAL" property="courierint" />
+    <result column="COURIERNAME" jdbcType="VARCHAR" property="couriername" />
+    <result column="RECIPIENT" jdbcType="VARCHAR" property="recipient" />
+    <result column="SIGNUNIT" jdbcType="DECIMAL" property="signunit" />
+    <result column="SIGNTIME" jdbcType="TIMESTAMP" property="signtime" />
+    <result column="INVALIDATEMARK" jdbcType="DECIMAL" property="invalidatemark" />
+    <result column="ABNORMALMARK" jdbcType="VARCHAR" property="abnormalmark" />
+    <result column="INPUTPERSONCODE" jdbcType="DECIMAL" property="inputpersoncode" />
+    <result column="INPUTPERSONID" jdbcType="DECIMAL" property="inputpersonid" />
+    <result column="INPUTID" jdbcType="DECIMAL" property="inputid" />
+    <result column="INPUTTIME" jdbcType="TIMESTAMP" property="inputtime" />
+    <result column="UNAME"  property="singunitname"/>
+    <!--员工对象-->
+    <association property="units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+    </association>
+    <!--单位对象-->
+    <association property="emp" javaType="SY_Emp">
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </association>
+  </resultMap>
+
+  <!--查询总行数-->
+  <select id="findSumCount" resultType="Integer" parameterType="DIS_Workordersign">
+    select count(*) from
+    (
+    select rownum rn,wr.*,un.name name,emp.empname empname from dis_workordersign wr
+    inner join sy_units un
+    on wr.inputid=un.id
+    inner join sy_emp emp
+    on wr.inputpersonid=emp.id
+    <where>
+      <if test="worksheetno!=null and worksheetno!=''">
+        and wr.worksheetno like concat(concat('%',#{worksheetno}),'%')
+      </if>
+      <if test="couriername!=null and couriername!=''">
+        and empname like concat(concat('%',#{couriername}),'%')
+      </if>
+      <if test="recipient!=null and recipient !=''">
+        and name like concat(concat('%',#{recipient}),'%')
+      </if>
+    </where>
+    )
+  </select>
+
+
+
+
+
+
+
   <insert id="insert" parameterType="com.wl.model.DIS_Workordersign">
     insert into BOS.DIS_WORKORDERSIGN (ID, WORKORDERID, WORKSHEETNO, 
       WORKORDERTYPE, SIGNTYPE, COURIERINT, 
@@ -26,7 +182,7 @@
       SIGNTIME, INVALIDATEMARK, ABNORMALMARK, 
       INPUTPERSONCODE, INPUTPERSONID, INPUTID, 
       INPUTTIME)
-    values (#{id,jdbcType=DECIMAL}, #{workorderid,jdbcType=DECIMAL}, #{worksheetno,jdbcType=VARCHAR}, 
+    values (wsign_id.nextval, #{workorderid,jdbcType=DECIMAL}, #{worksheetno,jdbcType=VARCHAR},
       #{workordertype,jdbcType=DECIMAL}, #{signtype,jdbcType=DECIMAL}, #{courierint,jdbcType=DECIMAL}, 
       #{couriername,jdbcType=VARCHAR}, #{recipient,jdbcType=VARCHAR}, #{signunit,jdbcType=DECIMAL}, 
       #{signtime,jdbcType=TIMESTAMP}, #{invalidatemark,jdbcType=DECIMAL}, #{abnormalmark,jdbcType=VARCHAR}, 

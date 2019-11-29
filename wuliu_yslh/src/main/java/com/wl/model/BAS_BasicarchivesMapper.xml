@@ -24,12 +24,12 @@
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.wl.model.BAS_Basicarchives">
-    insert into BOS.BAS_BASICARCHIVES (ID, NAME, GRADE, 
+    insert into BOS.BAS_BASICARCHIVES (id, NAME, GRADE,
       REMARKS, OPERATORID, OPERATIONUNITID, 
       OPERATIONTIME)
-    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{grade,jdbcType=DECIMAL}, 
+    values (asicarchives_id.nextval, #{name,jdbcType=VARCHAR}, #{grade,jdbcType=DECIMAL},
       #{remarks,jdbcType=VARCHAR}, #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL}, 
-      #{operationtime,jdbcType=TIMESTAMP})
+     sysdate)
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.BAS_Basicarchives">
     insert into BOS.BAS_BASICARCHIVES
@@ -111,7 +111,101 @@
       REMARKS = #{remarks,jdbcType=VARCHAR},
       OPERATORID = #{operatorid,jdbcType=DECIMAL},
       OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
-      OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP}
+      OPERATIONTIME = sysdate
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+  
+  <resultMap id="BAS_BasicarchivesAndSY_EmpAndSY_Units" type="BAS_Basicarchives">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="GRADE" jdbcType="DECIMAL" property="grade" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+
+    <association property="sy_emp" javaType="SY_Emp">
+      <id column="EID" jdbcType="DECIMAL" property="id" />
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </association>
+
+    <association property="sy_units" javaType="SY_UNITS">
+      <id column="IDU" jdbcType="DECIMAL" property="id" />
+      <result column="UNAME" jdbcType="VARCHAR" property="name" />
+    </association>
+
+
+    <association property="bas_basicarchivesentry" javaType="BAS_Basicarchivesentry">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="PARENTID" jdbcType="DECIMAL" property="parentid" />
+
+    </association>
+  </resultMap>
+
+  <select id="findBAS_BasicarchivesAndSY_EmpAndSY_Units" resultMap="BAS_BasicarchivesAndSY_EmpAndSY_Units" parameterType="Object">
+   select * from
+(select rownum rn,b.*,y.parentid,e.empname,u.name as uname,u.id as idu,y.id as yid from bas_basicarchives b
+inner join sy_emp e on b.operatorid=e.id
+inner join sy_units u on b.operationunitid=u.id
+inner join bas_basicarchivesentry y on b.id=y.parentid)
+<where>
+  rn between
+  <if test="page !=null and page!=''" >
+
+   #{page}
+  </if>
+
+  <if test="rows !=null and rows!=''">
+    AND  #{rows}
+  </if>
+</where>
+
+
+
+
+  </select>
+
+  <resultMap id="BAS_BasicarchivesAndSY_EmpAndSY_Units1" type="BAS_Basicarchives">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="GRADE" jdbcType="DECIMAL" property="grade" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+
+    <association property="sy_emp" javaType="SY_Emp">
+      <id column="EID" jdbcType="DECIMAL" property="id" />
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </association>
+
+    <association property="sy_units" javaType="SY_UNITS">
+      <id column="IDU" jdbcType="DECIMAL" property="id" />
+      <result column="UNAME" jdbcType="VARCHAR" property="name" />
+    </association>
+
+
+    <association property="bas_basicarchivesentry" javaType="BAS_Basicarchivesentry">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="PARENTID" jdbcType="DECIMAL" property="parentid" />
+
+    </association>
+  </resultMap>
+  <select id="findfindBASBasicarchivesAndSYEmpAndSYUnitsKey" resultMap="BAS_BasicarchivesAndSY_EmpAndSY_Units1">
+
+    select * from
+    (select rownum rn,b.*,y.parentid,e.empname,u.name as uname,u.id as idu,y.id as yid from bas_basicarchives b
+    inner join sy_emp e on b.operatorid=e.id
+    inner join sy_units u on b.operationunitid=u.id
+    inner join bas_basicarchivesentry y on b.id=y.parentid
+    <where>
+
+      <if test="ename != null">
+        AND  b.NAME = #{ename,jdbcType=DECIMAL}
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+
+
+
+  </select>
+
 </mapper>

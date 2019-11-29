@@ -18,6 +18,33 @@
     from BOS.DIS_PROPAGANDATASK
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <!--查询全部===-->
+  <select id="findAllProTask" resultType="DIS_Propagandatask" parameterType="DIS_Propagandatask">
+    select * from
+    (
+    select rownum rn,dp.* from DIS_PropagandaTask dp
+    <where>
+      <if test="outline != null and outline!=''">
+          outline like concat(concat('%',#{outline}),'%')
+        </if>
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询总行数-->
+  <select id="findsumCount" parameterType="DIS_Propagandatask" resultType="Integer">
+    select count(*) from
+    (
+    select rownum rn,dp.* from DIS_PropagandaTask dp
+    <where>
+      <if test="outline != null and outline!=''">
+        outline like concat(concat('%',#{outline}),'%')
+      </if>
+    </where>
+    )
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.DIS_PROPAGANDATASK
     where ID = #{id,jdbcType=DECIMAL}
@@ -26,8 +53,8 @@
     insert into BOS.DIS_PROPAGANDATASK (ID, OUTLINE, RELEASETIME, 
       FAILURETIME, STATUS, CONTENT
       )
-    values (#{id,jdbcType=DECIMAL}, #{outline,jdbcType=VARCHAR}, #{releasetime,jdbcType=TIMESTAMP}, 
-      #{failuretime,jdbcType=TIMESTAMP}, #{status,jdbcType=DECIMAL}, #{content,jdbcType=VARCHAR}
+    values (dis_proatask_id.nextval, #{outline,jdbcType=VARCHAR}, sysdate,
+      sysdate, #{status,jdbcType=DECIMAL}, #{content,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.DIS_Propagandatask">

@@ -15,6 +15,26 @@ public class BAS_Zoneinfo {
 
     private BigDecimal subordinateunit;
 
+    private SY_Units sy_units;
+
+    private SY_Emp emp;
+
+    public SY_Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(SY_Emp emp) {
+        this.emp = emp;
+    }
+
+    public SY_Units getSy_units() {
+        return sy_units;
+    }
+
+    public void setSy_units(SY_Units sy_units) {
+        this.sy_units = sy_units;
+    }
+
     public BigDecimal getId() {
         return id;
     }
@@ -61,5 +81,19 @@ public class BAS_Zoneinfo {
 
     public void setSubordinateunit(BigDecimal subordinateunit) {
         this.subordinateunit = subordinateunit;
+    }
+
+
+    public BAS_Zoneinfo() {
+    }
+
+    public BAS_Zoneinfo(BigDecimal id, String zonecode, String zonename, BigDecimal zonepeople, String telphone, BigDecimal subordinateunit, SY_Units sy_units) {
+        this.id = id;
+        this.zonecode = zonecode;
+        this.zonename = zonename;
+        this.zonepeople = zonepeople;
+        this.telphone = telphone;
+        this.subordinateunit = subordinateunit;
+        this.sy_units = sy_units;
     }
 }

@@ -17,11 +17,11 @@
     <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
   </resultMap>
   <sql id="Base_Column_List">
-    ID, LINETYPE, LINEID, LICENSEPLATEINT, CARRIER, MODELS, DRIVER, TELEPHONE, TON, REMARKS, 
+    ID, LINETYPE, LINEID, LICENSEPLATEINT, CARRIER, MODELS, DRIVER, TELEPHONE, TON, REMARKS,
     OPERATORID, OPERATIONUNITID, OPERATIONTIME
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from BOS.BAS_SHUTTLEBUS
     where ID = #{id,jdbcType=DECIMAL}
@@ -31,15 +31,15 @@
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.wl.model.BAS_Shuttlebus">
-    insert into BOS.BAS_SHUTTLEBUS (ID, LINETYPE, LINEID, 
-      LICENSEPLATEINT, CARRIER, MODELS, 
-      DRIVER, TELEPHONE, TON, 
-      REMARKS, OPERATORID, OPERATIONUNITID, 
+    insert into BOS.BAS_SHUTTLEBUS (ID, LINETYPE, LINEID,
+      LICENSEPLATEINT, CARRIER, MODELS,
+      DRIVER, TELEPHONE, TON,
+      REMARKS, OPERATORID, OPERATIONUNITID,
       OPERATIONTIME)
-    values (#{id,jdbcType=DECIMAL}, #{linetype,jdbcType=DECIMAL}, #{lineid,jdbcType=DECIMAL}, 
-      #{licenseplateint,jdbcType=VARCHAR}, #{carrier,jdbcType=VARCHAR}, #{models,jdbcType=VARCHAR}, 
-      #{driver,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{ton,jdbcType=DECIMAL}, 
-      #{remarks,jdbcType=VARCHAR}, #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=DECIMAL}, #{linetype,jdbcType=DECIMAL}, #{lineid,jdbcType=DECIMAL},
+      #{licenseplateint,jdbcType=VARCHAR}, #{carrier,jdbcType=VARCHAR}, #{models,jdbcType=VARCHAR},
+      #{driver,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{ton,jdbcType=DECIMAL},
+      #{remarks,jdbcType=VARCHAR}, #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL},
       #{operationtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.BAS_Shuttlebus">
@@ -185,4 +185,92 @@
       OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+  <resultMap id="BUSANDEMPANDUNITS" type="BAS_Shuttlebus">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="LINETYPE" jdbcType="DECIMAL" property="linetype" />
+    <result column="LICENSEPLATEINT" jdbcType="VARCHAR" property="licenseplateint" />
+    <result column="CARRIER" jdbcType="VARCHAR" property="carrier" />
+    <result column="MODELS" jdbcType="VARCHAR" property="models" />
+    <result column="DRIVER" jdbcType="VARCHAR" property="driver" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="TON" jdbcType="DECIMAL" property="ton" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+
+    <association property="sy_emp" javaType="SY_Emp">
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </association>
+
+    <association property="sy_units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+    </association>
+
+    <association property="log_logistics" javaType="LOG_Logistics">
+      <result column="LINENAME" jdbcType="VARCHAR" property="linename" />
+    </association>
+  </resultMap>
+
+  <select id="findBUSANDEMPANDUNITS"  resultMap="BUSANDEMPANDUNITS">
+    select * from(select rownum rn, b.*,e.empname,u.name,l.linename from BAS_SHUTTLEBUS  b
+inner join SY_EMP  e on b.operatorid=e.id
+inner join SY_UNITS u on b.operationunitid=u.id
+inner join LOG_Logistics l on b.lineid=l.id) where rn between #{page} and #{rows}
+  </select>
+
+
+  <resultMap id="BUSANDEMPANDUNITS1" type="BAS_Shuttlebus">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="LINETYPE" jdbcType="DECIMAL" property="linetype" />
+    <result column="LICENSEPLATEINT" jdbcType="VARCHAR" property="licenseplateint" />
+    <result column="CARRIER" jdbcType="VARCHAR" property="carrier" />
+    <result column="MODELS" jdbcType="VARCHAR" property="models" />
+    <result column="DRIVER" jdbcType="VARCHAR" property="driver" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="TON" jdbcType="DECIMAL" property="ton" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+
+    <association property="sy_emp" javaType="SY_Emp">
+      <result column="EMPNAME" jdbcType="VARCHAR" property="empname" />
+    </association>
+
+    <association property="sy_units" javaType="SY_Units">
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+    </association>
+
+    <association property="log_logistics" javaType="LOG_Logistics">
+      <result column="LINENAME" jdbcType="VARCHAR" property="linename" />
+    </association>
+  </resultMap>
+
+  <select id="findBUSANDEMPANDUNITSfenye" parameterType="Object"  resultMap="BUSANDEMPANDUNITS1">
+    select * from(select rownum rn, b.*,e.empname,u.name,l.linename from BAS_SHUTTLEBUS  b
+    inner join SY_EMP  e on b.operatorid=e.id
+    inner join SY_UNITS u on b.operationunitid=u.id
+    inner join LOG_Logistics l on b.lineid=l.id
+
+    <where >
+
+      <if test="licenseplateint != null">
+        and LICENSEPLATEINT like concat(concat('%',#{licenseplateint,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="driver != null">
+        and b.DRIVER like concat(concat('%',#{driver,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="carrier != null">
+        and CARRIER like concat(concat('%',#{carrier,jdbcType=VARCHAR}),'%')
+      </if>
+    </where>
+
+    ) where rn between #{page} and #{rows}
+  </select>
+
+  <select id="GetBUSCOUNT"  resultType="java.lang.Integer">
+   select COUNT(*) from(select rownum rn, b.*,e.empname,u.name,l.linename from BAS_SHUTTLEBUS  b
+inner join SY_EMP  e on b.operatorid=e.id
+inner join SY_UNITS u on b.operationunitid=u.id
+inner join LOG_Logistics l on b.lineid=l.id)
+  </select>
+
 </mapper>

@@ -18,6 +18,74 @@
     from BOS.SY_MENUS
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <!--查询出所有的菜单和对应的角色-->
+  <select id="findAllMenuAndRole" resultMap="MenuAndRole" parameterType="SY_Menus">
+    select * from
+    (select rownum rn,m.* from sy_menus m
+    <where>
+      <if test="parentid != null and parentid!=''">
+        and PARENTID =  #{parentid,jdbcType=VARCHAR}
+      </if>
+      <if test="text != null and text!=''">
+        and TEXT like  concat(concat('%',#{text}),'%')
+      </if>
+    </where>
+    )
+    where rn between #{page} and #{rows}
+
+
+  </select>
+
+  <!--自定义返回类型菜单和用户-->
+  <resultMap id="MenuAndRole" type="SY_Menus">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PARENTID" jdbcType="VARCHAR" property="parentid" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
+    <result column="TEXT" jdbcType="VARCHAR" property="text" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="TIP" jdbcType="VARCHAR" property="tip" />
+    <!--查询老师的学生-->
+    <!--select ：引入一个查询，查询老师对应的学生-->
+    <collection property="roles" ofType="Roles" select="findRoleOrMenuByID" column="id">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="ROLENAME" jdbcType="VARCHAR" property="rolename" />
+      <result column="ROLEDESC" jdbcType="VARCHAR" property="roledesc" />
+      <result column="DISABLED" jdbcType="DECIMAL" property="disabled" />
+    </collection>
+  </resultMap>
+
+  <!--查询菜单对应的角色-->
+  <select id="findRoleOrMenuByID" resultType="SY_Role" parameterType="int">
+    select * from sy_role r inner join sy_rolesmenus rm on r.id=rm.roleid where menuid=#{id}
+  </select>
+
+  <!--查询总行数-->
+  <select id="sumCount" parameterType="SY_Menus" resultType="Integer">
+    select count(*) from
+    (select rownum rn,m.* from sy_menus m
+    <where>
+      <if test="parentid != null and parentid!=''">
+        and PARENTID =  #{parentid,jdbcType=VARCHAR}
+      </if>
+      <if test="text != null and text!=''">
+        and TEXT like  concat(concat('%',#{text}),'%')
+      </if>
+    </where>
+    )
+  </select>
+
+
+  <!--查询所有的一级菜单-->
+  <select id="findMenuParent" resultType="SY_Menus">
+    select * from sy_menus where parentid=-1
+  </select>
+
+  <!--根据一级菜单查询二级菜单-->
+  <select id="findMenuChild" resultType="SY_Menus" parameterType="BigDecimal">
+     select * from sy_menus where parentid=#{parentid}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SY_MENUS
     where ID = #{id,jdbcType=DECIMAL}
@@ -25,7 +93,7 @@
   <insert id="insert" parameterType="com.wl.model.SY_Menus">
     insert into BOS.SY_MENUS (ID, PARENTID, TYPE, 
       TEXT, URL, TIP)
-    values (#{id,jdbcType=DECIMAL}, #{parentid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+    values (menus_id.nextval, #{parentid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
       #{text,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{tip,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SY_Menus">

@@ -1,5 +1,8 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -8,6 +11,8 @@ public class ACC_Businessadmissibility {
 
     private String businessnoticeno;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date reservationtime;
 
     private String customname;
@@ -50,6 +55,18 @@ public class ACC_Businessadmissibility {
 
     private BigDecimal actualpacking;
 
+    //起始页数
+    private Integer page=1;
+
+    //到第几页
+    private Integer rows=5;
+
+    //一个员工对象
+    private SY_Units units;
+
+    //一个单位对象
+    private SY_Emp emp;
+
     public BigDecimal getId() {
         return id;
     }
@@ -70,6 +87,7 @@ public class ACC_Businessadmissibility {
         return reservationtime;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setReservationtime(Date reservationtime) {
         this.reservationtime = reservationtime;
     }
@@ -232,5 +250,70 @@ public class ACC_Businessadmissibility {
 
     public void setActualpacking(BigDecimal actualpacking) {
         this.actualpacking = actualpacking;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
+    public SY_Units getUnits() {
+        return units;
+    }
+
+    public void setUnits(SY_Units units) {
+        this.units = units;
+    }
+
+    public SY_Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(SY_Emp emp) {
+        this.emp = emp;
+    }
+
+    @Override
+    public String toString() {
+        return "ACC_Businessadmissibility{" +
+                "id=" + id +
+                ", businessnoticeno='" + businessnoticeno + '\'' +
+                ", reservationtime=" + reservationtime +
+                ", customname='" + customname + '\'' +
+                ", pickupaddress='" + pickupaddress + '\'' +
+                ", customcode='" + customcode + '\'' +
+                ", linkman='" + linkman + '\'' +
+                ", telphone='" + telphone + '\'' +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", importanthints='" + importanthints + '\'' +
+                ", arrivecity='" + arrivecity + '\'' +
+                ", pickerinfo=" + pickerinfo +
+                ", sendaddress='" + sendaddress + '\'' +
+                ", processingunit=" + processingunit +
+                ", notificationsource=" + notificationsource +
+                ", customnomodifyflag=" + customnomodifyflag +
+                ", singletype='" + singletype + '\'' +
+                ", packagesnum=" + packagesnum +
+                ", actualweight=" + actualweight +
+                ", billingweight=" + billingweight +
+                ", packingfee=" + packingfee +
+                ", actualpacking=" + actualpacking +
+                ", page=" + page +
+                ", rows=" + rows +
+                ", units=" + units +
+                ", emp=" + emp +
+                '}';
     }
 }

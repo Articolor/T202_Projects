@@ -1,12 +1,15 @@
 package com.wl.mapper;
 
 import com.wl.model.ACC_Worksheet;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+@Service
 public interface ACC_WorksheetMapper {
     int deleteByPrimaryKey(BigDecimal id);
 
-    int insert(ACC_Worksheet record);
+    //工作单快速入录
+    void insertWSheet(ACC_Worksheet record);
 
     int insertSelective(ACC_Worksheet record);
 
