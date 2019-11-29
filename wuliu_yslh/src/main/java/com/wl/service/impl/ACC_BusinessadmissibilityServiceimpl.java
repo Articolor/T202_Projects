@@ -19,6 +19,16 @@ public class ACC_BusinessadmissibilityServiceimpl implements ACC_Businessadmissi
     }
 
     @Override
+    public List<ACC_Businessadmissibility> findAllBusinessR(ACC_Businessadmissibility b) {
+        return businessadmissibilityMapper.findAllBusinessR(b);
+    }
+
+    @Override
+    public Integer sumCountR(ACC_Businessadmissibility b) {
+        return businessadmissibilityMapper.sumCountR(b);
+    }
+
+    @Override
     public Integer sumCount(ACC_Businessadmissibility b) {
         return businessadmissibilityMapper.sumCount(b);
     }

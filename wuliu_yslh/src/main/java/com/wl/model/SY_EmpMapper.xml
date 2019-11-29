@@ -50,7 +50,7 @@
   </select>
   <!--根据员工工号查询出查台密码-->
   <select id="findByQueryPwd" resultType="SY_Emp" parameterType="String">
-    select * from SY_Emp where empno=#{querypwd}
+    select * from SY_Emp where empno=#{empno} and querypwd=#{querypwd}
   </select>
   <!--用户和角色的自定义返回类型-->
   <resultMap id="EmpAndRole" type="SY_Emp">

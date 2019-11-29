@@ -67,6 +67,28 @@ public class ACC_Businessadmissibility {
     //一个单位对象
     private SY_Emp emp;
 
+    //存放分拣编码
+    private String fjcode;
+
+    //存放处理单位
+    private BigDecimal punits;
+
+    public String getFjcode() {
+        return fjcode;
+    }
+
+    public void setFjcode(String fjcode) {
+        this.fjcode = fjcode;
+    }
+
+    public BigDecimal getPunits() {
+        return punits;
+    }
+
+    public void setPunits(BigDecimal punits) {
+        this.punits = punits;
+    }
+
     public BigDecimal getId() {
         return id;
     }
