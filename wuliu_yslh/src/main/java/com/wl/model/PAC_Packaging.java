@@ -1,5 +1,8 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -21,13 +24,15 @@ public class PAC_Packaging {
     private BigDecimal status;
 
     private BigDecimal operatorid;
-
+    @DateTimeFormat(pattern="YYYY-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date operationtime;
 
     private BigDecimal invalidatejobint;
 
     private BigDecimal invalidatename;
-
+    @DateTimeFormat(pattern="YYYY-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date invalidatetime;
 
     public BigDecimal getId() {

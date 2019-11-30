@@ -222,4 +222,11 @@
       DISABLED = #{disabled,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+  <select id="findemono" resultType="SY_Emp">
+    select * from   SY_EMP
+</select>
+  <select id="findbyid" resultType="SY_Emp">
+    select  * from  SY_EMP where empno=#{empno}
+  </select>
 </mapper>

@@ -31,7 +31,51 @@ public class DIS_Workordersign {
 
     private BigDecimal invalidatemark;
 
+    public DIS_Workordersign() {
+    }
+
     private String abnormalmark;
+
+    @Override
+    public String toString() {
+        return "DIS_Workordersign{" +
+                "id=" + id +
+                ", workorderid=" + workorderid +
+                ", worksheetno='" + worksheetno + '\'' +
+                ", workordertype=" + workordertype +
+                ", signtype=" + signtype +
+                ", courierint=" + courierint +
+                ", couriername='" + couriername + '\'' +
+                ", recipient='" + recipient + '\'' +
+                ", signunit=" + signunit +
+                ", signtime=" + signtime +
+                ", invalidatemark=" + invalidatemark +
+                ", abnormalmark='" + abnormalmark + '\'' +
+                ", inputpersoncode=" + inputpersoncode +
+                ", inputpersonid=" + inputpersonid +
+                ", inputid=" + inputid +
+                ", inputtime=" + inputtime +
+                '}';
+    }
+
+    public DIS_Workordersign(BigDecimal id, BigDecimal workorderid, String worksheetno, BigDecimal workordertype, BigDecimal signtype, BigDecimal courierint, String couriername, String recipient, BigDecimal signunit, Date signtime, BigDecimal invalidatemark, String abnormalmark, BigDecimal inputpersoncode, BigDecimal inputpersonid, BigDecimal inputid, Date inputtime) {
+        this.id = id;
+        this.workorderid = workorderid;
+        this.worksheetno = worksheetno;
+        this.workordertype = workordertype;
+        this.signtype = signtype;
+        this.courierint = courierint;
+        this.couriername = couriername;
+        this.recipient = recipient;
+        this.signunit = signunit;
+        this.signtime = signtime;
+        this.invalidatemark = invalidatemark;
+        this.abnormalmark = abnormalmark;
+        this.inputpersoncode = inputpersoncode;
+        this.inputpersonid = inputpersonid;
+        this.inputid = inputid;
+        this.inputtime = inputtime;
+    }
 
     private BigDecimal inputpersoncode;
 
@@ -221,29 +265,4 @@ public class DIS_Workordersign {
         this.inputtime = inputtime;
     }
 
-    @Override
-    public String toString() {
-        return "DIS_Workordersign{" +
-                "id=" + id +
-                ", workorderid=" + workorderid +
-                ", worksheetno='" + worksheetno + '\'' +
-                ", workordertype=" + workordertype +
-                ", signtype=" + signtype +
-                ", courierint=" + courierint +
-                ", couriername='" + couriername + '\'' +
-                ", recipient='" + recipient + '\'' +
-                ", signunit=" + signunit +
-                ", signtime=" + signtime +
-                ", invalidatemark=" + invalidatemark +
-                ", abnormalmark='" + abnormalmark + '\'' +
-                ", inputpersoncode=" + inputpersoncode +
-                ", inputpersonid=" + inputpersonid +
-                ", inputid=" + inputid +
-                ", inputtime=" + inputtime +
-                ", page=" + page +
-                ", rows=" + rows +
-                ", emp=" + emp +
-                ", units=" + units +
-                '}';
-    }
 }

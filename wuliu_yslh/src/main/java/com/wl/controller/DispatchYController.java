@@ -150,6 +150,7 @@ public class DispatchYController {
         map.put("sigs",list);
         map.put("sums",workordersignService.findSumCount(o));
         map.put("sing",o);
+        map.put("emps",empService.findXJY());//查询出所有的派送人员
         return map;
     }
 
