@@ -54,7 +54,7 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
     }
 
     @Override
-    public SY_Emp findByQueryPwd(String querypwd) {
-        return sy_empMapper.findByQueryPwd(querypwd);
+    public SY_Emp findByQueryPwd(SY_Emp e) {
+        return sy_empMapper.findByQueryPwd(e);
     }
 }

@@ -25,6 +25,8 @@
     <result column="BILLINGWEIGHT" jdbcType="DECIMAL" property="billingweight" />
     <result column="PACKINGFEE" jdbcType="DECIMAL" property="packingfee" />
     <result column="ACTUALPACKING" jdbcType="DECIMAL" property="actualpacking" />
+    <result column="FJCODE" jdbcType="VARCHAR" property="fjcode" />
+    <result column="PUNITS" jdbcType="DECIMAL" property="punits" />
   </resultMap>
   <sql id="Base_Column_List">
     ID, BUSINESSNOTICENO, RESERVATIONTIME, CUSTOMNAME, PICKUPADDRESS, CUSTOMCODE, LINKMAN, 
@@ -53,6 +55,46 @@
     </where>
     )
     where rn between #{page} and #{rows}
+  </select>
+
+  <!--人工调度的查询  查询受理表的工单表-->
+  <select id="findAllBusinessR" resultMap="BaseResultMap" parameterType="ACC_Businessadmissibility">
+    select * from
+    (
+    select rownum rn,b.*,wo.PickupUnit as punits,wo.SortingCode as fjcode from ACC_BUSINESSADMISSIBILITY b
+    inner join acc_workorder wo
+    on b.businessnoticeno=wo.businessnoticeno
+    <where>
+      <if test="processingunit!=null and processingunit!=''">
+        and wo.pickupunit=#{processingunit}
+      </if>
+      <if test="businessnoticeno!=null and businessnoticeno!=''">
+       and  b.businessnoticeno like concat(concat('%',#{businessnoticeno}),'%')
+      </if>
+      <if test="notificationsource!=null and notificationsource!=''">
+        and b.notificationsource=#{notificationsource}
+      </if>
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询总行数  人工调度-->
+  <select id="sumCountR" parameterType="ACC_Businessadmissibility" resultType="Integer">
+    select count(*) from
+    (select rownum rn,bb.* from acc_businessadmissibility bb
+    <where>
+      <if test="businessnoticeno != null and businessnoticeno!=''">
+        and BUSINESSNOTICENO like concat(concat('%',#{businessnoticeno}),'%')
+      </if>
+      <if test="processingunit != 0 and processingunit!=null">
+        and processingunit=#{processingunit}
+      </if>
+      <if test="notificationsource != 0 and notificationsource!=null">
+        and notificationsource =#{notificationsource}
+      </if>
+    </where>
+    )
   </select>
 
   <!--查询总行数的方法-->

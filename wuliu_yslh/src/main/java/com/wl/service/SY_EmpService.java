@@ -41,5 +41,5 @@ public interface SY_EmpService {
     List<SY_Emp> findXJY();
 
     //根据员工工号查询出查台密码-
-    SY_Emp findByQueryPwd(String querypwd);
+    SY_Emp findByQueryPwd(SY_Emp emp);
 }

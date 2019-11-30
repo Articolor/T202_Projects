@@ -16,13 +16,84 @@
     ID, WORKSHEETNO, CTYPE, CORPORATION, WAYBILLID, REMARKS, INPUTPERSON, INPUTDATE, 
     INPUTCOMPANY
   </sql>
+  <resultMap id="biglog" type="BIGLOG_LogisticsControlTable">
+    <id property="id" column="ID"></id>
+    <result property="worksheetno" column="WorkSheetNo"></result>
+    <result property="ctype" column="CType"></result>
+    <result property="corporation" column="Corporation"></result>
+    <result property="waybillid" column="WaybillID"></result>
+    <result property="remarks" column="Remarks"></result>
+    <result property="inputperson" column="InputPerson"></result>
+    <result property="inputdate" column="InputDate"></result>
+    <result property="inputcompany" column="InputCompany"></result>
+    <!--对应的员工-->
+    <association property="sy_emp" javaType="SY_Emp">
+      <result property="id" column="EID"></result>
+      <result property="empname" column="EmpName"></result>
+    </association>
+
+   <!--对应的单位-->
+    <association property="sy_units" javaType="SY_Units">
+      <result property="id" column="SID"></result>
+      <result property="name" column="SName"></result>
+
+    </association>
+
+  </resultMap>
+  <select id="selectAll" resultMap="biglog" parameterType="BIGLOG_Logisticscontroltable">
+    select * from (
+    select rownum rn,b.*,e.empname as empname,e.id as eid,s.name as sname,s.id as sid
+    from BIGLOG_LogisticsControlTable b,SY_EMP e,SY_Units s
+    <where>and b.inputperson=e.id and b.InputCompany=s.id
+      <if test="worksheetno != null and worksheetno!=''">
+         and
+         b.worksheetno like concat(concat('%',#{worksheetno}),'%')
+       </if>
+       <if test="corporation != null and corporation!=''">
+         and b.corporation like concat(concat('%',#{corporation}),'%')
+       </if>
+
+       <if test="ctype != null and ctype!=''">
+         and b.ctype like concat(concat('%',#{ctype}),'%')
+       </if>
+
+     </where>
+)
+    where rn between #{page} and #{rows}
+  </select>
+  <select id="querycount" resultType="int" parameterType="Object">
+    select count(*) from (
+    select rownum rn,b.*,e.empname as empname,e.id as eid,s.name as sname,s.id as sid
+    from BIGLOG_LogisticsControlTable b,SY_EMP e,SY_Units s
+    <where>and b.inputperson=e.id and b.InputCompany=s.id
+      <if test="worksheetno != null and worksheetno!=''">
+        and
+        b.worksheetno like concat(concat('%',#{worksheetno}),'%')
+      </if>
+      <if test="corporation != null and corporation!=''">
+        and b.corporation like concat(concat('%',#{corporation}),'%')
+      </if>
+      <if test="ctype != null and ctype!=''">
+        and b.ctype like concat(concat('%',#{ctype}),'%')
+      </if>
+
+    </where>
+    )
+
+  </select>
+  <select id="selectById" resultMap="biglog" parameterType="java.math.BigDecimal">
+     select b.*,e.empname as empname,e.id as eid,s.name as sname,s.id as sid
+     from BIGLOG_LogisticsControlTable b,SY_EMP e,SY_Units s
+ where b.inputperson=e.id and b.InputCompany=s.id and b.id=#{id}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from BOS.BIGLOG_LOGISTICSCONTROLTABLE
     where ID = #{id,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+  <delete id="delete" parameterType="com.wl.model.BIGLOG_Logisticscontroltable">
     delete from BOS.BIGLOG_LOGISTICSCONTROLTABLE
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
@@ -31,9 +102,9 @@
       CORPORATION, WAYBILLID, REMARKS, 
       INPUTPERSON, INPUTDATE, INPUTCOMPANY
       )
-    values (#{id,jdbcType=DECIMAL}, #{worksheetno,jdbcType=VARCHAR}, #{ctype,jdbcType=DECIMAL}, 
+    values (bl_seq.nextval, #{worksheetno,jdbcType=VARCHAR}, #{ctype,jdbcType=DECIMAL},
       #{corporation,jdbcType=VARCHAR}, #{waybillid,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
-      #{inputperson,jdbcType=DECIMAL}, #{inputdate,jdbcType=TIMESTAMP}, #{inputcompany,jdbcType=DECIMAL}
+      #{inputperson,jdbcType=DECIMAL}, sysdate, #{inputcompany,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.BIGLOG_Logisticscontroltable">
@@ -97,7 +168,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.BIGLOG_Logisticscontroltable">
+  <update id="update" parameterType="com.wl.model.BIGLOG_Logisticscontroltable">
     update BOS.BIGLOG_LOGISTICSCONTROLTABLE
     <set>
       <if test="worksheetno != null">
