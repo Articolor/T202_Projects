@@ -1,7 +1,7 @@
 package com.wl.controller;
 
 import com.wl.model.PAC_Packaging;
-import com.wl.service.PAC_PackagingService;
+import com.wl.service.PAC_packagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +13,7 @@ import java.util.Map;
 @RestController
 public class LQPAC_PackagingController {
     @Autowired
-    private PAC_PackagingService service;
+    private PAC_packagingService service;
     @RequestMapping("querypack")
     public Map<String,Object> querypack(PAC_Packaging p){
         int page=p.getPage();
