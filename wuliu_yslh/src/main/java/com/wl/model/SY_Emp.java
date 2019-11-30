@@ -20,6 +20,15 @@ public class SY_Emp {
     private String remark;
 
     private BigDecimal disabled;
+    private BIGLOG_Logisticscontroltable logisticscontroltable;
+
+    public BIGLOG_Logisticscontroltable getLogisticscontroltable() {
+        return logisticscontroltable;
+    }
+
+    public void setLogisticscontroltable(BIGLOG_Logisticscontroltable logisticscontroltable) {
+        this.logisticscontroltable = logisticscontroltable;
+    }
 
 
     private BAS_Deliverystandard bas_deliverystandard;

@@ -22,8 +22,13 @@ public interface SY_EmpMapper {
     List<SY_Emp> findXJY();
 
     //根据员工工号查询出查台密码-
-    SY_Emp findByQueryPwd(String querypwd);
+    SY_Emp findByQueryPwd(SY_Emp emp);
 
+    //查询工号
+    List<SY_Emp> findemono();
+
+    //查询名称
+    SY_Emp findbyid(SY_Emp emp);
     int deleteByPrimaryKey(BigDecimal id);
 
     void insertEMP(SY_Emp emp);

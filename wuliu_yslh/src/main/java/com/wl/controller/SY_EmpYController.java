@@ -26,6 +26,21 @@ public class SY_EmpYController {
     @Autowired
     private SY_RolesMenusService syRolesMenusService;
 
+    //查询empno
+    @RequestMapping("findemono")
+    public List<SY_Emp> findemono(){
+        List<SY_Emp> findemono = sy_empService.findemono();
+        return findemono;
+    }
+    //根据员工号查询出name
+    @RequestMapping("findByEmpnoFZS")
+    public Map<String,Object> findByEmpnoFZS(SY_Emp emp){
+        Map<String,Object> map=new HashMap<>();
+        SY_Emp findbyid = sy_empService.findbyid(emp);
+        map.put("shuju",findbyid);
+        return map;
+    }
+
     //登录的方法
     @RequestMapping("findEmpByLogin")
     public Map<String,Object> findEmpByLogin(SY_Emp emp){
@@ -37,7 +52,7 @@ public class SY_EmpYController {
         }
         SY_Role role = sy_roleService.selectByPrimaryKey(emp1.getRoleid());
         List<SY_Menus> menus = role.getMenus();
-        map.put("emp",emp);
+        map.put("emp",emp1);
         map.put("menus",menus);
         return map;
     }

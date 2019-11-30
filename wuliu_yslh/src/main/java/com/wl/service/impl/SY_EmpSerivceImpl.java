@@ -15,6 +15,15 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
     private SY_EmpMapper sy_empMapper;
 
 
+    @Override
+    public List<SY_Emp> findemono() {
+        return sy_empMapper.findemono();
+    }
+
+    @Override
+    public SY_Emp findbyid(SY_Emp emp) {
+        return sy_empMapper.findbyid(emp);
+    }
 
     //查询全部的方法有用户和角色
     @Override
@@ -22,9 +31,9 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
         return sy_empMapper.findAllEmpAndRole(sy_emp);
     }
 
+    //新增用户
     @Override
     public void insertEMP(SY_Emp emp) {
-        //新增用户
         sy_empMapper.insertEMP(emp);
     }
 
@@ -54,7 +63,7 @@ public class SY_EmpSerivceImpl implements SY_EmpService {
     }
 
     @Override
-    public SY_Emp findByQueryPwd(String querypwd) {
-        return sy_empMapper.findByQueryPwd(querypwd);
+    public SY_Emp findByQueryPwd(SY_Emp e) {
+        return sy_empMapper.findByQueryPwd(e);
     }
 }
