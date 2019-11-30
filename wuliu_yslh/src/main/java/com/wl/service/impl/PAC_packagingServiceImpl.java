@@ -11,6 +11,17 @@ import java.util.List;
 public class PAC_packagingServiceImpl implements PAC_packagingService {
     @Autowired
     private PAC_PackagingMapper packagingMapper;
+
+    @Override
+    public List<PAC_Packaging> querypack(PAC_Packaging p) {
+        return packagingMapper.querypack(p);
+    }
+
+    @Override
+    public int getcountlq(PAC_Packaging p) {
+        return packagingMapper.getcountlq(p);
+    }
+
     @Override
     public List<PAC_Packaging> selectPacking(PAC_Packaging p, int page, int rows) {
         return packagingMapper.selectPacking(p,page,rows);
