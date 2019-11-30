@@ -10,16 +10,82 @@
     <result column="TYPE" jdbcType="DECIMAL" property="type" />
     <result column="MEASUREMENTUNIT" jdbcType="VARCHAR" property="measurementunit" />
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
+
     <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
     <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+
     <result column="INVALIDATEJOBINT" jdbcType="DECIMAL" property="invalidatejobint" />
     <result column="INVALIDATENAME" jdbcType="DECIMAL" property="invalidatename" />
     <result column="INVALIDATETIME" jdbcType="TIMESTAMP" property="invalidatetime" />
+    <association property="syemp" javaType="SY_Emp">
+      <result property="id" column="EID"></result>
+      <result property="empname" column="INVALIDATEJOBQQ"></result>
+    </association>
+    <association property="emp" javaType="SY_Emp">
+      <result property="id" column="EID"></result>
+      <result property="empname" column="OPERATORQQ"></result>
+    </association>
   </resultMap>
+
   <sql id="Base_Column_List">
-    ID, ITEMCODE, ITEMNAME, PLANNEDPRICE, SPECIFICATIONS, TYPE, MEASUREMENTUNIT, STATUS, 
+    ID, ITEMCODE, ITEMNAME, PLANNEDPRICE, SPECIFICATIONS, TYPE, MEASUREMENTUNIT, STATUS,
     OPERATORID, OPERATIONTIME, INVALIDATEJOBINT, INVALIDATENAME, INVALIDATETIME
   </sql>
+  <select id="querypack" parameterType="PAC_Packaging" resultMap="BaseResultMap">
+
+    select * from (
+    select rownum rn,pac.*,emp.empname as operatorqq,emp.empname as invalidatejobqq from Pac_Packaging pac,SY_EMP emp
+    <where>and pac.operatorid=emp.id
+      <if test="itemcode != null and itemcode!=''">
+        and pac.itemcode like concat(concat('%',#{itemcode}),'%')
+      </if>
+      <if test="itemname != null and itemname!=''">
+        and pac.itemname like concat(concat('%',#{itemname}),'%')
+      </if>
+
+      <if test="measurementunit != null and measurementunit!=''">
+        and pac.measurementunit like concat(concat('%',#{measurementunit}),'%')
+      </if>
+      <if test="operatorqq != null and operatorqq!=''">
+        and emp.empname like concat(concat('%',#{operatorqq}),'%')
+      </if>
+
+      <if test="invalidatejobqq != null and invalidatejobqq!=''">
+        and emp.empname like concat(concat('%',#{invalidatejobqq}),'%')
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <select id="getcountlq" parameterType="PAC_Packaging" resultType="int">
+
+    select count(*) from (
+    select rownum rn,pac.*,emp.empname as operatorqq,emp.empname as invalidatejobqq from Pac_Packaging pac,SY_EMP emp
+    <where>and pac.operatorid=emp.id
+      <if test="itemcode != null and itemcode!=''">
+        and pac.itemcode like concat(concat('%',#{itemcode}),'%')
+      </if>
+      <if test="itemname != null and itemname!=''">
+        and pac.itemname like concat(concat('%',#{itemname}),'%')
+      </if>
+
+      <if test="measurementunit != null and measurementunit!=''">
+        and pac.measurementunit like concat(concat('%',#{measurementunit}),'%')
+      </if>
+      <if test="operatorqq != null and operatorqq!=''">
+        and emp.empname like concat(concat('%',#{operatorqq}),'%')
+      </if>
+
+      <if test="invalidatejobqq != null and invalidatejobqq!=''">
+        and emp.empname like concat(concat('%',#{invalidatejobqq}),'%')
+      </if>
+
+    </where>
+    )
+
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
