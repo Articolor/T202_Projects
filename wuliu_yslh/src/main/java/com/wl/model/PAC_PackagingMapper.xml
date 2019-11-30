@@ -167,7 +167,7 @@
             #{status,jdbcType=DECIMAL},
             #{operatorid,jdbcType=DECIMAL},
             sysdate,
-            #{invalidatejobint,jdbcType=NUMBER},
+            #{invalidatejobint,jdbcType=DECIMAL},
             #{invalidatename,jdbcType=DECIMAL},
             sysdate)
   </insert>
