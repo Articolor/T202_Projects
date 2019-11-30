@@ -8,6 +8,7 @@ import java.util.List;
 @Service
 public interface PAC_PackagingMapper {
     public List<PAC_Packaging> querypack(PAC_Packaging p);
+    public int getcountlq(PAC_Packaging p);
     int deleteByPrimaryKey(BigDecimal id);
 
     int insert(PAC_Packaging record);
