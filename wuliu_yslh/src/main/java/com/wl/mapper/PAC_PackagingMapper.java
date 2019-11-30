@@ -19,4 +19,8 @@ public interface PAC_PackagingMapper {
     int updateByPrimaryKeySelective(PAC_Packaging record);
 
     int updateByPrimaryKey(PAC_Packaging record);
+
+    List<PAC_Packaging> selectPacking(PAC_Packaging p,int page,int rows);
+
+    Integer selectPackingCount(PAC_Packaging p);
 }
