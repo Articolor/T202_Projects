@@ -6,6 +6,18 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface SY_EmpService {
+
+    //查询工号
+    List<SY_Emp> findemono();
+    //查询名称
+    SY_Emp findbyid(SY_Emp emp);
+
+
+
+
+
+
+
     //查询全部的方法有用户和角色xx
     List<SY_Emp> findAllEmpAndRole(SY_Emp sy_emp);
 
