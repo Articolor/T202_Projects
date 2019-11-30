@@ -18,6 +18,8 @@ public interface SY_EmpService {
 
 
 
+
+
     //查询全部的方法有用户和角色xx
     List<SY_Emp> findAllEmpAndRole(SY_Emp sy_emp);
 
