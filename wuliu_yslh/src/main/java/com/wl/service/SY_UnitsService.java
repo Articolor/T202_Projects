@@ -18,7 +18,8 @@ public interface SY_UnitsService {
 
     //模糊查询后的总行数
     public Integer findMhCount(SY_Units units);
-
+    //查询单位
+    List<SY_Units> selectfindALL();
     //修改单位
     void updateByPrimaryKeySelective(SY_Units record);
 
