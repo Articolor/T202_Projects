@@ -30,7 +30,7 @@
       COUNTY, ZONECODE, KEYWORD, 
       STARTINT, TERMINATEINT, SDINT
       )
-    values (#{id,jdbcType=DECIMAL}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+    values (BAS_Partition_id.nextval, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
       #{county,jdbcType=VARCHAR}, #{zonecode,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, 
       #{startint,jdbcType=DECIMAL}, #{terminateint,jdbcType=DECIMAL}, #{sdint,jdbcType=DECIMAL}
       )

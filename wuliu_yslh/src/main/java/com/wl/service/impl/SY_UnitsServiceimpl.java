@@ -37,6 +37,11 @@ public class SY_UnitsServiceimpl implements SY_UnitsService {
     }
 
     @Override
+    public List<SY_Units> selectfindALL() {
+        return unitsMapper.selectfindALL();
+    }
+
+    @Override
     public void updateByPrimaryKeySelective(SY_Units record) {
         unitsMapper.updateByPrimaryKeySelective(record);
     }

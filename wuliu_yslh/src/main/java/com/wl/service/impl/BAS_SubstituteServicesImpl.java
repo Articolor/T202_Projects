@@ -25,4 +25,19 @@ public class BAS_SubstituteServicesImpl implements BAS_SubstituteServices {
         return list;
     }
 
+    @Override
+    public int insert(BAS_Substitute record) {
+        return bas_substituteMapper.insert(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(BAS_Substitute record) {
+        return bas_substituteMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(BigDecimal id) {
+        return bas_substituteMapper.deleteByPrimaryKey(id);
+    }
+
 }

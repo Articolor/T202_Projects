@@ -15,9 +15,9 @@ public interface BAS_AreaMapper {
 
     //总和
     int getcount();
-
+    //删除
     int deleteByPrimaryKey(BigDecimal id);
-
+    //新增区域
     int insert(BAS_Area record);
 
     int insertSelective(BAS_Area record);
@@ -25,6 +25,6 @@ public interface BAS_AreaMapper {
     BAS_Area selectByPrimaryKey(BigDecimal id);
 
     int updateByPrimaryKeySelective(BAS_Area record);
-
+    //修改区域
     int updateByPrimaryKey(BAS_Area record);
 }

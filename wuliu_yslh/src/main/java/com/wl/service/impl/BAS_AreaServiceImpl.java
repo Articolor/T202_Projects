@@ -6,6 +6,7 @@ import com.wl.service.BAS_AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 @Service
 public class BAS_AreaServiceImpl implements BAS_AreaService {
@@ -24,7 +25,22 @@ public class BAS_AreaServiceImpl implements BAS_AreaService {
     }
 
     @Override
+    public int insert(BAS_Area record) {
+        return bas_areaMapper.insert(record);
+    }
+
+    @Override
     public int getcount() {
         return bas_areaMapper.getcount();
+    }
+
+    @Override
+    public int updateByPrimaryKey(BAS_Area record) {
+        return bas_areaMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(BigDecimal id) {
+        return bas_areaMapper.deleteByPrimaryKey(id);
     }
 }

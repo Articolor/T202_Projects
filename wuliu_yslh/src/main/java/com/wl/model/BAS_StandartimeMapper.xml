@@ -23,15 +23,15 @@
     where ID = #{id,jdbcType=DECIMAL}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
-    delete from BOS.BAS_STANDARTIME
-    where ID = #{id,jdbcType=DECIMAL}
+    delete from BAS_STANDARTIME
+    where ID = #{id}
   </delete>
   <insert id="insert" parameterType="com.wl.model.BAS_Standartime">
     insert into BOS.BAS_STANDARTIME (ID, TIMENAME, SUBORDINATEUNIT,
       WORKINGTIME, CLOSINGTIME, SATURDAYWORKINGTIME,
       SATURDAYCLOSINGTIME, SUNDAYWORKINGTIME,
       SUNDAYCLOSINGTIME)
-    values (#{id,jdbcType=DECIMAL}, #{timename,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=DECIMAL},
+    values (BAS_StandarTime_id.nextval, #{timename,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=DECIMAL},
       #{workingtime,jdbcType=TIMESTAMP}, #{closingtime,jdbcType=TIMESTAMP}, #{saturdayworkingtime,jdbcType=TIMESTAMP},
       #{saturdayclosingtime,jdbcType=TIMESTAMP}, #{sundayworkingtime,jdbcType=TIMESTAMP},
       #{sundayclosingtime,jdbcType=TIMESTAMP})

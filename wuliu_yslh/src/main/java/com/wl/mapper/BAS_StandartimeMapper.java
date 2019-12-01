@@ -11,8 +11,10 @@ public interface BAS_StandartimeMapper {
     List<BAS_Standartime> findBAS_StandartimeAndSy_units(Integer page, Integer rows);
     //分页收派时间管理
     List<BAS_Standartime> findBAS_StandartimeAndSy_unitsfenye(String timename,String name,Integer page,Integer rows);
-    int deleteByPrimaryKey(BigDecimal id);
 
+    //删除genjuid
+    int deleteByPrimaryKey(BigDecimal id);
+    //新增
     int insert(BAS_Standartime record);
 
     int insertSelective(BAS_Standartime record);

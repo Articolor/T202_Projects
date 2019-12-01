@@ -33,9 +33,9 @@
       COUNTY, POSTALCODE, SIMPLECODE, 
       CITYCODE, ENTRYUNITID, COMPLEMENTUNITID, 
       NATURE, THEAREA)
-    values (#{id,jdbcType=DECIMAL}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+    values (BAS_Area_id.nextval, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
       #{county,jdbcType=VARCHAR}, #{postalcode,jdbcType=DECIMAL}, #{simplecode,jdbcType=VARCHAR}, 
-      #{citycode,jdbcType=DECIMAL}, #{entryunitid,jdbcType=VARCHAR}, #{complementunitid,jdbcType=VARCHAR}, 
+      #{citycode,jdbcType=DECIMAL}, #{entryunitid,jdbcType=VARCHAR}, #{complementunitid,jdbcType=VARCHAR},
       #{nature,jdbcType=DECIMAL}, #{thearea,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.BAS_Area">
@@ -155,8 +155,6 @@
       POSTALCODE = #{postalcode,jdbcType=DECIMAL},
       SIMPLECODE = #{simplecode,jdbcType=VARCHAR},
       CITYCODE = #{citycode,jdbcType=DECIMAL},
-      ENTRYUNITID = #{entryunitid,jdbcType=VARCHAR},
-      COMPLEMENTUNITID = #{complementunitid,jdbcType=VARCHAR},
       NATURE = #{nature,jdbcType=DECIMAL},
       THEAREA = #{thearea,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}

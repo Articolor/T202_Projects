@@ -10,6 +10,8 @@ import java.util.List;
 public interface BAS_BasicarchivesMapper {
     //查询基础档案
     List<BAS_Basicarchives> findBAS_BasicarchivesAndSY_EmpAndSY_Units(int page,int rows);
+    //查询总行数diyi
+    int findBAS_BasicarchivesAndSY_EmpAndSY_Unitscount(int page,int rows);
 
     //分页查询基础数据
     List<BAS_Basicarchives> findfindBASBasicarchivesAndSYEmpAndSYUnitsKey(String ename,  int page, int rows);
