@@ -84,9 +84,8 @@ public class DispatchYController {
         /*如果是1----修改分拣编码
         * 如果是2----修改小件员编号
         * 如果是3----修改单位*/
-        System.out.println(o);
-
-        //workorderService.updateByPrimaryKeySelective(o);
+        //System.out.println(o);
+        workorderService.updateByPrimaryKeySelective(o);
         return "ok";
     }
 
