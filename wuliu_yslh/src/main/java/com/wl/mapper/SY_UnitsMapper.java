@@ -26,6 +26,8 @@ public interface SY_UnitsMapper {
 
     //新增单位
     void insertUnits(SY_Units record);
+    //查询单位
+    List<SY_Units> selectfindALL();
 
     int insertSelective(SY_Units record);
 

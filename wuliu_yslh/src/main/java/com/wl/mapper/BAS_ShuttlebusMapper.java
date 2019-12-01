@@ -13,10 +13,14 @@ public interface BAS_ShuttlebusMapper {
     List<BAS_Shuttlebus> findBUSANDEMPANDUNITSfenye(String licenseplateint,String driver,String carrier, Integer page,Integer rows);
     //班车总行数查询
     int GetBUSCOUNT();
-
+    //新增班车
+    int insert(BAS_Shuttlebus record);
+    //修改
+    int updateByPrimaryKey(BAS_Shuttlebus record);
+    //删除
     int deleteByPrimaryKey(BigDecimal id);
 
-    int insert(BAS_Shuttlebus record);
+
 
     int insertSelective(BAS_Shuttlebus record);
 
@@ -24,5 +28,5 @@ public interface BAS_ShuttlebusMapper {
 
     int updateByPrimaryKeySelective(BAS_Shuttlebus record);
 
-    int updateByPrimaryKey(BAS_Shuttlebus record);
+
 }
