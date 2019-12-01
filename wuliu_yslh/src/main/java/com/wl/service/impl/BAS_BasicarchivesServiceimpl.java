@@ -36,4 +36,11 @@ public class BAS_BasicarchivesServiceimpl implements BAS_BasicarchivesService {
         int i = basicarchivesMapper.updateByPrimaryKey(record);
         return i;
     }
+
+    @Override
+    public int findBAS_BasicarchivesAndSY_EmpAndSY_Unitscount(int page, int rows) {
+        return basicarchivesMapper.findBAS_BasicarchivesAndSY_EmpAndSY_Unitscount(page,rows);
+    }
+
+
 }
