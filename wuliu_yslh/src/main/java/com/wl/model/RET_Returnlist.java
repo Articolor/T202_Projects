@@ -1,5 +1,8 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -16,6 +19,8 @@ public class RET_Returnlist {
 
     private BigDecimal aploss;
 
+    @DateTimeFormat(pattern="YYYY-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date entrytime;
 
     private BigDecimal receivegunit;
@@ -24,12 +29,16 @@ public class RET_Returnlist {
 
     private BigDecimal returnunit;
 
+    @DateTimeFormat(pattern="YYYY-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date recordingtime;
 
     private BigDecimal entryunit;
 
     private String personname;
 
+    @DateTimeFormat(pattern="YYYY-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date confirmationtime;
 
     private BigDecimal confirmationunit;
@@ -46,6 +55,56 @@ public class RET_Returnlist {
 
     private String denialtype;
 
+    private  SY_Units receivegunit1;
+
+    private SY_Units returnunit2;
+
+    private SY_Units entryunit3;
+
+    private DIS_Workordersign  disWorkordersign=new DIS_Workordersign();
+
+    @Override
+    public String toString() {
+        return "RET_Returnlist{" +
+                "id=" + id +
+                ", applicationno='" + applicationno + '\'' +
+                ", worksheetno='" + worksheetno + '\'' +
+                ", returntype=" + returntype +
+                ", apremark='" + apremark + '\'' +
+                ", aploss=" + aploss +
+                ", entrytime=" + entrytime +
+                ", receivegunit=" + receivegunit +
+                ", invalidatesign=" + invalidatesign +
+                ", returnunit=" + returnunit +
+                ", recordingtime=" + recordingtime +
+                ", entryunit=" + entryunit +
+                ", personname='" + personname + '\'' +
+                ", confirmationtime=" + confirmationtime +
+                ", confirmationunit=" + confirmationunit +
+                ", confirmationpersonname='" + confirmationpersonname + '\'' +
+                ", treatmentstate=" + treatmentstate +
+                ", apreturnstatus=" + apreturnstatus +
+                ", identificationsign=" + identificationsign +
+                ", handlingopinions='" + handlingopinions + '\'' +
+                ", denialtype='" + denialtype + '\'' +
+                ", receivegunit1=" + receivegunit1 +
+                ", returnunit2=" + returnunit2 +
+                ", entryunit3=" + entryunit3 +
+                ", disWorkordersign=" + disWorkordersign +
+                '}';
+    }
+
+    public DIS_Workordersign getDisWorkordersign() {
+        return disWorkordersign;
+    }
+
+    public void setDisWorkordersign(DIS_Workordersign disWorkordersign) {
+        this.disWorkordersign = disWorkordersign;
+    }
+
+    public RET_Returnlist() {
+    }
+
     public BigDecimal getId() {
         return id;
     }
@@ -59,7 +118,7 @@ public class RET_Returnlist {
     }
 
     public void setApplicationno(String applicationno) {
-        this.applicationno = applicationno == null ? null : applicationno.trim();
+        this.applicationno = applicationno;
     }
 
     public String getWorksheetno() {
@@ -67,7 +126,7 @@ public class RET_Returnlist {
     }
 
     public void setWorksheetno(String worksheetno) {
-        this.worksheetno = worksheetno == null ? null : worksheetno.trim();
+        this.worksheetno = worksheetno;
     }
 
     public BigDecimal getReturntype() {
@@ -83,7 +142,7 @@ public class RET_Returnlist {
     }
 
     public void setApremark(String apremark) {
-        this.apremark = apremark == null ? null : apremark.trim();
+        this.apremark = apremark;
     }
 
     public BigDecimal getAploss() {
@@ -147,7 +206,7 @@ public class RET_Returnlist {
     }
 
     public void setPersonname(String personname) {
-        this.personname = personname == null ? null : personname.trim();
+        this.personname = personname;
     }
 
     public Date getConfirmationtime() {
@@ -171,7 +230,7 @@ public class RET_Returnlist {
     }
 
     public void setConfirmationpersonname(String confirmationpersonname) {
-        this.confirmationpersonname = confirmationpersonname == null ? null : confirmationpersonname.trim();
+        this.confirmationpersonname = confirmationpersonname;
     }
 
     public BigDecimal getTreatmentstate() {
@@ -203,7 +262,7 @@ public class RET_Returnlist {
     }
 
     public void setHandlingopinions(String handlingopinions) {
-        this.handlingopinions = handlingopinions == null ? null : handlingopinions.trim();
+        this.handlingopinions = handlingopinions;
     }
 
     public String getDenialtype() {
@@ -211,6 +270,30 @@ public class RET_Returnlist {
     }
 
     public void setDenialtype(String denialtype) {
-        this.denialtype = denialtype == null ? null : denialtype.trim();
+        this.denialtype = denialtype;
+    }
+
+    public SY_Units getReceivegunit1() {
+        return receivegunit1;
+    }
+
+    public void setReceivegunit1(SY_Units receivegunit1) {
+        this.receivegunit1 = receivegunit1;
+    }
+
+    public SY_Units getReturnunit2() {
+        return returnunit2;
+    }
+
+    public void setReturnunit2(SY_Units returnunit2) {
+        this.returnunit2 = returnunit2;
+    }
+
+    public SY_Units getEntryunit3() {
+        return entryunit3;
+    }
+
+    public void setEntryunit3(SY_Units entryunit3) {
+        this.entryunit3 = entryunit3;
     }
 }

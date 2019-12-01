@@ -24,12 +24,372 @@
     <result column="HANDLINGOPINIONS" jdbcType="VARCHAR" property="handlingopinions" />
     <result column="DENIALTYPE" jdbcType="VARCHAR" property="denialtype" />
   </resultMap>
+
+  <resultMap id="OneToOneResult" type="com.wl.model.RET_Returnlist">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="APPLICATIONNO" jdbcType="VARCHAR" property="applicationno" />
+    <result column="WORKSHEETNO" jdbcType="VARCHAR" property="worksheetno" />
+    <result column="RETURNTYPE" jdbcType="DECIMAL" property="returntype" />
+    <result column="APREMARK" jdbcType="VARCHAR" property="apremark" />
+    <result column="APLOSS" jdbcType="DECIMAL" property="aploss" />
+    <result column="ENTRYTIME" jdbcType="TIMESTAMP" property="entrytime" />
+    <result column="RECEIVEGUNIT" jdbcType="DECIMAL" property="receivegunit" />
+    <result column="INVALIDATESIGN" jdbcType="DECIMAL" property="invalidatesign" />
+    <result column="RETURNUNIT" jdbcType="DECIMAL" property="returnunit" />
+    <result column="RECORDINGTIME" jdbcType="TIMESTAMP" property="recordingtime" />
+    <result column="ENTRYUNIT" jdbcType="DECIMAL" property="entryunit" />
+    <result column="PERSONNAME" jdbcType="VARCHAR" property="personname" />
+    <result column="CONFIRMATIONTIME" jdbcType="TIMESTAMP" property="confirmationtime" />
+    <result column="CONFIRMATIONUNIT" jdbcType="DECIMAL" property="confirmationunit" />
+    <result column="CONFIRMATIONPERSONNAME" jdbcType="VARCHAR" property="confirmationpersonname" />
+    <result column="TREATMENTSTATE" jdbcType="DECIMAL" property="treatmentstate" />
+    <result column="APRETURNSTATUS" jdbcType="DECIMAL" property="apreturnstatus" />
+    <result column="IDENTIFICATIONSIGN" jdbcType="DECIMAL" property="identificationsign" />
+    <result column="HANDLINGOPINIONS" jdbcType="VARCHAR" property="handlingopinions" />
+    <result column="DENIALTYPE" jdbcType="VARCHAR" property="denialtype" />
+
+    <association property="receivegunit1" javaType="SY_Units">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="uname1" jdbcType="VARCHAR" property="name" />
+    <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+    <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+    <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+  </association>
+
+    <association property="returnunit2" javaType="SY_Units">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="uname2" jdbcType="VARCHAR" property="name" />
+      <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+      <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+      <result column="OPERAdataTIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    </association>
+
+    <association property="entryunit3" javaType="SY_Units">
+      <id column="ID" jdbcType="DECIMAL" property="id" />
+      <result column="uname3" jdbcType="VARCHAR" property="name" />
+      <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+      <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+      <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    </association>
+
+  </resultMap>
+
+
+  <!--返货申请确认 返回值-->
+  <resultMap id="Retreturn" type="com.wl.model.RET_Returnlist">
+    <id column="rid" jdbcType="DECIMAL" property="id" />
+    <result column="APPLICATIONNO" jdbcType="VARCHAR" property="applicationno" />
+    <result column="rw" jdbcType="VARCHAR" property="worksheetno" />
+    <result column="RETURNTYPE" jdbcType="DECIMAL" property="returntype" />
+    <result column="APREMARK" jdbcType="VARCHAR" property="apremark" />
+    <result column="APLOSS" jdbcType="DECIMAL" property="aploss" />
+    <result column="ENTRYTIME" jdbcType="TIMESTAMP" property="entrytime" />
+    <result column="RECEIVEGUNIT" jdbcType="DECIMAL" property="receivegunit" />
+    <result column="INVALIDATESIGN" jdbcType="DECIMAL" property="invalidatesign" />
+    <result column="RETURNUNIT" jdbcType="DECIMAL" property="returnunit" />
+    <result column="RECORDINGTIME" jdbcType="TIMESTAMP" property="recordingtime" />
+    <result column="ENTRYUNIT" jdbcType="DECIMAL" property="entryunit" />
+    <result column="PERSONNAME" jdbcType="VARCHAR" property="personname" />
+    <result column="CONFIRMATIONTIME" jdbcType="TIMESTAMP" property="confirmationtime" />
+    <result column="CONFIRMATIONUNIT" jdbcType="DECIMAL" property="confirmationunit" />
+    <result column="CONFIRMATIONPERSONNAME" jdbcType="VARCHAR" property="confirmationpersonname" />
+    <result column="TREATMENTSTATE" jdbcType="DECIMAL" property="treatmentstate" />
+    <result column="APRETURNSTATUS" jdbcType="DECIMAL" property="apreturnstatus" />
+    <result column="IDENTIFICATIONSIGN" jdbcType="DECIMAL" property="identificationsign" />
+    <result column="HANDLINGOPINIONS" jdbcType="VARCHAR" property="handlingopinions" />
+    <result column="DENIALTYPE" jdbcType="VARCHAR" property="denialtype" />
+
+    <association property="disWorkordersign" javaType="com.wl.model.DIS_Workordersign">
+    <id column="wid" jdbcType="DECIMAL" property="id" />
+    <result column="WORKORDERID" jdbcType="DECIMAL" property="workorderid" />
+    <result column="ww" jdbcType="VARCHAR" property="worksheetno" />
+    <result column="WORKORDERTYPE" jdbcType="DECIMAL" property="workordertype" />
+    <result column="SIGNTYPE" jdbcType="DECIMAL" property="signtype" />
+    <result column="COURIERINT" jdbcType="DECIMAL" property="courierint" />
+    <result column="COURIERNAME" jdbcType="VARCHAR" property="couriername" />
+    <result column="RECIPIENT" jdbcType="VARCHAR" property="recipient" />
+    <result column="SIGNUNIT" jdbcType="DECIMAL" property="signunit" />
+    <result column="SIGNTIME" jdbcType="TIMESTAMP" property="signtime" />
+    <result column="INVALIDATEMARK" jdbcType="DECIMAL" property="invalidatemark" />
+    <result column="ABNORMALMARK" jdbcType="VARCHAR" property="abnormalmark" />
+    <result column="INPUTPERSONCODE" jdbcType="DECIMAL" property="inputpersoncode" />
+    <result column="INPUTPERSONID" jdbcType="DECIMAL" property="inputpersonid" />
+    <result column="INPUTID" jdbcType="DECIMAL" property="inputid" />
+    <result column="INPUTTIME" jdbcType="TIMESTAMP" property="inputtime" />
+  </association>
+    <association property="entryunit3" javaType="SY_Units">
+      <id column="sid" jdbcType="DECIMAL" property="id" />
+      <result column="name" jdbcType="VARCHAR" property="name" />
+      <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+      <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+      <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    </association>
+  </resultMap>
   <sql id="Base_Column_List">
     ID, APPLICATIONNO, WORKSHEETNO, RETURNTYPE, APREMARK, APLOSS, ENTRYTIME, RECEIVEGUNIT, 
     INVALIDATESIGN, RETURNUNIT, RECORDINGTIME, ENTRYUNIT, PERSONNAME, CONFIRMATIONTIME, 
     CONFIRMATIONUNIT, CONFIRMATIONPERSONNAME, TREATMENTSTATE, APRETURNSTATUS, IDENTIFICATIONSIGN, 
     HANDLINGOPINIONS, DENIALTYPE
   </sql>
+  <!--返货申请-->
+
+  <select id="selectRetWork" resultMap="Retreturn" parameterType="Object">
+      select * from(select
+      rownum rn,
+      r.id as rid,r.applicationno,r.worksheetno as rw,r.returntype,r.apremark
+      ,r.aploss,r.entrytime,r.receivegunit,r.invalidatesign,r.returnunit
+      ,r.recordingtime,r.entryunit,r.personname,r.confirmationtime,r.confirmationunit
+      ,r.confirmationpersonname,r.treatmentstate,r.apreturnstatus
+      ,r.identificationsign,r.handlingopinions,r.denialtype,
+
+      w.id as wid,w.workorderid,w.worksheetno as ww,w.workordertype,w.signtype,w.courierint
+      ,w.couriername,w.recipient,w.signunit,w.signtime,w.invalidatemark
+      ,w.abnormalmark,w.inputpersoncode,w.inputpersonid,w.inputid,w.inputtime,
+
+      s.id as sid,s.name
+      from
+      ret_returnlist r inner join dis_workordersign w
+      on r.worksheetno=w.worksheetno inner join sy_units s on r.confirmationunit=s.id
+       <where>
+
+         <if test="r.worksheetno!=null and r.worksheetno!=''" >
+           and  r.WorkSheetNo like concat(concat('%',#{r.worksheetno}),'%')
+         </if>
+         <if test="r.returntype!=null and r.returntype!=''">
+           and  r.ReturnType=#{r.returntype}
+
+         </if>
+         <if test="r.apreturnstatus!=null and r.apreturnstatus!=''">
+           and r.ApReturnStatus=#{r.apreturnstatus}
+         </if>
+         <if test="r.treatmentstate!=null and r.treatmentstate!=''">
+           and  r.TreatmentState=#{r.treatmentstate}
+         </if>
+
+         <if test="r.invalidatesign!=null and r.invalidatesign!=''">
+           and r.InvalidateSign=#{r.invalidatesign}
+         </if>
+
+
+         <if test="r.identificationsign!=null and r.identificationsign!=''">
+           and r.identificationsign=#{r.identificationsign}
+        </if>
+         <if test="r.apremark!=null and r.apremark!=''">
+           and w.abnormalmark like concat(concat('%',#{r.apremark}),'%')
+         </if>
+
+       </where>
+       order by r.recordingtime asc)
+    <where>
+      rn between #{page} and #{rows}
+    </where>
+  </select>
+
+
+  <select id="selectResult" resultMap="OneToOneResult" parameterType="Object">
+    select * from (select rownum rn,s.*,
+    u1.id as idu,u1.name as uname1,
+    u2.id as idu2,u2.name as uname2,
+    u3.id as idu3,u3.name as uname3
+    from RET_RETURNLIST s inner join sy_units u1
+    on s.receivegunit=u1.id
+    inner join sy_units u2
+    on s.returnunit=u2.id
+    inner join sy_units u3
+    on s.entryunit=u3.id
+    <where>
+      <if test="r.worksheetno!=null and r.worksheetno!=''" >
+        and  s.WorkSheetNo like concat(concat('%',#{r.worksheetno}),'%')
+      </if>
+      <if test="r.returntype!=null and r.returntype!=''">
+        and  s.ReturnType=#{r.returntype}
+
+      </if>
+      <if test="r.apreturnstatus!=null and r.apreturnstatus!=''">
+        and s.ApReturnStatus=#{r.apreturnstatus}
+      </if>
+      <if test="r.treatmentstate!=null">
+        and  s.TreatmentState=#{r.treatmentstate}
+      </if>
+      <if test="r.entrytime!=null">
+        and s.entrytime=#{r.entrytime}
+      </if>
+      <if test="r.invalidatesign!=null and r.invalidatesign!=''">
+        and s.InvalidateSign=#{r.invalidatesign}
+      </if>
+      <if test="r.entryunit!=null and r.entryunit!=''">
+        and s.EntryUnit=#{r.entryunit}
+      </if>
+      <if test="r.confirmationtime!=null">
+        and s.ConfirmationTime=#{r.confirmationtime}
+      </if>
+      <if test="r.confirmationunit!=null and r.confirmationunit!=''">
+        and s.ConfirmationUnit like concat(concat('%',#{r.confirmationunit}),'%')
+      </if>
+      <if test="r.confirmationpersonname!=null and r.confirmationpersonname!=''">
+        and s.ConfirmationPersonName like concat(concat('%',#{r.confirmationpersonname}),'%')
+      </if>
+
+    </where>)
+    <where>
+      rn between #{page} and #{rows}
+    </where>
+  </select>
+
+
+  <!--返货申请确认总行数count-->
+
+  <select id="selectRetWorkCount" resultType="Integer" parameterType="Object">
+      select count(*) from(select
+      rownum rn,
+      r.id as rid,r.applicationno,r.worksheetno as rw,r.returntype,r.apremark
+      ,r.aploss,r.entrytime,r.receivegunit,r.invalidatesign,r.returnunit
+      ,r.recordingtime,r.entryunit,r.personname,r.confirmationtime,r.confirmationunit
+      ,r.confirmationpersonname,r.treatmentstate,r.apreturnstatus
+      ,r.identificationsign,r.handlingopinions,r.denialtype,
+
+      w.id as wid,w.workorderid,w.worksheetno as ww,w.workordertype,w.signtype,w.courierint
+      ,w.couriername,w.recipient,w.signunit,w.signtime,w.invalidatemark
+      ,w.abnormalmark,w.inputpersoncode,w.inputpersonid,w.inputid,w.inputtime
+
+      from
+      ret_returnlist r inner join dis_workordersign w
+      on r.worksheetno=w.worksheetno
+      inner join sy_units s on r.confirmationunit=s.id
+      <where>
+
+          <if test="worksheetno!=null and worksheetno!=''" >
+              and  r.WorkSheetNo like concat(concat('%',#{worksheetno}),'%')
+          </if>
+          <if test="returntype!=null and returntype!=''">
+              and  r.ReturnType=#{returntype}
+
+          </if>
+          <if test="apreturnstatus!=null and apreturnstatus!=''">
+              and r.ApReturnStatus=#{apreturnstatus}
+          </if>
+          <if test="treatmentstate!=null">
+              and  r.TreatmentState=#{treatmentstate}
+          </if>
+
+          <if test="invalidatesign!=null and invalidatesign!=''">
+              and r.InvalidateSign=#{invalidatesign}
+          </if>
+
+
+          <if test="identificationsign!=null and identificationsign!=''">
+              and r.identificationsign=#{identificationsign}
+          </if>
+          <if test="apremark!=null and apremark!=''">
+              and w.abnormalmark like concat(concat('%',#{apremark}),'%')
+          </if>
+
+      </where>
+      order by r.recordingtime asc)
+  </select>
+
+<!--
+  <select id="selectResultCount" resultMap="Integer" parameterType="Object">
+    select count(*) from (select rownum rn,s.*,
+    u1.id as idu,u1.name as uname1,
+    u2.id as idu2,u2.name as uname2,
+    u3.id as idu3,u3.name as uname3
+    from RET_RETURNLIST s inner join sy_units u1
+    on s.receivegunit=u1.id
+    inner join sy_units u2
+    on s.returnunit=u2.id
+    inner join sy_units u3
+    on s.entryunit=u3.id
+    <where>
+      <if test="r.worksheetno!=null and r.worksheetno!=''" >
+        and  s.WorkSheetNo like concat(concat('%',#{r.worksheetno}),'%')
+      </if>
+      <if test="r.returntype!=null and r.returntype!=''">
+        and  s.ReturnType=#{r.returntype}
+
+      </if>
+      <if test="r.apreturnstatus!=null and r.apreturnstatus!=''">
+        and s.ApReturnStatus=#{r.apreturnstatus}
+      </if>
+      <if test="r.treatmentstate!=null">
+        and  s.TreatmentState=#{r.treatmentstate}
+      </if>
+      <if test="r.entrytime!=null">
+        and s.entrytime=#{r.entrytime}
+      </if>
+      <if test="r.invalidatesign!=null and r.invalidatesign!=''">
+        and s.InvalidateSign=#{r.invalidatesign}
+      </if>
+      <if test="r.entryunit!=null and r.entryunit!=''">
+        and s.EntryUnit=#{r.entryunit}
+      </if>
+      <if test="r.confirmationtime!=null">
+        and s.ConfirmationTime=#{r.confirmationtime}
+      </if>
+      <if test="r.confirmationunit!=null and r.confirmationunit!=''">
+        and s.ConfirmationUnit like concat(concat('%',#{r.confirmationunit}),'%')
+      </if>
+      <if test="r.confirmationpersonname!=null and r.confirmationpersonname!=''">
+        and s.ConfirmationPersonName like concat(concat('%',#{r.confirmationpersonname}),'%')
+      </if>
+
+    </where>)
+  </select>-->
+
+
+
+    <!--count总行数-->
+    <select id="selectCount" resultType="Integer" parameterType="Object">
+        select count(*) from (select rownum rn,s.*,
+        u1.id as idu,u1.name as uname1,
+        u2.id as idu2,u2.name as uname2,
+        u3.id as idu3,u3.name as uname3
+        from RET_RETURNLIST s inner join sy_units u1
+        on s.receivegunit=u1.id
+        inner join sy_units u2
+        on s.returnunit=u2.id
+        inner join sy_units u3
+        on s.entryunit=u3.id
+        <where>
+            <!--<if test="id!=null and id!=''">
+              and s.id=#{id}
+            </if>-->
+            <if test="worksheetno!=null and worksheetno!=''" >
+                and  s.WorkSheetNo like concat(concat('%',#{worksheetno}),'%')
+            </if>
+            <if test="returntype!=null and returntype!=''">
+                and  s.ReturnType=#{returntype}
+
+            </if>
+            <if test="apreturnstatus!=null and apreturnstatus!=''">
+                and s.ApReturnStatus=#{apreturnstatus}
+            </if>
+            <if test="treatmentstate!=null">
+                and  s.TreatmentState=#{treatmentstate}
+            </if>
+            <if test="entrytime!=null">
+                and s.entrytime=#{entrytime}
+            </if>
+            <if test="invalidatesign!=null and invalidatesign!=''">
+                and s.InvalidateSign=#{invalidatesign}
+            </if>
+            <if test="entryunit!=null and entryunit!=''">
+                and s.EntryUnit=#{entryunit}
+            </if>
+            <if test="confirmationtime!=null">
+                and s.ConfirmationTime=#{confirmationtime}
+            </if>
+            <if test="confirmationunit!=null and confirmationunit!=''">
+                and s.ConfirmationUnit like concat(concat('%',#{confirmationunit}),'%')
+            </if>
+            <if test="confirmationpersonname!=null and confirmationpersonname!=''">
+                and s.ConfirmationPersonName like concat(concat('%',#{confirmationpersonname}),'%')
+            </if>
+
+        </where>)
+    </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -41,7 +401,7 @@
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.wl.model.RET_Returnlist">
-    insert into BOS.RET_RETURNLIST (ID, APPLICATIONNO, WORKSHEETNO, 
+    insert into BOS.RET_RETURNLIST (ID, APPLICATIONNO, WORKSHEETNO,
       RETURNTYPE, APREMARK, APLOSS, 
       ENTRYTIME, RECEIVEGUNIT, INVALIDATESIGN, 
       RETURNUNIT, RECORDINGTIME, ENTRYUNIT, 
@@ -49,13 +409,13 @@
       CONFIRMATIONPERSONNAME, TREATMENTSTATE, 
       APRETURNSTATUS, IDENTIFICATIONSIGN, HANDLINGOPINIONS, 
       DENIALTYPE)
-    values (#{id,jdbcType=DECIMAL}, #{applicationno,jdbcType=VARCHAR}, #{worksheetno,jdbcType=VARCHAR}, 
+    values (RQT_RETURNID.Nextval,concat('SQ',RQT_RETURNID.Nextval),concat('GDH',RQT_RETURNID.Nextval),
       #{returntype,jdbcType=DECIMAL}, #{apremark,jdbcType=VARCHAR}, #{aploss,jdbcType=DECIMAL}, 
       #{entrytime,jdbcType=TIMESTAMP}, #{receivegunit,jdbcType=DECIMAL}, #{invalidatesign,jdbcType=DECIMAL}, 
       #{returnunit,jdbcType=DECIMAL}, #{recordingtime,jdbcType=TIMESTAMP}, #{entryunit,jdbcType=DECIMAL}, 
       #{personname,jdbcType=VARCHAR}, #{confirmationtime,jdbcType=TIMESTAMP}, #{confirmationunit,jdbcType=DECIMAL}, 
       #{confirmationpersonname,jdbcType=VARCHAR}, #{treatmentstate,jdbcType=DECIMAL}, 
-      #{apreturnstatus,jdbcType=DECIMAL}, #{identificationsign,jdbcType=DECIMAL}, #{handlingopinions,jdbcType=VARCHAR}, 
+      RQT_RETURNID.Nextval, #{identificationsign,jdbcType=DECIMAL}, #{handlingopinions,jdbcType=VARCHAR},
       #{denialtype,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.RET_Returnlist">
@@ -67,7 +427,7 @@
       <if test="applicationno != null">
         APPLICATIONNO,
       </if>
-      <if test="worksheetno != null">
+      <if test="worksheetno!= null">
         WORKSHEETNO,
       </if>
       <if test="returntype != null">
@@ -125,9 +485,10 @@
         DENIALTYPE,
       </if>
     </trim>
+
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=DECIMAL},
+        RQT_RETURNID.Nextval,
       </if>
       <if test="applicationno != null">
         #{applicationno,jdbcType=VARCHAR},

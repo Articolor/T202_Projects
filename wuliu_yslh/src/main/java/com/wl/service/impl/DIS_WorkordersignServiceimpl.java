@@ -47,4 +47,9 @@ public class DIS_WorkordersignServiceimpl implements DIS_WorkordersignService {
     public DIS_Workordersign findByID2UnitsAndEmp(DIS_Workordersign o) {
         return workordersignMapper.findByID2UnitsAndEmp(o);
     }
+
+    @Override
+    public void updateByIDOMark(DIS_Workordersign o) {
+       workordersignMapper.updateByIDOMark(o);
+    }
 }

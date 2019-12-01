@@ -59,4 +59,9 @@ public class ACC_WorkorderServiceimpl implements ACC_WorkorderService {
     public void updateByOrderAndUnits(ACC_Workorder o) {
         workorderMapper.updateByOrderAndUnits(o);
     }
+
+    @Override
+    public int updateByPrimaryKeySelective(ACC_Workorder record) {
+        return workorderMapper.updateByPrimaryKeySelective(record);
+    }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 @Service
 public interface PAC_PackagingMapper {
     public List<PAC_Packaging> querypack(PAC_Packaging p);
+    public int getcountlq(PAC_Packaging p);
     int deleteByPrimaryKey(BigDecimal id);
 
     int insert(PAC_Packaging record);
@@ -19,4 +20,8 @@ public interface PAC_PackagingMapper {
     int updateByPrimaryKeySelective(PAC_Packaging record);
 
     int updateByPrimaryKey(PAC_Packaging record);
+
+    List<PAC_Packaging> selectPacking(PAC_Packaging p,int page,int rows);
+
+    Integer selectPackingCount(PAC_Packaging p);
 }

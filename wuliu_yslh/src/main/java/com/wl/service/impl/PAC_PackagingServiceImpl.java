@@ -16,4 +16,9 @@ public class PAC_PackagingServiceImpl implements PAC_PackagingService {
     public List<PAC_Packaging> querypack(PAC_Packaging p) {
         return mapper.querypack(p);
     }
+
+    @Override
+    public int getcountlq(PAC_Packaging p) {
+        return mapper.getcountlq(p);
+    }
 }
