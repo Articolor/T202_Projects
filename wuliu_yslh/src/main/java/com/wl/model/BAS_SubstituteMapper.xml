@@ -35,7 +35,7 @@
       STANDARDKG, STANDARDLENGTH, MODELS, 
       PLATEINT, INVALIDATEMARK, SUBORDINATEUNIT
       )
-    values (#{id,jdbcType=DECIMAL}, #{empno,jdbcType=VARCHAR}, #{empname,jdbcType=VARCHAR}, 
+    values (Substitute_id.nextval, #{empno,jdbcType=VARCHAR}, #{empname,jdbcType=VARCHAR},
       #{mobileno,jdbcType=DECIMAL}, #{type,jdbcType=DECIMAL}, #{pda,jdbcType=DECIMAL}, 
       #{standardkg,jdbcType=DECIMAL}, #{standardlength,jdbcType=DECIMAL}, #{models,jdbcType=VARCHAR}, 
       #{plateint,jdbcType=VARCHAR}, #{invalidatemark,jdbcType=DECIMAL}, #{subordinateunit,jdbcType=DECIMAL}
@@ -163,15 +163,12 @@
     update BOS.BAS_SUBSTITUTE
     set EMPNO = #{empno,jdbcType=VARCHAR},
       EMPNAME = #{empname,jdbcType=VARCHAR},
-      MOBILENO = #{mobileno,jdbcType=DECIMAL},
-      TYPE = #{type,jdbcType=DECIMAL},
       PDA = #{pda,jdbcType=DECIMAL},
       STANDARDKG = #{standardkg,jdbcType=DECIMAL},
       STANDARDLENGTH = #{standardlength,jdbcType=DECIMAL},
       MODELS = #{models,jdbcType=VARCHAR},
       PLATEINT = #{plateint,jdbcType=VARCHAR},
-      INVALIDATEMARK = #{invalidatemark,jdbcType=DECIMAL},
-      SUBORDINATEUNIT = #{subordinateunit,jdbcType=DECIMAL}
+      INVALIDATEMARK = #{invalidatemark,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
 
@@ -196,14 +193,15 @@
     <association property="sy_emp" javaType="SY_Emp">
       <id column="EID" jdbcType="DECIMAL" property="id" />
       <result column="EMP" jdbcType="VARCHAR" property="empname" />
+      <result column="EMPNO" jdbcType="VARCHAR" property="empno" />
     </association>
   </resultMap>
 
   <select id="findBAS_SubstituteAndSY_Units" resultMap="BAS_SubstituteAndSY_Units" parameterType="Object">
-    select * from(select rownum rn, b.*,e.id as eid,u.operationtime,u.name,e.empname as emp
+   select * from(select rownum rn, b.*,e.empno as eno,e.id as eid,u.operationtime,u.name,e.empname as emp
    from Bas_Substitute b
    inner join SY_UNITS u on b.subordinateunit=u.id
-   inner join SY_EMP e on b.empno=e.id)
+   inner join SY_EMP e on b.empno=e.empno)
     where rn between #{page} and #{rows}
   </select>
 
@@ -235,7 +233,7 @@
     select * from(select rownum rn, b.*,e.id as eid,u.operationtime,u.name,e.empname as emp
     from Bas_Substitute b
     inner join SY_UNITS u on b.subordinateunit=u.id
-    inner join SY_EMP e on b.empno=e.id
+    inner join SY_EMP e on b.empno=e.empno
     <where>
       <if test="empno != null and empno!=''">
         b.EMPNO = #{empno,jdbcType=VARCHAR}
@@ -251,4 +249,6 @@
     )
     where rn between #{page} and #{rows}
   </select>
+
+
 </mapper>

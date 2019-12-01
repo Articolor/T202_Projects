@@ -36,11 +36,11 @@
       DRIVER, TELEPHONE, TON,
       REMARKS, OPERATORID, OPERATIONUNITID,
       OPERATIONTIME)
-    values (#{id,jdbcType=DECIMAL}, #{linetype,jdbcType=DECIMAL}, #{lineid,jdbcType=DECIMAL},
+    values (bus_id.nextval, #{linetype,jdbcType=DECIMAL}, #{lineid,jdbcType=DECIMAL},
       #{licenseplateint,jdbcType=VARCHAR}, #{carrier,jdbcType=VARCHAR}, #{models,jdbcType=VARCHAR},
       #{driver,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{ton,jdbcType=DECIMAL},
       #{remarks,jdbcType=VARCHAR}, #{operatorid,jdbcType=DECIMAL}, #{operationunitid,jdbcType=DECIMAL},
-      #{operationtime,jdbcType=TIMESTAMP})
+      sysdate)
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.BAS_Shuttlebus">
     insert into BOS.BAS_SHUTTLEBUS
@@ -179,16 +179,14 @@
       DRIVER = #{driver,jdbcType=VARCHAR},
       TELEPHONE = #{telephone,jdbcType=VARCHAR},
       TON = #{ton,jdbcType=DECIMAL},
-      REMARKS = #{remarks,jdbcType=VARCHAR},
-      OPERATORID = #{operatorid,jdbcType=DECIMAL},
-      OPERATIONUNITID = #{operationunitid,jdbcType=DECIMAL},
-      OPERATIONTIME = #{operationtime,jdbcType=TIMESTAMP}
+      REMARKS = #{remarks,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
 
   <resultMap id="BUSANDEMPANDUNITS" type="BAS_Shuttlebus">
     <id column="ID" jdbcType="DECIMAL" property="id" />
     <result column="LINETYPE" jdbcType="DECIMAL" property="linetype" />
+    <result column="LINEID" jdbcType="DECIMAL" property="lineid" />
     <result column="LICENSEPLATEINT" jdbcType="VARCHAR" property="licenseplateint" />
     <result column="CARRIER" jdbcType="VARCHAR" property="carrier" />
     <result column="MODELS" jdbcType="VARCHAR" property="models" />
@@ -212,11 +210,12 @@
   </resultMap>
 
   <select id="findBUSANDEMPANDUNITS"  resultMap="BUSANDEMPANDUNITS">
-    select * from(select rownum rn, b.*,e.empname,u.name,l.linename from BAS_SHUTTLEBUS  b
+     select * from(select rownum rn, b.*,e.empname,u.name,l.linename from BAS_SHUTTLEBUS  b
 inner join SY_EMP  e on b.operatorid=e.id
 inner join SY_UNITS u on b.operationunitid=u.id
-inner join LOG_Logistics l on b.lineid=l.id) where rn between #{page} and #{rows}
-  </select>
+inner join LOG_Logistics l on b.lineid=l.id
+) where rn between #{page} and #{rows}
+</select>
 
 
   <resultMap id="BUSANDEMPANDUNITS1" type="BAS_Shuttlebus">

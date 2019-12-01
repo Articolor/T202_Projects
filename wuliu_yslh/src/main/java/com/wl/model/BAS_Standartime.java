@@ -12,22 +12,27 @@ public class BAS_Standartime {
     private String timename;
 
     private BigDecimal subordinateunit;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = " HH:mm:ss",timezone = "GMT+8")
     private Date workingtime;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date closingtime;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date saturdayworkingtime;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date saturdayclosingtime;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date sundayworkingtime;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "HH:mm:ss",timezone = "GMT+8")
     private Date sundayclosingtime;
 

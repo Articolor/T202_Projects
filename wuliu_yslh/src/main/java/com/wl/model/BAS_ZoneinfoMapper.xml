@@ -61,7 +61,7 @@
   inner join sy_units un
   on bz.subordinateunit=un.id
     <where>
-      <if test="name != null and name !=''">
+      <if test="name!= null and name !=''">
         un.NAME= #{name,jdbcType=VARCHAR}
       </if>
       <if test="zonecode != null and zonecode !=''">
@@ -89,7 +89,7 @@
     insert into BOS.BAS_ZONEINFO (ID, ZONECODE, ZONENAME, 
       ZONEPEOPLE, TELPHONE, SUBORDINATEUNIT
       )
-    values (#{id,jdbcType=DECIMAL}, #{zonecode,jdbcType=VARCHAR}, #{zonename,jdbcType=VARCHAR}, 
+    values (BAS_ZoneInfo_id.nextval, #{zonecode,jdbcType=VARCHAR}, #{zonename,jdbcType=VARCHAR},
       #{zonepeople,jdbcType=DECIMAL}, #{telphone,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=DECIMAL}
       )
   </insert>
@@ -161,9 +161,7 @@
     update BOS.BAS_ZONEINFO
     set ZONECODE = #{zonecode,jdbcType=VARCHAR},
       ZONENAME = #{zonename,jdbcType=VARCHAR},
-      ZONEPEOPLE = #{zonepeople,jdbcType=DECIMAL},
-      TELPHONE = #{telphone,jdbcType=VARCHAR},
-      SUBORDINATEUNIT = #{subordinateunit,jdbcType=DECIMAL}
+      TELPHONE = #{telphone,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
 </mapper>

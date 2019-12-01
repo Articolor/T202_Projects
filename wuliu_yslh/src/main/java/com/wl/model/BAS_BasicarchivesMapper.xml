@@ -163,6 +163,25 @@ inner join bas_basicarchivesentry y on b.id=y.parentid)
 
   </select>
 
+  <select id="findBAS_BasicarchivesAndSY_EmpAndSY_Unitscount" resultType="java.lang.Integer" parameterType="Object">
+  select count(*) from
+  (select rownum rn,b.*,y.parentid,e.empname,u.name as uname,u.id as idu,y.id as yid from bas_basicarchives b
+  inner join sy_emp e on b.operatorid=e.id
+  inner join sy_units u on b.operationunitid=u.id
+  inner join bas_basicarchivesentry y on b.id=y.parentid)
+  <where>
+    rn between
+    <if test="page !=null and page!=''" >
+
+      #{page}
+    </if>
+
+    <if test="rows !=null and rows!=''">
+      AND  #{rows}
+    </if>
+  </where>
+  </select>
+
   <resultMap id="BAS_BasicarchivesAndSY_EmpAndSY_Units1" type="BAS_Basicarchives">
     <id column="ID" jdbcType="DECIMAL" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
