@@ -13,6 +13,58 @@
   <sql id="Base_Column_List">
     ID, VEHICLEINT, TRANSPORTWAY, WAYBILLID, ESTIMATEDATE, CARGON, IMPORTANTHINTS
   </sql>
+  <select id="queryextract" resultType="IAE_Extract" parameterType="IAE_Extract">
+
+    select * from (
+    select rownum rn,e.* from IAE_Extract e
+    <where>
+      <if test="id != null and id!=''">
+        and id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="vehicleint != null and vehicleint!=''">
+        and vehicleint like concat(concat('%',#{vehicleint}),'%')
+      </if>
+
+      <if test="transportway != null and transportway!=''">
+        and transportway like concat(concat('%',#{transportway}),'%')
+      </if>
+      <if test="waybillid != null and waybillid!=''">
+        and waybillid like concat(concat('%',#{waybillid}),'%')
+      </if>
+
+      <if test="estimatedate != null and estimatedate!=''">
+        and estimatedate like concat(concat('%',#{estimatedate}),'%')
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+  <select id="querycount" resultType="int">
+    select count(*) from (
+    select rownum rn,e.* from IAE_Extract e
+    <where>
+      <if test="id != null and id!=''">
+        and id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="vehicleint != null and vehicleint!=''">
+        and vehicleint like concat(concat('%',#{vehicleint}),'%')
+      </if>
+
+      <if test="transportway != null and transportway!=''">
+        and transportway like concat(concat('%',#{transportway}),'%')
+      </if>
+      <if test="waybillid != null and waybillid!=''">
+        and waybillid like concat(concat('%',#{waybillid}),'%')
+      </if>
+
+      <if test="estimatedate != null and estimatedate!=''">
+        and estimatedate like concat(concat('%',#{estimatedate}),'%')
+      </if>
+
+    </where>
+    )
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -23,12 +75,12 @@
     delete from BOS.IAE_EXTRACT
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.wl.model.IAE_Extract">
-    insert into BOS.IAE_EXTRACT (ID, VEHICLEINT, TRANSPORTWAY, 
+  <insert id="insert" parameterType="com.wl.model.IAE_Extract" >
+    insert into BOS.IAE_EXTRACT (ID, VEHICLEINT, TRANSPORTWAY,
       WAYBILLID, ESTIMATEDATE, CARGON, 
       IMPORTANTHINTS)
     values (#{id,jdbcType=VARCHAR}, #{vehicleint,jdbcType=VARCHAR}, #{transportway,jdbcType=VARCHAR}, 
-      #{waybillid,jdbcType=VARCHAR}, #{estimatedate,jdbcType=TIMESTAMP}, #{cargon,jdbcType=DECIMAL}, 
+      #{waybillid,jdbcType=VARCHAR}, sysdate, #{cargon,jdbcType=DECIMAL},
       #{importanthints,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.IAE_Extract">

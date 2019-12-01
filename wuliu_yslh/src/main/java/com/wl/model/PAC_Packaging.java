@@ -1,9 +1,16 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class PAC_Packaging {
+
+
+
+
     private BigDecimal id;
 
     private String itemcode;
@@ -18,17 +25,61 @@ public class PAC_Packaging {
 
     private String measurementunit;
 
-    private BigDecimal status;
 
+    private BigDecimal status;
+    private  SY_Emp syemp;
     private BigDecimal operatorid;
+
 
     private Date operationtime;
 
+
+    private SY_Emp emp;
     private BigDecimal invalidatejobint;
+
+
 
     private BigDecimal invalidatename;
 
+
+
     private Date invalidatetime;
+
+    private Integer page=1;
+
+    private Integer rows=5;
+
+    public SY_Emp getSyemp() {
+        return syemp;
+    }
+
+    public void setSyemp(SY_Emp syemp) {
+        this.syemp = syemp;
+    }
+
+    public SY_Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(SY_Emp emp) {
+        this.emp = emp;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
 
     public BigDecimal getId() {
         return id;

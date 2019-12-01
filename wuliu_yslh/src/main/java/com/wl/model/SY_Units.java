@@ -14,6 +14,9 @@ public class SY_Units {
 
     private BigDecimal operatorid;
 
+    public SY_Units() {
+    }
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date operationtime=new Date();
 

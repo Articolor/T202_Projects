@@ -1,11 +1,16 @@
 package com.wl.mapper;
 
 import com.wl.model.IAE_Extract;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+@Service
 public interface IAE_ExtractMapper {
+    public List<IAE_Extract> queryextract(IAE_Extract e);
+    public int querycount(IAE_Extract e);
     int deleteByPrimaryKey(String id);
 
-    int insert(IAE_Extract record);
+    public int insert(IAE_Extract record);
 
     int insertSelective(IAE_Extract record);
 

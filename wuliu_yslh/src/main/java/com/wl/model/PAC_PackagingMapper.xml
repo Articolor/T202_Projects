@@ -10,120 +10,244 @@
     <result column="TYPE" jdbcType="DECIMAL" property="type" />
     <result column="MEASUREMENTUNIT" jdbcType="VARCHAR" property="measurementunit" />
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
+
     <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
     <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+
     <result column="INVALIDATEJOBINT" jdbcType="DECIMAL" property="invalidatejobint" />
     <result column="INVALIDATENAME" jdbcType="DECIMAL" property="invalidatename" />
     <result column="INVALIDATETIME" jdbcType="TIMESTAMP" property="invalidatetime" />
+    <association property="syemp" javaType="SY_Emp">
+      <result property="id" column="EID"></result>
+      <result property="empname" column="INVALIDATEJOBQQ"></result>
+    </association>
+    <association property="emp" javaType="SY_Emp">
+      <result property="id" column="EID"></result>
+      <result property="empname" column="OPERATORQQ"></result>
+    </association>
   </resultMap>
+
   <sql id="Base_Column_List">
-    ID, ITEMCODE, ITEMNAME, PLANNEDPRICE, SPECIFICATIONS, TYPE, MEASUREMENTUNIT, STATUS, 
+    ID, ITEMCODE, ITEMNAME, PLANNEDPRICE, SPECIFICATIONS, TYPE, MEASUREMENTUNIT, STATUS,
     OPERATORID, OPERATIONTIME, INVALIDATEJOBINT, INVALIDATENAME, INVALIDATETIME
   </sql>
+  <select id="querypack" parameterType="PAC_Packaging" resultMap="BaseResultMap">
+
+    select * from (
+    select rownum rn,pac.*,emp.empname as operatorqq,emp.empname as invalidatejobqq from Pac_Packaging pac,SY_EMP emp
+    <where>and pac.operatorid=emp.id
+      <if test="itemcode != null and itemcode!=''">
+        and pac.itemcode like concat(concat('%',#{itemcode}),'%')
+      </if>
+      <if test="itemname != null and itemname!=''">
+        and pac.itemname like concat(concat('%',#{itemname}),'%')
+      </if>
+
+      <if test="measurementunit != null and measurementunit!=''">
+        and pac.measurementunit like concat(concat('%',#{measurementunit}),'%')
+      </if>
+      <if test="operatorqq != null and operatorqq!=''">
+        and emp.empname like concat(concat('%',#{operatorqq}),'%')
+      </if>
+
+      <if test="invalidatejobqq != null and invalidatejobqq!=''">
+        and emp.empname like concat(concat('%',#{invalidatejobqq}),'%')
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <select id="getcountlq" parameterType="PAC_Packaging" resultType="int">
+
+    select count(*) from (
+    select rownum rn,pac.*,emp.empname as operatorqq,emp.empname as invalidatejobqq from Pac_Packaging pac,SY_EMP emp
+    <where>and pac.operatorid=emp.id
+      <if test="itemcode != null and itemcode!=''">
+        and pac.itemcode like concat(concat('%',#{itemcode}),'%')
+      </if>
+      <if test="itemname != null and itemname!=''">
+        and pac.itemname like concat(concat('%',#{itemname}),'%')
+      </if>
+
+      <if test="measurementunit != null and measurementunit!=''">
+        and pac.measurementunit like concat(concat('%',#{measurementunit}),'%')
+      </if>
+      <if test="operatorqq != null and operatorqq!=''">
+        and emp.empname like concat(concat('%',#{operatorqq}),'%')
+      </if>
+
+      <if test="invalidatejobqq != null and invalidatejobqq!=''">
+        and emp.empname like concat(concat('%',#{invalidatejobqq}),'%')
+      </if>
+
+    </where>
+    )
+
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from BOS.PAC_PACKAGING
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+    <!--模糊加分页-->
+    <select id="selectPacking" parameterType="Object" resultType="com.wl.model.PAC_Packaging">
+    select * from(select rownum rn,p.* from pac_packaging p
+    <where>
+        <if test="p.itemcode != null and p.itemcode != ''">
+           and ITEMCODE like concat(concat('%',#{p.itemcode}),'%')
+    </if>
+        <if test="p.itemname != null and p.itemname != ''">
+            and ITEMNAME like concat(concat('%',#{p.itemname}),'%')
+        </if>
+        <if test="p.plannedprice != null and p.plannedprice != ''">
+            and PLANNEDPRICE=#{p.plannedprice}
+        </if>
+
+        <if test="p.type != null and p.type != ''">
+           and TYPE=#{p.type}
+        </if>
+
+        <if test="p.status != null and p.status != ''">
+           and STATUS=#{p.status}
+        </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+    </select>
+
+
+
+    <!---->
+    <!--模糊加分页-->
+    <select id="selectPackingCount" parameterType="Object" resultType="Integer">
+        select count(*) from(select rownum rn,p.* from pac_packaging p
+        <where>
+            <if test="itemcode != null and itemcode != ''">
+                and ITEMCODE like concat(concat('%',#{itemcode}),'%')
+            </if>
+            <if test="itemname != null and itemname != ''">
+                and ITEMNAME like concat(concat('%',#{itemname}),'%')
+            </if>
+            <if test="plannedprice != null and plannedprice != ''">
+                and PLANNEDPRICE=#{plannedprice}
+            </if>
+
+            <if test="type != null and type != ''">
+                and TYPE=#{type}
+            </if>
+
+            <if test="status != null and status != ''">
+                and STATUS=#{status}
+            </if>
+
+        </where>
+        )
+    </select>
+
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.PAC_PACKAGING
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.wl.model.PAC_Packaging">
-    insert into BOS.PAC_PACKAGING (ID, ITEMCODE, ITEMNAME, 
-      PLANNEDPRICE, SPECIFICATIONS, TYPE, 
-      MEASUREMENTUNIT, STATUS, OPERATORID, 
-      OPERATIONTIME, INVALIDATEJOBINT, INVALIDATENAME, 
-      INVALIDATETIME)
-    values (#{id,jdbcType=DECIMAL}, #{itemcode,jdbcType=VARCHAR}, #{itemname,jdbcType=VARCHAR}, 
-      #{plannedprice,jdbcType=DECIMAL}, #{specifications,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
-      #{measurementunit,jdbcType=VARCHAR}, #{status,jdbcType=DECIMAL}, #{operatorid,jdbcType=DECIMAL}, 
-      #{operationtime,jdbcType=TIMESTAMP}, #{invalidatejobint,jdbcType=TIMESTAMP}, #{invalidatename,jdbcType=DECIMAL}, 
-      #{invalidatetime,jdbcType=TIMESTAMP})
-  </insert>
   <insert id="insertSelective" parameterType="com.wl.model.PAC_Packaging">
     insert into BOS.PAC_PACKAGING
+    values (pacid.nextval,
+            concat('WP',pacid.nextval),
+            #{itemname,jdbcType=VARCHAR},
+            #{plannedprice,jdbcType=DECIMAL},
+            #{specifications,jdbcType=VARCHAR},
+            #{type,jdbcType=DECIMAL},
+            #{measurementunit,jdbcType=VARCHAR},
+            #{status,jdbcType=DECIMAL},
+            #{operatorid,jdbcType=DECIMAL},
+            sysdate,
+            #{invalidatejobint,jdbcType=DECIMAL},
+            #{invalidatename,jdbcType=DECIMAL},
+            sysdate)
+  </insert>
+  <insert id="insert" parameterType="com.wl.model.PAC_Packaging">
+    insert into BOS.PAC_PACKAGING
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
-      </if>
-      <if test="itemcode != null">
+      <if test="itemcode != null and itemcode != ''">
         ITEMCODE,
       </if>
-      <if test="itemname != null">
+      <if test="itemname != null and itemname != ''">
         ITEMNAME,
       </if>
-      <if test="plannedprice != null">
+      <if test="plannedprice != null and plannedprice != ''">
         PLANNEDPRICE,
       </if>
-      <if test="specifications != null">
+      <if test="specifications != null and specifications != ''">
         SPECIFICATIONS,
       </if>
-      <if test="type != null">
+      <if test="type != null and type != ''">
         TYPE,
       </if>
-      <if test="measurementunit != null">
+      <if test="measurementunit != null and measurementunit != ''">
         MEASUREMENTUNIT,
       </if>
-      <if test="status != null">
+      <if test="status != null and status != ''">
         STATUS,
       </if>
-      <if test="operatorid != null">
+      <if test="operatorid != null and operatorid != ''">
         OPERATORID,
       </if>
-      <if test="operationtime != null">
+      <if test="operationtime != null and operationtime != ''">
         OPERATIONTIME,
       </if>
-      <if test="invalidatejobint != null">
+      <if test="invalidatejobint != null and invalidatejobint != ''">
         INVALIDATEJOBINT,
       </if>
-      <if test="invalidatename != null">
+      <if test="invalidatename != null and invalidatename != ''">
         INVALIDATENAME,
       </if>
-      <if test="invalidatetime != null">
+      <if test="invalidatetime != null and invalidatetime != ''">
         INVALIDATETIME,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=DECIMAL},
-      </if>
-      <if test="itemcode != null">
+
+        <if test="itemcode != null and itemcode != ''">
         #{itemcode,jdbcType=VARCHAR},
       </if>
-      <if test="itemname != null">
+        <if test="itemname != null and itemname != ''">
         #{itemname,jdbcType=VARCHAR},
       </if>
-      <if test="plannedprice != null">
+        <if test="plannedprice != null and plannedprice != ''">
         #{plannedprice,jdbcType=DECIMAL},
       </if>
-      <if test="specifications != null">
+        <if test="specifications != null and specifications != ''">
         #{specifications,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
+      <if test="type != null and type!=''">
         #{type,jdbcType=DECIMAL},
       </if>
-      <if test="measurementunit != null">
+        <if test="measurementunit != null and measurementunit != ''">
         #{measurementunit,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
+        <if test="status != null and status != ''">
         #{status,jdbcType=DECIMAL},
       </if>
-      <if test="operatorid != null">
+        <if test="operatorid != null and operatorid != ''">
         #{operatorid,jdbcType=DECIMAL},
       </if>
-      <if test="operationtime != null">
+        <if test="operationtime != null and operationtime != ''">
         #{operationtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="invalidatejobint != null">
+        <if test="invalidatejobint != null and invalidatejobint != ''">
         #{invalidatejobint,jdbcType=TIMESTAMP},
       </if>
-      <if test="invalidatename != null">
+        <if test="invalidatename != null and invalidatename != ''">
         #{invalidatename,jdbcType=DECIMAL},
       </if>
-      <if test="invalidatetime != null">
-        #{invalidatetime,jdbcType=TIMESTAMP},
+        <if test="invalidatetime != null and invalidatetime != ''">
+        #{sysdate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
