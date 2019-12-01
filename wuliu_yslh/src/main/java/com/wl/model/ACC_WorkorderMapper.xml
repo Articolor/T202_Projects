@@ -290,37 +290,37 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.ACC_Workorder">
     update BOS.ACC_WORKORDER
     <set>
-      <if test="businessnoticeno != null">
+      <if test="businessnoticeno != null and businessnoticeno!=''">
         BUSINESSNOTICENO = #{businessnoticeno,jdbcType=VARCHAR},
       </if>
-      <if test="jobno != null">
+      <if test="jobno != null and jobno!=''">
         JOBNO = #{jobno,jdbcType=VARCHAR},
       </if>
-      <if test="jobtype != null">
+      <if test="jobtype != null and jobtype!=''">
         JOBTYPE = #{jobtype,jdbcType=DECIMAL},
       </if>
-      <if test="pickupstatus != null">
+      <if test="pickupstatus != null and pickupstatus!=''">
         PICKUPSTATUS = #{pickupstatus,jdbcType=DECIMAL},
       </if>
-      <if test="shortmessageint != null">
+      <if test="shortmessageint != null and shortmessageint!=''">
         SHORTMESSAGEINT = #{shortmessageint,jdbcType=DECIMAL},
       </if>
-      <if test="workgenerationtime != null">
+      <if test="workgenerationtime != null and workgenerationtime!=''">
         WORKGENERATIONTIME = #{workgenerationtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="aftersinglenum != null">
+      <if test="aftersinglenum != null and aftersinglenum!=''">
         AFTERSINGLENUM = #{aftersinglenum,jdbcType=DECIMAL},
       </if>
-      <if test="smallmembernum != null">
+      <if test="smallmembernum != null and smallmembernum!=''">
         SMALLMEMBERNUM = #{smallmembernum,jdbcType=DECIMAL},
       </if>
-      <if test="pickupunit != null">
+      <if test="pickupunit != null and pickupunit!=''">
         PICKUPUNIT = #{pickupunit,jdbcType=DECIMAL},
       </if>
-      <if test="pickuptime != null">
+      <if test="pickuptime != null and pickuptime!=''">
         PICKUPTIME = #{pickuptime,jdbcType=TIMESTAMP},
       </if>
-      <if test="sortingcode != null">
+      <if test="sortingcode != null and sortingcode!=''">
         SORTINGCODE = #{sortingcode,jdbcType=VARCHAR},
       </if>
     </set>
