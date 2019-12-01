@@ -72,7 +72,22 @@ public class DispatchYController {
         map.put("wbuss",list);
         map.put("sums",workorderService.findsumcountUB(o));
         map.put("work",o);
+        map.put("xjy",empService.findXJY());//查询所有的小件员
+        map.put("units",unitsService.findAllUnits());//查询所有的分拣编码
         return map;
+    }
+
+    //根据转入的方式修改工单表ret
+    @RequestMapping("updateByThreeAndId")
+    public String updateByThreeAndId(ACC_Workorder o){
+        //根据单选按钮选中的值修改工单表
+        /*如果是1----修改分拣编码
+        * 如果是2----修改小件员编号
+        * 如果是3----修改单位*/
+        System.out.println(o);
+
+        //workorderService.updateByPrimaryKeySelective(o);
+        return "ok";
     }
 
     //根据员工工号查询出查单密码-----查台转单
@@ -150,7 +165,13 @@ public class DispatchYController {
         map.put("sigs",list);
         map.put("sums",workordersignService.findSumCount(o));
         map.put("sing",o);
-        map.put("emps",empService.findXJY());//查询出所有的派送人员
+        map.put("units",unitsService.findAllUnits());//查询出所有的单位
+        map.put("emps",empService.findemono());//查询所有的员工
+        //查询出所有工单号
+        ACC_Workorder a = new ACC_Workorder();
+        a.setRows(1000);
+        a.setPage(1);
+        map.put("worknos",workorderService.findAllWorderAndBility(a));
         return map;
     }
 
@@ -165,6 +186,7 @@ public class DispatchYController {
     //签收录入-----编辑
     @RequestMapping("updateSignYWY")
     public String updateSignYWY(DIS_Workordersign o){
+        //workordersignServic.
         return "ok";
     }
 
@@ -182,11 +204,16 @@ public class DispatchYController {
     //取消签收申请确认----查询全部
     @RequestMapping("findAllBySign2YWY")
     public Map<String,Object> findAllBySign2YWY(DIS_Workordersign o){
+        Integer page = o.getPage();
+        Integer rows = o.getRows();
+        o.setPage((page-1)*rows+1);
+        o.setRows((page*rows));
         Map<String,Object> map=new HashMap<>();
         List<DIS_Workordersign> list = workordersignService.findAllByUnits2AndEmp(o);
         map.put("sings",list);
         map.put("sing",o);
         map.put("sums",workordersignService.findSumCount2(o));
+        map.put("units",unitsService.findAllUnits());//查询出所有的单位
         return map;
     }
 
@@ -197,6 +224,14 @@ public class DispatchYController {
         DIS_Workordersign worksign = workordersignService.findByID2UnitsAndEmp(o);
         map.put("worksign",worksign);
         return map;
+    }
+
+    //取消签收确认----作废
+    @RequestMapping("updateByIdOMark")
+    public String updateByIdOMark(DIS_Workordersign o){
+        //根据id修改作废标志将2修改成1
+        workordersignService.updateByIDOMark(o);
+        return "ok";
     }
 
 }

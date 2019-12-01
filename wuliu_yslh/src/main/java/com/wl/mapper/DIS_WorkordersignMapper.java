@@ -30,4 +30,7 @@ public interface DIS_WorkordersignMapper {
     DIS_Workordersign findByID2UnitsAndEmp(DIS_Workordersign o);
 
     int insertSelective(DIS_Workordersign record);
+
+    //根据id修改作废标记
+    void updateByIDOMark(DIS_Workordersign o);
 }
