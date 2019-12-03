@@ -1,8 +1,10 @@
 package com.wl.mapper;
 
 import com.wl.model.SOR_Package;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+@Service
 public interface SOR_PackageMapper {
     int deleteByPrimaryKey(BigDecimal id);
 
