@@ -1,5 +1,8 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,6 +15,8 @@ public class SOR_Outbounddetails {
 
     private BigDecimal volume;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date scandate;
 
     private BigDecimal isscan;
@@ -82,5 +87,19 @@ public class SOR_Outbounddetails {
 
     public void setIsdoublestorage(BigDecimal isdoublestorage) {
         this.isdoublestorage = isdoublestorage;
+    }
+
+    @Override
+    public String toString() {
+        return "SOR_Outbounddetails{" +
+                "id=" + id +
+                ", packageid='" + packageid + '\'' +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", scandate=" + scandate +
+                ", isscan=" + isscan +
+                ", isnextstorage=" + isnextstorage +
+                ", isdoublestorage=" + isdoublestorage +
+                '}';
     }
 }

@@ -29,6 +29,47 @@
     </where>
   </select>
 
+
+  <!--查询全部   加分页加 高级查询-->
+  <select id="findAllOutBo" parameterType="SOR_Outbound" resultType="SOR_Outbound">
+    select * from
+    (
+    select rownum rn,o.* from sor_outbound o
+    <where>
+      <if test="id!=null and id!=''">
+        and o.id like concat('%',concat(#{id},'%'))
+      </if>
+      <if test="handovertype!=null and handovertype!=''">
+        and o.handovertype=#{handovertype}
+      </if>
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+
+  <!--查询总行数-->
+  <select id="sumCount" parameterType="SOR_Outbound" resultType="Integer">
+    select count(*) from
+    (
+    select rownum rn,o.* from sor_outbound o
+    <where>
+      <if test="id!=null and id!=''">
+        and o.id like concat('%',concat(#{id},'%'))
+      </if>
+      <if test="handovertype!=null and handovertype!=''">
+        and o.handovertype=#{handovertype}
+      </if>
+    </where>
+    )
+  </select>
+
+  <!--根据时间查询出最新时间-->
+  <select id="findNewDate" resultType="SOR_Outbound">
+     select * from sor_outbound order by enterdate desc
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -44,10 +85,10 @@
       DIRECTION, ACCEPTPERSON, CARRIERS, 
       DELIVERYPERSON, DELIVERYDATE, DELIVERYCOMPANY, 
       ENTERPERSON, ENTERDATE)
-    values (#{id,jdbcType=DECIMAL}, #{handovertype,jdbcType=DECIMAL}, #{line,jdbcType=VARCHAR}, 
+    values (sor_outbound_id.nextval, #{handovertype,jdbcType=DECIMAL}, #{line,jdbcType=VARCHAR},
       #{direction,jdbcType=DECIMAL}, #{acceptperson,jdbcType=DECIMAL}, #{carriers,jdbcType=DECIMAL}, 
-      #{deliveryperson,jdbcType=DECIMAL}, #{deliverydate,jdbcType=TIMESTAMP}, #{deliverycompany,jdbcType=VARCHAR}, 
-      #{enterperson,jdbcType=DECIMAL}, #{enterdate,jdbcType=TIMESTAMP})
+      #{deliveryperson,jdbcType=DECIMAL}, sysdate, #{deliverycompany,jdbcType=VARCHAR},
+      #{enterperson,jdbcType=DECIMAL}, sysdate)
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SOR_Outbound">
     insert into BOS.SOR_OUTBOUND

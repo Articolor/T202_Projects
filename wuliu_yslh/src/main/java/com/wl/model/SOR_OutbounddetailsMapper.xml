@@ -14,6 +14,13 @@
   <sql id="Base_Column_List">
     ID, PACKAGEID, WEIGHT, VOLUME, SCANDATE, ISSCAN, ISNEXTSTORAGE, ISDOUBLESTORAGE
   </sql>
+
+  <!--根据出库单号查询出出库详细表数据-->
+  <select id="findByIdOutDeta" resultType="SOR_Outbounddetails" parameterType="SOR_Outbounddetails">
+    select * from SOR_OUTBOUNDDETAILS where id=#{id}
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -28,8 +35,8 @@
     insert into BOS.SOR_OUTBOUNDDETAILS (ID, PACKAGEID, WEIGHT, 
       VOLUME, SCANDATE, ISSCAN, 
       ISNEXTSTORAGE, ISDOUBLESTORAGE)
-    values (#{id,jdbcType=DECIMAL}, #{packageid,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, 
-      #{volume,jdbcType=DECIMAL}, #{scandate,jdbcType=TIMESTAMP}, #{isscan,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=DECIMAL},concat('HBH',sor_detailspackage_id.nextval), #{weight,jdbcType=DECIMAL},
+      #{volume,jdbcType=DECIMAL}, sysdate, #{isscan,jdbcType=DECIMAL},
       #{isnextstorage,jdbcType=DECIMAL}, #{isdoublestorage,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SOR_Outbounddetails">

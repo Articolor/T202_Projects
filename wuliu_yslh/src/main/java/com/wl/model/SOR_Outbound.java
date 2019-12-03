@@ -26,6 +26,26 @@ public class SOR_Outbound {
 
     private Date enterdate;
 
+    private Integer page=1;
+
+    private Integer rows=5;
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
     public BigDecimal getId() {
         return id;
     }
@@ -112,5 +132,24 @@ public class SOR_Outbound {
 
     public void setEnterdate(Date enterdate) {
         this.enterdate = enterdate;
+    }
+
+    @Override
+    public String toString() {
+        return "SOR_Outbound{" +
+                "id=" + id +
+                ", handovertype=" + handovertype +
+                ", line='" + line + '\'' +
+                ", direction=" + direction +
+                ", acceptperson=" + acceptperson +
+                ", carriers=" + carriers +
+                ", deliveryperson=" + deliveryperson +
+                ", deliverydate=" + deliverydate +
+                ", deliverycompany='" + deliverycompany + '\'' +
+                ", enterperson=" + enterperson +
+                ", enterdate=" + enterdate +
+                ", page=" + page +
+                ", rows=" + rows +
+                '}';
     }
 }
