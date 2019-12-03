@@ -214,9 +214,17 @@ public class SOR_AllYController {
     @RequestMapping("insertPackAgeYWY")
     public String insertPackAgeYWY(SOR_Package p){
         //新增和包信息
+        
         return "ok";
     }
 
+    //分拣管理----和包-----保存
+    @RequestMapping("insertPageAgeDateilsYWY")
+    public String insertPageAgeDateilsYWY(SOR_Packagedetails d){
+        //新增和包信息对应的和详细信息
+
+        return "ok";
+    }
 
 
 }

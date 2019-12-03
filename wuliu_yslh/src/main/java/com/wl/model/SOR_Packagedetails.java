@@ -1,11 +1,12 @@
 package com.wl.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class SOR_Packagedetails {
     private BigDecimal id;
 
-    private BigDecimal warename;
+    private String warename;
 
     private String destination;
 
@@ -19,13 +20,31 @@ public class SOR_Packagedetails {
 
     private BigDecimal volume;
 
-    private BigDecimal service;
+    private Date service;
 
     private String importanthints;
 
     private String ask;
 
     private String inputtype;
+
+    @Override
+    public String toString() {
+        return "SOR_Packagedetails{" +
+                "id=" + id +
+                ", warename='" + warename + '\'' +
+                ", destination='" + destination + '\'' +
+                ", ticket=" + ticket +
+                ", actualcargoint=" + actualcargoint +
+                ", cargoint=" + cargoint +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", service=" + service +
+                ", importanthints='" + importanthints + '\'' +
+                ", ask='" + ask + '\'' +
+                ", inputtype='" + inputtype + '\'' +
+                '}';
+    }
 
     public BigDecimal getId() {
         return id;
@@ -35,11 +54,11 @@ public class SOR_Packagedetails {
         this.id = id;
     }
 
-    public BigDecimal getWarename() {
+    public String getWarename() {
         return warename;
     }
 
-    public void setWarename(BigDecimal warename) {
+    public void setWarename(String warename) {
         this.warename = warename;
     }
 
@@ -48,7 +67,7 @@ public class SOR_Packagedetails {
     }
 
     public void setDestination(String destination) {
-        this.destination = destination == null ? null : destination.trim();
+        this.destination = destination;
     }
 
     public BigDecimal getTicket() {
@@ -91,11 +110,11 @@ public class SOR_Packagedetails {
         this.volume = volume;
     }
 
-    public BigDecimal getService() {
+    public Date getService() {
         return service;
     }
 
-    public void setService(BigDecimal service) {
+    public void setService(Date service) {
         this.service = service;
     }
 
@@ -104,7 +123,7 @@ public class SOR_Packagedetails {
     }
 
     public void setImportanthints(String importanthints) {
-        this.importanthints = importanthints == null ? null : importanthints.trim();
+        this.importanthints = importanthints;
     }
 
     public String getAsk() {
@@ -112,7 +131,7 @@ public class SOR_Packagedetails {
     }
 
     public void setAsk(String ask) {
-        this.ask = ask == null ? null : ask.trim();
+        this.ask = ask;
     }
 
     public String getInputtype() {
@@ -120,6 +139,6 @@ public class SOR_Packagedetails {
     }
 
     public void setInputtype(String inputtype) {
-        this.inputtype = inputtype == null ? null : inputtype.trim();
+        this.inputtype = inputtype;
     }
 }
