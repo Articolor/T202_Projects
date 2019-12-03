@@ -52,4 +52,15 @@ public class SOR_Storagedetails {
     public void setState(BigDecimal state) {
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return "SOR_Storagedetails{" +
+                "id=" + id +
+                ", packageid='" + packageid + '\'' +
+                ", weight=" + weight +
+                ", outboundid='" + outboundid + '\'' +
+                ", state=" + state +
+                '}';
+    }
 }

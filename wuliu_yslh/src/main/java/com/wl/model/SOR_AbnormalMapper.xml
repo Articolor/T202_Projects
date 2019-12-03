@@ -33,10 +33,10 @@
       LAUNCHCOMPANY, ABNORMALTYPE, TRANSFERINT, 
       CARGOINT, PACKAGEINT, HEDGEABNINT, 
       ABOSTATE, HANDLEDATE)
-    values (#{id,jdbcType=DECIMAL}, #{launchdate,jdbcType=TIMESTAMP}, #{launchperson,jdbcType=VARCHAR}, 
-      #{launchcompany,jdbcType=VARCHAR}, #{abnormaltype,jdbcType=DECIMAL}, #{transferint,jdbcType=VARCHAR}, 
-      #{cargoint,jdbcType=VARCHAR}, #{packageint,jdbcType=VARCHAR}, #{hedgeabnint,jdbcType=DECIMAL}, 
-      #{abostate,jdbcType=DECIMAL}, #{handledate,jdbcType=TIMESTAMP})
+    values (sor_abnormal_id.nextval,sysdate, #{launchperson,jdbcType=VARCHAR},
+      #{launchcompany,jdbcType=VARCHAR}, #{abnormaltype,jdbcType=DECIMAL}, CONCAT('JJDH',sor_transfer_no.nextval),
+      #{cargoint,jdbcType=VARCHAR}, #{packageint,jdbcType=VARCHAR}, sor_transfer_no.nextval,
+      #{abostate,jdbcType=DECIMAL}, sysdate)
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SOR_Abnormal">
     insert into BOS.SOR_ABNORMAL

@@ -12,6 +12,41 @@
   <sql id="Base_Column_List">
     ID, ACCEPTDATE, ACCEPTPERSON, ACCEPTCOMPANY, DELIVERYPERSON, DELIVERYCOMPANY
   </sql>
+
+  <!--查询所有的信息-->
+  <select id="findAllStrYWY" resultType="SOR_Storage" parameterType="SOR_Storage">
+    select * from
+    (
+    select rownum rn,st.* from SOR_Storage st
+    <where >
+      <if test="id!=null and id!=''">
+        and id like concat('%',concat(#{id},'%'))
+      </if>
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询全部的分页-->
+  <select id="sumcount" resultType="Integer" parameterType="SOR_Storage">
+    select count(*) from
+    (
+    select rownum rn,st.* from SOR_Storage st
+    <where >
+      <if test="id!=null and id!=''">
+        and id like concat('%',concat(#{id},'%'))
+      </if>
+    </where>
+    )
+  </select>
+
+  <!--根据时间查询-->
+  <select id="findTimeNew" resultType="SOR_Storage">
+    select * from SOR_Storage order by acceptdate desc
+  </select>
+
+
+
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -26,7 +61,7 @@
     insert into BOS.SOR_STORAGE (ID, ACCEPTDATE, ACCEPTPERSON, 
       ACCEPTCOMPANY, DELIVERYPERSON, DELIVERYCOMPANY
       )
-    values (#{id,jdbcType=DECIMAL}, #{acceptdate,jdbcType=TIMESTAMP}, #{acceptperson,jdbcType=DECIMAL}, 
+    values (sor_storage_id.nextval,sysdate, #{acceptperson,jdbcType=DECIMAL},
       #{acceptcompany,jdbcType=VARCHAR}, #{deliveryperson,jdbcType=DECIMAL}, #{deliverycompany,jdbcType=VARCHAR}
       )
   </insert>

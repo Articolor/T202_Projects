@@ -1,11 +1,16 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class SOR_Storage {
     private BigDecimal id;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date acceptdate;
 
     private BigDecimal acceptperson;
@@ -15,6 +20,26 @@ public class SOR_Storage {
     private BigDecimal deliveryperson;
 
     private String deliverycompany;
+
+    private Integer page=1;//起始页数
+
+    private Integer rows=5;//到哪一行结束
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
 
     public BigDecimal getId() {
         return id;
@@ -62,5 +87,19 @@ public class SOR_Storage {
 
     public void setDeliverycompany(String deliverycompany) {
         this.deliverycompany = deliverycompany == null ? null : deliverycompany.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SOR_Storage{" +
+                "id=" + id +
+                ", acceptdate=" + acceptdate +
+                ", acceptperson=" + acceptperson +
+                ", acceptcompany='" + acceptcompany + '\'' +
+                ", deliveryperson=" + deliveryperson +
+                ", deliverycompany='" + deliverycompany + '\'' +
+                ", page=" + page +
+                ", rows=" + rows +
+                '}';
     }
 }

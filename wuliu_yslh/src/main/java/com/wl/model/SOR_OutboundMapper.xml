@@ -18,6 +18,17 @@
     ID, HANDOVERTYPE, LINE, DIRECTION, ACCEPTPERSON, CARRIERS, DELIVERYPERSON, DELIVERYDATE, 
     DELIVERYCOMPANY, ENTERPERSON, ENTERDATE
   </sql>
+
+  <!--查询全部-->
+  <select id="findAllByOut" resultType="SOR_Outbound" parameterType="SOR_Outbound">
+    select * from SOR_OutBound
+    <where>
+      <if test="id!=null and id!=''">
+        and id=#{id}
+      </if>
+    </where>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

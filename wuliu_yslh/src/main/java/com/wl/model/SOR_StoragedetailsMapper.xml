@@ -17,6 +17,12 @@
     from BOS.SOR_STORAGEDETAILS
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <!--根据id查询-->
+  <select id="fingByIdDateils" resultType="SOR_Storagedetails" parameterType="SOR_Storagedetails">
+    select * from SOR_StorageDetails where id=#{id}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SOR_STORAGEDETAILS
     where ID = #{id,jdbcType=DECIMAL}
@@ -24,7 +30,7 @@
   <insert id="insert" parameterType="com.wl.model.SOR_Storagedetails">
     insert into BOS.SOR_STORAGEDETAILS (ID, PACKAGEID, WEIGHT, 
       OUTBOUNDID, STATE)
-    values (#{id,jdbcType=DECIMAL}, #{packageid,jdbcType=VARCHAR}, #{weight,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=DECIMAL}, CONCAT('HBH',sor_strdate_page.nextval), #{weight,jdbcType=DECIMAL},
       #{outboundid,jdbcType=VARCHAR}, #{state,jdbcType=DECIMAL})
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SOR_Storagedetails">
