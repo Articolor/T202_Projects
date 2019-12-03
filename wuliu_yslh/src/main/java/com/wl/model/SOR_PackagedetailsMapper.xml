@@ -3,14 +3,14 @@
 <mapper namespace="com.wl.mapper.SOR_PackagedetailsMapper">
   <resultMap id="BaseResultMap" type="com.wl.model.SOR_Packagedetails">
     <id column="ID" jdbcType="DECIMAL" property="id" />
-    <result column="WARENAME" jdbcType="DECIMAL" property="warename" />
+    <result column="WARENAME" jdbcType="VARCHAR" property="warename" />
     <result column="DESTINATION" jdbcType="VARCHAR" property="destination" />
     <result column="TICKET" jdbcType="DECIMAL" property="ticket" />
     <result column="ACTUALCARGOINT" jdbcType="DECIMAL" property="actualcargoint" />
     <result column="CARGOINT" jdbcType="DECIMAL" property="cargoint" />
     <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
     <result column="VOLUME" jdbcType="DECIMAL" property="volume" />
-    <result column="SERVICE" jdbcType="DECIMAL" property="service" />
+    <result column="SERVICE" jdbcType="TIMESTAMP" property="service" />
     <result column="IMPORTANTHINTS" jdbcType="VARCHAR" property="importanthints" />
     <result column="ASK" jdbcType="VARCHAR" property="ask" />
     <result column="INPUTTYPE" jdbcType="VARCHAR" property="inputtype" />
@@ -35,9 +35,9 @@
       WEIGHT, VOLUME, SERVICE, 
       IMPORTANTHINTS, ASK, INPUTTYPE
       )
-    values (#{id,jdbcType=DECIMAL}, #{warename,jdbcType=DECIMAL}, #{destination,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=DECIMAL}, #{warename,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR},
       #{ticket,jdbcType=DECIMAL}, #{actualcargoint,jdbcType=DECIMAL}, #{cargoint,jdbcType=DECIMAL}, 
-      #{weight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, #{service,jdbcType=DECIMAL}, 
+      #{weight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, #{service,jdbcType=TIMESTAMP},
       #{importanthints,jdbcType=VARCHAR}, #{ask,jdbcType=VARCHAR}, #{inputtype,jdbcType=VARCHAR}
       )
   </insert>
@@ -86,7 +86,7 @@
         #{id,jdbcType=DECIMAL},
       </if>
       <if test="warename != null">
-        #{warename,jdbcType=DECIMAL},
+        #{warename,jdbcType=VARCHAR},
       </if>
       <if test="destination != null">
         #{destination,jdbcType=VARCHAR},
@@ -107,7 +107,7 @@
         #{volume,jdbcType=DECIMAL},
       </if>
       <if test="service != null">
-        #{service,jdbcType=DECIMAL},
+        #{service,jdbcType=TIMESTAMP},
       </if>
       <if test="importanthints != null">
         #{importanthints,jdbcType=VARCHAR},
@@ -124,7 +124,7 @@
     update BOS.SOR_PACKAGEDETAILS
     <set>
       <if test="warename != null">
-        WARENAME = #{warename,jdbcType=DECIMAL},
+        WARENAME = #{warename,jdbcType=VARCHAR},
       </if>
       <if test="destination != null">
         DESTINATION = #{destination,jdbcType=VARCHAR},
@@ -145,7 +145,7 @@
         VOLUME = #{volume,jdbcType=DECIMAL},
       </if>
       <if test="service != null">
-        SERVICE = #{service,jdbcType=DECIMAL},
+        SERVICE = #{service,jdbcType=TIMESTAMP},
       </if>
       <if test="importanthints != null">
         IMPORTANTHINTS = #{importanthints,jdbcType=VARCHAR},
@@ -161,14 +161,14 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.wl.model.SOR_Packagedetails">
     update BOS.SOR_PACKAGEDETAILS
-    set WARENAME = #{warename,jdbcType=DECIMAL},
+    set WARENAME = #{warename,jdbcType=VARCHAR},
       DESTINATION = #{destination,jdbcType=VARCHAR},
       TICKET = #{ticket,jdbcType=DECIMAL},
       ACTUALCARGOINT = #{actualcargoint,jdbcType=DECIMAL},
       CARGOINT = #{cargoint,jdbcType=DECIMAL},
       WEIGHT = #{weight,jdbcType=DECIMAL},
       VOLUME = #{volume,jdbcType=DECIMAL},
-      SERVICE = #{service,jdbcType=DECIMAL},
+      SERVICE = #{service,jdbcType=TIMESTAMP},
       IMPORTANTHINTS = #{importanthints,jdbcType=VARCHAR},
       ASK = #{ask,jdbcType=VARCHAR},
       INPUTTYPE = #{inputtype,jdbcType=VARCHAR}

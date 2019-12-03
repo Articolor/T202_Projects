@@ -84,7 +84,7 @@
       TICKETSUM, CARGOSUM, WEIGHTSUM, 
       VOLUMESUM, STATE, ASK
       )
-    values (#{id,jdbcType=DECIMAL}, #{packageperson,jdbcType=DECIMAL}, #{sealint,jdbcType=VARCHAR}, 
+    values (sor_package_id.nextval, #{packageperson,jdbcType=DECIMAL}, #{sealint,jdbcType=VARCHAR},
       #{destination,jdbcType=VARCHAR}, #{reckondes,jdbcType=VARCHAR}, #{timelimit,jdbcType=TIMESTAMP}, 
       #{ticketsum,jdbcType=DECIMAL}, #{cargosum,jdbcType=DECIMAL}, #{weightsum,jdbcType=DECIMAL}, 
       #{volumesum,jdbcType=DECIMAL}, #{state,jdbcType=DECIMAL}, #{ask,jdbcType=DECIMAL}
