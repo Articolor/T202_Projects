@@ -12,4 +12,9 @@ public interface PAC_StockService {
     public int updatepacsk(PAC_Stock record);
     public int querycount(Object o);
 
+    public List<PAC_Stock> findStockManage(PAC_Stock p,int page,int rows);
+
+    public Integer findStockManageCount(PAC_Stock p);
+
+    public   int insertStock(PAC_Stock p);
 }
