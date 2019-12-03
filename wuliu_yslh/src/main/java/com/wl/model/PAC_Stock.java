@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class PAC_Stock {
 
@@ -28,6 +29,46 @@ public class PAC_Stock {
     private String remark;
     private PAC_Stockitem pac_stockitem;
     private Integer page=1;
+    private List<PAC_Stockitem> pacStockitem;
+
+    private SY_Units units;
+
+    private String goodscode;
+
+    private String goodname;
+
+    public String getGoodname() {
+        return goodname;
+    }
+
+    public void setGoodname(String goodname) {
+        this.goodname = goodname;
+    }
+
+    public SY_Units getUnits() {
+        return units;
+    }
+
+    public void setUnits(SY_Units units) {
+        this.units = units;
+    }
+
+    public String getGoodscode() {
+        return goodscode;
+    }
+
+    public void setGoodscode(String goodscode) {
+        this.goodscode = goodscode;
+    }
+
+    public List<PAC_Stockitem> getPacStockitem() {
+        return pacStockitem;
+    }
+
+    public void setPacStockitem(List<PAC_Stockitem> pacStockitem) {
+        this.pacStockitem = pacStockitem;
+    }
+
     public Integer getPage() {
         return page;
     }

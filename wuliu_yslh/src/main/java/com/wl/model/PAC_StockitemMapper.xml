@@ -50,12 +50,7 @@
     ID, WAREHOUSENO, GOODSCODE, GOODSNAME, STORAGENUM, ACTUALNUM, PLANNEDPRICE, SPECIFICATIONS, 
     TYPE, STATUS
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from BOS.PAC_STOCKITEM
-    where ID = #{id,jdbcType=DECIMAL}
-  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.PAC_STOCKITEM
     where ID = #{id,jdbcType=DECIMAL}
