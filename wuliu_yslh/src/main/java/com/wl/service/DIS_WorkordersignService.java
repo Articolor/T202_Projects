@@ -25,4 +25,7 @@ public interface DIS_WorkordersignService {
 
     //根据编号查询出签收单号2
     DIS_Workordersign findByID2UnitsAndEmp(DIS_Workordersign o);
+
+    //根据id修改作废标记
+    void updateByIDOMark(DIS_Workordersign o);
 }

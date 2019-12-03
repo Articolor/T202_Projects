@@ -170,8 +170,11 @@
   </select>
 
 
-
-
+  <!--根据id修改作废标志-->
+  <update id="updateByIDOMark" parameterType="DIS_Workordersign">
+    update DIS_Workordersign set INVALIDATEMARK=#{invalidatemark}
+    where id=#{id}
+  </update>
 
 
 
@@ -185,9 +188,9 @@
     values (wsign_id.nextval, #{workorderid,jdbcType=DECIMAL}, #{worksheetno,jdbcType=VARCHAR},
       #{workordertype,jdbcType=DECIMAL}, #{signtype,jdbcType=DECIMAL}, #{courierint,jdbcType=DECIMAL}, 
       #{couriername,jdbcType=VARCHAR}, #{recipient,jdbcType=VARCHAR}, #{signunit,jdbcType=DECIMAL}, 
-      #{signtime,jdbcType=TIMESTAMP}, #{invalidatemark,jdbcType=DECIMAL}, #{abnormalmark,jdbcType=VARCHAR}, 
+      sysdate, #{invalidatemark,jdbcType=DECIMAL}, #{abnormalmark,jdbcType=VARCHAR},
       #{inputpersoncode,jdbcType=DECIMAL}, #{inputpersonid,jdbcType=DECIMAL}, #{inputid,jdbcType=DECIMAL}, 
-      #{inputtime,jdbcType=TIMESTAMP})
+      sysdate)
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.DIS_Workordersign">
     insert into BOS.DIS_WORKORDERSIGN

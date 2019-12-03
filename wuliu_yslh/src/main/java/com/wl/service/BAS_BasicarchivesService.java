@@ -14,4 +14,6 @@ public interface BAS_BasicarchivesService {
     int insert(BAS_Basicarchives record);
     //修改基础数据
     int updateByPrimaryKey(BAS_Basicarchives record);
+    //查询总行数diyi
+    int findBAS_BasicarchivesAndSY_EmpAndSY_Unitscount(int page,int rows);
 }

@@ -201,6 +201,14 @@ public class ACC_Workorder {
         this.pickuptime = pickuptime;
     }
 
+
+    public ACC_Workorder(BigDecimal id, BigDecimal smallmembernum, BigDecimal pickupunit, String sortingcode) {
+        this.id = id;
+        this.smallmembernum = smallmembernum;
+        this.pickupunit = pickupunit;
+        this.sortingcode = sortingcode;
+    }
+
     @Override
     public String toString() {
         return "ACC_Workorder{" +

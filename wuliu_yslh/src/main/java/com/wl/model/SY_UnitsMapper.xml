@@ -17,6 +17,11 @@
     from BOS.SY_UNITS
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+  <select id="selectfindALL"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from BOS.SY_UNITS
+  </select>
 
   <select id="findAllUnitsAndEmp" resultMap="UnitsAndEmp" parameterType="SY_Units">
     select * from

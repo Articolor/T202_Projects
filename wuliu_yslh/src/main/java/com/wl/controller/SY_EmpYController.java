@@ -1,5 +1,6 @@
 package com.wl.controller;
 
+import com.wl.mapper.SY_UnitsMapper;
 import com.wl.model.*;
 import com.wl.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +57,11 @@ public class SY_EmpYController {
         map.put("menus",menus);
         return map;
     }
-
-
+    @RequestMapping("selectfindALL")
+    public List<SY_Units> selectfindALL() {
+        List<SY_Units> sy_units = unitsService.selectfindALL();
+        return sy_units;
+    }
 
     //查询所有单位---单位管理
     @RequestMapping("findAllUnits")

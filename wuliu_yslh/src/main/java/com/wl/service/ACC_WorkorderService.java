@@ -33,4 +33,7 @@ public interface ACC_WorkorderService {
 
     //根据工单表的业务通知单号修改分拣编码和所有单位（取件单位）
     void updateByOrderAndUnits(ACC_Workorder o);
+
+    //修改
+    int updateByPrimaryKeySelective(ACC_Workorder record);
 }

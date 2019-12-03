@@ -13,9 +13,9 @@ public interface BAS_SubstituteMapper {
 
     //取派员查询
     List<BAS_Substitute> findBAS_SubstituteAndSY_Unitsfenye(String empno,String empname,Integer mobileno,Integer page,Integer rows);
-
+    //删除取派员
     int deleteByPrimaryKey(BigDecimal id);
-
+    //新增
     int insert(BAS_Substitute record);
 
     int insertSelective(BAS_Substitute record);
@@ -23,6 +23,6 @@ public interface BAS_SubstituteMapper {
     BAS_Substitute selectByPrimaryKey(BigDecimal id);
 
     int updateByPrimaryKeySelective(BAS_Substitute record);
-
+    //修改
     int updateByPrimaryKey(BAS_Substitute record);
 }

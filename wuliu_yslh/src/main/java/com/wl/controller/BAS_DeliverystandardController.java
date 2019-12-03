@@ -35,6 +35,10 @@ public class BAS_DeliverystandardController {
     //分页查询所有收派标准
     @RequestMapping("findAllBASDeliverystandardAndSY_EMP")
     public  Map<String,Object> findAllBASDeliverystandardAndSY_EMP(BAS_Deliverystandard d){
+        Integer page = d.getPage();
+        Integer rows = d.getRows();
+        d.setPage((page-1)*rows+1);
+        d.setRows(page*rows);
         Map<String,Object> map=new HashMap<>();
         List<BAS_Deliverystandard> list = bas_deliverystandardService.findAllBASDeliverystandardAndSY_EMPKEY(d);
         int i = bas_deliverystandardService.findAllBASDELIVERYSTANDARD();
@@ -59,22 +63,21 @@ public class BAS_DeliverystandardController {
     //收派新增
     @RequestMapping("insert")
     public int insert(BAS_Deliverystandard bas_deliverystandard){
-        bas_deliverystandard.setOperationunitid(new BigDecimal(1));
-        bas_deliverystandard.setOperatorid(new BigDecimal(1));
+        bas_deliverystandard.setOperationunitid(new BigDecimal(2));
+        bas_deliverystandard.setOperatorid(new BigDecimal(2));
         int i = bas_deliverystandardService.insert(bas_deliverystandard);
         return 1;
     }
 
     //收派编辑
-    @RequestMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey12121")
     public int updateByPrimaryKey(BAS_Deliverystandard bas_deliverystandard){
-       BAS_Deliverystandard bas = new BAS_Deliverystandard("收派具体名称",new BigDecimal(1),new BigDecimal(100),new BigDecimal(1),new BigDecimal(1),new BigDecimal(1),null);
-        bas.setId(new BigDecimal(52));
 
-      /*  System.out.println(bas_deliverystandard);
+
+        System.out.println(bas_deliverystandard);
         bas_deliverystandard.setOperatorid(new BigDecimal(1));
-      bas_deliverystandard.setOperationunitid(new BigDecimal(1));*/
-        int i = bas_deliverystandardService.updateByPrimaryKey(bas);
+      bas_deliverystandard.setOperationunitid(new BigDecimal(1));
+        int i = bas_deliverystandardService.updateByPrimaryKey(bas_deliverystandard);
         return i;
     }
 
@@ -83,7 +86,9 @@ public class BAS_DeliverystandardController {
     public Map<String,Object> findBAS_BasicarchivesAndSY_EmpAndSY_Units(Integer page,Integer rows){
         Map<String,Object> map=new HashMap<>();
         List<BAS_Basicarchives> list = basicarchivesService.findBAS_BasicarchivesAndSY_EmpAndSY_Units((page-1)*rows+1,page*rows);
+        int sy_unitscount = basicarchivesService.findBAS_BasicarchivesAndSY_EmpAndSY_Unitscount(page, rows);
         map.put("shuju",list);
+        map.put("count",sy_unitscount);
         return map;
     }
     //分页查询基础档案
@@ -96,6 +101,7 @@ public class BAS_DeliverystandardController {
     //新增基础数据
     @RequestMapping("insertbasicrchives")
     public int insertbasicrchives(BAS_Basicarchives basicrchives){
+        System.out.println(basicrchives);
         basicrchives.setOperatorid(new BigDecimal(5));
         basicrchives.setOperationunitid(new BigDecimal(6));
         int i = basicarchivesService.insert(basicrchives);
@@ -125,6 +131,31 @@ public class BAS_DeliverystandardController {
 
         return  list;
     }
+
+    //新增班车
+    @RequestMapping("insertbus")
+    public int insertbus(BAS_Shuttlebus bas_shuttlebus){
+        bas_shuttlebus.setLineid(new BigDecimal(8));
+        bas_shuttlebus.setOperatorid(new BigDecimal(2));
+        bas_shuttlebus.setOperationunitid(new BigDecimal(3));
+        int i = bas_shuttlebusService.insert(bas_shuttlebus);
+        return i;
+    }
+
+    //修改班车
+    @RequestMapping("updateByPrimaryKeybbus")
+    public int updateByPrimaryKeybus(BAS_Shuttlebus bas_shuttlebus){
+        int i = bas_shuttlebusService.updateByPrimaryKey(bas_shuttlebus);
+        return i;
+    }
+
+    //删除班车
+    @RequestMapping("deleteByPrimaryKey11")
+    public int deleteByPrimaryKey11(BigDecimal id){
+        System.out.println(id);
+        int i = bas_shuttlebusService.deleteByPrimaryKey(id);
+        return i;
+    }
     //查询取派员设置
     @RequestMapping("findBAS_SubstituteAndSY_Units")
     public  Map<String,Object> findBAS_SubstituteAndSY_Units(Integer page,Integer rows){
@@ -136,13 +167,35 @@ public class BAS_DeliverystandardController {
     //高级查询取派员设置
     @RequestMapping("findBAS_SubstituteAndSY_Unitsfenye")
     public  Map<String,Object> findBAS_SubstituteAndSY_Unitsfenye(String empno,String empname,Integer mobileno,Integer page,Integer rows){
-        System.out.println(empno + "/t" + empname);
         Map<String,Object> map=new HashMap<>();
         List<BAS_Substitute> list = bas_substituteServices.findBAS_SubstituteAndSY_Unitsfenye(empno,empname,mobileno,(page-1)*rows+1,page*rows);
         map.put("shuju",list);
         return map;
     }
 
+    //新增
+    @RequestMapping("insertBAS_Substitute")
+    public int insertBAS_Substitute(BAS_Substitute  bas_substitute){
+        bas_substitute.setType(new BigDecimal(8));
+        bas_substitute.setSubordinateunit(new BigDecimal(6));
+        bas_substitute.setMobileno(new BigDecimal(1808031754));
+        int i = bas_substituteServices.insert(bas_substitute);
+        return i;
+    }
+
+    //修改
+    @RequestMapping("updateByPrimaryKeysub")
+    public int updateByPrimaryKey(BAS_Substitute  bas_substitute) {
+        int i = bas_substituteServices.updateByPrimaryKey(bas_substitute);
+        return i;
+    }
+
+    //删除
+    @RequestMapping("deleteByPrimaryKeyshu")
+    public int deleteByPrimaryKeyshu(BigDecimal id){
+        int i = bas_substituteServices.deleteByPrimaryKey(id);
+        return i;
+    }
     //查询区域设置
     @RequestMapping("findBASAreaAndsy_units")
     public  Map<String,Object> findBASAreaAndsy_units(Integer page,Integer rows){
@@ -159,7 +212,26 @@ public class BAS_DeliverystandardController {
         List<BAS_Area> basAreaAndsy_unitsFenye = bas_areaService.findBASAreaAndsy_unitsFenye(province, city, county, (page-1)*rows+1, rows*page);
         return basAreaAndsy_unitsFenye;
     }
-
+    //新增区域
+    @RequestMapping("insertArea")
+    public int insert(BAS_Area bas_area){
+        bas_area.setEntryunitid("3");
+        bas_area.setComplementunitid("4");
+        int i = bas_areaService.insert(bas_area);
+        return i;
+    }
+    //修改区域
+    @RequestMapping("updateByPrimaryKeyarea")
+    public int updateByPrimaryKeyarea(BAS_Area bas_area) {
+        int i = bas_areaService.updateByPrimaryKey(bas_area);
+        return i;
+    }
+    //删除
+    @RequestMapping("deleteByPrimaryKeyarea")
+    public int deleteByPrimaryKeyarea(BigDecimal id){
+        int i = bas_areaService.deleteByPrimaryKey(id);
+        return i;
+    }
     //管理分区
     @RequestMapping("findBAS_Partition")
     public  Map<String,Object> findBAS_Partition(Integer page,Integer rows){
@@ -175,6 +247,25 @@ public class BAS_DeliverystandardController {
         return gaoji;
     }
 
+    //新增分区
+    @RequestMapping("insertoart")
+    public int insertoart(BAS_Partition bas_partition){
+        int i = bas_partitionService.insert(bas_partition);
+        return i;
+    }
+    //修改分区
+    @RequestMapping("updateByPrimaryKeypart")
+    public int updateByPrimaryKey(BAS_Partition bas_partition){
+        int i = bas_partitionService.updateByPrimaryKey(bas_partition);
+        return i;
+    }
+    //删除分区
+    @RequestMapping("deleteByPrimaryKeypart")
+    public int deleteByPrimaryKey(BigDecimal id){
+        int i = bas_partitionService.deleteByPrimaryKey(id);
+        return i;
+    }
+
     //收派时间管理
     @RequestMapping("findBAS_StandartimeAndSy_units")
     public Map<String,Object> findBAS_StandartimeAndSy_units(Integer page,Integer rows){
@@ -186,13 +277,24 @@ public class BAS_DeliverystandardController {
     //收派时间管理分页
     @RequestMapping("findBAS_StandartimeAndSy_unitsfenye")
     public Map<String,Object> FIND(String timename,String name,Integer page,Integer rows ){
-        System.out.println(timename + "/t" + name);
         Map<String,Object> map=new HashMap<>();
         List<BAS_Standartime> syUnitsfenye = bas_standartimeservice.findBAS_StandartimeAndSy_unitsfenye(timename, name, (page-1)*rows+1, rows*page);
         map.put("shuju",syUnitsfenye);
         return map;
     }
+    //新增收派时间
+    @RequestMapping("insertStandartime")
+    public int insert(BAS_Standartime record) {
+        int insert = bas_standartimeservice.insert(record);
+        return insert;
+    }
 
+    //删除收派时间
+    @RequestMapping("deleteByPrimaryKeytime")
+    public int deleteByPrimaryKeytime(BigDecimal id){
+        System.out.println(id);
+        return bas_standartimeservice.deleteByPrimaryKey(id);
+    }
     //管理定区
     @RequestMapping("findBAS_ZoneinfoAndSY_EmpAndSY_Units")
     public Map<String,Object> findBAS_ZoneinfoAndSY_EmpAndSY_Units(Integer page,Integer rows){
@@ -205,7 +307,6 @@ public class BAS_DeliverystandardController {
     //管理定区gaoji
     @RequestMapping("findBAS_ZoneinfoAndSY_EmpAndSY_Unitsfenye")
     public Map<String,Object> findBAS_ZoneinfoAndSY_EmpAndSY_Unitsfenye(String name,String zonecode,Integer page,Integer rows){
-        System.out.println(name + "/t" + zonecode);
         Map<String,Object> map=new HashMap<>();
         List<BAS_Zoneinfo> empAndSYUnits = bas_zoneinfoService.findBAS_ZoneinfoAndSY_EmpAndSY_Unitsfenye(name, zonecode, (page-1)*rows, rows*page);
         map.put("shuju",empAndSYUnits);
@@ -217,5 +318,25 @@ public class BAS_DeliverystandardController {
     public List<BAS_Zonecustominfo> findBAS_ZonecustominfoANDBAS_ZONEINFO(Integer id){
         List<BAS_Zonecustominfo> bas_zonecustominfoANDBAS_zoneinfo = bas_zonecustominfoService.findBAS_ZonecustominfoANDBAS_ZONEINFO(id);
         return bas_zonecustominfoANDBAS_zoneinfo;
+    }
+
+    @RequestMapping("insertbaszoneinfo1")
+    public int insertbaszoneinfo(BAS_Zoneinfo bas_zoneinfo){
+        bas_zoneinfo.setZonepeople(new BigDecimal(6));
+        bas_zoneinfo.setSubordinateunit(new BigDecimal(5));
+        int i = bas_zoneinfoService.insert(bas_zoneinfo);
+        return i;
+    }
+
+    @RequestMapping("updateByPrimaryKeyzoneinfo")
+    public int updateByPrimaryKey(BAS_Zoneinfo bas_zoneinfo){
+        int i = bas_zoneinfoService.updateByPrimaryKey(bas_zoneinfo);
+        return i;
+    }
+
+    @RequestMapping("deleteByPrimaryKeyZoneinfo")
+    public int deleteByPrimaryKeyZoneinfo(BigDecimal id){
+        int i = bas_zoneinfoService.deleteByPrimaryKey(id);
+        return i;
     }
 }
