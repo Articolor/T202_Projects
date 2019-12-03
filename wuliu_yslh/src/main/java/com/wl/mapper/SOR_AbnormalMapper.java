@@ -1,11 +1,14 @@
 package com.wl.mapper;
 
 import com.wl.model.SOR_Abnormal;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+@Service
 public interface SOR_AbnormalMapper {
     int deleteByPrimaryKey(BigDecimal id);
 
+    //新增异单数据
     int insert(SOR_Abnormal record);
 
     int insertSelective(SOR_Abnormal record);
