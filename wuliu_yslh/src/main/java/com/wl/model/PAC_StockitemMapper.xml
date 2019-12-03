@@ -13,6 +13,39 @@
     <result column="TYPE" jdbcType="DECIMAL" property="type" />
     <result column="STATUS" jdbcType="DECIMAL" property="status" />
   </resultMap>
+
+
+  <!--库存管理返回值-->
+  <resultMap id="Stocks" type="com.wl.model.PAC_Stockitem">
+    <id column="psid" jdbcType="DECIMAL" property="id" />
+    <result column="WAREHOUSENO" jdbcType="VARCHAR" property="warehouseno" />
+    <result column="GOODSCODE" jdbcType="VARCHAR" property="goodscode" />
+    <result column="GOODSNAME" jdbcType="VARCHAR" property="goodsname" />
+    <result column="STORAGENUM" jdbcType="DECIMAL" property="storagenum" />
+    <result column="ACTUALNUM" jdbcType="DECIMAL" property="actualnum" />
+    <result column="psplannedprice" jdbcType="DECIMAL" property="plannedprice" />
+    <result column="SPECIFICATIONS" jdbcType="VARCHAR" property="specifications" />
+    <result column="TYPE" jdbcType="DECIMAL" property="type" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <association property="packaging"  javaType="com.wl.model.PAC_Packaging">
+      <id column="pcid" jdbcType="DECIMAL" property="id" />
+      <result column="ITEMCODE" jdbcType="VARCHAR" property="itemcode" />
+      <result column="ITEMNAME" jdbcType="VARCHAR" property="itemname" />
+      <result column="pcplannedprice" jdbcType="DECIMAL" property="plannedprice" />
+      <result column="SPECIFICATIONS" jdbcType="VARCHAR" property="specifications" />
+      <result column="pctype" jdbcType="DECIMAL" property="type" />
+      <result column="MEASUREMENTUNIT" jdbcType="VARCHAR" property="measurementunit" />
+      <result column="pcstatus" jdbcType="DECIMAL" property="status" />
+      <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+      <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+      <result column="INVALIDATEJOBINT" jdbcType="DECIMAL" property="invalidatejobint" />
+      <result column="INVALIDATENAME" jdbcType="DECIMAL" property="invalidatename" />
+      <result column="INVALIDATETIME" jdbcType="TIMESTAMP" property="invalidatetime" />
+    </association>
+
+  </resultMap>
+
+
   <sql id="Base_Column_List">
     ID, WAREHOUSENO, GOODSCODE, GOODSNAME, STORAGENUM, ACTUALNUM, PLANNEDPRICE, SPECIFICATIONS, 
     TYPE, STATUS
@@ -28,11 +61,11 @@
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.wl.model.PAC_Stockitem">
-    insert into BOS.PAC_STOCKITEM (ID, WAREHOUSENO, GOODSCODE, 
-      GOODSNAME, STORAGENUM, ACTUALNUM, 
-      PLANNEDPRICE, SPECIFICATIONS, TYPE, 
+    insert into BOS.PAC_STOCKITEM (ID, WAREHOUSENO, GOODSCODE,
+      GOODSNAME, STORAGENUM, ACTUALNUM,
+      PLANNEDPRICE, SPECIFICATIONS, TYPE,
       STATUS)
-    values (#{id,jdbcType=DECIMAL}, #{warehouseno,jdbcType=VARCHAR}, #{goodscode,jdbcType=VARCHAR}, 
+    values (sm_seq.nextval,#{warehouseno,jdbcType=VARCHAR}, concat('WP',sm_seq.nextval),
       #{goodsname,jdbcType=VARCHAR}, #{storagenum,jdbcType=DECIMAL}, #{actualnum,jdbcType=DECIMAL}, 
       #{plannedprice,jdbcType=DECIMAL}, #{specifications,jdbcType=VARCHAR}, #{type,jdbcType=DECIMAL}, 
       #{status,jdbcType=DECIMAL})
@@ -150,4 +183,80 @@
       STATUS = #{status,jdbcType=DECIMAL}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+
+  <!--根据入库单号查询-->
+  <select id="selectByPrimaryKey" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from BOS.PAC_STOCKITEM
+    where warehouseno = #{warehouseno,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectStock" resultMap="Stocks" parameterType="Object">
+    select * from (select
+    rownum rn,
+    ps.id as psid,ps.warehouseno,
+    ps.goodscode,ps.goodsname,
+    ps.storagenum,ps.actualnum,ps.plannedprice as psplannedprice,
+    ps.specifications,ps.type,ps.status,
+
+    pc.id as pcid,pc.itemcode,pc.itemname,
+    pc.plannedprice as pcplannedprice,
+    pc.type as pctype,pc.measurementunit,
+    pc.status as pcstatus,pc.operatorid,pc.operationtime,
+    pc.invalidatejobint,pc.invalidatename,pc.invalidatetime
+    from
+    pac_stockitem ps inner join pac_packaging pc
+    on ps.goodscode=pc.itemcode
+    <where>
+
+      <if test="p.goodscode != null and p.goodscode !=''">
+        and ps.GOODSCODE like concat(concat('%',#{p.goodscode,jdbcType=VARCHAR}),'%')
+      </if>
+
+      <if test="p.specifications != null and p.specifications !=''">
+        and ps.SPECIFICATIONS like concat(concat('%',#{p.specifications,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="p.type != null and p.type !=''">
+        and ps.TYPE = #{p.type,jdbcType=DECIMAL}
+      </if>
+      <if test="symbol!= null and symbol!='' and p.storagenum != null and p.storagenum != ''">
+        and ps.STORAGENUM #{symbol} #{p.storagenum,jdbcType=DECIMAL}
+      </if>
+      <if test="symbol2!= null and symbol2!='' and p.plannedprice != null and p.plannedprice !=''">
+        and ps.PLANNEDPRICE #{symbol2} #{p.plannedprice,jdbcType=DECIMAL}
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+  <!--总行数库存管理-->
+  <select id="selectStockCount" resultType="Integer" parameterType="Object">
+    select count(*) from (select * from
+    pac_stockitem ps inner join pac_packaging pc
+    on ps.goodscode=pc.itemcode
+    <where>
+
+      <if test="p.goodscode != null and p.goodscode !=''">
+        and ps.GOODSCODE like concat(concat('%',#{p.goodscode,jdbcType=VARCHAR}),'%')
+      </if>
+
+      <if test="p.specifications != null and p.specifications !=''">
+        and ps.SPECIFICATIONS like concat(concat('%',#{p.specifications,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="p.type != null and p.type !=''">
+        and ps.TYPE = #{p.type,jdbcType=DECIMAL}
+      </if>
+      <if test="symbol!= null and symbol!='' and p.storagenum != null and p.storagenum != ''">
+        and ps.STORAGENUM  #{symbol}  #{p.storagenum,jdbcType=DECIMAL}
+      </if>
+      <if test="symbol2!= null and symbol2!='' and p.plannedprice != null and p.plannedprice !=''">
+        and ps.PLANNEDPRICE  #{symbol2}  #{p.plannedprice,jdbcType=DECIMAL}
+      </if>
+
+    </where>
+    )
+  </select>
 </mapper>

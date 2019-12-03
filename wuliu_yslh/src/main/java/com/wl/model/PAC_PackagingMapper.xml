@@ -163,7 +163,7 @@
             #{plannedprice,jdbcType=DECIMAL},
             #{specifications,jdbcType=VARCHAR},
             #{type,jdbcType=DECIMAL},
-            #{measurementunit,jdbcType=VARCHAR},
+            '支',
             #{status,jdbcType=DECIMAL},
             #{operatorid,jdbcType=DECIMAL},
             sysdate,
@@ -293,7 +293,7 @@
     </set>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wl.model.PAC_Packaging">
+  <!--<update id="updateByPrimaryKey" parameterType="com.wl.model.PAC_Packaging">
     update BOS.PAC_PACKAGING
     set ITEMCODE = #{itemcode,jdbcType=VARCHAR},
       ITEMNAME = #{itemname,jdbcType=VARCHAR},
@@ -307,6 +307,13 @@
       INVALIDATEJOBINT = #{invalidatejobint,jdbcType=TIMESTAMP},
       INVALIDATENAME = #{invalidatename,jdbcType=DECIMAL},
       INVALIDATETIME = #{invalidatetime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>-->
+
+  <update id="updateByPrimaryKey" parameterType="com.wl.model.PAC_Packaging">
+    update BOS.PAC_PACKAGING
+    set
+      STATUS = -1
     where ID = #{id,jdbcType=DECIMAL}
   </update>
 </mapper>
