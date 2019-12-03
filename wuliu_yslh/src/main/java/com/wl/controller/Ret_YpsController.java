@@ -22,6 +22,10 @@ public class Ret_YpsController {
     private PAC_StockItemService pos;
     @Autowired
     private SY_UnitsService su;
+    @Autowired
+    private SY_EmpService emp;
+    @Autowired
+    private SOR_AbnormalService sor;
 
     //模糊查询分页一体
     @RequestMapping("/findRet")
@@ -78,6 +82,7 @@ public class Ret_YpsController {
         Map<String,Object> map=new HashMap<>();
         map.put("pac",pac.selectPacking(p,(page-1)*rows+1,rows*page));
         map.put("count",pac.selectPackingCount(p));
+        map.put("emps",emp.findemono());//查询全部的用户名
         return map;
     }
 
@@ -108,6 +113,7 @@ public class Ret_YpsController {
         System.out.println(pas.findStockManage(p,(page-1)*rows+1,rows*page));
         map.put("pas",pas.findStockManage(p,(page-1)*rows+1,rows*page));
         map.put("count",pas.findStockManageCount(p));
+        map.put("emps",emp.findemono());//查询全部的用户名
         return map;
     }
     //下拉框单位表
@@ -151,6 +157,15 @@ public class Ret_YpsController {
         map.put("pos", pos.selectStock(p,page,rows,symbol,symbol2));
         System.out.println(pos.selectStock(p, page, rows, symbol, symbol2));
         map.put("count",pos.selectStockCount(p,symbol,symbol2));
+        return map;
+    }
+
+    @RequestMapping("findAbnormal")
+    public Map<String,Object> findAbnormal(SOR_Abnormal a,int page,int rows){
+        Map<String,Object> map=new HashMap<>();
+        map.put("abn",sor.findAbnormals(a, page, rows));
+        map.put("count",sor.findAbnormalCount(a));
+        map.put("emps",emp.findemono());//查询全部的用户名
         return map;
     }
 }

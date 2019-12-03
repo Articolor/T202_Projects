@@ -35,14 +35,14 @@ public class PAC_Stock {
 
     private String goodscode;
 
-    private String goodname;
+    private String goodsname;
 
-    public String getGoodname() {
-        return goodname;
+    public String getGoodsname() {
+        return goodsname;
     }
 
-    public void setGoodname(String goodname) {
-        this.goodname = goodname;
+    public void setGoodsname(String goodsname) {
+        this.goodsname = goodsname;
     }
 
     public SY_Units getUnits() {

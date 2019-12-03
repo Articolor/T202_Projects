@@ -314,9 +314,9 @@ where rn between #{page} and #{rows}
         and
         p2.goodscode=#{p.goodscode}
       </if>
-      <if test="p.goodname != null and p.goodname != ''">
+      <if test="p.goodsname != null and p.goodsname != ''">
         and
-        p2.goodname=#{p.goodname}
+        p2.goodsname=#{p.goodsname}
       </if>
     </where>
     )where rn between #{page} and #{rows}
@@ -359,9 +359,9 @@ where rn between #{page} and #{rows}
         and
         p2.goodscode=#{goodscode}
       </if>
-      <if test="goodname != null and goodname != ''">
+      <if test="goodsname != null and goodsname != ''">
         and
-        p2.goodname=#{goodname}
+        p2.goodsname=#{goodsname}
       </if>
     </where>
     )
