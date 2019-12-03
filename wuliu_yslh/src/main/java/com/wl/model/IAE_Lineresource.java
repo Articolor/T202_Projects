@@ -1,9 +1,31 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class IAE_Lineresource {
+    private int page=1;
+    private int rows=5;
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
     private String id;
 
     private String resourcetype;
@@ -19,9 +41,11 @@ public class IAE_Lineresource {
     private BigDecimal waybillid;
 
     private String carrier;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date expectarrivaldate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date expectdeparturedate;
 
     private BigDecimal ticket;
@@ -33,17 +57,20 @@ public class IAE_Lineresource {
     private BigDecimal volume;
 
     private String handleperson;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date handledate;
 
     private BigDecimal enterperson;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date enterdate;
 
     private String entercompany;
 
     private BigDecimal acceptperson;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date acceptdate;
 
     private String acceptcompany;
@@ -59,7 +86,8 @@ public class IAE_Lineresource {
     private String warename;
 
     private BigDecimal actualvolume;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date timelimit;
 
     private String ask;
@@ -75,7 +103,8 @@ public class IAE_Lineresource {
     private BigDecimal deliverytype;
 
     private String importanthints;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date surplustime;
 
     public String getId() {

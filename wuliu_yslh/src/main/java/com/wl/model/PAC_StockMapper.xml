@@ -31,8 +31,8 @@
   <select id="selectAll" resultMap="result" parameterType="PAC_Stock">
     select * from (
 select rownum rn,sk.*,sm.Status as status from PAC_StockItem sm,PAC_Stock sk
-<where>
-    and sm.WarehouseNo=sk.warehouseno
+    <where>
+      and sm.WarehouseNo=sk.warehouseno
     <if test="warehouseno != null and warehouseno!=''">
       and
       sk.warehouseno like concat(concat('%',#{warehouseno}),'%')
@@ -123,7 +123,7 @@ where rn between #{page} and #{rows}
       TRANSPORT, SUBORDINATEUNIT, DRAWERNO, 
       DRAWERNAME, DRAWERTIME, REMARK
       )
-    values (pac_sk_seq.nextval, #{warehouseno,jdbcType=VARCHAR}, #{reservoirtype,jdbcType=DECIMAL},
+    values (pac_sk_seq.nextval, concat('RK',pac_sk_seq.nextval), #{reservoirtype,jdbcType=DECIMAL},
       #{transport,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=VARCHAR}, #{drawerno,jdbcType=DECIMAL}, 
       #{drawername,jdbcType=VARCHAR}, sysdate, #{remark,jdbcType=VARCHAR}
       )

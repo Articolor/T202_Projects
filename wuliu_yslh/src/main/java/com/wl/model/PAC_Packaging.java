@@ -32,7 +32,8 @@ public class PAC_Packaging {
 
 
     private Date operationtime;
-
+    private String operatorqq;
+    private String invalidatejobqq;
 
     private SY_Emp emp;
     private BigDecimal invalidatejobint;

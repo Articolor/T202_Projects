@@ -40,7 +40,7 @@
     )
     where rn between #{page} and #{rows}
   </select>
-  <select id="querycount" resultType="int">
+  <select id="querycount" resultType="int" parameterType="IAE_Extract">
     select count(*) from (
     select rownum rn,e.* from IAE_Extract e
     <where>
