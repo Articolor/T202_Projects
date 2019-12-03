@@ -13,7 +13,7 @@ public interface PAC_StockitemMapper {
 
     int insertSelective(PAC_Stockitem record);
 
-    PAC_Stockitem selectByPrimaryKey(BigDecimal id);
+    //PAC_Stockitem selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(PAC_Stockitem record);
 
