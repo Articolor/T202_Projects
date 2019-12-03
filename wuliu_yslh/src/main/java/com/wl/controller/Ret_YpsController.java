@@ -26,6 +26,8 @@ public class Ret_YpsController {
     private SY_EmpService emp;
     @Autowired
     private SOR_AbnormalService sor;
+    @Autowired
+    private SOR_PackageService sp;
 
     //模糊查询分页一体
     @RequestMapping("/findRet")
@@ -154,18 +156,28 @@ public class Ret_YpsController {
     public Map<String,Object> findStock(PAC_Stockitem p, int page, int rows, String symbol, String symbol2){
         System.out.println(p+symbol+symbol2);
         Map<String,Object> map=new HashMap<>();
-        map.put("pos", pos.selectStock(p,page,rows,symbol,symbol2));
+        map.put("pos", pos.selectStock(p,(page-1)*rows+1,rows*page,symbol,symbol2));
         System.out.println(pos.selectStock(p, page, rows, symbol, symbol2));
         map.put("count",pos.selectStockCount(p,symbol,symbol2));
         return map;
     }
-
+    //单货异常管理
     @RequestMapping("findAbnormal")
     public Map<String,Object> findAbnormal(SOR_Abnormal a,int page,int rows){
         Map<String,Object> map=new HashMap<>();
-        map.put("abn",sor.findAbnormals(a, page, rows));
+        map.put("abn",sor.findAbnormals(a, (page-1)*rows+1,rows*page));
         map.put("count",sor.findAbnormalCount(a));
         map.put("emps",emp.findemono());//查询全部的用户名
+        return map;
+    }
+
+    //合包查询
+    @RequestMapping("findSORPackage")
+    public Map<String,Object> findSORPackage(SOR_Package p,int page,int rows){
+        Map<String,Object> map=new HashMap<>();
+        map.put("sop",sp.findSORPackage(p,(page-1)*rows+1,rows*page));
+        map.put("count",sp.findSORPackageCount(p));
+        map.put("emps",emp.findemono());
         return map;
     }
 }

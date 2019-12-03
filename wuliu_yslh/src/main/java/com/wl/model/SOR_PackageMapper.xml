@@ -50,8 +50,8 @@
   </select>
   <!--合包总行数-->
   <select id="findSORPackageCount" parameterType="com.wl.model.SOR_Package" resultType="Integer">
-    select * from
-    (select rownum rn,s.* from SOR_PACKAGE s
+    select count(*) from
+    (select rownum rn from SOR_PACKAGE s
     <where>
       <if test="id != null">
         and s.id like concat(concat('%',#{id,jdbcType=DECIMAL}),'%')
