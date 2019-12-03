@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wl.mapper.IAE_LineresourceMapper">
+  <select id="queryline" parameterType="IAE_LINERESOURCE" resultType="IAE_LINERESOURCE">
+    select * from (
+    select rownum rn,l.* from IAE_LINERESOURCE l
+    <where>
+      <if test="id != null and id!=''">
+        and id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="handleperson != null and handleperson!=''">
+        and handleperson like concat(concat('%',#{handleperson}),'%')
+      </if>
+
+      <if test="destination != null and destination!=''">
+        and destination like concat(concat('%',#{destination}),'%')
+      </if>
+      <if test="entercompany != null and entercompany!=''">
+        and entercompany like concat(concat('%',#{entercompany}),'%')
+      </if>
+      <if test="port != null and port!=''">
+        and port like concat(concat('%',#{port}),'%')
+      </if>
+      <if test="demand != null and demand!=''">
+        and demand like concat(concat('%',#{demand}),'%')
+      </if>
+      <if test="vehicleint != null and vehicleint!=''">
+        and vehicleint like concat(concat('%',#{vehicleint}),'%')
+      </if>
+      <if test="waybillid != null">
+        and waybillid like concat(concat('%',#{waybillid}),'%')
+      </if>
+      <if test="carrier != null and carrier!=''">
+        and carrier like concat(concat('%',#{carrier}),'%')
+      </if>
+      <if test="handleperson != null and handleperson!=''">
+        and handleperson like concat(concat('%',#{handleperson}),'%')
+      </if>
+      <if test="enterperson != null and enterperson!=''">
+        and enterperson like concat(concat('%',#{enterperson}),'%')
+      </if>
+      <if test="acceptperson != null">
+        and acceptperson like concat(concat('%',#{acceptperson}),'%')
+      </if>
+      <if test="acceptcompany != null and acceptcompany!=''">
+        and acceptcompany like concat(concat('%',#{acceptcompany}),'%')
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+
+  </select>
+  <select id="getcount" resultType="int" parameterType="IAE_LINERESOURCE">
+    select count(*) from (
+    select rownum rn,l.* from IAE_LINERESOURCE l
+    <where>
+      <if test="id != null and id!=''">
+        and id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="handleperson != null and handleperson!=''">
+        and handleperson like concat(concat('%',#{handleperson}),'%')
+      </if>
+
+      <if test="destination != null and destination!=''">
+        and destination like concat(concat('%',#{destination}),'%')
+      </if>
+      <if test="entercompany != null and entercompany!=''">
+        and entercompany like concat(concat('%',#{entercompany}),'%')
+      </if>
+      <if test="port != null and port!=''">
+        and port like concat(concat('%',#{port}),'%')
+      </if>
+      <if test="demand != null and demand!=''">
+        and demand like concat(concat('%',#{demand}),'%')
+      </if>
+      <if test="vehicleint != null and vehicleint!=''">
+        and vehicleint like concat(concat('%',#{vehicleint}),'%')
+      </if>
+      <if test="waybillid != null">
+        and waybillid like concat(concat('%',#{waybillid}),'%')
+      </if>
+      <if test="carrier != null and carrier!=''">
+        and carrier like concat(concat('%',#{carrier}),'%')
+      </if>
+      <if test="handleperson != null and handleperson!=''">
+        and handleperson like concat(concat('%',#{handleperson}),'%')
+      </if>
+      <if test="enterperson != null and enterperson!=''">
+        and enterperson like concat(concat('%',#{enterperson}),'%')
+      </if>
+      <if test="acceptperson != null">
+        and acceptperson like concat(concat('%',#{acceptperson}),'%')
+      </if>
+      <if test="acceptcompany != null and acceptcompany!=''">
+        and acceptcompany like concat(concat('%',#{acceptcompany}),'%')
+      </if>
+
+    </where>
+    )
+  </select>
   <resultMap id="BaseResultMap" type="com.wl.model.IAE_Lineresource">
     <id column="ID" jdbcType="VARCHAR" property="id" />
     <result column="RESOURCETYPE" jdbcType="VARCHAR" property="resourcetype" />

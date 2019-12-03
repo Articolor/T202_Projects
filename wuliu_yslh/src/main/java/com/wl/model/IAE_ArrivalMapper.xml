@@ -17,6 +17,58 @@
     ID, SENDCOMPANY, CARGOADDRESS, ISSUEPERSON, ISSUEDATE, WORKADDRESS, STORAGEDATE, 
     OUTBOUNDDATE, TIMELIMIT, BATCH
   </sql>
+  <select id="queryarrival" parameterType="IAE_ARRIVAL" resultType="IAE_ARRIVAL">
+    select * from (
+    select rownum rn,a.* from IAE_ARRIVAL a
+    <where>
+      <if test="id != null and id!=''">
+        and id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="sendcompany != null and sendcompany!=''">
+        and sendcompany like concat(concat('%',#{sendcompany}),'%')
+      </if>
+
+      <if test="cargoaddress != null and cargoaddress!=''">
+        and cargoaddress like concat(concat('%',#{cargoaddress}),'%')
+      </if>
+      <if test="issueperson != null and issueperson!=''">
+        and issueperson like concat(concat('%',#{issueperson}),'%')
+      </if>
+
+      <if test="workaddress != null and workaddress!=''">
+        and workaddress like concat(concat('%',#{workaddress}),'%')
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+
+  </select>
+  <select id="getcount" resultType="int" parameterType="IAE_ARRIVAL">
+    select count(*) from (
+    select rownum rn,a.* from IAE_ARRIVAL a
+    <where>
+      <if test="id != null and id!=''">
+        and id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="sendcompany != null and sendcompany!=''">
+        and sendcompany like concat(concat('%',#{sendcompany}),'%')
+      </if>
+
+      <if test="cargoaddress != null and cargoaddress!=''">
+        and cargoaddress like concat(concat('%',#{cargoaddress}),'%')
+      </if>
+      <if test="issueperson != null and issueperson!=''">
+        and issueperson like concat(concat('%',#{issueperson}),'%')
+      </if>
+
+      <if test="workaddress != null and workaddress!=''">
+        and workaddress like concat(concat('%',#{workaddress}),'%')
+      </if>
+
+    </where>
+    )
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
