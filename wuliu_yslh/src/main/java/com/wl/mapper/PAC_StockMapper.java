@@ -22,4 +22,16 @@ public interface PAC_StockMapper {
     public int updatepacsk(PAC_Stock record);
 
     int updateByPrimaryKey(PAC_Stock record);
+
+
+
+
+
+
+
+    List<PAC_Stock> findStockManage(PAC_Stock p,int page,int rows);
+
+    Integer findStockManageCount(PAC_Stock p);
+
+    int insertStock(PAC_Stock p);
 }
