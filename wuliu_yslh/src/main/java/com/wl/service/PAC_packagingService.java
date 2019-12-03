@@ -15,4 +15,10 @@ public interface PAC_packagingService {
    public int updateByPrimaryKeySelective(PAC_Packaging record);
 
    public  int insertSelective(PAC_Packaging record);
+
+
+
+
+
+   public int updateByPrimaryKey(PAC_Packaging record);
 }

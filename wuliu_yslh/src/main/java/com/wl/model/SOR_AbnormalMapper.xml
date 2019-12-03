@@ -24,6 +24,77 @@
     from BOS.SOR_ABNORMAL
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+  <!--异常监控-->
+  <select id="findAbnormals" parameterType="Object" resultType="com.wl.model.SOR_Abnormal">
+    select * from (
+    select rownum rn,s.* from BOS.SOR_ABNORMAL s
+    <where>
+      <if test="a.id!=null and a.id!=''">
+       and ID like concat(concat('%',#{a.id,jdbcType=DECIMAL}),'%')
+      </if>
+
+      <if test="a.launchdate != null and a.launchdate !=''">
+        and LAUNCHDATE = #{a.launchdate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="a.launchperson != null and a.launchperson != ''">
+        and LAUNCHPERSON = #{a.launchperson,jdbcType=VARCHAR}
+      </if>
+      <if test="a.launchcompany != null and a.launchcompany != ''">
+        and LAUNCHCOMPANY = #{a.launchcompany,jdbcType=VARCHAR}
+      </if>
+      <if test="a.abnormaltype != null and a.abnormaltype != ''">
+        and ABNORMALTYPE = #{a.abnormaltype,jdbcType=DECIMAL}
+      </if>
+      <if test="a.transferint != null and a.transferint !=''">
+        and TRANSFERINT = #{a.transferint,jdbcType=VARCHAR}
+      </if>
+      <if test="a.cargoint != null and a.cargoint != ''">
+        and CARGOINT like concat(concat('%',#{a.cargoint,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="a.abostate != null and a.abostate != ''">
+        and ABOSTATE = #{a.abostate,jdbcType=DECIMAL}
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+  <!--异单监控总行数-->
+  <select id="findAbnormalCount" parameterType="com.wl.model.SOR_Abnormal" resultType="Integer">
+    select count(*) from (
+    select rownum rn from BOS.SOR_ABNORMAL
+    <where>
+      <if test="id!=null and id!=''">
+        and ID like concat(concat('%',#{id,jdbcType=DECIMAL}),'%')
+      </if>
+
+      <if test="launchdate != null and launchdate !=''">
+        and LAUNCHDATE = #{a.launchdate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="launchperson != null and launchperson != ''">
+        and LAUNCHPERSON = #{launchperson,jdbcType=VARCHAR}
+      </if>
+      <if test="launchcompany != null and launchcompany != ''">
+        and LAUNCHCOMPANY = #{launchcompany,jdbcType=VARCHAR}
+      </if>
+      <if test="abnormaltype != null and abnormaltype != ''">
+        and ABNORMALTYPE = #{abnormaltype,jdbcType=DECIMAL}
+      </if>
+      <if test="transferint != null and transferint !=''">
+        and TRANSFERINT = #{transferint,jdbcType=VARCHAR}
+      </if>
+      <if test="cargoint != null and cargoint != ''">
+        and CARGOINT like concat(concat('%',#{cargoint,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="abostate != null and abostate != ''">
+        and ABOSTATE = #{abostate,jdbcType=DECIMAL}
+      </if>
+
+    </where>
+    )
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SOR_ABNORMAL
     where ID = #{id,jdbcType=DECIMAL}
