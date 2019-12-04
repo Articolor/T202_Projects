@@ -21,6 +21,16 @@ public class SOR_Storage {
 
     private String deliverycompany;
 
+    private SOR_Storagedetails storagedetails;
+
+    public SOR_Storagedetails getStoragedetails() {
+        return storagedetails;
+    }
+
+    public void setStoragedetails(SOR_Storagedetails storagedetails) {
+        this.storagedetails = storagedetails;
+    }
+
     private Integer page=1;//起始页数
 
     private Integer rows=5;//到哪一行结束
