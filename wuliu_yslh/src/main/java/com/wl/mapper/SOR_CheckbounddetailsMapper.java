@@ -12,6 +12,7 @@ public interface SOR_CheckbounddetailsMapper {
 
     int deleteByPrimaryKey(BigDecimal id);
 
+
     //新增盘库详细信息
     int insert(SOR_Checkbounddetails record);
 

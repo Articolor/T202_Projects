@@ -63,7 +63,7 @@
       CHECKPERSON, CHECKDATE, CHECKCOMPANY
       )
     values (sor_check_id.nextval,sor_check_scanid.nextval, #{cargosum,jdbcType=DECIMAL},
-      #{checkperson,jdbcType=DECIMAL}, #{checkdate,jdbcType=TIMESTAMP}, #{checkcompany,jdbcType=VARCHAR}
+      #{checkperson,jdbcType=DECIMAL},sysdate, #{checkcompany,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SOR_Checkbound">

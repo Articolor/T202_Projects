@@ -1,9 +1,14 @@
 package com.wl.mapper;
 
 import com.wl.model.IAE_Timeinput;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+@Service
 public interface IAE_TimeinputMapper {
+    public List<IAE_Timeinput> queryinput(IAE_Timeinput i);
+    public int querycount(IAE_Timeinput i);
     int deleteByPrimaryKey(BigDecimal id);
 
     int insert(IAE_Timeinput record);

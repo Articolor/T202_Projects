@@ -22,4 +22,24 @@ public class SOR_PackageServiceImpl implements SOR_PackageService {
     public Integer findSORPackageCount(SOR_Package s) {
         return packageMapper.findSORPackageCount(s);
     }
+
+    @Override
+    public int insert(SOR_Package record) {
+        return packageMapper.insert(record);
+    }
+
+    @Override
+    public List<SOR_Package> findNewDate() {
+        return packageMapper.findNewDate();
+    }
+
+    @Override
+    public List<SOR_Package> findAllPackYWY(SOR_Package p) {
+        return packageMapper.findAllPackYWY(p);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(SOR_Package record) {
+        return packageMapper.updateByPrimaryKeySelective(record);
+    }
 }

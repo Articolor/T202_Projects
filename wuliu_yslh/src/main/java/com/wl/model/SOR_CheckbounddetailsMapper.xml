@@ -25,7 +25,11 @@
   <!--根据扫描设备号查询-->
   <select id="findByIDBound" resultType="SOR_Checkbounddetails" parameterType="SOR_Checkbounddetails">
     select * from Sor_Checkbounddetails
-    where packageid=#{packageid}
+    <where>
+      <if test="packageid!=null and packageid!=''">
+        and packageid=#{packageid}
+      </if>
+    </where>
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
@@ -39,7 +43,7 @@
       )
     values (sor_chdetails_id.nextval, #{packageid,jdbcType=VARCHAR}, #{cargocount,jdbcType=DECIMAL},
       #{weight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, #{cargotype,jdbcType=DECIMAL}, 
-      #{direction,jdbcType=VARCHAR}, #{storageperson,jdbcType=DECIMAL}, #{storagedate,jdbcType=TIMESTAMP}
+      #{direction,jdbcType=VARCHAR}, #{storageperson,jdbcType=DECIMAL}, sysdate
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wl.model.SOR_Checkbounddetails">
