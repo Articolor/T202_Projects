@@ -98,4 +98,20 @@ public class SOR_Checkbounddetails {
     public void setStoragedate(Date storagedate) {
         this.storagedate = storagedate;
     }
+
+
+    @Override
+    public String toString() {
+        return "SOR_Checkbounddetails{" +
+                "id=" + id +
+                ", packageid='" + packageid + '\'' +
+                ", cargocount=" + cargocount +
+                ", weight=" + weight +
+                ", volume=" + volume +
+                ", cargotype=" + cargotype +
+                ", direction='" + direction + '\'' +
+                ", storageperson=" + storageperson +
+                ", storagedate=" + storagedate +
+                '}';
+    }
 }

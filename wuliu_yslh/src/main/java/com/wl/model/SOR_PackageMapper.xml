@@ -25,6 +25,11 @@
     from BOS.SOR_PACKAGE
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <!--根据时间查询出最新的时间-->
+  <select id="findNewDate" resultType="SOR_Package">
+       select * from sor_package order by timelimit desc
+  </select>
 <!--合包查询-->
   <select id="findSORPackage" parameterType="Object" resultType="com.wl.model.SOR_Package">
     select * from
@@ -74,6 +79,19 @@
 
 
 
+  <!--查询全部的合包信息-->
+  <select id="findAllPackYWY" resultType="SOR_Package" parameterType="SOR_Package">
+    select * from sor_package
+    <where>
+      <if test="id!=null and id!=''">
+        and id=#{id}
+      </if>
+      <if test="state!=null and state1=''">
+        and state=#{state}
+      </if>
+    </where>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SOR_PACKAGE
     where ID = #{id,jdbcType=DECIMAL}
@@ -85,7 +103,7 @@
       VOLUMESUM, STATE, ASK
       )
     values (sor_package_id.nextval, #{packageperson,jdbcType=DECIMAL}, #{sealint,jdbcType=VARCHAR},
-      #{destination,jdbcType=VARCHAR}, #{reckondes,jdbcType=VARCHAR}, #{timelimit,jdbcType=TIMESTAMP}, 
+      #{destination,jdbcType=VARCHAR}, #{reckondes,jdbcType=VARCHAR}, sysdate,
       #{ticketsum,jdbcType=DECIMAL}, #{cargosum,jdbcType=DECIMAL}, #{weightsum,jdbcType=DECIMAL}, 
       #{volumesum,jdbcType=DECIMAL}, #{state,jdbcType=DECIMAL}, #{ask,jdbcType=DECIMAL}
       )
@@ -172,37 +190,37 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.SOR_Package">
     update BOS.SOR_PACKAGE
     <set>
-      <if test="packageperson != null">
+      <if test="packageperson != null and packageperson!=''">
         PACKAGEPERSON = #{packageperson,jdbcType=DECIMAL},
       </if>
-      <if test="sealint != null">
+      <if test="sealint != null and sealint!=''">
         SEALINT = #{sealint,jdbcType=VARCHAR},
       </if>
-      <if test="destination != null">
+      <if test="destination != null and destination!=''">
         DESTINATION = #{destination,jdbcType=VARCHAR},
       </if>
-      <if test="reckondes != null">
+      <if test="reckondes != null and reckondes!=''">
         RECKONDES = #{reckondes,jdbcType=VARCHAR},
       </if>
-      <if test="timelimit != null">
+      <if test="timelimit != null and timelimit!=''">
         TIMELIMIT = #{timelimit,jdbcType=TIMESTAMP},
       </if>
-      <if test="ticketsum != null">
+      <if test="ticketsum != null and ticketsum!=''">
         TICKETSUM = #{ticketsum,jdbcType=DECIMAL},
       </if>
-      <if test="cargosum != null">
+      <if test="cargosum != null and cargosum!=''">
         CARGOSUM = #{cargosum,jdbcType=DECIMAL},
       </if>
-      <if test="weightsum != null">
+      <if test="weightsum != null and weightsum!=''">
         WEIGHTSUM = #{weightsum,jdbcType=DECIMAL},
       </if>
-      <if test="volumesum != null">
+      <if test="volumesum != null and volumesum!=''">
         VOLUMESUM = #{volumesum,jdbcType=DECIMAL},
       </if>
-      <if test="state != null">
+      <if test="state != null and state!=''">
         STATE = #{state,jdbcType=DECIMAL},
       </if>
-      <if test="ask != null">
+      <if test="ask != null and ask!=''">
         ASK = #{ask,jdbcType=DECIMAL},
       </if>
     </set>

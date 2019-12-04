@@ -37,7 +37,7 @@
       )
     values (#{id,jdbcType=DECIMAL}, #{warename,jdbcType=VARCHAR}, #{destination,jdbcType=VARCHAR},
       #{ticket,jdbcType=DECIMAL}, #{actualcargoint,jdbcType=DECIMAL}, #{cargoint,jdbcType=DECIMAL}, 
-      #{weight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, #{service,jdbcType=TIMESTAMP},
+      #{weight,jdbcType=DECIMAL}, #{volume,jdbcType=DECIMAL}, sysdate,
       #{importanthints,jdbcType=VARCHAR}, #{ask,jdbcType=VARCHAR}, #{inputtype,jdbcType=VARCHAR}
       )
   </insert>
