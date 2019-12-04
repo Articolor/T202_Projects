@@ -32,6 +32,12 @@ public class BAS_DeliverystandardController {
     private BAS_ZoneinfoService bas_zoneinfoService;
     @Autowired
     private BAS_ZonecustominfoService bas_zonecustominfoService;
+    @Autowired
+    private LOG_LogisticsService log_logisticsService;
+    @Autowired
+    private LOG_LogisticstransferService log_logisticstransferService;
+    @Autowired
+    private LOG_TrackService trackService;
     //分页查询所有收派标准
     @RequestMapping("findAllBASDeliverystandardAndSY_EMP")
     public  Map<String,Object> findAllBASDeliverystandardAndSY_EMP(BAS_Deliverystandard d){
@@ -338,5 +344,38 @@ public class BAS_DeliverystandardController {
     public int deleteByPrimaryKeyZoneinfo(BigDecimal id){
         int i = bas_zoneinfoService.deleteByPrimaryKey(id);
         return i;
+    }
+
+    //查询跟踪表登记
+    @RequestMapping("findalltracck")
+    public Map<String, Object> findalltracck(String linename, String logisticscar, Integer page, Integer rows) {
+        Map<String, Object> map = new HashMap<>();
+        List<LOG_Track> list = trackService.findalltracck(linename, logisticscar, (page - 1) * rows + 1, rows * page);
+        map.put("shuju", list);
+        return map;
+    }
+
+    //删除跟踪表记录
+    @RequestMapping("deleteByPrimaryKeytracck")
+    public int deleteByPrimaryKeytracck(BigDecimal id) {
+        int i = trackService.deleteByPrimaryKey(id);
+        return i;
+    }
+
+    //查询登记表查询
+    @RequestMapping("selectfindLogistics")
+    public Map<String, Object> selectfindLogistics(String logisticsint, Integer iscancel, Integer page, Integer rows) {
+        Map<String, Object> map = new HashMap<>();
+        List<LOG_Logistics> list = log_logisticsService.selectfindLogistics(logisticsint, iscancel, (page - 1) * rows + 1, rows * page);
+        map.put("shuju",list);
+        return map;
+    }
+    //物流交接单查询
+    @RequestMapping("selectfindtransfer")
+    public Map<String, Object> selectfindtransfer( String transferint,String driver, Integer page,Integer rows){
+        Map<String, Object> map = new HashMap<>();
+        List<LOG_Logisticstransfer> list = log_logisticstransferService.selectfindtransfer(transferint, driver, (page - 1) * rows + 1, rows * page);
+        map.put("shuju",list);
+        return map;
     }
 }
