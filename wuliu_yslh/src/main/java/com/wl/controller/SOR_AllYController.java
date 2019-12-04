@@ -25,6 +25,12 @@ public class SOR_AllYController {
     private SOR_OutboundService outboundService;
     @Autowired
     private SOR_AbnormalService abnormalService;
+    @Autowired
+    private SOR_OutbounddetailsService outbounddetailsService;
+    @Autowired
+    private SOR_CheckboundService checkboundService;
+    @Autowired
+    private SOR_CheckbounddetailsService checkbounddetailsService;
 
     //分拣管理----入库----入库查询
     @RequestMapping("findAllSorageYWY")
@@ -100,4 +106,125 @@ public class SOR_AllYController {
         map.put("stor",list.get(0));
         return map;
     }
+
+
+
+    //分拣管理----出库-------查询全部
+    @RequestMapping("findAllOutBoundYWY")
+    public Map<String,Object> findAllOutBoundYWY(SOR_Outbound o){
+        //查询出出库信息
+        Integer page = o.getPage();
+        Integer rows = o.getRows();
+        o.setPage((page-1)*rows+1);
+        o.setRows((page*rows));
+        Map<String,Object> map=new HashMap<>();
+        List<SOR_Outbound> list = outboundService.findAllOutBo(o);
+        map.put("outs",list);
+        map.put("sums",outboundService.sumCount(o));
+        map.put("bound",o);
+        map.put("emps",empService.findemono());//查询全部的用户名
+        map.put("units",unitsService.findAllUnits());//查询全部的单位
+        return map;
+    }
+
+
+    //分拣管理---出库-----查看明细
+    @RequestMapping("findByIDBoundYWY")
+    public Map<String,Object> findByIDBoundYWY(SOR_Outbounddetails o){
+        Map<String,Object> map=new HashMap<>();
+        //根据出库单号查询出出库详细信息
+        List<SOR_Outbounddetails> list = outbounddetailsService.findByIdOutDeta(o);
+        map.put("outdates",list);
+        return map;
+    }
+
+    //分拣管理----出库----新增出库表
+    @RequestMapping("insertOutBanYWY")
+    public String insertOutBanYWY(SOR_Outbound o){
+        System.out.println(o);
+        int i = outboundService.insert(o);
+        System.out.println(i);
+        return "ok";
+    }
+
+    //分拣管理----出库---新增出表表对应的出库详情表信息
+    @RequestMapping("insertOutBanDateYWY")
+    public String insertOutBanDateYWY(SOR_Outbounddetails d){
+        List<SOR_Outbound> list = outboundService.findNewDate();
+        SOR_Outbound s = list.get(0);
+        d.setId(s.getId());
+        System.out.println(d);
+        outbounddetailsService.insert(d);
+        return "ok";
+    }
+
+
+
+
+
+    //分拣管理------盘库-------查询
+    @RequestMapping("findAllCheckBYWY")
+    public Map<String,Object> findAllCheckBYWY(SOR_Checkbound  o){
+        Integer page = o.getPage();
+        Integer rows = o.getRows();
+        o.setPage((page-1)*rows+1);
+        o.setRows(page*rows);
+        Map<String,Object> map=new HashMap<>();
+        List<SOR_Checkbound> list = checkboundService.findAllCheckBound(o);
+        map.put("checks",list);
+        map.put("sums",checkboundService.sumCount(o));
+        map.put("check",o);
+        return map;
+    }
+
+
+    //分拣管理---------盘库------明细数据
+    @RequestMapping("findByIDdateils")
+    public Map<String,Object> findByIDdateils(SOR_Checkbounddetails c){
+        //根据盘库表查询出盘库详细表信息
+        Map<String,Object> map=new HashMap<>();
+        List<SOR_Checkbounddetails> list = checkbounddetailsService.findByIDBound(c);
+        map.put("checdateils",list);
+        return map;
+    }
+
+    //分拣管理----盘库----新增盘库
+    @RequestMapping("insertCheckBountDateilsYWY")
+    public String insertCheckBountDateilsYWY(SOR_Checkbound c){
+        //新增盘库信息
+        System.out.println(c);
+        //int i = checkboundService.insert(c);
+        return "ok";
+    }
+
+    //分拣管理----盘库----新增盘库详细信息
+    @RequestMapping("insertBountDateilsYWY")
+    public String insertBountDateilsYWY(SOR_Checkbounddetails d){
+        //查询出之前新增的盘库信息
+        List<SOR_Checkbound> newDate = checkboundService.findNewDate();
+        SOR_Checkbound s = newDate.get(0);
+        d.setPackageid(s.getScanid().toString());
+        System.out.println(d);
+        //checkbounddetailsService.insert(d);
+        return "ok";
+    }
+
+
+    //分拣管理-----合包----保存
+    @RequestMapping("insertPackAgeYWY")
+    public String insertPackAgeYWY(SOR_Package p){
+        //新增和包信息
+        
+        return "ok";
+    }
+
+    //分拣管理----和包-----保存
+    @RequestMapping("insertPageAgeDateilsYWY")
+    public String insertPageAgeDateilsYWY(SOR_Packagedetails d){
+        //新增和包信息对应的和详细信息
+
+        return "ok";
+    }
+
+
 }

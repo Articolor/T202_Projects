@@ -40,4 +40,19 @@ public class PAC_StockServiceImpl implements PAC_StockService {
     public int querycount(Object o) {
         return mapper.querycount(o);
     }
+
+    @Override
+    public List<PAC_Stock> findStockManage(PAC_Stock p, int page, int rows) {
+        return mapper.findStockManage(p, page, rows);
+    }
+
+    @Override
+    public Integer findStockManageCount(PAC_Stock p) {
+        return mapper.findStockManageCount(p);
+    }
+
+    @Override
+    public int insertStock(PAC_Stock p) {
+        return mapper.insertStock(p);
+    }
 }

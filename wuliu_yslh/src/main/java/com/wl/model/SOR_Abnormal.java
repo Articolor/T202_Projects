@@ -1,11 +1,16 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class SOR_Abnormal {
     private BigDecimal id;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date launchdate;
 
     private String launchperson;
@@ -23,7 +28,8 @@ public class SOR_Abnormal {
     private BigDecimal hedgeabnint;
 
     private BigDecimal abostate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date handledate;
 
     public BigDecimal getId() {

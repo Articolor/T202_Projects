@@ -12,6 +12,42 @@
   <sql id="Base_Column_List">
     ID, SCANID, CARGOSUM, CHECKPERSON, CHECKDATE, CHECKCOMPANY
   </sql>
+  <!--查询全部的信息-->
+  <select id="findAllCheckBound" parameterType="SOR_Checkbound" resultType="SOR_Checkbound">
+    select * from (
+   select rownum rn,o.* from sor_checkbound o
+   <where>
+   <if test="id!=null and id!=''">
+     and o.id like concat('%',concat(#{id},'%'))
+   </if>
+   <if test="checkcompany!=null and checkcompany!=''">
+     and o.checkcompany=#{checkcompany}
+   </if>
+   </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+
+  <!--查询总行数-->
+  <select id="sumCount" resultType="Integer" parameterType="SOR_Checkbound">
+    select count(*) from (
+    select rownum rn,o.* from sor_checkbound o
+    <where>
+      <if test="id!=null and id!=''">
+        and o.id like concat('%',concat(#{id},'%'))
+      </if>
+      <if test="checkcompany!=null and checkcompany!=''">
+        and o.checkcompany=#{checkcompany}
+      </if>
+    </where>
+    )
+  </select>
+
+  <!--根据时间查询-->
+  <select id="findNewDate" resultType="SOR_Checkbound">
+    select * from sor_checkbound order by checkdate desc
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -26,7 +62,7 @@
     insert into BOS.SOR_CHECKBOUND (ID, SCANID, CARGOSUM, 
       CHECKPERSON, CHECKDATE, CHECKCOMPANY
       )
-    values (#{id,jdbcType=DECIMAL}, #{scanid,jdbcType=DECIMAL}, #{cargosum,jdbcType=DECIMAL}, 
+    values (sor_check_id.nextval,sor_check_scanid.nextval, #{cargosum,jdbcType=DECIMAL},
       #{checkperson,jdbcType=DECIMAL}, #{checkdate,jdbcType=TIMESTAMP}, #{checkcompany,jdbcType=VARCHAR}
       )
   </insert>

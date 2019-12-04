@@ -41,4 +41,9 @@ public class PAC_packagingServiceImpl implements PAC_packagingService {
     public int insertSelective(PAC_Packaging record) {
         return packagingMapper.insertSelective(record);
     }
+
+    @Override
+    public int updateByPrimaryKey(PAC_Packaging record) {
+        return packagingMapper.updateByPrimaryKey(record);
+    }
 }

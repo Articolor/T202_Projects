@@ -25,6 +25,55 @@
     from BOS.SOR_PACKAGE
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+<!--合包查询-->
+  <select id="findSORPackage" parameterType="Object" resultType="com.wl.model.SOR_Package">
+    select * from
+    (select rownum rn,s.* from SOR_PACKAGE s
+    <where>
+      <if test="s.id != null and s.id !=''">
+       and s.id like concat(concat('%',#{s.id,jdbcType=DECIMAL}),'%')
+      </if>
+
+      <if test="s.sealint != null and s.sealint !=''">
+      and s.sealint like concat(concat('%',#{s.sealint,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="s.destination != null and s.destination !=''">
+      and s.destination like concat(concat('%',#{s.destination,jdbcType=VARCHAR}),'%')
+      </if>
+
+      <if test="s.state != null and s.state != ''">
+        and s.state=#{s.state,jdbcType=DECIMAL}
+      </if>
+
+    </where>
+    )where rn between #{page} and #{rows}
+  </select>
+  <!--合包总行数-->
+  <select id="findSORPackageCount" parameterType="com.wl.model.SOR_Package" resultType="Integer">
+    select count(*) from
+    (select rownum rn from SOR_PACKAGE s
+    <where>
+      <if test="id != null">
+        and s.id like concat(concat('%',#{id,jdbcType=DECIMAL}),'%')
+      </if>
+
+      <if test="sealint != null">
+        and s.sealint like concat(concat('%',#{sealint,jdbcType=VARCHAR}),'%')
+      </if>
+      <if test="destination != null">
+        and s.destination like concat(concat('%',#{destination,jdbcType=VARCHAR}),'%')
+      </if>
+
+      <if test="state != null">
+        and s.state=#{state,jdbcType=DECIMAL}
+      </if>
+
+    </where>
+    )
+  </select>
+
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.SOR_PACKAGE
     where ID = #{id,jdbcType=DECIMAL}
@@ -35,7 +84,7 @@
       TICKETSUM, CARGOSUM, WEIGHTSUM, 
       VOLUMESUM, STATE, ASK
       )
-    values (#{id,jdbcType=DECIMAL}, #{packageperson,jdbcType=DECIMAL}, #{sealint,jdbcType=VARCHAR}, 
+    values (sor_package_id.nextval, #{packageperson,jdbcType=DECIMAL}, #{sealint,jdbcType=VARCHAR},
       #{destination,jdbcType=VARCHAR}, #{reckondes,jdbcType=VARCHAR}, #{timelimit,jdbcType=TIMESTAMP}, 
       #{ticketsum,jdbcType=DECIMAL}, #{cargosum,jdbcType=DECIMAL}, #{weightsum,jdbcType=DECIMAL}, 
       #{volumesum,jdbcType=DECIMAL}, #{state,jdbcType=DECIMAL}, #{ask,jdbcType=DECIMAL}

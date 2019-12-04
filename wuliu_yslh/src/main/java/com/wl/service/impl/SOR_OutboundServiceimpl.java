@@ -17,4 +17,24 @@ public class SOR_OutboundServiceimpl implements SOR_OutboundService {
     public List<SOR_Outbound> findAllByOut(SOR_Outbound o) {
         return outboundMapper.findAllByOut(o);
     }
+
+    @Override
+    public List<SOR_Outbound> findAllOutBo(SOR_Outbound o) {
+        return outboundMapper.findAllOutBo(o);
+    }
+
+    @Override
+    public Integer sumCount(SOR_Outbound o) {
+        return outboundMapper.sumCount(o);
+    }
+
+    @Override
+    public int insert(SOR_Outbound record) {
+        return outboundMapper.insert(record);
+    }
+
+    @Override
+    public List<SOR_Outbound> findNewDate() {
+        return outboundMapper.findNewDate();
+    }
 }

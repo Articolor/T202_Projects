@@ -31,6 +31,8 @@ public class PAC_Packaging {
     private BigDecimal operatorid;
 
 
+    @DateTimeFormat(pattern="YYYY-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date operationtime;
     private String operatorqq;
     private String invalidatejobqq;
@@ -44,6 +46,8 @@ public class PAC_Packaging {
 
 
 
+    @DateTimeFormat(pattern="YYYY-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date invalidatetime;
 
     private Integer page=1;

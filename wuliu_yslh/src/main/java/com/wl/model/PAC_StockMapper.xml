@@ -12,6 +12,30 @@
     <result column="DRAWERTIME" jdbcType="TIMESTAMP" property="drawertime" />
     <result column="REMARK" jdbcType="VARCHAR" property="remark" />
   </resultMap>
+
+
+  <!--入库管理返回值-->
+  <resultMap id="selectStockManage" type="com.wl.model.PAC_Stock">
+    <id column="p1id" jdbcType="DECIMAL" property="id" />
+    <result column="p1w" jdbcType="VARCHAR" property="warehouseno" />
+    <result column="RESERVOIRTYPE" jdbcType="DECIMAL" property="reservoirtype" />
+    <result column="TRANSPORT" jdbcType="VARCHAR" property="transport" />
+    <result column="SUBORDINATEUNIT" jdbcType="VARCHAR" property="subordinateunit" />
+    <result column="DRAWERNO" jdbcType="DECIMAL" property="drawerno" />
+    <result column="DRAWERNAME" jdbcType="VARCHAR" property="drawername" />
+    <result column="DRAWERTIME" jdbcType="TIMESTAMP" property="drawertime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <association property="units"  javaType="com.wl.model.SY_Units">
+      <id column="sid" jdbcType="DECIMAL" property="id" />
+      <result column="NAME" jdbcType="VARCHAR" property="name" />
+      <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+      <result column="OPERATORID" jdbcType="DECIMAL" property="operatorid" />
+      <result column="OPERATIONTIME" jdbcType="TIMESTAMP" property="operationtime" />
+    </association>
+  </resultMap>
+
+
+
   <resultMap id="result" type="com.wl.model.PAC_Stock">
     <id property="id" column="ID"></id>
     <result property="warehouseno" column="WarehouseNo"></result>
@@ -118,6 +142,18 @@ where rn between #{page} and #{rows}
     delete from BOS.PAC_STOCK
     where ID = #{id,jdbcType=DECIMAL}
   </delete>
+
+  <insert id="insertStock" parameterType="com.wl.model.PAC_Stock">
+    insert into BOS.PAC_STOCK (ID, WAREHOUSENO, RESERVOIRTYPE,
+      TRANSPORT, SUBORDINATEUNIT, DRAWERNO,
+      DRAWERNAME, DRAWERTIME, REMARK
+      )
+    values (pac_sk_seq.nextval,concat('RK',pac_sk_seq.nextval), #{reservoirtype,jdbcType=DECIMAL},
+      #{transport,jdbcType=VARCHAR}, #{subordinateunit,jdbcType=VARCHAR}, #{drawerno,jdbcType=DECIMAL},
+      #{drawername,jdbcType=VARCHAR}, sysdate, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+
   <insert id="insert" parameterType="com.wl.model.PAC_Stock">
     insert into BOS.PAC_STOCK (ID, WAREHOUSENO, RESERVOIRTYPE, 
       TRANSPORT, SUBORDINATEUNIT, DRAWERNO, 
@@ -231,4 +267,105 @@ where rn between #{page} and #{rows}
       REMARK = #{remark,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+
+
+
+
+
+
+
+
+
+  <!--三表联查(入库管理)-->
+  <select id="findStockManage" resultMap="selectStockManage" parameterType="Object">
+    select * from(select rownum rn,
+    p1.id as p1id,p1.warehouseno as p1w,
+    p1.reservoirtype,p1.transport,
+    p1.subordinateunit,p1.drawerno,
+    p1.drawername,p1.drawertime,p1.remark,
+
+    s.id as sid,s.name
+    from
+    pac_stock p1
+    inner join sy_units s
+    on p1.drawerno=s.id
+    <where>
+      <if test="p.warehouseno != null and p.warehouseno != ''">
+        and
+        p1.warehouseno like concat(concat('%',#{p.warehouseno}),'%')
+      </if>
+      <if test="p.reservoirtype != null and p.reservoirtype != ''">
+        and p1.reservoirtype=#{p.reservoirtype}
+      </if>
+      <if test="p.transport != null and p.transport != ''">
+        and p1.transport like concat(concat('%',#{p.transport}),'%')
+      </if>
+      <if test="p.subordinateunit != null and p.subordinateunit!=''">
+        and
+        p1.subordinateunit like concat(concat('%',#{p.subordinateunit}),'%')
+      </if>
+      <if test="p.drawertime != null">
+        and
+        p1.drawertime=#{p.drawertime}
+      </if>
+
+      <if test="p.goodscode != null and p.goodscode != ''">
+        and
+        p2.goodscode=#{p.goodscode}
+      </if>
+      <if test="p.goodsname != null and p.goodsname != ''">
+        and
+        p2.goodsname=#{p.goodsname}
+      </if>
+    </where>
+    )where rn between #{page} and #{rows}
+  </select>
+
+  <!--三表联查(入库管理)-->
+  <select id="findStockManageCount" resultType="Integer" parameterType="com.wl.model.PAC_Stock">
+    select count(*) from(select rownum rn,
+    p1.id as p1id,p1.warehouseno as p1w,
+    p1.reservoirtype,p1.transport,
+    p1.subordinateunit,p1.drawerno,
+    p1.drawername,p1.drawertime,p1.remark,
+
+    s.id as sid,s.name
+    from
+    pac_stock p1
+    inner join sy_units s
+    on p1.drawerno=s.id
+    <where>
+      <if test="warehouseno != null and warehouseno != ''">
+        and
+        p1.warehouseno like concat(concat('%',#{warehouseno}),'%')
+      </if>
+      <if test="reservoirtype != null and reservoirtype != ''">
+        and p1.reservoirtype=#{reservoirtype}
+      </if>
+      <if test="transport != null and transport != null">
+        and p1.transport like concat(concat('%',#{transport}),'%')
+      </if>
+      <if test="subordinateunit!= null and  subordinateunit!=''">
+        and
+        p1.subordinateunit like concat(concat('%',#{subordinateunit}),'%')
+      </if>
+      <if test="drawertime != null">
+        and
+        p1.drawertime=#{drawertime}
+      </if>
+
+      <if test="goodscode != null and goodscode != ''">
+        and
+        p2.goodscode=#{goodscode}
+      </if>
+      <if test="goodsname != null and goodsname != ''">
+        and
+        p2.goodsname=#{goodsname}
+      </if>
+    </where>
+    )
+  </select>
+  <!--新增-->
+  <!--修改-->
 </mapper>

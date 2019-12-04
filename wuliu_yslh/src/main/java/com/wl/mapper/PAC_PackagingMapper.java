@@ -24,4 +24,11 @@ public interface PAC_PackagingMapper {
     List<PAC_Packaging> selectPacking(PAC_Packaging p,int page,int rows);
 
     Integer selectPackingCount(PAC_Packaging p);
+
+
+
+
+
+
+
 }

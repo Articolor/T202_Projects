@@ -16,6 +16,26 @@ public class SOR_Checkbound {
 
     private String checkcompany;
 
+    private Integer page=1;
+
+    private Integer rows=5;
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
+
     public BigDecimal getId() {
         return id;
     }
@@ -62,5 +82,19 @@ public class SOR_Checkbound {
 
     public void setCheckcompany(String checkcompany) {
         this.checkcompany = checkcompany == null ? null : checkcompany.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SOR_Checkbound{" +
+                "id=" + id +
+                ", scanid=" + scanid +
+                ", cargosum=" + cargosum +
+                ", checkperson=" + checkperson +
+                ", checkdate=" + checkdate +
+                ", checkcompany='" + checkcompany + '\'' +
+                ", page=" + page +
+                ", rows=" + rows +
+                '}';
     }
 }

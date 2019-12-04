@@ -23,6 +23,16 @@ public class PAC_Stockitem {
 
     private BigDecimal status;
 
+    private PAC_Packaging packaging;
+
+    public PAC_Packaging getPackaging() {
+        return packaging;
+    }
+
+    public void setPackaging(PAC_Packaging packaging) {
+        this.packaging = packaging;
+    }
+
     public BigDecimal getId() {
         return id;
     }
