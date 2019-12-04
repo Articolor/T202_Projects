@@ -1,9 +1,17 @@
 package com.wl.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class IAE_Timeinput {
+    private SY_Emp emp;
+
+    private Integer page=1;
+    private Integer rows=5;
+
     private BigDecimal id;
 
     private String inputtype;
@@ -15,13 +23,17 @@ public class IAE_Timeinput {
     private String vehicleint;
 
     private String waybillid;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date expectarrivaldate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date expectdeparturedate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date actualarrivaldate;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date actualdeparturedate;
 
     private String start;
@@ -31,8 +43,33 @@ public class IAE_Timeinput {
     private String remarks;
 
     private BigDecimal inputperson;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date inputdate;
+
+    public SY_Emp getEmp() {
+        return emp;
+    }
+
+    public void setEmp(SY_Emp emp) {
+        this.emp = emp;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public Integer getRows() {
+        return rows;
+    }
+
+    public void setRows(Integer rows) {
+        this.rows = rows;
+    }
 
     public BigDecimal getId() {
         return id;
