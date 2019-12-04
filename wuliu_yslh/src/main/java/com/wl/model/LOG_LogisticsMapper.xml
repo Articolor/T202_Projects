@@ -19,11 +19,24 @@
     CARTYPE, LOGISTICSSTATE, ISCANCEL
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from BOS.LOG_LOGISTICS
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+  <select id="selectfindLogistics"  resultType="LOG_Logistics">
+    select * from (select l.*,rownum rn from log_logistics l
+    <where>
+      <if test="logisticsint!=null and logisticsint!=''">
+        and logisticsint like concat(concat('%',#{logisticsint}),'%')
+      </if>
+      <if test="iscancel!=null and iscancel!=''">
+        and iscancel like concat(concat('%',#{iscancel}),'%')
+      </if>
+    </where>
+    ) where rn between #{page} and #{rows}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.LOG_LOGISTICS
     where ID = #{id,jdbcType=DECIMAL}

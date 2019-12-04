@@ -19,10 +19,23 @@
     CARINT, NEXTNODELOAD, DESCRIBE
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from BOS.LOG_TRACK
     where ID = #{id,jdbcType=DECIMAL}
+  </select>
+
+  <select id="findalltracck"  resultType="LOG_Track">
+    select * from (select rownum rn,l.* from LOG_Track l
+    <where>
+      <if test="linename!=null and linename!=''">
+        and linename like concat(concat('%',#{linename}),'%')
+      </if>
+      <if test="logisticscar!=null and logisticscar!=''">
+        and logisticscar like concat(concat('%',#{logisticscar}),'%')
+      </if>
+    </where>
+    ) where rn between #{page} and #{rows}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.LOG_TRACK

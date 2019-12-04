@@ -15,11 +15,25 @@
     ID, TRANSFERINT, STARTSTATION, ENDSTATION, DISPATCHER, DRIVER, DELIVERYPERSON, DELIVERYDATE
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from BOS.LOG_LOGISTICSTRANSFER
     where ID = #{id,jdbcType=DECIMAL}
   </select>
+
+  <select id="selectfindtransfer"  resultType="LOG_Logisticstransfer">
+    select * from (select l.*,rownum rn from LOG_LogisticsTransfer l
+    <where>
+      <if test="transferint!=null and transferint!=''">
+        and transferint like concat(concat('%',#{transferint}),'%')
+      </if>
+      <if test="driver!=null and driver!=''">
+        and driver like concat(concat('%',#{driver}),'%')
+      </if>
+    </where>
+    ) where rn between #{page} and #{rows}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
     delete from BOS.LOG_LOGISTICSTRANSFER
     where ID = #{id,jdbcType=DECIMAL}
