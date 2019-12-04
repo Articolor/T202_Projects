@@ -28,4 +28,9 @@ public interface SOR_StorageMapper {
     int updateByPrimaryKeySelective(SOR_Storage record);
 
     int updateByPrimaryKey(SOR_Storage record);
+
+    //入库
+    List<SOR_Storage> findSS(int page,int rows);
+
+    Integer findSSCount();
 }
