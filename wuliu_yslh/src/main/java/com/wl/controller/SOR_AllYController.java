@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,10 @@ public class SOR_AllYController {
     private SOR_CheckboundService checkboundService;
     @Autowired
     private SOR_CheckbounddetailsService checkbounddetailsService;
+    @Autowired
+    private SOR_PackageService packageService;
+    @Autowired
+    private SOR_PackagedetailsService packagedetailsService;
 
     //分拣管理----入库----入库查询
     @RequestMapping("findAllSorageYWY")
@@ -174,6 +179,8 @@ public class SOR_AllYController {
         map.put("checks",list);
         map.put("sums",checkboundService.sumCount(o));
         map.put("check",o);
+        map.put("emps",empService.findemono());//查询全部的用户名
+        map.put("units",unitsService.findAllUnits());//查询全部的单位
         return map;
     }
 
@@ -182,6 +189,7 @@ public class SOR_AllYController {
     @RequestMapping("findByIDdateils")
     public Map<String,Object> findByIDdateils(SOR_Checkbounddetails c){
         //根据盘库表查询出盘库详细表信息
+        System.out.println(c);
         Map<String,Object> map=new HashMap<>();
         List<SOR_Checkbounddetails> list = checkbounddetailsService.findByIDBound(c);
         map.put("checdateils",list);
@@ -193,7 +201,7 @@ public class SOR_AllYController {
     public String insertCheckBountDateilsYWY(SOR_Checkbound c){
         //新增盘库信息
         System.out.println(c);
-        //int i = checkboundService.insert(c);
+        int i = checkboundService.insert(c);
         return "ok";
     }
 
@@ -205,8 +213,27 @@ public class SOR_AllYController {
         SOR_Checkbound s = newDate.get(0);
         d.setPackageid(s.getScanid().toString());
         System.out.println(d);
-        //checkbounddetailsService.insert(d);
+        checkbounddetailsService.insert(d);
         return "ok";
+    }
+
+    //分拣管理----合包----根据设备号查询
+    @RequestMapping("findByPageIdYWY")
+    public Map<String,Object> findByPageIdYWY(SOR_Checkbounddetails c){
+        Map<String,Object> map=new HashMap<>();
+        List<SOR_Checkbounddetails> list = checkbounddetailsService.findByIDBound(c);
+        map.put("pageid",list.get(0));
+        return map;
+    }
+
+    //分拣管理-----合包----查询所有的设备号
+    @RequestMapping("findByPageAllYWY")
+    public Map<String,Object> findByPageAllYWY(){
+        Map<String,Object> map=new HashMap<>();
+        List<SOR_Checkbounddetails> list = checkbounddetailsService.findByIDBound(new SOR_Checkbounddetails());
+        map.put("pageids",list);
+        map.put("units",unitsService.findAllUnits());//查询全部的单位
+        return map;
     }
 
 
@@ -214,17 +241,63 @@ public class SOR_AllYController {
     @RequestMapping("insertPackAgeYWY")
     public String insertPackAgeYWY(SOR_Package p){
         //新增和包信息
-        
+        System.out.println(p);
+        int i = packageService.insert(p);
+        System.out.println(i);
         return "ok";
     }
 
     //分拣管理----和包-----保存
     @RequestMapping("insertPageAgeDateilsYWY")
     public String insertPageAgeDateilsYWY(SOR_Packagedetails d){
+        //根据最新时间查询出刚刚新增的和包信息
+        List<SOR_Package> newDate = packageService.findNewDate();
+        d.setId(newDate.get(0).getId());
         //新增和包信息对应的和详细信息
-
+        System.out.println(d);
+        int i = packagedetailsService.insert(d);
+        System.out.println(i);
         return "ok";
     }
 
 
+    //分拣管理-----拆包-----查询全部的合包号
+    @RequestMapping("findOutPackageYWY")
+    public Map<String,Object> findOutPackageYWY(SOR_Package p){
+        //查询所有的合包号
+        Map<String,Object> map=new HashMap<>();
+        p.setState(new BigDecimal(2));
+        List<SOR_Package> list = packageService.findAllPackYWY(p);
+        map.put("packids",list);
+        return map;
+    }
+
+    //分拣管理-----拆包---和包号
+    @RequestMapping("findByPageidsYWY")
+    public Map<String,Object> findByPageidsYWY(SOR_Package p){
+        //根据id查询和合包对象
+        Map<String,Object> map=new HashMap<>();
+        p.setState(new BigDecimal(2));
+        List<SOR_Package> list = packageService.findAllPackYWY(p);
+        map.put("packids",list.get(0));
+        return map;
+    }
+
+
+
+    //分拣管理----拆包-----保存
+    @RequestMapping("insertOutPageAgeDateilsYWY")
+    public String insertOutPageAgeDateilsYWY(SOR_Packagedetails d){
+        //新增和包信息对应的和详细信息
+        System.out.println(d);
+        int i = packagedetailsService.insert(d);
+        System.out.println(i);
+        //修改合包状态为已合包  1   2未合包
+        SOR_Package p=new SOR_Package();
+        p.setId(d.getId());
+        p.setState(new BigDecimal(1));
+        System.out.println(p);
+        packageService.updateByPrimaryKeySelective(p);
+        return "ok";
+    }
 }
