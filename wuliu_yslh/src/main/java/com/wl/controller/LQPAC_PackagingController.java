@@ -13,7 +13,7 @@ import java.util.Map;
 @RestController
 public class LQPAC_PackagingController {
     @Autowired
-    private PAC_packagingService service;
+   private PAC_packagingService service;
     @RequestMapping("querypack")
     public Map<String,Object> querypack(PAC_Packaging p){
         int page=p.getPage();

@@ -1,6 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wl.mapper.IAE_TimeinputMapper">
+  <select id="queryinput" resultMap="biglog" parameterType="IAE_Timeinput">
+    select * from (
+    select rownum rn,b.*,e.empname as empname,e.id as eid
+    from sy_emp e,Iae_Timeinput b
+    <where>e.id=b.inputperson
+      <if test="id != null">
+        and
+        b.id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="port != null and port!=''">
+        and b.port like concat(concat('%',#{port}),'%')
+      </if>
+
+      <if test="demand != null and demand!=''">
+        and b.demand like concat(concat('%',#{demand}),'%')
+      </if>
+      <if test="vehicleint != null and vehicleint!=''">
+        and b.vehicleint like concat(concat('%',#{vehicleint}),'%')
+      </if>
+      <if test="waybillid != null and waybillid!=''">
+        and b.waybillid like concat(concat('%',#{waybillid}),'%')
+      </if>
+
+      <if test="carriers != null and carriers!=''">
+        and b.carriers like concat(concat('%',#{carriers}),'%')
+      </if>
+      <if test="start != null and start!=''">
+        and b.start like concat(concat('%',#{start}),'%')
+      </if>
+
+      <if test="inputtype != null and inputtype!=''">
+        and b.inputtype like concat(concat('%',#{inputtype}),'%')
+      </if>
+
+    </where>
+    )
+    where rn between #{page} and #{rows}
+  </select>
+  <select id="querycount" resultType="int" parameterType="Object">
+    select count(*) from (
+    select rownum rn,b.*,e.empname as empname,e.id as eid
+    from sy_emp e,Iae_Timeinput b
+    <where>e.id=b.inputperson
+      <if test="id != null">
+        and
+        b.id like concat(concat('%',#{id}),'%')
+      </if>
+      <if test="port != null and port!=''">
+        and b.port like concat(concat('%',#{port}),'%')
+      </if>
+
+      <if test="demand != null and demand!=''">
+        and b.demand like concat(concat('%',#{demand}),'%')
+      </if>
+      <if test="vehicleint != null and vehicleint!=''">
+        and b.vehicleint like concat(concat('%',#{vehicleint}),'%')
+      </if>
+      <if test="waybillid != null and waybillid!=''">
+        and b.waybillid like concat(concat('%',#{waybillid}),'%')
+      </if>
+
+      <if test="carriers != null and carriers!=''">
+        and b.carriers like concat(concat('%',#{carriers}),'%')
+      </if>
+      <if test="start != null and start!=''">
+        and b.start like concat(concat('%',#{start}),'%')
+      </if>
+
+      <if test="inputtype != null and inputtype!=''">
+        and b.inputtype like concat(concat('%',#{inputtype}),'%')
+      </if>
+
+    </where>
+    )
+
+  </select>
+  <resultMap id="biglog" type="IAE_Timeinput">
+    <id property="id" column="ID"></id>
+    <result property="inputtype" column="InputType"></result>
+    <result property="port" column="Port"></result>
+    <result property="demand" column="Demand"></result>
+    <result property="vehicleint" column="VehicleInt"></result>
+    <result property="waybillid" column="WaybillID"></result>
+    <result property="expectarrivaldate" column="ExpectArrivalDate"></result>
+    <result property="expectdeparturedate" column="ExpectDepartureDate"></result>
+    <result property="actualarrivaldate" column="ActualArrivalDate"></result>
+    <result property="actualdeparturedate" column="ActualDepartureDate"></result>
+    <result property="start" column="Start"></result>
+    <result property="carriers" column="Carriers"></result>
+    <result property="remarks" column="Remarks"></result>
+    <result property="inputperson" column="InputPerson"></result>
+    <result property="inputdate" column="InputDate"></result>
+
+    <!--对应的员工-->
+    <association property="emp" javaType="SY_Emp">
+      <result property="id" column="EID"></result>
+      <result property="empname" column="EmpName"></result>
+    </association>
+
+
+  </resultMap>
   <resultMap id="BaseResultMap" type="com.wl.model.IAE_Timeinput">
     <id column="ID" jdbcType="DECIMAL" property="id" />
     <result column="INPUTTYPE" jdbcType="VARCHAR" property="inputtype" />
