@@ -1,9 +1,15 @@
 package com.wl.mapper;
 
 import com.wl.model.LOG_Track;
-import java.math.BigDecimal;
+import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+@Service
 public interface LOG_TrackMapper {
+    //查询跟踪记录
+    List<LOG_Track> findalltracck(String linename, String logisticscar, Integer page, Integer rows);
+    //删除记录
     int deleteByPrimaryKey(BigDecimal id);
 
     int insert(LOG_Track record);
