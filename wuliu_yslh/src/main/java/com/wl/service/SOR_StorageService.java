@@ -17,4 +17,9 @@ public interface SOR_StorageService {
 
     //根据时间查询出最新对象
     List<SOR_Storage> findTimeNew();
+
+
+    List<SOR_Storage> findSS(int page,int rows);
+
+    Integer findSSCount();
 }

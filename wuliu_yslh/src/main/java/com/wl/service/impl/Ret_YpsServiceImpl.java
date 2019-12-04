@@ -41,4 +41,9 @@ public class Ret_YpsServiceImpl implements Ret_YpsService {
     public Integer selectRetWorkCount(RET_Returnlist r) {
         return ret.selectRetWorkCount(r);
     }
+
+    @Override
+    public int updateByPrimaryKey(RET_Returnlist record) {
+        return ret.updateByPrimaryKey(record);
+    }
 }

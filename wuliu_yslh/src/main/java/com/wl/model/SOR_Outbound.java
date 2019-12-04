@@ -26,6 +26,16 @@ public class SOR_Outbound {
 
     private Date enterdate;
 
+    private SOR_Outbounddetails outbounddetails;
+
+    public SOR_Outbounddetails getOutbounddetails() {
+        return outbounddetails;
+    }
+
+    public void setOutbounddetails(SOR_Outbounddetails outbounddetails) {
+        this.outbounddetails = outbounddetails;
+    }
+
     private Integer page=1;
 
     private Integer rows=5;

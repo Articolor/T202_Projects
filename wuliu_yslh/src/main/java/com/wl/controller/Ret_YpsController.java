@@ -28,6 +28,10 @@ public class Ret_YpsController {
     private SOR_AbnormalService sor;
     @Autowired
     private SOR_PackageService sp;
+    @Autowired
+    private SOR_StorageService se;
+    @Autowired
+    private SOR_OutboundService so;
 
     //模糊查询分页一体
     @RequestMapping("/findRet")
@@ -178,6 +182,26 @@ public class Ret_YpsController {
         map.put("sop",sp.findSORPackage(p,(page-1)*rows+1,rows*page));
         map.put("count",sp.findSORPackageCount(p));
         map.put("emps",emp.findemono());
+        return map;
+    }
+
+
+    //出入库查询
+    @RequestMapping("findSS")
+    public Map<String,Object> findSS(int page,int rows){
+        Map<String,Object> map=new HashMap<>();
+        map.put("crk",se.findSS((page-1)*rows+1,rows*page));
+        map.put("count",se.findSSCount());
+        System.out.println(se.findSSCount()+"=="+se.findSS((page - 1) * rows + 1, rows * page));
+        return map;
+    }
+
+    @RequestMapping("findOD")
+    public Map<String,Object> findOD(int page,int rows){
+        Map<String,Object> map=new HashMap<>();
+        map.put("crk",so.findOutD((page-1)*rows+1,rows*page));
+        map.put("count",so.findOutDCount());
+        System.out.println(so.findOutDCount()+"=="+so.findOutD((page - 1) * rows + 1, rows * page));
         return map;
     }
 }

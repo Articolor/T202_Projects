@@ -14,6 +14,32 @@
     <result column="ENTERPERSON" jdbcType="DECIMAL" property="enterperson" />
     <result column="ENTERDATE" jdbcType="TIMESTAMP" property="enterdate" />
   </resultMap>
+
+<!--出库返回值-->
+  <resultMap id="BaseResultMap2" type="com.wl.model.SOR_Outbound">
+    <id column="sid" jdbcType="DECIMAL" property="id" />
+    <result column="HANDOVERTYPE" jdbcType="DECIMAL" property="handovertype" />
+    <result column="LINE" jdbcType="VARCHAR" property="line" />
+    <result column="DIRECTION" jdbcType="DECIMAL" property="direction" />
+    <result column="ACCEPTPERSON" jdbcType="DECIMAL" property="acceptperson" />
+    <result column="CARRIERS" jdbcType="DECIMAL" property="carriers" />
+    <result column="DELIVERYPERSON" jdbcType="DECIMAL" property="deliveryperson" />
+    <result column="DELIVERYDATE" jdbcType="TIMESTAMP" property="deliverydate" />
+    <result column="DELIVERYCOMPANY" jdbcType="VARCHAR" property="deliverycompany" />
+    <result column="ENTERPERSON" jdbcType="DECIMAL" property="enterperson" />
+    <result column="ENTERDATE" jdbcType="TIMESTAMP" property="enterdate" />
+  <association property="outbounddetails" javaType="com.wl.model.SOR_Outbounddetails">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PACKAGEID" jdbcType="VARCHAR" property="packageid" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="VOLUME" jdbcType="DECIMAL" property="volume" />
+    <result column="SCANDATE" jdbcType="TIMESTAMP" property="scandate" />
+    <result column="ISSCAN" jdbcType="DECIMAL" property="isscan" />
+    <result column="ISNEXTSTORAGE" jdbcType="DECIMAL" property="isnextstorage" />
+    <result column="ISDOUBLESTORAGE" jdbcType="DECIMAL" property="isdoublestorage" />
+  </association>
+  </resultMap>
+
   <sql id="Base_Column_List">
     ID, HANDOVERTYPE, LINE, DIRECTION, ACCEPTPERSON, CARRIERS, DELIVERYPERSON, DELIVERYDATE, 
     DELIVERYCOMPANY, ENTERPERSON, ENTERDATE
@@ -213,4 +239,27 @@
       ENTERDATE = #{enterdate,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+  <!--出库查询-->
+  <select id="findOutD" parameterType="Integer" resultMap="BaseResultMap2">
+   select * from (
+    select rownum rn,s.id as sid,
+    s.deliveryperson ,s.deliverydate
+    ,s.enterperson,s.enterdate,
+    s2.weight
+    from sor_outbound s inner join sor_outbounddetails s2
+    on s.id=s2.id
+    )where rn between #{page} and #{rows}
+  </select>
+
+  <select id="findOutDCount" resultType="Integer">
+   select count(*) from (
+    select rownum rn,s.id as sid,
+    s.deliveryperson ,s.deliverydate
+    ,s.enterperson,s.enterdate,
+    s2.weight
+    from sor_outbound s inner join sor_outbounddetails s2
+    on s.id=s2.id
+    )
+  </select>
 </mapper>

@@ -37,4 +37,14 @@ public class SOR_OutboundServiceimpl implements SOR_OutboundService {
     public List<SOR_Outbound> findNewDate() {
         return outboundMapper.findNewDate();
     }
+
+    @Override
+    public List<SOR_Outbound> findOutD(int page, int rows) {
+        return outboundMapper.findOutD(page, rows);
+    }
+
+    @Override
+    public Integer findOutDCount() {
+        return outboundMapper.findOutDCount();
+    }
 }
