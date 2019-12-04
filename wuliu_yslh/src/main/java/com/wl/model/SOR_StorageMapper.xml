@@ -9,6 +9,25 @@
     <result column="DELIVERYPERSON" jdbcType="DECIMAL" property="deliveryperson" />
     <result column="DELIVERYCOMPANY" jdbcType="VARCHAR" property="deliverycompany" />
   </resultMap>
+
+
+  <!--入库返回值-->
+  <resultMap id="BaseResultMap2" type="com.wl.model.SOR_Storage">
+    <id column="sid" jdbcType="DECIMAL" property="id" />
+    <result column="ACCEPTDATE" jdbcType="TIMESTAMP" property="acceptdate" />
+    <result column="ACCEPTPERSON" jdbcType="DECIMAL" property="acceptperson" />
+    <result column="ACCEPTCOMPANY" jdbcType="VARCHAR" property="acceptcompany" />
+    <result column="DELIVERYPERSON" jdbcType="DECIMAL" property="deliveryperson" />
+    <result column="DELIVERYCOMPANY" jdbcType="VARCHAR" property="deliverycompany" />
+  <association property="storagedetails" javaType="com.wl.model.SOR_Storagedetails">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PACKAGEID" jdbcType="VARCHAR" property="packageid" />
+    <result column="WEIGHT" jdbcType="DECIMAL" property="weight" />
+    <result column="OUTBOUNDID" jdbcType="VARCHAR" property="outboundid" />
+    <result column="STATE" jdbcType="DECIMAL" property="state" />
+  </association>
+  </resultMap>
+
   <sql id="Base_Column_List">
     ID, ACCEPTDATE, ACCEPTPERSON, ACCEPTCOMPANY, DELIVERYPERSON, DELIVERYCOMPANY
   </sql>
@@ -138,4 +157,21 @@
       DELIVERYCOMPANY = #{deliverycompany,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=DECIMAL}
   </update>
+
+  <!--入库查询-->
+  <select id="findSS" resultMap="BaseResultMap2" parameterType="Object">
+    select * from(
+    select rownum rn,s.id as sid,
+     s.acceptperson,s.acceptdate,s.deliveryperson,s.deliverycompany,s2.weight
+    from sor_storage s inner join sor_storagedetails s2 on s.id=s2.id
+    )where rn between #{page} and #{rows}
+  </select>
+
+  <select id="findSSCount" resultType="Integer" parameterType="Object">
+    select count(*) from(
+    select rownum rn,s.id as sid,
+     s.acceptperson,s.acceptdate,s.deliveryperson,s.deliverycompany,s2.weight
+    from sor_storage s inner join sor_storagedetails s2 on s.id=s2.id
+    )
+  </select>
 </mapper>
