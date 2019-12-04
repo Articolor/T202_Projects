@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,9 +98,13 @@ public class BAS_DeliverystandardController {
     }
     //分页查询基础档案
     @RequestMapping("findfindBASBasicarchivesAndSYEmpAndSYUnitsKey")
-    public  List<BAS_Basicarchives> findfindBASBasicarchivesAndSYEmpAndSYUnitsKey( String ename ,  Integer page, Integer rows){
+    public  Map<String,Object> findfindBASBasicarchivesAndSYEmpAndSYUnitsKey( String ename ,  Integer page, Integer rows){
+        Map<String,Object> map=new HashMap<>();
         List<BAS_Basicarchives> list = basicarchivesService.findfindBASBasicarchivesAndSYEmpAndSYUnitsKey(ename, (page-1)*rows+1,page*rows);
-        return list;
+        int sy_unitscount = basicarchivesService.findBAS_BasicarchivesAndSY_EmpAndSY_Unitscount(page, rows);
+        map.put("shuju",list);
+        map.put("count",sy_unitscount);
+        return map;
     }
 
     //新增基础数据
