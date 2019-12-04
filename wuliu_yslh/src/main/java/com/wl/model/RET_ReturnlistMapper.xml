@@ -494,9 +494,10 @@
         #{applicationno,jdbcType=VARCHAR},
       </if>
       <if test="worksheetno != null">
-        #{worksheetno,jdbcType=VARCHAR},
+        #{wo
+        rksheetno,jdbcType=VARCHAR},
       </if>
-      <if test="returntype != null">
+      <if test="returupdatepacskntype != null">
         #{returntype,jdbcType=DECIMAL},
       </if>
       <if test="apremark != null">
@@ -552,7 +553,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wl.model.RET_Returnlist">
+  <update id="updateByPrimaryKeySelective"  parameterType="com.wl.model.RET_Returnlist">
     update BOS.RET_RETURNLIST
     <set>
       <if test="applicationno != null">
@@ -618,7 +619,7 @@
     </set>
     where ID = #{id,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wl.model.RET_Returnlist">
+  <update id="updateByPrimaryKey"  parameterType="com.wl.model.RET_Returnlist" >
     update BOS.RET_RETURNLIST
     set APPLICATIONNO = #{applicationno,jdbcType=VARCHAR},
       WORKSHEETNO = #{worksheetno,jdbcType=VARCHAR},
