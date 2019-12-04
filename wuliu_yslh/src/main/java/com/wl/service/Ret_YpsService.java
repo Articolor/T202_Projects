@@ -23,4 +23,7 @@ public interface Ret_YpsService {
 
     //查询总行数
     public Integer selectRetWorkCount(RET_Returnlist r);
+
+    //
+    public int updateByPrimaryKey(RET_Returnlist record);
 }
