@@ -31,4 +31,9 @@ public interface SOR_OutboundMapper {
     int updateByPrimaryKeySelective(SOR_Outbound record);
 
     int updateByPrimaryKey(SOR_Outbound record);
+
+    //出库
+    List<SOR_Outbound> findOutD(int page,int rows);
+
+    Integer findOutDCount();
 }

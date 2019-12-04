@@ -20,4 +20,11 @@ public interface SOR_OutboundService {
 
     //根据时间查询出最新新增的数据
     List<SOR_Outbound> findNewDate();
+
+
+
+    //出库
+    List<SOR_Outbound> findOutD(int page,int rows);
+
+    Integer findOutDCount();
 }

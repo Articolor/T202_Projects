@@ -31,4 +31,14 @@ public class SOR_StorageServiceImpl implements SOR_StorageService {
     public List<SOR_Storage> findTimeNew() {
         return storageMapper.findTimeNew();
     }
+
+    @Override
+    public List<SOR_Storage> findSS(int page, int rows) {
+        return storageMapper.findSS(page, rows);
+    }
+
+    @Override
+    public Integer findSSCount() {
+        return storageMapper.findSSCount();
+    }
 }

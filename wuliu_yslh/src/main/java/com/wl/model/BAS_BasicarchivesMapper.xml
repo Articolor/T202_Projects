@@ -215,8 +215,8 @@ inner join bas_basicarchivesentry y on b.id=y.parentid)
     inner join bas_basicarchivesentry y on b.id=y.parentid
     <where>
 
-      <if test="ename != null">
-        AND  b.NAME = #{ename,jdbcType=DECIMAL}
+      <if test="ename!= null and ename!=''">
+        AND  b.NAME like concat('%',concat(#{ename,jdbcType=DECIMAL},'%'))
       </if>
 
     </where>

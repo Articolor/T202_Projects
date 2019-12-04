@@ -104,8 +104,11 @@ where rn between #{page} and #{rows}
         </where>
     )
     where rn between #{page} and #{rows}
-
   </select>
+
+
+
+
   <select id="querycount" parameterType="Object" resultType="int">
     select count(*) from (
     select rownum rn,sk.*,sm.Status as status from PAC_StockItem sm,PAC_Stock sk
